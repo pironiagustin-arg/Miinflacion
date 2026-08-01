@@ -19,20 +19,18 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,400&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* "Pizarra de casa de cambio" — tinta oscura cálida, no grafito frío */
-  --bg:#0D110D; --surf:#161C15; --surf2:#1E251C; --surf3:#252E20;
-  --b1:#26301F; --b2:#37432E; --b3:#4A5940;
-  --t1:#F3EFE3; --t2:#A6A28C; --t3:#6B6753;
-  --accent:#FFB238; --accent2:#D98A1C; --accent-bg:rgba(255,178,56,.10);
-  --red:#FF6B5B; --red-bg:rgba(255,107,91,.09);
-  --amber:#C97A3D; --amber-bg:rgba(201,122,61,.10);
-  --green:#4FAE7C; --green-bg:rgba(79,174,124,.09);
-  --purple:#B39DFF; --purple-bg:rgba(179,157,255,.09);
-  --display:'Fraunces',Georgia,serif;
-  --mono:'JetBrains Mono',monospace;
+  --bg:#0A0D12; --surf:#12161D; --surf2:#1A1F28; --surf3:#212732;
+  --b1:#232933; --b2:#2D3540; --b3:#3B4552;
+  --t1:#F2F4F7; --t2:#98A2B0; --t3:#5D6672;
+  --accent:#22D3A6; --accent2:#189C7A; --accent-bg:rgba(34,211,166,.10);
+  --red:#FF5C5C; --red-bg:rgba(255,92,92,.09);
+  --amber:#F5A623; --amber-bg:rgba(245,166,35,.09);
+  --green:#3DDC84; --green-bg:rgba(61,220,132,.09);
+  --purple:#9B8CFF; --purple-bg:rgba(155,140,255,.09);
+  --mono:'Space Grotesk',sans-serif;
   --sans:'Inter',sans-serif;
   --r:8px; --rl:14px; --rxl:18px;
 }
@@ -48,12 +46,9 @@ body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100
 #screen-auth{align-items:center;justify-content:center;padding:2rem}
 .auth-box{width:100%;max-width:400px}
 .auth-logo{text-align:center;margin-bottom:2.5rem}
-.auth-logo-mark{
-  display:inline-block;font-family:var(--mono);font-size:22px;font-weight:700;
-  color:var(--accent);letter-spacing:.06em;padding:10px 20px;
-}
+.auth-logo-mark{font-family:var(--mono);font-size:28px;font-weight:700;color:var(--accent);letter-spacing:-.02em}
 .auth-logo-mark span{color:var(--t2);font-weight:400}
-.auth-logo-sub{font-size:12px;color:var(--t3);margin-top:10px;letter-spacing:.04em}
+.auth-logo-sub{font-size:12px;color:var(--t3);margin-top:4px;letter-spacing:.04em}
 .auth-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--rl);padding:28px 28px 24px;margin-bottom:16px;box-shadow:0 16px 40px -24px rgba(0,0,0,.6)}
 .auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--surf2);border-radius:8px;padding:4px;margin-bottom:22px}
 .auth-tab{font-size:13px;font-weight:500;padding:8px;text-align:center;border-radius:6px;cursor:pointer;color:var(--t3);border:none;background:transparent;transition:all .15s}
@@ -72,7 +67,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100
 .auth-footer a{color:var(--t2);cursor:pointer;text-decoration:underline}
 .auth-meta{text-align:center;font-size:11px;color:var(--t3);line-height:1.6;margin-top:8px}
 .auth-slogan{text-align:center;margin-bottom:1.6rem}
-.auth-slogan-line1{font-family:var(--display);font-size:21px;font-weight:600;font-style:italic;color:var(--t1);line-height:1.3;letter-spacing:-.01em}
+.auth-slogan-line1{font-size:16px;font-weight:700;color:var(--t1);line-height:1.35;letter-spacing:-.01em}
 .auth-slogan-line1 em{color:var(--accent);font-style:normal}
 .auth-slogan-line2{font-size:14px;font-weight:400;color:var(--t2);margin-top:6px;line-height:1.4}
 .auth-slogan-line2 strong{color:var(--accent);font-weight:700}
@@ -80,7 +75,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100
 /* Slogan banner inside app */
 .slogan-banner{background:var(--surf);border:1px solid var(--b1);border-left:3px solid var(--accent);border-radius:var(--r);padding:14px 20px;margin-bottom:1.8rem;display:flex;align-items:center;gap:16px}
 .slogan-banner-text{}
-.slogan-banner-q{font-family:var(--display);font-size:17px;font-weight:600;font-style:italic;color:var(--t1);line-height:1.3}
+.slogan-banner-q{font-size:14px;font-weight:700;color:var(--t1);line-height:1.35}
 .slogan-banner-q em{color:var(--accent);font-style:normal}
 .slogan-banner-a{font-size:12px;color:var(--t2);margin-top:3px}
 .slogan-banner-a strong{color:var(--accent);font-weight:700}
@@ -93,48 +88,21 @@ body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100
 /* ══ TOPBAR ══ */
 .topbar{
   position:fixed;top:0;left:0;right:0;z-index:200;
-  height:52px;background:rgba(13,17,13,.96);backdrop-filter:blur(14px);
+  height:52px;background:rgba(11,11,11,.96);backdrop-filter:blur(14px);
   border-bottom:1px solid var(--b1);
   display:flex;align-items:center;padding:0 16px 0 0;gap:0;
 }
 .nav-brand{
   font-family:var(--mono);font-size:13px;font-weight:700;
-  color:var(--accent);letter-spacing:.05em;
+  color:var(--accent);letter-spacing:.01em;
   display:flex;align-items:center;gap:6px;
   padding:0 20px;height:100%;border-right:1px solid var(--b1);
   flex-shrink:0;
 }
 .nav-brand span{color:var(--t2);font-weight:300}
 .topbar-mid{flex:1;display:flex;align-items:center;padding:0 20px;gap:14px}
-/* ── Pizarra de casa de cambio — la señal visual de la marca ── */
-.board{
-  font-family:var(--mono);font-variant-numeric:tabular-nums;
-  background:linear-gradient(180deg,#050704,#0B0F09);
-  border:1px solid var(--b2);border-radius:6px;
-  color:var(--accent);position:relative;overflow:hidden;
-  box-shadow:inset 0 2px 5px rgba(0,0,0,.65),inset 0 -1px 0 rgba(255,255,255,.04);
-  text-shadow:0 0 6px rgba(255,178,56,.45);
-}
-.board::after{
-  content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
-  background:repeating-linear-gradient(180deg,rgba(0,0,0,.18) 0px,rgba(0,0,0,.18) 1px,transparent 1px,transparent 3px);
-}
-@keyframes board-flicker{
-  0%,100%{opacity:1;transform:translateY(0)}
-  20%{opacity:.4;transform:translateY(-1px)}
-  45%{opacity:1}
-  65%{opacity:.55}
-  85%{opacity:1}
-}
-.board-flicker{animation:board-flicker .5s steps(7)}
-@media (prefers-reduced-motion: reduce){ .board-flicker{animation:none} }
-
-.ipc-ticker{
-  font-family:var(--mono);font-size:11px;letter-spacing:.02em;
-  display:flex;align-items:center;gap:7px;
-  padding:4px 10px;
-}
-.ipc-ticker .live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 5px var(--accent);animation:pulse 2s infinite}
+.ipc-ticker{font-family:var(--mono);font-size:11px;color:var(--t3);display:flex;align-items:center;gap:6px}
+.ipc-ticker .live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
 .topbar-right{display:flex;align-items:center;gap:10px;padding-left:16px}
 .nav-user{font-size:12px;color:var(--t2)}
 .nav-user b{color:var(--t1)}
@@ -209,15 +177,14 @@ body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100
 .hero-eyebrow{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .hero-eyebrow::before{content:'';width:18px;height:1px;background:var(--accent)}
 .hero-label{font-size:12px;color:var(--t3);margin-bottom:4px}
-.hero-board{display:inline-block;padding:14px 26px;margin-top:2px}
-.hero-num{font-family:var(--mono);font-size:80px;font-weight:700;line-height:1;letter-spacing:-.02em;color:var(--accent);transition:color .3s}
-.hero-num.empty{color:var(--b3);text-shadow:none}
+.hero-num{font-family:var(--mono);font-size:80px;font-weight:700;line-height:1;letter-spacing:-.03em;color:var(--accent);transition:color .3s}
+.hero-num.empty{color:var(--b3)}
 .hero-unit{font-size:20px;font-weight:300;color:var(--t2);margin-left:2px;vertical-align:super}
 .hero-caption{font-size:12px;color:var(--t3);margin-top:8px}
 .hero-caption em{color:var(--t2);font-style:normal}
 .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:4px}
 .stat-c{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:14px 16px;box-shadow:0 6px 16px -14px rgba(0,0,0,.5)}
-.stat-c.hi{border-color:rgba(255,178,56,.2);background:var(--accent-bg)}
+.stat-c.hi{border-color:rgba(34,211,166,.2);background:var(--accent-bg)}
 .slabel{font-size:10px;color:var(--t3);letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
 .sval{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--t1);line-height:1}
 .sval.accent{color:var(--accent)}
@@ -360,7 +327,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100
 
 /* RANGE SLIDER STYLES */
 input[type=range]{-webkit-appearance:none;appearance:none;height:3px;background:var(--b2);border-radius:2px;outline:none;cursor:pointer;width:100%}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--accent);cursor:pointer;transition:transform .15s;box-shadow:0 0 0 3px rgba(255,178,56,.12)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--accent);cursor:pointer;transition:transform .15s;box-shadow:0 0 0 3px rgba(34,211,166,.12)}
 input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.25)}
 
 /* ══════════ HISTORIAL PANEL ══════════ */
@@ -378,7 +345,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.25)}
 
 .timeline-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:1.6rem}
 .t-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:12px;transition:border-color .2s}
-.t-card.current{border-color:rgba(255,178,56,.3)}
+.t-card.current{border-color:rgba(34,211,166,.3)}
 .t-month{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:7px}
 .t-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--t1)}
 .t-val.accent{color:var(--accent)}
@@ -398,7 +365,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.25)}
 .rt-mini{height:4px;border-radius:2px}
 
 .context-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.2rem}
-.cbt-card{background:var(--surf);border:1px solid rgba(255,178,56,.15);border-radius:var(--rl);padding:20px 22px;margin-bottom:1.6rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.cbt-card{background:var(--surf);border:1px solid rgba(34,211,166,.15);border-radius:var(--rl);padding:20px 22px;margin-bottom:1.6rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
 .cbt-left .cbt-lbl{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);margin-bottom:5px}
 .cbt-left .cbt-desc{font-size:12px;color:var(--t2);line-height:1.5}
 .cbt-val{font-family:var(--mono);font-size:30px;font-weight:700;color:var(--accent);white-space:nowrap}
@@ -568,7 +535,7 @@ footer{border-top:1px solid var(--b1);padding:18px 2rem;display:flex;align-items
 .plans-sub{font-size:14px;color:var(--t2)}
 .plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.6rem;align-items:start}
 .plan-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--rl);padding:26px;position:relative}
-.plan-card-premium{border-color:rgba(255,178,56,.3);background:linear-gradient(160deg,#12201C 0%,#12161D 60%)}
+.plan-card-premium{border-color:rgba(34,211,166,.3);background:linear-gradient(160deg,#12201C 0%,#12161D 60%)}
 .plan-popular{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--accent);color:#000;font-size:9px;font-weight:800;letter-spacing:.1em;padding:3px 12px;border-radius:0 0 6px 6px}
 .plan-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .plan-name{font-size:16px;font-weight:700;color:var(--t1)}
@@ -665,7 +632,7 @@ footer{border-top:1px solid var(--b1);padding:18px 2rem;display:flex;align-items
 .auth-forgot{font-size:11px;color:var(--t3);text-align:right;margin-top:-8px;cursor:pointer}
 .auth-forgot:hover{color:var(--t2)}
 /* Loading overlay */
-.loading-overlay{position:fixed;inset:0;background:rgba(13,17,13,.85);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;backdrop-filter:blur(6px)}
+.loading-overlay{position:fixed;inset:0;background:rgba(11,11,11,.85);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;backdrop-filter:blur(6px)}
 .loading-overlay-spinner{width:36px;height:36px;border:3px solid var(--b2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
 .loading-overlay-txt{font-size:14px;color:var(--t2)}
 /* Auth message */
@@ -728,14 +695,14 @@ footer{border-top:1px solid var(--b1);padding:18px 2rem;display:flex;align-items
 .fc-comp-row:last-child{border-bottom:none}
 .fc-comp-rubro{font-size:12px;color:var(--t2)}
 /* Colores de las canastas */
-.cc-0{background:#FFB238}.cc-1{background:#5BC8FF}.cc-2{background:#B39DFF}
-.ct-0{color:#FFB238}.ct-1{color:#5BC8FF}.ct-2{color:#B39DFF}
+.cc-0{background:#22D3A6}.cc-1{background:#5BC8FF}.cc-2{background:#B39DFF}
+.ct-0{color:#22D3A6}.ct-1{color:#5BC8FF}.ct-2{color:#B39DFF}
 @media(max-width:768px){.canasta-selector{display:none}.family-cards{grid-template-columns:1fr}}
 
 /* ══════════ DEMO MODE ══════════ */
 .demo-banner{
-  background:linear-gradient(90deg,rgba(255,178,56,.08),rgba(255,178,56,.04));
-  border-bottom:1px solid rgba(255,178,56,.15);
+  background:linear-gradient(90deg,rgba(34,211,166,.08),rgba(34,211,166,.04));
+  border-bottom:1px solid rgba(34,211,166,.15);
   padding:9px 2rem;
   display:flex;align-items:center;justify-content:space-between;gap:12px;
   flex-wrap:wrap;
@@ -803,7 +770,7 @@ footer{border-top:1px solid var(--b1);padding:18px 2rem;display:flex;align-items
 .noticia-img{width:100%;height:180px;object-fit:cover;display:block;border-bottom:1px solid var(--b1)}
 .noticia-body{padding:18px 20px}
 .noticia-cat{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 9px;border-radius:4px;margin-bottom:10px}
-.cat-macro{background:rgba(255,178,56,.1);color:var(--accent)}
+.cat-macro{background:rgba(34,211,166,.1);color:var(--accent)}
 .cat-economia{background:rgba(61,220,132,.1);color:var(--green)}
 .cat-politica{background:rgba(91,200,255,.1);color:#5BC8FF}
 .cat-internacional{background:rgba(179,157,255,.1);color:var(--purple)}
@@ -858,7 +825,7 @@ footer{border-top:1px solid var(--b1);padding:18px 2rem;display:flex;align-items
 .ob-step:last-child{border-bottom:none}
 .ob-step-icon{
   width:36px;height:36px;border-radius:10px;
-  background:var(--accent-bg);border:1px solid rgba(255,178,56,.2);
+  background:var(--accent-bg);border:1px solid rgba(34,211,166,.2);
   display:flex;align-items:center;justify-content:center;
   font-size:18px;flex-shrink:0;
 }
@@ -886,82 +853,81 @@ footer{border-top:1px solid var(--b1);padding:18px 2rem;display:flex;align-items
 
 /* ══════════ MODO CLARO — Beige cálido ══════════ */
 body.light-mode {
-  /* Misma identidad "pizarra de casa de cambio", de día — papel de libreta */
-  --bg:    #EDE6D6;
-  --surf:  #F8F3E7;
-  --surf2: #E6DDC7;
-  --surf3: #DACFAF;
-  --b1:    #D6CCAF;
-  --b2:    #C0B38C;
-  --b3:    #A0906A;
-  --t1:    #23200f;
-  --t2:    #4a4128;
-  --t3:    #756c4e;
-  --accent:#B8790E;
-  --accent-bg: rgba(184,121,14,0.10);
-  --red:   #C23A28;
-  --green: #2F6B4B;
-  --amber: #93502A;
-  --purple:#5B3FA3;
+  --bg:    #f5f0e8;
+  --surf:  #fdfaf5;
+  --surf2: #ede8de;
+  --surf3: #e0dbd0;
+  --b1:    #d8d2c6;
+  --b2:    #c4bdb0;
+  --b3:    #a09890;
+  --t1:    #1a1714;
+  --t2:    #3d3830;
+  --t3:    #6b6358;
+  --accent:#4a7c00;
+  --accent-bg: rgba(74,124,0,0.09);
+  --red:   #c42000;
+  --green: #2a7000;
+  --amber: #a85800;
+  --purple:#5522bb;
 }
 body.light-mode .topbar {
-  background: rgba(248,243,231,0.97);
+  background: rgba(245,240,232,0.97);
   border-bottom-color: var(--b1);
   box-shadow: 0 1px 0 var(--b1);
 }
 body.light-mode .sidebar {
-  background: var(--surf2);
+  background: #ede8de;
   border-right-color: var(--b1);
 }
 body.light-mode .nav-tab {
   color: var(--t2);
 }
 body.light-mode .nav-tab.active {
-  background: var(--accent-bg);
+  background: rgba(74,124,0,0.12);
   color: var(--accent);
 }
 body.light-mode .nav-tab:hover {
   background: rgba(0,0,0,0.05);
 }
 body.light-mode .macro-card {
-  background: var(--surf);
+  background: #fdfaf5;
   border-color: var(--b1);
 }
 body.light-mode .noticia-card {
-  background: var(--surf);
+  background: #fdfaf5;
   border-color: var(--b1);
 }
 body.light-mode .cat-card {
-  background: var(--surf);
+  background: #fdfaf5;
   border-color: var(--b1);
 }
 body.light-mode .cat-head:hover {
   background: var(--surf2);
 }
 body.light-mode .hero-box {
-  background: linear-gradient(135deg, var(--surf2), var(--surf3));
+  background: linear-gradient(135deg, #ede8de, #e5dfd4);
   border-color: var(--b1);
 }
 body.light-mode .how-hero {
-  background: var(--surf2);
+  background: #ede8de;
   border-color: var(--b1);
 }
 body.light-mode .fin-card,
 body.light-mode .deuda-card,
 body.light-mode .onboarding-box,
 body.light-mode .upgrade-box {
-  background: var(--surf);
+  background: #fdfaf5;
   border-color: var(--b1);
 }
 body.light-mode .fin-metric,
 body.light-mode .deuda-metric {
-  background: var(--surf2);
+  background: #ede8de;
   border-color: var(--b1);
 }
 body.light-mode .form-input,
 body.light-mode .fin-inp,
 body.light-mode .money-inp {
-  background: var(--surf);
+  background: #fdfaf5;
   color: var(--t1);
   border-color: var(--b2);
 }
@@ -975,21 +941,22 @@ body.light-mode .noticia-titulo {
 body.light-mode .noticia-resumen {
   color: var(--t2);
 }
-/* .hero-num vive dentro de .board (siempre oscuro, como una pizarra real)
-   así que mantiene var(--accent) en los dos temas — no se pisa en claro. */
+body.light-mode .hero-num {
+  color: var(--t1);
+}
 body.light-mode .plan-card {
-  background: var(--surf);
+  background: #fdfaf5;
   border-color: var(--b1);
 }
 body.light-mode .plan-card.featured {
   border-color: var(--accent);
 }
 body.light-mode .demo-banner {
-  background: var(--surf2);
+  background: #ede8de;
   border-color: var(--b1);
 }
 body.light-mode .ipc-status-bar {
-  background: var(--surf2);
+  background: #ede8de;
 }
 body.light-mode .how-step {
   border-bottom-color: var(--b1);
@@ -1322,14 +1289,14 @@ body.light-mode .deuda-body {
 .cat-card[data-cat="transporte"]   { border-left: 3px solid #F5A623; }
 .cat-card[data-cat="salud"]        { border-left: 3px solid #B39DFF; }
 .cat-card[data-cat="educacion"]    { border-left: 3px solid #FF6B9D; }
-.cat-card[data-cat="indumentaria"] { border-left: 3px solid #E85D9E; }
+.cat-card[data-cat="indumentaria"] { border-left: 3px solid #22D3A6; }
 .cat-card[data-cat="recreacion"]   { border-left: 3px solid #FFD93D; }
 .cat-card[data-cat="restaurantes"] { border-left: 3px solid #FF8C42; }
 .cat-card[data-cat="comunicaciones"]{ border-left: 3px solid #4FC3F7; }
 .cat-card[data-cat="hogar"]        { border-left: 3px solid #81C784; }
 .cat-card[data-cat="banco_deudas"] { border-left: 3px solid var(--red); }
 .cat-card[data-cat="ahorro"]       { border-left: 3px solid var(--accent); }
-.cat-card[data-cat="inversion"]    { border-left: 3px solid #FFB238; }
+.cat-card[data-cat="inversion"]    { border-left: 3px solid #22D3A6; }
 
 /* Hero más dramático */
 .hero-num {
@@ -1376,7 +1343,7 @@ body.light-mode .deuda-body {
   position: absolute;
   top: -50%; left: -50%;
   width: 200%; height: 200%;
-  background: radial-gradient(ellipse at center, rgba(255,178,56,0.04) 0%, transparent 60%);
+  background: radial-gradient(ellipse at center, rgba(34,211,166,0.04) 0%, transparent 60%);
   pointer-events: none;
 }
 .hero-ipc-wrap {
@@ -1483,8 +1450,8 @@ body.light-mode .deuda-body {
 <div class="screen" id="screen-auth">
   <div class="auth-box">
     <div class="auth-logo">
-      <div class="auth-logo-mark board">MI<span>·INFLACIÓN</span></div>
-      <div class="auth-logo-sub">Inflación personal, deudas e inversiones · Argentina</div>
+      <div class="auth-logo-mark">MI<span>INFLACIÓN</span></div>
+      <div class="auth-logo-sub">Calculadora personal · Argentina</div>
     </div>
     <div class="auth-slogan">
       <div class="auth-slogan-line1">¿La inflación <em>no coincide</em> con tus gastos?</div>
@@ -1572,7 +1539,7 @@ body.light-mode .deuda-body {
         </div>
       </div>
     </div>
-    <div class="ipc-ticker board">
+    <div class="ipc-ticker">
       <span class="live-dot"></span>
       IPC <span id="ticker-val">—</span>
     </div>
@@ -1729,9 +1696,7 @@ body.light-mode .deuda-body {
     <div class="hero-left">
       <div class="hero-eyebrow">Inflación personalizada</div>
       <div class="hero-label">Tu inflación mensual estimada</div>
-      <div class="board hero-board">
-        <div class="hero-num empty" id="hero-num">—</div>
-      </div>
+      <div class="hero-num empty" id="hero-num">—</div>
       <div class="hero-caption" id="hero-cap">Registrá tus gastos para calcular</div>
     </div>
     <div class="hero-stats">
@@ -3965,7 +3930,7 @@ document.getElementById('r-pass').addEventListener('keydown', e => { if(e.key===
 const MAX_CANASTAS_FREE = 1;
 const MAX_CANASTAS_PRO  = 3;
 const MAX_DEUDAS_FREE = 1; // Mis Deudas: 1 deuda de prueba gratis, resto Premium
-const CANASTA_COLORS    = ['#FFB238','#5BC8FF','#B39DFF'];
+const CANASTA_COLORS    = ['#22D3A6','#5BC8FF','#B39DFF'];
 
 // Canastas: array de { id, name, state, region }
 let canastas = [];
@@ -4213,8 +4178,6 @@ function aplicarDatosIPC(data) {
   document.getElementById('ipc-oficial-val').textContent = ipcLastVal.toFixed(1).replace('.',',') + '%';
   document.getElementById('ipc-oficial-mes').textContent = ipcLastMes + ' · INDEC';
   document.getElementById('ticker-val').textContent = ipcLastVal.toFixed(1).replace('.',',') + '%';
-  const tickerBoard = document.querySelector('.ipc-ticker.board');
-  if (tickerBoard) { tickerBoard.classList.remove('board-flicker'); void tickerBoard.offsetWidth; tickerBoard.classList.add('board-flicker'); }
   const badge = document.getElementById('nav-badge-mes');
   if (badge) badge.textContent = ipcLastMes.slice(0,3).toUpperCase() + ' ' + String(d.getFullYear()).slice(2);
   updateMain();
@@ -4596,7 +4559,7 @@ function updateSubDistrib(c) {
   if (!track) return;
 
   const tot = c.subs.reduce((a,s) => a+(state[c.id+'_'+s.id]?.w||0), 0);
-  const colors = ['#FFB238','#3DDC84','#F5A623','#B39DFF','#FF9090','#5BC8FF','#FFD166','#A8E6CF'];
+  const colors = ['#22D3A6','#3DDC84','#F5A623','#B39DFF','#FF9090','#5BC8FF','#FFD166','#A8E6CF'];
 
   let segsHTML = '';
   c.subs.forEach((s, i) => {
@@ -4797,7 +4760,7 @@ function updateMain() {
 
 // Paleta de colores para la torta (10 rubros)
 const PIE_COLORS = [
-  '#FFB238', // accent lima
+  '#22D3A6', // accent lima
   '#3DDC84', // green
   '#5BC8FF', // blue
   '#F5A623', // amber
@@ -5348,7 +5311,7 @@ function renderMiniBarChart(hist, isPremium) {
 
     // Tu IPC
     const hP = (h.ipcPersonal / maxVal) * chartH;
-    const accentColor = '#FFB238';
+    const accentColor = '#22D3A6';
     ctx.fillStyle = accentColor;
     ctx.beginPath();
     ctx.roundRect(x - barW - 2, PAD_TOP + chartH - hP, barW, hP, [3,3,0,0]);
@@ -5672,7 +5635,7 @@ function exportMonthReport() {
   for (var i = 0; i < count3; i++) sum3 += hist[i].ipcPersonal;
   var ipcProy = (sum3 / count3).toFixed(2);
 
-  var colors = ['#FFB238','#3DDC84','#5BC8FF','#F5A623','#B39DFF','#FF7070','#FFD166','#A8E6CF','#FF9F9F','#9BB3FF'];
+  var colors = ['#22D3A6','#3DDC84','#5BC8FF','#F5A623','#B39DFF','#FF7070','#FFD166','#A8E6CF','#FF9F9F','#9BB3FF'];
 
   // SVG torta
   function buildPieSVG(rubros) {
@@ -6404,7 +6367,7 @@ function renderEvolucionChart(hist, isPremium, totalCount) {
   ctx.lineTo(xPos(data.length - 1), PAD.top + cH);
   ctx.lineTo(xPos(0), PAD.top + cH);
   ctx.closePath();
-  ctx.fillStyle = 'rgba(255,178,56,0.07)';
+  ctx.fillStyle = 'rgba(34,211,166,0.07)';
   ctx.fill();
 
   // Línea IPC INDEC
@@ -6421,7 +6384,7 @@ function renderEvolucionChart(hist, isPremium, totalCount) {
 
   // Línea IPC personal
   ctx.beginPath();
-  ctx.strokeStyle = '#FFB238';
+  ctx.strokeStyle = '#22D3A6';
   ctx.lineWidth = 2.5;
   data.forEach((d, i) => {
     const x = xPos(i), y = yPos(d.ipcPersonal);
@@ -6434,9 +6397,9 @@ function renderEvolucionChart(hist, isPremium, totalCount) {
     const x = xPos(i), y = yPos(d.ipcPersonal);
     ctx.beginPath();
     ctx.arc(x, y, 4, 0, Math.PI * 2);
-    ctx.fillStyle = '#FFB238';
+    ctx.fillStyle = '#22D3A6';
     ctx.fill();
-    ctx.fillStyle = '#FFB238';
+    ctx.fillStyle = '#22D3A6';
     ctx.font = 'bold 10px monospace';
     ctx.textAlign = 'center';
     ctx.fillText(d.ipcPersonal.toFixed(1) + '%', x, y - 10);
@@ -6456,7 +6419,7 @@ function renderEvolucionChart(hist, isPremium, totalCount) {
   ctx.font = '11px sans-serif';
   ctx.textAlign = 'left';
   // Personal
-  ctx.fillStyle = '#FFB238';
+  ctx.fillStyle = '#22D3A6';
   ctx.fillRect(PAD.left, H - 18, 16, 2);
   ctx.fillText('Tu IPC personal', PAD.left + 22, H - 14);
   // INDEC
@@ -7150,7 +7113,7 @@ function calcFinanzas() {
     color = '#5aaa00'; label = '🟢 Buena';
     desc = 'Tu situación financiera es saludable. Hay espacio para mejorar el ahorro o reducir deudas. Revisá las recomendaciones.';
   } else if (score >= 50) {
-    color = '#FFB238'; label = '🟡 Regular';
+    color = '#22D3A6'; label = '🟡 Regular';
     desc = 'Tu situación es manejable pero con vulnerabilidades. Priorizá reducir deudas costosas y aumentar el margen mensual.';
   } else if (score >= 35) {
     color = '#b86000'; label = '🟠 En riesgo';
@@ -7194,7 +7157,7 @@ function calcFinanzas() {
   // Ahorro
   setMetric('met-ahorro', fmtPct(tasaAhorro),
     'bar-ahorro', Math.min(tasaAhorro / 25 * 100, 100),
-    tasaAhorro >= 15 ? '#2a7a00' : tasaAhorro >= 10 ? '#FFB238' : tasaAhorro >= 5 ? '#b86000' : '#cc2200');
+    tasaAhorro >= 15 ? '#2a7a00' : tasaAhorro >= 10 ? '#22D3A6' : tasaAhorro >= 5 ? '#b86000' : '#cc2200');
 
   // Gasto
   setMetric('met-gasto', fmtPct(ratioGasto),
@@ -9189,7 +9152,7 @@ async function initIPCAlerta() {
         bannerEl.style.cssText += ';background:rgba(42,122,0,.08);border:1px solid rgba(42,122,0,.2);color:var(--green)';
         bannerEl.textContent = '✅ Ya cerraste tu mes de ' + mesLabel + ' · IPC personal registrado';
       } else {
-        bannerEl.style.cssText += ';background:rgba(255,178,56,.1);border:1px solid rgba(255,178,56,.3);color:var(--t1)';
+        bannerEl.style.cssText += ';background:rgba(34,211,166,.1);border:1px solid rgba(34,211,166,.3);color:var(--t1)';
         bannerEl.textContent = '📢 Nuevo IPC disponible — cerrá tu mes para comparar tu inflación personal vs la oficial';
         if (btnEl) btnEl.style.display = 'block';
       }
@@ -9418,7 +9381,7 @@ function drawInteresCompuestoChart(serieBaja, serieBase, serieAlta) {
 
   drawLinea(serieBaja, 'rgba(255,255,255,0.28)', [4, 3]);
   drawLinea(serieAlta, 'rgba(255,255,255,0.28)', [4, 3]);
-  drawLinea(serieBase, '#FFB238');
+  drawLinea(serieBase, '#22D3A6');
 
   // Labels eje X (años)
   ctx.fillStyle = 'rgba(255,255,255,0.3)';
@@ -9594,7 +9557,7 @@ function showCierreBanner(label, dias) {
 
   const banner = document.createElement('div');
   banner.id = 'cierre-banner';
-  banner.style.cssText = 'background:linear-gradient(135deg,rgba(255,178,56,.12),rgba(255,178,56,.06));border:1px solid rgba(255,178,56,.3);border-radius:10px;padding:14px 16px;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap';
+  banner.style.cssText = 'background:linear-gradient(135deg,rgba(34,211,166,.12),rgba(34,211,166,.06));border:1px solid rgba(34,211,166,.3);border-radius:10px;padding:14px 16px;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap';
 
   const txtDiv = document.createElement('div');
   txtDiv.innerHTML =
