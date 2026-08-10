@@ -22,17 +22,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:#0A0D12; --surf:#12161D; --surf2:#1A1F28; --surf3:#212732;
-  --b1:#232933; --b2:#2D3540; --b3:#3B4552;
-  --t1:#F2F4F7; --t2:#98A2B0; --t3:#5D6672;
-  --accent:#22D3A6; --accent2:#189C7A; --accent-bg:rgba(34,211,166,.10);
-  --red:#FF5C5C; --red-bg:rgba(255,92,92,.09);
-  --amber:#F5A623; --amber-bg:rgba(245,166,35,.09);
-  --green:#3DDC84; --green-bg:rgba(61,220,132,.09);
-  --purple:#9B8CFF; --purple-bg:rgba(155,140,255,.09);
+  --bg:#0B0B0B; --surf:#141414; --surf2:#1C1C1C; --surf3:#222222;
+  --b1:#242424; --b2:#2E2E2E; --b3:#3A3A3A;
+  --t1:#F0F0F0; --t2:#A0A0A0; --t3:#606060;
+  --accent:#C8F135; --accent2:#96BE1E; --accent-bg:rgba(200,241,53,.08);
+  --red:#FF5555; --red-bg:rgba(255,85,85,.08);
+  --amber:#F5A623; --amber-bg:rgba(245,166,35,.08);
+  --green:#3DDC84; --green-bg:rgba(61,220,132,.08);
+  --purple:#B39DFF; --purple-bg:rgba(179,157,255,.08);
   --mono:'Space Grotesk',sans-serif;
   --sans:'Inter',sans-serif;
-  --r:8px; --rl:14px; --rxl:18px;
+  --r:10px; --rl:16px; --rxl:20px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;scroll-behavior:smooth}
@@ -47,9 +47,9 @@ body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100
 .auth-box{width:100%;max-width:400px}
 .auth-logo{text-align:center;margin-bottom:2.5rem}
 .auth-logo-mark{font-family:var(--mono);font-size:28px;font-weight:700;color:var(--accent);letter-spacing:-.02em}
-.auth-logo-mark span{color:var(--t2);font-weight:400}
+.auth-logo-mark span{color:var(--t2);font-weight:300}
 .auth-logo-sub{font-size:12px;color:var(--t3);margin-top:4px;letter-spacing:.04em}
-.auth-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--rl);padding:28px 28px 24px;margin-bottom:16px;box-shadow:0 16px 40px -24px rgba(0,0,0,.6)}
+.auth-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--rl);padding:28px 28px 24px;margin-bottom:16px}
 .auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--surf2);border-radius:8px;padding:4px;margin-bottom:22px}
 .auth-tab{font-size:13px;font-weight:500;padding:8px;text-align:center;border-radius:6px;cursor:pointer;color:var(--t3);border:none;background:transparent;transition:all .15s}
 .auth-tab.active{background:var(--surf3);color:var(--t1)}
@@ -183,8 +183,8 @@ body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100
 .hero-caption{font-size:12px;color:var(--t3);margin-top:8px}
 .hero-caption em{color:var(--t2);font-style:normal}
 .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:4px}
-.stat-c{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:14px 16px;box-shadow:0 6px 16px -14px rgba(0,0,0,.5)}
-.stat-c.hi{border-color:rgba(34,211,166,.2);background:var(--accent-bg)}
+.stat-c{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:14px 16px}
+.stat-c.hi{border-color:rgba(200,241,53,.2);background:var(--accent-bg)}
 .slabel{font-size:10px;color:var(--t3);letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
 .sval{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--t1);line-height:1}
 .sval.accent{color:var(--accent)}
@@ -327,7 +327,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--sans);min-height:100
 
 /* RANGE SLIDER STYLES */
 input[type=range]{-webkit-appearance:none;appearance:none;height:3px;background:var(--b2);border-radius:2px;outline:none;cursor:pointer;width:100%}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--accent);cursor:pointer;transition:transform .15s;box-shadow:0 0 0 3px rgba(34,211,166,.12)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--accent);cursor:pointer;transition:transform .15s;box-shadow:0 0 0 3px rgba(200,241,53,.12)}
 input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.25)}
 
 /* ══════════ HISTORIAL PANEL ══════════ */
@@ -345,7 +345,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.25)}
 
 .timeline-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:1.6rem}
 .t-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:12px;transition:border-color .2s}
-.t-card.current{border-color:rgba(34,211,166,.3)}
+.t-card.current{border-color:rgba(200,241,53,.3)}
 .t-month{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:7px}
 .t-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--t1)}
 .t-val.accent{color:var(--accent)}
@@ -365,7 +365,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.25)}
 .rt-mini{height:4px;border-radius:2px}
 
 .context-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.2rem}
-.cbt-card{background:var(--surf);border:1px solid rgba(34,211,166,.15);border-radius:var(--rl);padding:20px 22px;margin-bottom:1.6rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.cbt-card{background:var(--surf);border:1px solid rgba(200,241,53,.15);border-radius:var(--rl);padding:20px 22px;margin-bottom:1.6rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
 .cbt-left .cbt-lbl{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);margin-bottom:5px}
 .cbt-left .cbt-desc{font-size:12px;color:var(--t2);line-height:1.5}
 .cbt-val{font-family:var(--mono);font-size:30px;font-weight:700;color:var(--accent);white-space:nowrap}
@@ -388,9 +388,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.25)}
 .how-formula p{font-size:13px;color:var(--t2);line-height:1.7;margin-bottom:8px}
 .how-formula code{font-family:var(--mono);font-size:12px;color:var(--accent);background:var(--accent-bg);padding:2px 7px;border-radius:4px}
 .how-faq{display:flex;flex-direction:column;gap:6px;margin-bottom:1.6rem}
-.faq-item{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:14px 18px}
-.faq-q{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:5px}
-.faq-a{font-size:12px;color:var(--t2);line-height:1.6}
 
 /* ══════════ FUENTES PANEL ══════════ */
 .src-hero{background:var(--surf);border:1px solid var(--b1);border-radius:var(--rl);padding:24px;margin-bottom:1.6rem;display:flex;gap:18px;align-items:start}
@@ -450,13 +447,8 @@ footer{border-top:1px solid var(--b1);padding:18px 2rem;display:flex;align-items
 }
 
 /* ══════════ MI HISTORIAL PERSONAL ══════════ */
-.premium-banner{background:linear-gradient(135deg,#1A1400,#1C1C14);border:1px solid rgba(179,157,255,.3);border-radius:var(--rl);padding:16px 20px;margin-bottom:1.6rem;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.premium-banner-left{display:flex;align-items:center;gap:14px}
-.premium-icon{font-size:22px;color:var(--purple)}
-.premium-title{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:3px}
-.premium-desc{font-size:12px;color:var(--t2)}
-.premium-btn{background:var(--purple);color:#000;font-size:13px;font-weight:700;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;font-family:var(--sans);white-space:nowrap;transition:opacity .15s}
-.premium-btn:hover{opacity:.85}
+.chip-btn{background:var(--purple);color:#000;font-size:13px;font-weight:700;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;font-family:var(--sans);white-space:nowrap;transition:opacity .15s}
+.chip-btn:hover{opacity:.85}
 
 .mh-hero{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;align-items:start;margin-bottom:1.6rem}
 .mh-hero-left{}
@@ -514,12 +506,6 @@ footer{border-top:1px solid var(--b1);padding:18px 2rem;display:flex;align-items
 .upgrade-close:hover{color:var(--t1)}
 .upgrade-badge{font-size:10px;font-weight:800;letter-spacing:.1em;color:var(--purple);margin-bottom:12px}
 .upgrade-title{font-size:20px;font-weight:700;color:var(--t1);margin-bottom:16px;line-height:1.2}
-.upgrade-price{font-family:var(--mono);font-size:42px;font-weight:700;color:var(--accent);line-height:1}
-.upgrade-price span{font-size:16px;color:var(--t2);font-weight:300}
-.upgrade-anual{font-size:12px;color:var(--t2);margin-top:4px;margin-bottom:20px}
-.upgrade-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:4px}
-.upgrade-list li{font-size:13px;color:var(--t2)}
-.upgrade-list li::first-letter{color:var(--accent)}
 
 @media(max-width:768px){
   .mh-hero{grid-template-columns:1fr}
@@ -527,38 +513,6 @@ footer{border-top:1px solid var(--b1);padding:18px 2rem;display:flex;align-items
   .mh-row-head,.mh-row{grid-template-columns:90px 80px 80px 1fr 36px}
   .mh-ipc-indec,.mh-diff{display:none}
 }
-
-/* ══════════ PLANES ══════════ */
-.plans-hero{text-align:center;padding:2rem 0 2.4rem;margin-bottom:.5rem}
-.plans-eyebrow{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
-.plans-title{font-size:28px;font-weight:700;color:var(--t1);margin-bottom:6px}
-.plans-sub{font-size:14px;color:var(--t2)}
-.plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.6rem;align-items:start}
-.plan-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--rl);padding:26px;position:relative}
-.plan-card-premium{border-color:rgba(34,211,166,.3);background:linear-gradient(160deg,#12201C 0%,#12161D 60%)}
-.plan-popular{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--accent);color:#000;font-size:9px;font-weight:800;letter-spacing:.1em;padding:3px 12px;border-radius:0 0 6px 6px}
-.plan-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.plan-name{font-size:16px;font-weight:700;color:var(--t1)}
-.plan-badge{font-size:10px;font-weight:800;letter-spacing:.06em;padding:3px 8px;border-radius:5px}
-.plan-badge-free{background:var(--b2);color:var(--t2)}
-.plan-badge-pro{background:var(--accent-bg);color:var(--accent)}
-.plan-price{font-family:var(--mono);font-size:36px;font-weight:700;color:var(--t1);line-height:1;margin-bottom:4px}
-.plan-price span{font-size:14px;color:var(--t2);font-weight:300}
-.plan-card-premium .plan-price{color:var(--accent)}
-.plan-price-sub{font-size:11px;color:var(--t3);margin-bottom:20px}
-.plan-features{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
-.plan-features li{font-size:13px;display:flex;align-items:start;gap:8px;line-height:1.4}
-.feat-ok{color:var(--t2)}
-.feat-ok::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0}
-.feat-ok.feat-hl{color:var(--t1)}
-.feat-ok.feat-hl::before{color:var(--accent)}
-.feat-no{color:var(--t3)}
-.feat-no::before{content:"–";color:var(--b3);flex-shrink:0}
-.plan-btn{width:100%;padding:12px;border-radius:8px;border:none;font-size:14px;font-weight:700;font-family:var(--sans);cursor:pointer;transition:opacity .15s}
-.plan-btn-free{background:var(--b2);color:var(--t3);cursor:default}
-.plan-btn-pro{background:var(--accent);color:#000}
-.plan-btn-pro:hover{opacity:.88}
-.plan-guarantee{font-size:11px;color:var(--t3);text-align:center;margin-top:10px}
 
 /* IPC CALENDAR */
 .ipc-calendar-box{background:var(--surf);border:1px solid var(--b1);border-radius:var(--rl);padding:20px 24px;margin-bottom:1.6rem;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -571,8 +525,6 @@ footer{border-top:1px solid var(--b1);padding:18px 2rem;display:flex;align-items
 .ipc-cal-sub{font-size:11px;color:var(--t3);margin-top:3px}
 .ipc-cal-countdown.today{color:var(--red)}
 .ipc-cal-countdown.soon{color:var(--amber)}
-
-.plans-faq{display:flex;flex-direction:column;gap:6px;margin-bottom:2rem}
 
 /* BARRA DE ESTADO IPC en nav area */
 .ipc-status-bar{background:var(--surf2);border-bottom:1px solid var(--b1);padding:6px 2rem;display:flex;align-items:center;gap:20px;font-size:11px;color:var(--t3);flex-wrap:wrap}
@@ -597,31 +549,10 @@ footer{border-top:1px solid var(--b1);padding:18px 2rem;display:flex;align-items
 .salary-res-item .sr-val.accent{color:var(--accent)}
 
 @media(max-width:768px){
-  .plans-grid{grid-template-columns:1fr}
   .salary-grid{grid-template-columns:1fr}
   .salary-result{grid-template-columns:1fr 1fr}
   .ipc-status-bar{padding:6px 1rem}
 }
-
-/* MODAL DE PAGO */
-.pay-plan-opt{border:1px solid var(--b2);border-radius:var(--r);padding:14px;cursor:pointer;transition:all .15s;background:var(--surf2)}
-.pay-plan-opt:hover{border-color:var(--accent)}
-.pay-plan-name{font-size:12px;color:var(--t2);margin-bottom:4px;display:flex;align-items:center;gap:6px}
-.pay-plan-price{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--t1)}
-.pay-plan-price span{font-size:12px;color:var(--t2);font-weight:300}
-.pay-plan-savings{font-size:9px;font-weight:700;background:var(--accent-bg);color:var(--accent);padding:2px 6px;border-radius:4px}
-.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
-.pay-method-btn{border:1px solid var(--b2);border-radius:8px;padding:10px;font-size:13px;font-family:var(--sans);background:var(--surf2);color:var(--t2);cursor:pointer;display:flex;align-items:center;gap:7px;justify-content:center;transition:all .15s}
-.pay-method-btn.active{border-color:var(--accent);color:var(--t1);background:var(--surf3)}
-.pay-info-box{background:var(--surf2);border-radius:var(--r);padding:16px;margin-bottom:12px}
-.pay-info-label{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
-.pay-info-value{font-family:var(--mono);font-size:16px;font-weight:600;color:var(--t1)}
-.pay-copyable{cursor:pointer;border-bottom:1px dashed var(--b3);display:inline-block;transition:color .15s}
-.pay-copyable:hover{color:var(--accent)}
-.pay-info-note{font-size:11px;color:var(--t3);margin-top:10px;line-height:1.5}
-.pay-info-note b{color:var(--t2)}
-.pay-amount-display{text-align:center;font-size:13px;color:var(--t2);margin-top:4px}
-.pay-amount-display b{color:var(--accent);font-family:var(--mono);font-size:16px}
 
 /* AUTH EXTRAS */
 .btn-google{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:11px;border-radius:8px;border:1px solid var(--b2);background:var(--surf2);color:var(--t1);font-size:14px;font-weight:500;font-family:var(--sans);cursor:pointer;transition:all .15s;margin-bottom:16px}
@@ -695,14 +626,14 @@ footer{border-top:1px solid var(--b1);padding:18px 2rem;display:flex;align-items
 .fc-comp-row:last-child{border-bottom:none}
 .fc-comp-rubro{font-size:12px;color:var(--t2)}
 /* Colores de las canastas */
-.cc-0{background:#22D3A6}.cc-1{background:#5BC8FF}.cc-2{background:#B39DFF}
-.ct-0{color:#22D3A6}.ct-1{color:#5BC8FF}.ct-2{color:#B39DFF}
+.cc-0{background:#C8F135}.cc-1{background:#5BC8FF}.cc-2{background:#B39DFF}
+.ct-0{color:#C8F135}.ct-1{color:#5BC8FF}.ct-2{color:#B39DFF}
 @media(max-width:768px){.canasta-selector{display:none}.family-cards{grid-template-columns:1fr}}
 
 /* ══════════ DEMO MODE ══════════ */
 .demo-banner{
-  background:linear-gradient(90deg,rgba(34,211,166,.08),rgba(34,211,166,.04));
-  border-bottom:1px solid rgba(34,211,166,.15);
+  background:linear-gradient(90deg,rgba(200,241,53,.08),rgba(200,241,53,.04));
+  border-bottom:1px solid rgba(200,241,53,.15);
   padding:9px 2rem;
   display:flex;align-items:center;justify-content:space-between;gap:12px;
   flex-wrap:wrap;
@@ -744,7 +675,7 @@ footer{border-top:1px solid var(--b1);padding:18px 2rem;display:flex;align-items
 /* MACRO GRID */
 .macro-section-title{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:8px;font-weight:600}
 .macro-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
-.macro-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:14px;transition:border-color .15s;position:relative;overflow:hidden;box-shadow:0 6px 16px -14px rgba(0,0,0,.5)}
+.macro-card{background:var(--surf);border:1px solid var(--b1);border-radius:var(--r);padding:14px;transition:border-color .15s;position:relative;overflow:hidden}
 .macro-card:hover{border-color:var(--b2)}
 .macro-card.loading::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.03),transparent);animation:shimmer 1.5s infinite}
 @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
@@ -770,7 +701,7 @@ footer{border-top:1px solid var(--b1);padding:18px 2rem;display:flex;align-items
 .noticia-img{width:100%;height:180px;object-fit:cover;display:block;border-bottom:1px solid var(--b1)}
 .noticia-body{padding:18px 20px}
 .noticia-cat{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 9px;border-radius:4px;margin-bottom:10px}
-.cat-macro{background:rgba(34,211,166,.1);color:var(--accent)}
+.cat-macro{background:rgba(200,241,53,.1);color:var(--accent)}
 .cat-economia{background:rgba(61,220,132,.1);color:var(--green)}
 .cat-politica{background:rgba(91,200,255,.1);color:#5BC8FF}
 .cat-internacional{background:rgba(179,157,255,.1);color:var(--purple)}
@@ -825,7 +756,7 @@ footer{border-top:1px solid var(--b1);padding:18px 2rem;display:flex;align-items
 .ob-step:last-child{border-bottom:none}
 .ob-step-icon{
   width:36px;height:36px;border-radius:10px;
-  background:var(--accent-bg);border:1px solid rgba(34,211,166,.2);
+  background:var(--accent-bg);border:1px solid rgba(200,241,53,.2);
   display:flex;align-items:center;justify-content:center;
   font-size:18px;flex-shrink:0;
 }
@@ -1099,6 +1030,24 @@ body.light-mode .deuda-body {
 /* ══════════ MIS FINANZAS ══════════ */
 .fin-section { margin-bottom: 1.6rem; }
 
+/* Sub-navegación: Diagnóstico / Deudas / Herramientas dentro de Mis Finanzas */
+.fin-subnav {
+  display: flex; gap: 8px; margin-bottom: 1.6rem;
+  border-bottom: 1px solid var(--b1); padding-bottom: 0;
+  flex-wrap: wrap;
+}
+.fin-subnav-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: none; border: none; cursor: pointer;
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  color: var(--t3); padding: 10px 4px 12px; margin-right: 18px;
+  border-bottom: 2px solid transparent; transition: color .15s, border-color .15s;
+}
+.fin-subnav-btn:hover { color: var(--t2); }
+.fin-subnav-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.fin-subpanel { display: none; }
+.fin-subpanel.active { display: block; }
+
 /* Mis Finanzas en escritorio: grilla 2x2 para que entre más de un vistazo
    en pantallas grandes. En mobile se apila normal (una sola columna). */
 .fin-grid-4 {
@@ -1120,7 +1069,6 @@ body.light-mode .deuda-body {
 .fin-card {
   background: var(--surf); border: 1px solid var(--b1);
   border-radius: var(--rl); padding: 20px;
-  box-shadow: 0 1px 0 rgba(255,255,255,.02) inset, 0 8px 20px -14px rgba(0,0,0,.5);
 }
 .fin-input-row { display: flex; flex-direction: column; gap: 8px; }
 .fin-input-wrap {
@@ -1197,10 +1145,9 @@ body.light-mode .deuda-body {
 .deuda-card {
   background: var(--surf); border: 1px solid var(--b1);
   border-radius: var(--rl); overflow: hidden;
-  margin-bottom: 10px; transition: border-color .15s, box-shadow .15s;
-  box-shadow: 0 8px 20px -16px rgba(0,0,0,.5);
+  margin-bottom: 10px; transition: border-color .15s;
 }
-.deuda-card:hover { border-color: var(--b2); box-shadow: 0 10px 24px -14px rgba(0,0,0,.6); }
+.deuda-card:hover { border-color: var(--b2); }
 .deuda-header {
   display: flex; align-items: center; gap: 12px;
   padding: 14px 16px; cursor: pointer;
@@ -1289,14 +1236,14 @@ body.light-mode .deuda-body {
 .cat-card[data-cat="transporte"]   { border-left: 3px solid #F5A623; }
 .cat-card[data-cat="salud"]        { border-left: 3px solid #B39DFF; }
 .cat-card[data-cat="educacion"]    { border-left: 3px solid #FF6B9D; }
-.cat-card[data-cat="indumentaria"] { border-left: 3px solid #22D3A6; }
+.cat-card[data-cat="indumentaria"] { border-left: 3px solid #C8F135; }
 .cat-card[data-cat="recreacion"]   { border-left: 3px solid #FFD93D; }
 .cat-card[data-cat="restaurantes"] { border-left: 3px solid #FF8C42; }
 .cat-card[data-cat="comunicaciones"]{ border-left: 3px solid #4FC3F7; }
 .cat-card[data-cat="hogar"]        { border-left: 3px solid #81C784; }
 .cat-card[data-cat="banco_deudas"] { border-left: 3px solid var(--red); }
 .cat-card[data-cat="ahorro"]       { border-left: 3px solid var(--accent); }
-.cat-card[data-cat="inversion"]    { border-left: 3px solid #22D3A6; }
+.cat-card[data-cat="inversion"]    { border-left: 3px solid #C8F135; }
 
 /* Hero más dramático */
 .hero-num {
@@ -1343,7 +1290,7 @@ body.light-mode .deuda-body {
   position: absolute;
   top: -50%; left: -50%;
   width: 200%; height: 200%;
-  background: radial-gradient(ellipse at center, rgba(34,211,166,0.04) 0%, transparent 60%);
+  background: radial-gradient(ellipse at center, rgba(200,241,53,0.04) 0%, transparent 60%);
   pointer-events: none;
 }
 .hero-ipc-wrap {
@@ -1578,41 +1525,29 @@ body.light-mode .deuda-body {
     </button>
     <button class="nav-tab" data-panel="familia">
       <span class="tab-icon">👨‍👩‍👧</span>
-      <span class="tab-label">Familia <span class="nav-badge" style="background:var(--purple)">PRO</span></span>
+      <span class="tab-label">Familia</span>
     </button>
     <div class="sidebar-divider"></div>
-    <div class="sidebar-section-lbl">Datos</div>
-    <button class="nav-tab" data-panel="argentina">
-      <span class="tab-icon">🇦🇷</span>
-      <span class="tab-label">Argentina Hoy</span>
-    </button>
     <button class="nav-tab" data-panel="historial">
       <span class="tab-icon">📈</span>
       <span class="tab-label">IPC mensual <span class="nav-badge" id="nav-badge-mes">—</span></span>
     </button>
-    <div class="sidebar-divider"></div>
-    <div class="sidebar-section-lbl">Info</div>
     <button class="nav-tab" data-panel="finanzas">
       <span class="tab-icon">💡</span>
       <span class="tab-label">Mis Finanzas</span>
     </button>
-    <button class="nav-tab" data-panel="deudas">
-      <span class="tab-icon">💳</span>
-      <span class="tab-label">Mis Deudas</span>
+    <button class="nav-tab" data-panel="argentina">
+      <span class="tab-icon">🇦🇷</span>
+      <span class="tab-label">Argentina Hoy</span>
     </button>
-    <button class="nav-tab" data-panel="herramientas">
-      <span class="tab-icon">🧰</span>
-      <span class="tab-label">Herramientas</span>
-    </button>
-    <button class="nav-tab" data-panel="planes">
-      <span class="tab-icon">⭐</span>
-      <span class="tab-label">Planes</span>
-    </button>
-    <button class="nav-tab" data-panel="info">
+    <!-- Ayuda y Legal ya no ocupan lugar en el menú principal (se acceden
+         desde el footer) pero se mantienen en el DOM, ocultos, para que
+         siga funcionando el mismo sistema de navegación por click(). -->
+    <button class="nav-tab" data-panel="info" style="display:none">
       <span class="tab-icon">ℹ️</span>
       <span class="tab-label">Ayuda y fuentes</span>
     </button>
-    <button class="nav-tab" data-panel="legal">
+    <button class="nav-tab" data-panel="legal" style="display:none">
       <span class="tab-icon">📋</span>
       <span class="tab-label">Legal</span>
     </button>
@@ -1678,7 +1613,7 @@ body.light-mode .deuda-body {
     <div class="mmi-sep"></div>
     <div class="mmi-item">
       <span class="mmi-lbl">📈 IPC Acum.</span>
-      <span class="mmi-val" id="mini-ipc">—</span>
+      <span class="mmi-val" id="mini-ipc">14,7%</span>
     </div>
     <div style="margin-left:auto;font-size:10px;color:var(--t3)">
       <a href="#" onclick="document.querySelector('[data-panel=argentina]').click();return false" style="color:var(--accent);text-decoration:none;font-size:11px">Ver todo →</a>
@@ -1752,7 +1687,10 @@ body.light-mode .deuda-body {
 
   <div class="sec-hd">
     <div class="sec-title">Rubros de tu canasta</div>
-    <span class="sec-hint">Cargá montos en $ · Expandí para ver subrubros</span>
+    <div style="display:flex;align-items:center;gap:12px">
+      <span class="sec-hint">Cargá montos en $ · Expandí para ver subrubros</span>
+      <button class="arg-add-btn" onclick="showCsvImport()">📄 Importar resumen (CSV)</button>
+    </div>
   </div>
 
   <div class="cat-grid" id="cat-grid"></div>
@@ -1848,36 +1786,11 @@ body.light-mode .deuda-body {
     </div>
   </div>
 
-  <!-- Premium gate si tiene 1 canasta y quiere agregar más -->
-  <div id="family-premium-gate" style="display:none">
-    <div class="premium-banner">
-      <div class="premium-banner-left">
-        <div class="premium-icon">★</div>
-        <div>
-          <div class="premium-title">Hasta 3 canastas — Plan Premium</div>
-          <div class="premium-desc">El plan básico incluye 1 canasta. Premium permite hasta 3.</div>
-        </div>
-      </div>
-      <button class="premium-btn" onclick="showUpgrade()">Ver planes → $2.490/mes</button>
-    </div>
-  </div>
 
 </div><!-- /panel-familia -->
 
 <!-- ── PANEL: MI HISTORIAL PERSONAL ── -->
 <div class="panel container" id="panel-mi-historial">
-
-  <!-- FREEMIUM BANNER (se muestra/oculta via JS) -->
-  <div class="premium-banner" id="premium-banner" style="display:none">
-    <div class="premium-banner-left">
-      <div class="premium-icon">★</div>
-      <div>
-        <div class="premium-title">Historial completo — Plan Premium</div>
-        <div class="premium-desc">Accedé a todos tus meses guardados y comparativas anuales.</div>
-      </div>
-    </div>
-    <button class="premium-btn" onclick="showUpgrade()">Ver planes → $2.490/mes</button>
-  </div>
 
   <!-- HERO DEL HISTORIAL -->
   <div class="mh-hero">
@@ -1907,6 +1820,21 @@ body.light-mode .deuda-body {
         <div class="sval" id="mh-acum-diff">—</div>
         <div class="ssub">tu canasta vs. promedio</div>
       </div>
+    </div>
+  </div>
+
+  <!-- PRÓXIMA PUBLICACIÓN DEL IPC -->
+  <div class="ipc-calendar-box" id="ipc-calendar-box">
+    <div class="ipc-cal-left">
+      <div class="ipc-cal-icon" id="ipc-cal-icon">📅</div>
+      <div>
+        <div class="ipc-cal-title" id="ipc-cal-title">Próxima publicación del IPC</div>
+        <div class="ipc-cal-desc" id="ipc-cal-desc">El INDEC publica el IPC entre el 10 y 15 de cada mes</div>
+      </div>
+    </div>
+    <div class="ipc-cal-right">
+      <div class="ipc-cal-countdown" id="ipc-cal-countdown">—</div>
+      <div class="ipc-cal-sub" id="ipc-cal-sub">días estimados</div>
     </div>
   </div>
 
@@ -1989,7 +1917,6 @@ body.light-mode .deuda-body {
       <span style="display:flex;align-items:center;gap:6px"><span style="width:16px;height:2px;background:var(--accent);display:inline-block"></span>Tu IPC personal</span>
       <span style="display:flex;align-items:center;gap:6px"><span style="width:16px;height:2px;background:rgba(255,255,255,.3);display:inline-block;border-top:2px dashed rgba(255,255,255,.3)"></span>IPC INDEC</span>
     </div>
-    <div id="evolucion-lock" class="mh-lock-row" style="display:none;margin-top:10px" onclick="showUpgrade()"></div>
   </div>
 
   <div class="sec-hd" style="margin-top:1.4rem"><div class="sec-title">Variación por división — último mes</div></div>
@@ -2052,8 +1979,8 @@ body.light-mode .deuda-body {
     <div class="macro-cards">
       <div class="macro-card loading"><div class="mc-lbl">Riesgo País</div><div class="mc-val" id="mc-riesgo">—</div><div class="mc-sub">EMBI+ Argentina</div></div>
 
-      <div class="macro-card loading"><div class="mc-lbl">Tasa TAMAR</div><div class="mc-val" id="mc-tasa">—</div><div class="mc-sub">Referencia bancos privados</div></div>
-      <div class="macro-card loading"><div class="mc-lbl">Inflación acum.</div><div class="mc-val" id="mc-ipc-acum">—</div><div class="mc-sub" id="mc-ipc-acum-sub">Acumulada</div></div>
+      <div class="macro-card loading"><div class="mc-lbl">Tasa BCRA</div><div class="mc-val" id="mc-tasa">—</div><div class="mc-sub">TNA política monetaria</div></div>
+      <div class="macro-card loading"><div class="mc-lbl">Inflación acum.</div><div class="mc-val" id="mc-ipc-acum">—</div><div class="mc-sub">Acumulada 2026</div></div>
     </div>
   </div>
 
@@ -2111,12 +2038,26 @@ body.light-mode .deuda-body {
 <!-- ── PANEL: MIS FINANZAS ── -->
 <div class="panel container" id="panel-finanzas" style="padding-bottom:5rem">
 
-  <div class="how-hero" style="margin-bottom:1.6rem">
+  <div class="how-hero" style="margin-bottom:1.2rem">
     <div class="hero-eyebrow">Salud financiera</div>
     <div style="font-size:24px;font-weight:700;color:var(--t1);margin-bottom:4px">Mis Finanzas</div>
-    <div style="font-size:13px;color:var(--t2)">Monotributo · Score de deuda · Flujo de caja · Recomendaciones personalizadas</div>
+    <div style="font-size:13px;color:var(--t2)">Diagnóstico, deudas y calculadoras — todo en un solo lugar</div>
   </div>
 
+  <!-- SUB-NAVEGACIÓN -->
+  <div class="fin-subnav" id="fin-subnav">
+    <button class="fin-subnav-btn active" data-sub="diagnostico" onclick="switchFinSub('diagnostico')">
+      <span>💡</span> Diagnóstico
+    </button>
+    <button class="fin-subnav-btn" data-sub="deudas" onclick="switchFinSub('deudas')">
+      <span>💳</span> Deudas
+    </button>
+    <button class="fin-subnav-btn" data-sub="herramientas" onclick="switchFinSub('herramientas')">
+      <span>🧰</span> Herramientas
+    </button>
+  </div>
+
+  <div class="fin-subpanel active" id="fin-sub-diagnostico">
   <div class="fin-grid-4">
 
   <!-- INGRESOS MÚLTIPLES -->
@@ -2137,14 +2078,7 @@ body.light-mode .deuda-body {
     </div>
   </div>
 
-  <!-- ══ Diagnóstico financiero completo — Premium ══ -->
-  <div id="finanzas-locked" style="display:none;background:var(--surf);border:1px solid var(--b1);border-radius:var(--rl);padding:24px;text-align:center" onclick="showUpgrade()">
-    <div style="font-size:28px;margin-bottom:10px">🔒</div>
-    <div style="font-size:15px;color:var(--t1);font-weight:600;margin-bottom:6px">Diagnóstico financiero completo</div>
-    <div style="font-size:13px;color:var(--t2);margin-bottom:14px">Categoría de monotributo, score de salud financiera, flujo de caja y recomendaciones personalizadas.</div>
-    <button class="premium-btn" onclick="showUpgrade()">🔒 Desbloquear con Premium</button>
-  </div>
-  <div id="finanzas-unlocked" style="display:none">
+  <div id="finanzas-unlocked">
 
   <!-- MONOTRIBUTO -->
   <div class="fin-section">
@@ -2406,18 +2340,9 @@ body.light-mode .deuda-body {
   </div><!-- /finanzas-unlocked -->
 
   </div><!-- /fin-grid-4 -->
+  </div><!-- /fin-sub-diagnostico -->
 
-</div><!-- /panel-finanzas -->
-
-<!-- ── PANEL: MIS DEUDAS ── -->
-<div class="panel container" id="panel-deudas" style="padding-bottom:5rem">
-
-  <div class="how-hero" style="margin-bottom:1.6rem">
-    <div class="hero-eyebrow">Gestión de deudas</div>
-    <div style="font-size:24px;font-weight:700;color:var(--t1);margin-bottom:4px">Mis Deudas</div>
-    <div style="font-size:13px;color:var(--t2)">Costo financiero real · Tasa efectiva vs inflación · Proyección de cancelación</div>
-  </div>
-
+  <div class="fin-subpanel" id="fin-sub-deudas">
   <!-- RESUMEN GENERAL -->
   <div class="sec-hd"><div class="sec-title">Resumen de carga de deuda</div></div>
   <div id="deudas-resumen-wrap">
@@ -2464,7 +2389,7 @@ body.light-mode .deuda-body {
       </div>
       <div class="form-group">
         <label class="form-label">Tipo</label>
-        <select class="form-input" id="d-tipo" onchange="onDeudaTipoChange()">
+        <select class="form-input" id="d-tipo">
           <option value="tarjeta">💳 Tarjeta de crédito</option>
           <option value="prestamo">🏦 Préstamo bancario</option>
           <option value="cuotas">🛒 Compra en cuotas</option>
@@ -2503,7 +2428,7 @@ body.light-mode .deuda-body {
           <span style="padding:0 14px;color:var(--t3);font-size:14px">%</span>
         </div>
       </div>
-      <div class="form-group" id="d-cuotas-rest-wrap">
+      <div class="form-group">
         <label class="form-label">Cuotas restantes</label>
         <input class="form-input" type="number" id="d-cuotas-rest" placeholder="Ej: 18" min="1" />
       </div>
@@ -2514,10 +2439,6 @@ body.light-mode .deuda-body {
           <option value="uva">UVA (ajuste por CER)</option>
           <option value="usd">En dólares</option>
         </select>
-      </div>
-      <div class="form-group" style="grid-column:1/-1;flex-direction:row;align-items:center;gap:8px">
-        <input type="checkbox" id="d-revolvente" onchange="onDeudaRevolventeChange()" style="width:16px;height:16px;accent-color:var(--accent)" />
-        <label class="form-label" for="d-revolvente" style="margin:0">Deuda revolvente, sin plazo fijo (ej: tarjeta de crédito) — se simula hasta cancelar en vez de usar "cuotas restantes"</label>
       </div>
     </div>
     <div style="display:flex;gap:8px">
@@ -2539,18 +2460,9 @@ body.light-mode .deuda-body {
   <div style="background:var(--surf2);border-radius:var(--r);padding:14px 16px;margin-top:1rem;font-size:12px;color:var(--t3);line-height:1.6">
     <b style="color:var(--t2)">¿Qué es la tasa real?</b> En Argentina, si tu deuda tiene TNA 80% y la inflación anual es 50%, tu tasa real es aproximadamente 20%. Eso significa que en términos de poder adquisitivo, la deuda se "licúa" parcialmente. Pero si la tasa supera la inflación, estás pagando más en términos reales.
   </div>
+  </div><!-- /fin-sub-deudas -->
 
-</div><!-- /panel-deudas -->
-
-<!-- ── PANEL: HERRAMIENTAS ── -->
-<div class="panel container" id="panel-herramientas" style="padding-bottom:5rem">
-
-  <div class="how-hero" style="margin-bottom:1.6rem">
-    <div class="hero-eyebrow">Calculadoras</div>
-    <div style="font-size:24px;font-weight:700;color:var(--t1);margin-bottom:4px">Herramientas</div>
-    <div style="font-size:13px;color:var(--t2)">Alerta IPC e interés compuesto gratis · BCRA, UVA, Renta Fija y jubilación con Premium</div>
-  </div>
-
+  <div class="fin-subpanel" id="fin-sub-herramientas">
   <!-- ══ ALERTA IPC (gratis) ══ -->
   <div class="fin-section">
     <div class="sec-hd">
@@ -2569,46 +2481,6 @@ body.light-mode .deuda-body {
         </div>
         <button class="btn-primary" id="ipc-cerrar-mes-btn" style="display:none;width:100%;margin-top:12px" onclick="document.querySelector('[data-panel=mi-historial]').click()">Ir a cerrar mi mes →</button>
       </div>
-      <div id="ipc-alert-locked" style="display:none"></div>
-    </div>
-  </div>
-
-  <!-- ══ A: CENTRAL DE DEUDORES BCRA ══ -->
-  <div class="fin-section">
-    <div class="sec-hd">
-      <div class="sec-title">🏦 Central de Deudores BCRA</div>
-      <span style="font-size:11px;color:var(--accent)">★ Premium</span>
-    </div>
-    <div class="fin-card">
-      <div id="bcra-unlocked" style="display:none">
-        <div style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6">
-          Ingresá tu CUIT/CUIL para ver tu situación crediticia oficial en el BCRA.
-        </div>
-        <div style="display:flex;gap:8px;margin-bottom:12px">
-          <div class="fin-input-wrap" style="flex:1">
-            <span class="fin-prefix" style="font-size:13px">CUIT</span>
-            <input type="text" class="fin-inp" id="bcra-cuit-inp" data-no-money-format="1"
-              placeholder="20123456789" maxlength="11" inputmode="numeric"
-              style="font-size:16px;letter-spacing:.08em"
-              onkeydown="if(event.key==='Enter')consultarBCRA()" />
-          </div>
-          <button class="btn-primary" id="bcra-btn" onclick="consultarBCRA()" style="padding:0 20px;white-space:nowrap">
-            Consultar
-          </button>
-        </div>
-        <div style="font-size:11px;color:var(--t3);margin-bottom:16px">
-          🔒 Tu CUIT no se guarda ni se comparte. La consulta es pública, igual que en la web del BCRA.
-        </div>
-        <div id="bcra-result" style="display:none"></div>
-        <div id="bcra-loading" style="display:none;text-align:center;padding:20px;color:var(--t3);font-size:13px">
-          <div class="loading-spinner" style="margin:0 auto 8px"></div>
-          Consultando Central de Deudores…
-        </div>
-      </div>
-      <div id="bcra-locked" style="display:none;text-align:center;padding:8px 0" onclick="showUpgrade()">
-        <div style="font-size:13px;color:var(--t2);margin-bottom:10px">Consultá tu situación crediticia oficial en el BCRA con tu CUIT/CUIL.</div>
-        <button class="premium-btn" onclick="showUpgrade()">🔒 Desbloquear con Premium</button>
-      </div>
     </div>
   </div>
 
@@ -2616,10 +2488,9 @@ body.light-mode .deuda-body {
   <div class="fin-section">
     <div class="sec-hd">
       <div class="sec-title">🏠 Calculadora UVA</div>
-      <span style="font-size:11px;color:var(--accent)">★ Premium</span>
     </div>
     <div class="fin-card">
-      <div id="uva-unlocked" style="display:none">
+      <div id="uva-unlocked">
         <div style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6">
           Calculá cuánto aumentó tu deuda o depósito en UVA desde que lo contrataste hasta hoy.
         </div>
@@ -2650,10 +2521,6 @@ body.light-mode .deuda-body {
         </div>
         <div id="uva-result" style="display:none;padding:14px;background:var(--surf2);border-radius:8px;border:1px solid var(--b1)"></div>
       </div>
-      <div id="uva-locked" style="display:none;text-align:center;padding:8px 0" onclick="showUpgrade()">
-        <div style="font-size:13px;color:var(--t2);margin-bottom:10px">Calculá cuánto aumentó tu deuda o depósito en UVA con el ajuste por inflación real.</div>
-        <button class="premium-btn" onclick="showUpgrade()">🔒 Desbloquear con Premium</button>
-      </div>
     </div>
   </div>
 
@@ -2661,10 +2528,9 @@ body.light-mode .deuda-body {
   <div class="fin-section">
     <div class="sec-hd">
       <div class="sec-title">📊 Comparador de Renta Fija</div>
-      <span style="font-size:11px;color:var(--accent)">★ Premium</span>
     </div>
     <div class="fin-card">
-      <div id="rf-unlocked" style="display:none">
+      <div id="rf-unlocked">
         <div style="font-size:13px;color:var(--t2);margin-bottom:16px;line-height:1.5">Renta fija argentina · Plazo fijo, Lecap, Bono CER y Fondo Money Market comparados.</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
           <div>
@@ -2694,22 +2560,16 @@ body.light-mode .deuda-body {
           📌 LECAP/BONCAP: precio y variación en vivo (fuente: data912.com). Resto: tasas de referencia BCRA + valores orientativos. No incluye TIR calculada. Esto no constituye asesoramiento financiero.
         </div>
       </div>
-      <div id="rf-locked" style="display:none;text-align:center;padding:8px 0" onclick="showUpgrade()">
-        <div style="font-size:13px;color:var(--t2);margin-bottom:10px">Comparador de Plazo Fijo, LECAP/BONCAP (precio en vivo), Bono CER y Money Market.</div>
-        <button class="premium-btn" onclick="showUpgrade()">🔒 Desbloquear con Premium</button>
-      </div>
     </div>
   </div>
 
-
-  <!-- ══ H:- ══ H: PROYECCIÓN JUBILACIÓN ══ -->
+  <!-- ══ H: PROYECCIÓN JUBILACIÓN ══ -->
   <div class="fin-section">
     <div class="sec-hd">
       <div class="sec-title">🏛️ Proyección de jubilación</div>
-      <span style="font-size:11px;color:var(--accent)">★ Premium</span>
     </div>
     <div class="fin-card">
-      <div id="jub-unlocked" style="display:none">
+      <div id="jub-unlocked">
         <div style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6">
           Estimá cuánto podrías cobrar de jubilación según tu sueldo actual y los años de aportes. Basado en la fórmula SIPA vigente.
         </div>
@@ -2741,10 +2601,6 @@ body.light-mode .deuda-body {
         <div style="font-size:11px;color:var(--t3);margin-top:10px;line-height:1.5">
           ⚠️ Estimación orientativa basada en la fórmula SIPA actual. El haber real depende de tu historial de aportes, actualizaciones y cambios en la legislación. No reemplaza una consulta en ANSES.
         </div>
-      </div>
-      <div id="jub-locked" style="display:none;text-align:center;padding:8px 0" onclick="showUpgrade()">
-        <div style="font-size:13px;color:var(--t2);margin-bottom:10px">Estimá cuánto podrías cobrar de jubilación según tu sueldo y años de aportes (fórmula SIPA).</div>
-        <button class="premium-btn" onclick="showUpgrade()">🔒 Desbloquear con Premium</button>
       </div>
     </div>
   </div>
@@ -2813,7 +2669,44 @@ body.light-mode .deuda-body {
     </div>
   </div>
 
-</div><!-- /panel-herramientas -->
+<!-- ══ A: CENTRAL DE DEUDORES BCRA ══ -->
+  <div class="fin-section">
+    <div class="sec-hd">
+      <div class="sec-title" style="font-size:14px;color:var(--t2);font-weight:600">🏦 Central de Deudores BCRA</div>
+      <span style="font-size:11px;color:var(--t3)">Utilidad aparte — no es sobre inflación</span>
+    </div>
+    <div class="fin-card">
+      <div id="bcra-unlocked">
+        <div style="font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.6">
+          Ingresá tu CUIT/CUIL para ver tu situación crediticia oficial en el BCRA.
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <div class="fin-input-wrap" style="flex:1">
+            <span class="fin-prefix" style="font-size:13px">CUIT</span>
+            <input type="text" class="fin-inp" id="bcra-cuit-inp" data-no-money-format="1"
+              placeholder="20123456789" maxlength="11" inputmode="numeric"
+              style="font-size:16px;letter-spacing:.08em"
+              onkeydown="if(event.key==='Enter')consultarBCRA()" />
+          </div>
+          <button class="btn-primary" id="bcra-btn" onclick="consultarBCRA()" style="padding:0 20px;white-space:nowrap">
+            Consultar
+          </button>
+        </div>
+        <div style="font-size:11px;color:var(--t3);margin-bottom:16px">
+          🔒 Tu CUIT no se guarda ni se comparte. La consulta es pública, igual que en la web del BCRA.
+        </div>
+        <div id="bcra-result" style="display:none"></div>
+        <div id="bcra-loading" style="display:none;text-align:center;padding:20px;color:var(--t3);font-size:13px">
+          <div class="loading-spinner" style="margin:0 auto 8px"></div>
+          Consultando Central de Deudores…
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /fin-sub-herramientas -->
+
+</div><!-- /panel-finanzas -->
 
 <!-- ── PANEL: LEGAL ── -->
 <div class="panel container" id="panel-legal" style="padding-bottom:5rem">
@@ -2846,9 +2739,7 @@ body.light-mode .deuda-body {
           <br><br>
           <b>Información de cuenta:</b> tu nombre y dirección de correo electrónico, proporcionados al registrarte con email/contraseña o al iniciar sesión con Google.
           <br><br>
-          <b>Datos de uso:</b> los gastos y ponderaciones que cargás en tu canasta personal, tu historial de meses guardados y la configuración de tu cuenta (región, canastas, plan).
-          <br><br>
-          <b>Datos de pago:</b> los pagos se procesan exclusivamente a través de Mercado Pago. Mi Inflación no almacena datos de tarjetas de crédito, débito ni información bancaria. Solo guardamos la confirmación de que el pago fue aprobado y el plan que contrataste.
+          <b>Datos de uso:</b> los gastos y ponderaciones que cargás en tu canasta personal, tu historial de meses guardados y la configuración de tu cuenta (región, canastas).
         </div>
       </div>
     </div>
@@ -2862,7 +2753,6 @@ body.light-mode .deuda-body {
           <br><br>
           · Proveerte el servicio de calculadora de inflación personal<br>
           · Sincronizar tu canasta y historial entre dispositivos<br>
-          · Gestionar tu suscripción Premium<br>
           · Enviarte notificaciones sobre el IPC (solo si las activaste)<br>
           · Mejorar la aplicación mediante análisis de uso agregado y anónimo
           <br><br>
@@ -2892,7 +2782,6 @@ body.light-mode .deuda-body {
           <br><br>
           · <b>Supabase</b> — base de datos y autenticación (supabase.com)<br>
           · <b>Google OAuth</b> — inicio de sesión con Google (policies.google.com/privacy)<br>
-          · <b>Mercado Pago</b> — procesamiento de pagos (mercadopago.com.ar)<br>
           · <b>Vercel</b> — hosting de la aplicación (vercel.com)<br>
           · <b>DolarAPI y ArgentinaDatos</b> — datos económicos públicos
           <br><br>
@@ -2963,10 +2852,10 @@ body.light-mode .deuda-body {
           Mi Inflación es una herramienta de cálculo de inflación personal que permite a los usuarios argentinos estimar su inflación mensual en base a su canasta de consumo particular. El servicio incluye:
           <br><br>
           · Calculadora de inflación personal por rubro y subrubro<br>
-          · Historial mensual de inflación personal vs. INDEC<br>
+          · Historial mensual de inflación personal vs. INDEC, sin límite de meses<br>
           · Dashboard de indicadores macroeconómicos argentinos y noticias curadas<br>
           · Alerta cuando sale el IPC y simulador de interés compuesto<br>
-          · En plan Premium: diagnóstico financiero completo (score, monotributo), gestión de deudas ilimitada, Herramientas (Central de Deudores BCRA, calculadora UVA, comparador de Renta Fija con precio en vivo, proyección de jubilación) y modo familia (múltiples canastas)
+          · Diagnóstico financiero completo (score, monotributo), gestión de deudas, Herramientas (Central de Deudores BCRA, calculadora UVA, comparador de Renta Fija con precio en vivo, proyección de jubilación) y modo familia (hasta 3 canastas)
           <br><br>
           Los datos del INDEC y fuentes económicas son informativos. Mi Inflación no es una fuente oficial y no reemplaza la medición del INDEC.
         </div>
@@ -2976,33 +2865,15 @@ body.light-mode .deuda-body {
     <div class="how-step">
       <div class="how-step-num">3</div>
       <div class="how-step-body">
-        <div class="how-step-title">Plan básico y plan Premium</div>
+        <div class="how-step-title">Servicio gratuito</div>
         <div class="how-step-desc">
-          <b>Plan Básico (gratuito):</b> incluye la calculadora de inflación personal, historial de hasta 2 meses, registro de ingresos mensuales, 1 deuda de prueba, alerta cuando sale el IPC y simulador de interés compuesto. No requiere tarjeta de crédito.
-          <br><br>
-          <b>Plan Premium:</b> disponible por $2.490/mes o $19.900/año. Incluye historial ilimitado, gráfico acumulado personal vs. INDEC, diagnóstico financiero completo (score, monotributo), deudas ilimitadas, Herramientas (BCRA, UVA, Renta Fija con precio en vivo, jubilación) y modo familia (hasta 3 canastas).
-          <br><br>
-          Los precios están expresados en pesos argentinos (ARS) e incluyen IVA. Mi Inflación se reserva el derecho de modificar los precios con previo aviso de 30 días.
+          Mi Inflación es un servicio gratuito. No requiere tarjeta de crédito ni pago alguno para acceder a ninguna de sus funciones, incluyendo el historial ilimitado de meses, el diagnóstico financiero completo, la gestión de deudas y el modo familia.
         </div>
       </div>
     </div>
 
     <div class="how-step">
       <div class="how-step-num">4</div>
-      <div class="how-step-body">
-        <div class="how-step-title">Pagos y facturación</div>
-        <div class="how-step-desc">
-          Los pagos se procesan a través de <b>Mercado Pago</b>. Al completar un pago, el plan Premium se activa automáticamente en tu cuenta.
-          <br><br>
-          <b>Garantía de 7 días:</b> si no estás satisfecho con el servicio dentro de los 7 días de tu primera suscripción, podés solicitar el reembolso completo escribiendo a pironiagustin05@gmail.com.
-          <br><br>
-          Las suscripciones mensuales y anuales no se renuevan automáticamente. Para continuar con Premium deberás realizar un nuevo pago al vencimiento de tu período.
-        </div>
-      </div>
-    </div>
-
-    <div class="how-step">
-      <div class="how-step-num">5</div>
       <div class="how-step-body">
         <div class="how-step-title">Uso aceptable</div>
         <div class="how-step-desc">
@@ -3017,7 +2888,7 @@ body.light-mode .deuda-body {
     </div>
 
     <div class="how-step">
-      <div class="how-step-num">6</div>
+      <div class="how-step-num">5</div>
       <div class="how-step-body">
         <div class="how-step-title">Limitación de responsabilidad</div>
         <div class="how-step-desc">
@@ -3031,7 +2902,7 @@ body.light-mode .deuda-body {
     </div>
 
     <div class="how-step">
-      <div class="how-step-num">7</div>
+      <div class="how-step-num">6</div>
       <div class="how-step-body">
         <div class="how-step-title">Jurisdicción</div>
         <div class="how-step-desc">
@@ -3093,84 +2964,7 @@ body.light-mode .deuda-body {
 
 </div><!-- /panel-como -->
 
-<!-- ── PANEL: PLANES ── -->
-<div class="panel container" id="panel-planes">
 
-  <div class="plans-hero">
-    <div class="plans-eyebrow">Elegí tu plan</div>
-    <div class="plans-title">Inflación real, a tu ritmo</div>
-    <div class="plans-sub">Empezá gratis. Suscribite cuando quieras más.</div>
-  </div>
-
-  <div class="plans-grid">
-    <!-- BÁSICO -->
-    <div class="plan-card">
-      <div class="plan-header">
-        <div class="plan-name">Básico</div>
-        <div class="plan-badge plan-badge-free">Gratis</div>
-      </div>
-      <div class="plan-price">$0<span>/mes</span></div>
-      <div class="plan-price-sub">Sin tarjeta. Sin vencimiento.</div>
-      <ul class="plan-features">
-        <li class="feat-ok">Calculadora de inflación personal</li>
-        <li class="feat-ok">Todos los rubros y subrubros</li>
-        <li class="feat-ok">Gráfico de torta de tu canasta</li>
-        <li class="feat-ok">Datos IPC por región (7 regiones)</li>
-        <li class="feat-ok">Registro de ingresos mensuales</li>
-        <li class="feat-ok">1 deuda de prueba</li>
-        <li class="feat-ok">Alerta cuando sale el IPC</li>
-        <li class="feat-ok">Simulador de interés compuesto</li>
-        <li class="feat-ok" style="border-top:1px solid var(--b1);padding-top:8px;margin-top:2px"><b>Historial: últimos 2 meses</b></li>
-      </ul>
-      <button class="plan-btn plan-btn-free" disabled>Plan actual</button>
-    </div>
-
-    <!-- PREMIUM -->
-    <div class="plan-card plan-card-premium">
-      <div class="plan-popular">MÁS ELEGIDO</div>
-      <div class="plan-header">
-        <div class="plan-name">Premium</div>
-        <div class="plan-badge plan-badge-pro">★ PRO</div>
-      </div>
-      <div class="plan-price">$2.490<span>/mes</span></div>
-      <div class="plan-price-sub">o <b>$19.900/año</b> — equivale a 2 meses gratis</div>
-      <ul class="plan-features">
-        <li class="feat-ok">Todo lo del plan Básico</li>
-        <li class="feat-ok feat-hl">Historial ilimitado de meses</li>
-        <li class="feat-ok feat-hl">Gráfico acumulado personal vs. INDEC</li>
-        <li class="feat-ok feat-hl">Mis Finanzas: score de salud financiera y monotributo</li>
-        <li class="feat-ok feat-hl">Mis Deudas ilimitadas (TEM/TEA, comparador vs. inflación)</li>
-        <li class="feat-ok feat-hl">Herramientas: BCRA, UVA, Renta Fija (precio en vivo), jubilación</li>
-        <li class="feat-ok feat-hl">Modo familia (hasta 3 canastas)</li>
-      </ul>
-      <button class="plan-btn plan-btn-pro" onclick="showUpgrade()">Quiero Premium →</button>
-      <div class="plan-guarantee">7 días de garantía — si no te sirve, te devolvemos el dinero</div>
-    </div>
-  </div>
-
-  <!-- IPC CALENDAR BOX -->
-  <div class="ipc-calendar-box" id="ipc-calendar-box">
-    <div class="ipc-cal-left">
-      <div class="ipc-cal-icon" id="ipc-cal-icon">📅</div>
-      <div>
-        <div class="ipc-cal-title" id="ipc-cal-title">Próxima publicación del IPC</div>
-        <div class="ipc-cal-desc" id="ipc-cal-desc">El INDEC publica el IPC entre el 10 y 15 de cada mes</div>
-      </div>
-    </div>
-    <div class="ipc-cal-right">
-      <div class="ipc-cal-countdown" id="ipc-cal-countdown">—</div>
-      <div class="ipc-cal-sub" id="ipc-cal-sub">días estimados</div>
-    </div>
-  </div>
-
-  <div class="plans-faq">
-    <div class="faq-item"><div class="faq-q">¿Puedo cancelar cuando quiera?</div><div class="faq-a">Sí. Sin contratos ni permanencia. Cancelás desde tu cuenta y no se te cobra el siguiente período.</div></div>
-    <div class="faq-item"><div class="faq-q">¿Qué pasa con mis datos si paso a Básico?</div><div class="faq-a">Tu historial completo queda guardado. Solo dejás de ver los meses que superan el límite gratuito hasta que volvás a suscribirte.</div></div>
-    <div class="faq-item"><div class="faq-q">¿Cuándo sale el IPC del INDEC?</div><div class="faq-a">Entre el 10 y 15 de cada mes. El plan Premium te avisa el día exacto con un recordatorio para que guardes tu canasta antes de que salga el dato.</div></div>
-    <div class="faq-item"><div class="faq-q">¿Cómo funciona el modo familia?</div><div class="faq-a">Podés crear hasta 3 canastas distintas (ej: vos, tu pareja, o comparar dos situaciones). Cada canasta tiene su propio historial y su propio IPC calculado.</div></div>
-  </div>
-
-</div><!-- /panel-planes -->
 
 <!-- ── PANEL: FUENTES ── -->
 
@@ -3179,7 +2973,7 @@ body.light-mode .deuda-body {
 </div><!-- /app-layout -->
 
 <footer>
-  <div class="footer-left"><span>MIINFLACIÓN</span> · Calculadora personal Argentina · Datos: INDEC + ArgentinaDatos API · <a href="#" onclick="document.querySelector('[data-panel=legal]').click();return false" style="color:var(--t3);text-decoration:none">Privacidad</a> · <a href="#" onclick="document.querySelector('[data-panel=legal]').click();switchLegalTab('tyc');return false" style="color:var(--t3);text-decoration:none">Términos</a> · <a href="https://forms.gle/L3ubboA8b51r2dFA8" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:600">💬 Sugerencias y errores</a></div>
+  <div class="footer-left"><span>MIINFLACIÓN</span> · Calculadora personal Argentina · Datos: INDEC + ArgentinaDatos API · <a href="#" onclick="document.querySelector('[data-panel=info]').click();return false" style="color:var(--t3);text-decoration:none">Cómo funciona</a> · <a href="#" onclick="document.querySelector('[data-panel=legal]').click();return false" style="color:var(--t3);text-decoration:none">Privacidad</a> · <a href="#" onclick="document.querySelector('[data-panel=legal]').click();switchLegalTab('tyc');return false" style="color:var(--t3);text-decoration:none">Términos</a> · <a href="https://forms.gle/L3ubboA8b51r2dFA8" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:600">💬 Sugerencias y errores</a></div>
   <div class="footer-center">
     <a href="https://www.indec.gob.ar" target="_blank">indec.gob.ar</a> ·
     <a href="https://argentinadatos.com" target="_blank">argentinadatos.com</a> ·
@@ -3188,76 +2982,6 @@ body.light-mode .deuda-body {
   </div>
   <div class="footer-right"><a href="#" title="Creador">Agustín Pironi</a></div>
 </footer>
-
-
-  <div class="upgrade-modal" id="upgrade-modal" style="display:none">
-    <div class="upgrade-box" style="max-width:460px">
-      <button class="upgrade-close" onclick="hideUpgrade()">✕</button>
-
-      <!-- PASO 1: Elegir plan -->
-      <div id="pay-step-1">
-        <div class="upgrade-badge">★ PREMIUM</div>
-        <div class="upgrade-title">Desbloqueá Mi Inflación Premium</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
-          <div class="pay-plan-opt" id="opt-mensual" onclick="selectPlan('mensual')" style="border-color:var(--accent)">
-            <div class="pay-plan-name">Mensual</div>
-            <div class="pay-plan-price">$2.490<span>/mes</span></div>
-          </div>
-          <div class="pay-plan-opt" id="opt-anual" onclick="selectPlan('anual')">
-            <div class="pay-plan-name">Anual <span class="pay-plan-savings">2 meses gratis</span></div>
-            <div class="pay-plan-price">$19.900<span>/año</span></div>
-            <div style="font-size:10px;color:var(--t3)">= $1.658/mes</div>
-          </div>
-        </div>
-        <ul class="upgrade-list" style="margin-bottom:20px">
-          <li>✓ Historial ilimitado de meses</li>
-          <li>✓ Score financiero, monotributo y deudas ilimitadas</li>
-          <li>✓ Herramientas: BCRA, UVA, Renta Fija en vivo, jubilación</li>
-          <li>✓ Modo familia (hasta 3 canastas)</li>
-        </ul>
-        <button class="btn-primary" style="width:100%" onclick="goPayStep2()">Continuar →</button>
-        <div style="font-size:11px;color:var(--t3);text-align:center;margin-top:10px">7 días de garantía · Cancelás cuando querés</div>
-      </div>
-
-      <!-- PASO 2: Redirige a MP -->
-      <div id="pay-step-2" style="display:none">
-        <button onclick="goPayStep1()" style="background:none;border:none;color:var(--t3);font-size:12px;cursor:pointer;margin-bottom:16px;padding:0">← Volver</button>
-        <div class="upgrade-badge">PAGO SEGURO VÍA MERCADO PAGO</div>
-        <div class="upgrade-title" id="pay-step2-title">Suscripción mensual · $2.490</div>
-        <div style="font-size:13px;color:var(--t2);margin-bottom:20px;line-height:1.5">
-          Al hacer click se abre Mercado Pago donde podés pagar con tarjeta, débito, saldo de MP o transferencia. Elegís vos el método.
-        </div>
-        <div class="pay-info-box" style="margin-bottom:16px">
-          <div class="pay-info-label">Destinatario</div>
-          <div class="pay-info-value">Agustín Pironi</div>
-          <div class="pay-info-label" style="margin-top:10px">Alias MP</div>
-          <div class="pay-info-value pay-copyable" onclick="copyText('agustinpironi.mp', this)">agustinpironi.mp</div>
-          <div class="pay-info-label" style="margin-top:10px">Importe</div>
-          <div class="pay-info-value accent" id="pay-amount-display" style="color:var(--accent)">$2.490</div>
-        </div>
-        <!-- Campo código promocional -->
-        <div style="margin-bottom:12px">
-          <div style="display:flex;gap:8px">
-            <input id="promo-code-inp" class="form-input" type="text" placeholder="¿Tenés un código? Ingresalo acá"
-              style="flex:1;padding:10px 14px;font-size:13px;text-transform:uppercase;letter-spacing:.05em"
-              oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')applyPromoCode()" />
-            <button onclick="applyPromoCode()" class="btn-logout"
-              style="padding:10px 16px;font-size:13px;white-space:nowrap;border-color:var(--accent);color:var(--accent)">
-              Aplicar
-            </button>
-          </div>
-          <div id="promo-msg" style="font-size:11px;margin-top:6px;display:none"></div>
-        </div>
-        <button class="btn-primary" style="width:100%;font-size:15px;padding:14px;display:flex;align-items:center;justify-content:center;gap:8px" onclick="goToMercadoPago()" id="btn-go-mp">
-          🔵 Pagar con Mercado Pago →
-        </button>
-        <div style="font-size:11px;color:var(--t3);text-align:center;margin-top:10px;line-height:1.5">
-          El premium se activa automáticamente al completar el pago.
-        </div>
-      </div>
-
-    </div>
-  </div>
 
 
   <!-- BARRA INFERIOR MOBILE -->
@@ -3282,10 +3006,6 @@ body.light-mode .deuda-body {
       <button class="mbn-item" data-panel="finanzas" onclick="mobileNav('finanzas',this)">
         <span class="mbn-icon">💡</span>
         <span class="mbn-label">Finanzas</span>
-      </button>
-      <button class="mbn-item" data-panel="planes" onclick="mobileNav('planes',this)">
-        <span class="mbn-icon">⭐</span>
-        <span class="mbn-label">Planes</span>
       </button>
     </div>
   </nav>
@@ -3388,7 +3108,7 @@ body.light-mode .deuda-body {
   <div class="upgrade-modal" id="auth-modal" style="display:none">
     <div class="upgrade-box" style="max-width:420px;padding:0;overflow:hidden">
       <!-- Header del modal -->
-      <div style="background:linear-gradient(135deg,#12201C,#12161D);padding:24px 28px 20px;border-bottom:1px solid var(--b1)">
+      <div style="background:linear-gradient(135deg,#141914,#141414);padding:24px 28px 20px;border-bottom:1px solid var(--b1)">
         <button class="upgrade-close" onclick="hideAuthModal()" style="top:16px;right:16px">✕</button>
         <div class="upgrade-badge" style="margin-bottom:8px">GUARDÁ TU PROGRESO</div>
         <div style="font-size:18px;font-weight:700;color:var(--t1);margin-bottom:4px" id="auth-modal-title">Creá tu cuenta gratis</div>
@@ -3441,6 +3161,46 @@ body.light-mode .deuda-body {
         </div>
         <div style="font-size:11px;color:var(--t3);text-align:center;margin-top:14px">
           Al registrarte, tu canasta actual se guarda automáticamente en tu cuenta.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: IMPORTAR RESUMEN DE TARJETA (CSV) -->
+  <div class="upgrade-modal" id="csv-import-modal" style="display:none">
+    <div class="upgrade-box" style="max-width:560px;max-height:85vh;overflow-y:auto">
+      <button class="upgrade-close" onclick="hideCsvImport()">✕</button>
+      <div class="upgrade-badge">IMPORTAR GASTOS</div>
+      <div class="upgrade-title">Resumen de tarjeta (CSV)</div>
+      <div style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:18px">
+        Subí el CSV de tu resumen de tarjeta o cuenta y te sugerimos en qué rubro entra cada gasto. Nada se carga sin que lo confirmes vos.
+      </div>
+
+      <!-- Paso 1: input -->
+      <div id="csv-step-input">
+        <div class="form-group">
+          <label class="form-label">Archivo CSV</label>
+          <input type="file" id="csv-file-inp" accept=".csv,.txt" class="form-input" onchange="handleCsvFileSelect(event)" />
+        </div>
+        <div style="text-align:center;font-size:11px;color:var(--t3);margin:10px 0">— o pegá el texto acá —</div>
+        <div class="form-group">
+          <textarea id="csv-paste-inp" class="form-input" rows="5" placeholder="Fecha,Descripción,Monto&#10;01/07/2026,COTO CICSA,15000&#10;03/07/2026,YPF SERVICIOS,22000" style="font-family:var(--mono);font-size:12px;resize:vertical;width:100%"></textarea>
+        </div>
+        <div class="auth-error" id="csv-error" style="display:none"></div>
+        <button class="btn-primary" style="width:100%;margin-top:8px" onclick="processCsvImport()">Analizar →</button>
+        <div style="font-size:11px;color:var(--t3);margin-top:12px;line-height:1.5">
+          📌 Funciona con cualquier CSV que tenga una columna de monto y una de descripción — no hace falta que sea de un banco en particular. El archivo se procesa acá mismo, en tu navegador: no se sube a ningún servidor.
+        </div>
+      </div>
+
+      <!-- Paso 2: revisión -->
+      <div id="csv-step-review" style="display:none">
+        <div style="font-size:12px;color:var(--t2);margin-bottom:14px;line-height:1.5" id="csv-review-summary"></div>
+        <div id="csv-review-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px"></div>
+        <div style="font-size:11px;color:var(--t3);margin-bottom:16px;line-height:1.5" id="csv-review-excluded"></div>
+        <div style="display:flex;gap:8px">
+          <button class="btn-primary" style="flex:1" onclick="applyCsvImport()">Aplicar a mi canasta →</button>
+          <button class="btn-logout" onclick="backToCsvInput()">Volver</button>
         </div>
       </div>
     </div>
@@ -3778,7 +3538,6 @@ async function doLogout() {
     console.warn('Logout error:', e);
   }
   currentUser = null;
-  isPremiumUser = false;
   // Reset a demo mode
   canastas = [{ id: 'demo', name: 'Mi canasta', state: makeEmptyState(), region: 'nacional' }];
   activeCanastaIdx = 0;
@@ -3863,7 +3622,6 @@ async function checkSession() {
   // Arrancar siempre en modo demo primero (app visible de inmediato)
   initTheme();
   enterDemoMode();
-  checkPaymentReturn();
 
   // Luego verificar si hay sesión activa
   try {
@@ -3879,7 +3637,6 @@ async function checkSession() {
 
 function enterDemoMode() {
   currentUser = null;
-  isPremiumUser = false;
 
   // ══ CRÍTICO: restaurar desde localStorage ANTES de cualquier otra cosa ══
   let restored = false;
@@ -3927,15 +3684,13 @@ document.getElementById('r-pass').addEventListener('keydown', e => { if(e.key===
 // ═══════════════════════════════════════════════
 // SISTEMA MULTI-CANASTA
 // ═══════════════════════════════════════════════
-const MAX_CANASTAS_FREE = 1;
-const MAX_CANASTAS_PRO  = 3;
-const MAX_DEUDAS_FREE = 1; // Mis Deudas: 1 deuda de prueba gratis, resto Premium
-const CANASTA_COLORS    = ['#22D3A6','#5BC8FF','#B39DFF'];
+const MAX_CANASTAS = 3; // modo familia: hasta 3 canastas, gratis para todos
+const CANASTA_COLORS    = ['#C8F135','#5BC8FF','#B39DFF'];
 
 // Canastas: array de { id, name, state, region }
 let canastas = [];
 let activeCanastaIdx = 0;
-let isPremiumUser = false; // se carga desde Supabase
+const isPremiumUser = true; // app 100% gratuita — todas las funciones desbloqueadas para todos
 
 // Accesos rápidos a la canasta activa
 function getActiveCanasta() { return canastas[activeCanastaIdx] || canastas[0]; }
@@ -4024,9 +3779,6 @@ async function loadUserState() {
   }
 
   try {
-    // Leer estado premium
-    isPremiumUser = data.is_premium === true;
-
     if (data.version >= 3 && data.canastas) {
       // Formato nuevo multi-canasta
       canastas = JSON.parse(data.canastas);
@@ -4129,8 +3881,7 @@ const IPC_DATOS_MANUALES = [
   { fecha: '2026-03-01', valor: 3.4 },
   { fecha: '2026-04-01', valor: 2.6 },
   { fecha: '2026-05-01', valor: 2.1 },
-  { fecha: '2026-06-01', valor: 1.9 },
-  // 👆 Agregar acá la próxima línea cuando salga el dato del mes siguiente
+  // 👆 Agregar acá la próxima línea cuando salga el dato de junio 2026
 ];
 
 let ipcLiveData = null;
@@ -4154,7 +3905,7 @@ function fetchIPC() {
   // usuario ya vio el dato manual apenas entró.
   const ctrl = new AbortController();
   const timeoutId = setTimeout(() => ctrl.abort(), 8000);
-  fetch('https://api.argentinadatos.com/v1/finanzas/indices/inflacion', { signal: ctrl.signal })
+  fetch('https://argentinadatos.com/api/v1/finanzas/indices/inflacion', { signal: ctrl.signal })
     .then(r => r.ok ? r.json() : null)
     .then(data => {
       if (!Array.isArray(data) || !data.length) return;
@@ -4182,22 +3933,6 @@ function aplicarDatosIPC(data) {
   if (badge) badge.textContent = ipcLastMes.slice(0,3).toUpperCase() + ' ' + String(d.getFullYear()).slice(2);
   updateMain();
   buildTimeline(data);
-  updateIpcAcumCard();
-}
-
-// Card "Inflación acum." de Argentina Hoy — usa computeAcum(), ya calculado
-// a partir de ipcLiveData (mismo dato real que mueve la calculadora, nada hardcodeado).
-function updateIpcAcumCard() {
-  if (!Array.isArray(ipcLiveData) || !ipcLiveData.length) return;
-  const acums = computeAcum(ipcLiveData);
-  const acumUltimo = acums[acums.length - 1];
-  if (acumUltimo == null) return;
-  const year = _parseFechaLocal(ipcLiveData[ipcLiveData.length - 1].fecha).getFullYear();
-  setMacro('mc-ipc-acum', acumUltimo.toFixed(1).replace('.', ',') + '%', '');
-  const subEl = document.getElementById('mc-ipc-acum-sub');
-  if (subEl) subEl.textContent = 'Acumulada ' + year;
-  const miniEl = document.getElementById('mini-ipc');
-  if (miniEl) miniEl.textContent = acumUltimo.toFixed(1).replace('.', ',') + '%';
 }
 
 function buildTimeline(data) {
@@ -4559,7 +4294,7 @@ function updateSubDistrib(c) {
   if (!track) return;
 
   const tot = c.subs.reduce((a,s) => a+(state[c.id+'_'+s.id]?.w||0), 0);
-  const colors = ['#22D3A6','#3DDC84','#F5A623','#B39DFF','#FF9090','#5BC8FF','#FFD166','#A8E6CF'];
+  const colors = ['#C8F135','#3DDC84','#F5A623','#B39DFF','#FF9090','#5BC8FF','#FFD166','#A8E6CF'];
 
   let segsHTML = '';
   c.subs.forEach((s, i) => {
@@ -4760,7 +4495,7 @@ function updateMain() {
 
 // Paleta de colores para la torta (10 rubros)
 const PIE_COLORS = [
-  '#22D3A6', // accent lima
+  '#C8F135', // accent lima
   '#3DDC84', // green
   '#5BC8FF', // blue
   '#F5A623', // amber
@@ -4961,13 +4696,27 @@ function buildRubrosHist() {
 // sidebar de escritorio y la barra de navegación mobile, para que nunca
 // vuelvan a desincronizarse entre sí (ese desvío fue lo que causaba que
 // Mis Finanzas/Herramientas funcionaran en el celular pero no en la compu).
+let currentFinSub = 'diagnostico';
+
+function switchFinSub(sub) {
+  currentFinSub = sub;
+  document.querySelectorAll('.fin-subnav-btn').forEach(b => b.classList.toggle('active', b.dataset.sub === sub));
+  document.querySelectorAll('.fin-subpanel').forEach(p => p.classList.toggle('active', p.id === 'fin-sub-' + sub));
+  window.scrollTo({top:0,behavior:'smooth'});
+  initFinSub(sub);
+}
+
+function initFinSub(sub) {
+  if (sub === 'diagnostico') { loadFinanzasData(); renderFuentesIngreso(); initFinanzasGate(); }
+  if (sub === 'deudas') initDeudas();
+  if (sub === 'herramientas') initHerramientas();
+}
+
 function onPanelActivated(panel) {
   if (panel === 'mi-historial') renderHistorial();
   if (panel === 'familia') renderFamilyPanel();
   if (panel === 'argentina') initArgentinaPanel();
-  if (panel === 'finanzas') { loadFinanzasData(); renderFuentesIngreso(); initFinanzasGate(); }
-  if (panel === 'deudas') initDeudas();
-  if (panel === 'herramientas') initHerramientas();
+  if (panel === 'finanzas') initFinSub(currentFinSub);
 }
 
 document.querySelectorAll('.nav-tab').forEach(t => {
@@ -5029,7 +4778,6 @@ function initApp() {
 // ═══════════════════════════════════════════════
 // HISTORIAL PERSONAL — SNAPSHOTS MENSUALES
 // ═══════════════════════════════════════════════
-const FREE_MONTHS_LIMIT = 2;
 const MONTH_NAMES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 
 // getCurrentMonthKey() y getCurrentMonthLabel() están definidas más abajo,
@@ -5147,9 +4895,7 @@ async function deleteSnapshot(key) {
 
 async function renderHistorial() {
   const hist = await getHistorial();
-  const isPremium = isPremiumUser;
-  // Gráfico de evolución — mismo límite freemium que el resto del historial
-  renderEvolucionChart(isPremium ? hist : hist.slice(0, FREE_MONTHS_LIMIT), isPremium, hist.length);
+  renderEvolucionChart(hist, hist.length);
 
   // Stats hero
   const countEl = document.getElementById('mh-count');
@@ -5199,17 +4945,13 @@ async function renderHistorial() {
     : 'Cargá tus gastos en "Mi canasta" y guardá el snapshot mensual';
 
   // Tabla
-  renderHistTable(hist, isPremium);
+  renderHistTable(hist);
 
   // Gráfico
-  renderMiniBarChart(hist, isPremium);
-
-  // Banner premium
-  const banner = document.getElementById('premium-banner');
-  if (banner) banner.style.display = (!isPremium && hist.length > FREE_MONTHS_LIMIT) ? 'flex' : 'none';
+  renderMiniBarChart(hist);
 }
 
-function renderHistTable(hist, isPremium) {
+function renderHistTable(hist) {
   const table = document.getElementById('mh-table');
   if (!table) return;
 
@@ -5217,9 +4959,6 @@ function renderHistTable(hist, isPremium) {
     table.innerHTML = '<div class="mh-table-empty" id="mh-table-empty"><p>Todavía no guardaste ningún mes.<br>Completá tu canasta y hacé click en "Guardar mes actual".</p></div>';
     return;
   }
-
-  // Límite freemium: los FREE_MONTHS_LIMIT más recientes son visibles
-  const visibleCount = isPremium ? hist.length : Math.min(hist.length, FREE_MONTHS_LIMIT);
 
   let html = `<div class="mh-row-head">
     <span>Mes</span>
@@ -5235,9 +4974,8 @@ function renderHistTable(hist, isPremium) {
     const sign = parseFloat(diff) > 0 ? '+' : '';
     const diffClass = parseFloat(diff) > 0 ? 'pos' : parseFloat(diff) < 0 ? 'neg' : 'zero';
     const ipcColor = h.ipcPersonal >= 3 ? 'var(--red)' : h.ipcPersonal >= 2 ? 'var(--amber)' : 'var(--green)';
-    const locked = !isPremium && i >= FREE_MONTHS_LIMIT;
 
-    html += `<div class="mh-row${locked ? ' locked' : ''}">
+    html += `<div class="mh-row">
       <span class="mh-mes">${h.label}</span>
       <span class="mh-ipc-personal" style="color:${ipcColor}">${h.ipcPersonal.toFixed(2).replace('.',',')}%</span>
       <span class="mh-ipc-indec">${h.ipcOficial.toFixed(1).replace('.',',')}%</span>
@@ -5247,24 +4985,16 @@ function renderHistTable(hist, isPremium) {
     </div>`;
   });
 
-  // Lock row si hay meses ocultos
-  if (!isPremium && hist.length > FREE_MONTHS_LIMIT) {
-    const locked = hist.length - FREE_MONTHS_LIMIT;
-    html += `<div class="mh-lock-row" onclick="showUpgrade()">
-      🔒 ${locked} mes${locked > 1 ? 'es' : ''} anterior${locked > 1 ? 'es' : ''} — desbloqueá con Premium
-    </div>`;
-  }
-
   table.innerHTML = html;
 }
 
-function renderMiniBarChart(hist, isPremium) {
+function renderMiniBarChart(hist) {
   const chartBox = document.getElementById('mh-chart-box');
   const empty = document.getElementById('mh-chart-empty');
   const canvas = document.getElementById('mh-chart');
   if (!chartBox || !canvas) return;
 
-  const visibleHist = isPremium ? hist : hist.slice(0, FREE_MONTHS_LIMIT);
+  const visibleHist = hist;
 
   if (visibleHist.length < 1) {
     if (empty) empty.style.display = 'flex';
@@ -5311,7 +5041,7 @@ function renderMiniBarChart(hist, isPremium) {
 
     // Tu IPC
     const hP = (h.ipcPersonal / maxVal) * chartH;
-    const accentColor = '#22D3A6';
+    const accentColor = '#C8F135';
     ctx.fillStyle = accentColor;
     ctx.beginPath();
     ctx.roundRect(x - barW - 2, PAD_TOP + chartH - hP, barW, hP, [3,3,0,0]);
@@ -5344,18 +5074,6 @@ function renderMiniBarChart(hist, isPremium) {
     ctx.textAlign = 'left';
   });
 }
-
-function showUpgrade() {
-  document.getElementById('upgrade-modal').style.display = 'flex';
-}
-function hideUpgrade() {
-  document.getElementById('upgrade-modal').style.display = 'none';
-}
-
-// Cerrar modal con ESC
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') hideUpgrade();
-});
 
 // ═══════════════════════════════════════════════
 // CALENDARIO IPC — cuándo sale el próximo dato
@@ -5458,158 +5176,8 @@ function renderIPCStatus() {
       countdown.className = 'ipc-cal-countdown';
       if (calSub) calSub.textContent = 'días hasta el próximo IPC';
       if (calTitle) calTitle.textContent = 'Próxima publicación del IPC';
-      if (calDesc) calDesc.textContent = s.hint + '. El plan Premium te avisa el día exacto.';
+      if (calDesc) calDesc.textContent = s.hint + '. Te avisamos acá cuando esté disponible.';
     }
-  }
-}
-
-// ═══════════════════════════════════════════════
-// FLUJO DE PAGO
-// ═══════════════════════════════════════════════
-let selectedPlan = 'mensual';
-const PLAN_PRICES = { mensual: '$2.490', anual: '$19.900' };
-
-function selectPlan(plan) {
-  selectedPlan = plan;
-  document.querySelectorAll('.pay-plan-opt').forEach(el => el.style.borderColor = 'var(--b2)');
-  document.getElementById('opt-'+plan).style.borderColor = 'var(--accent)';
-}
-
-function goPayStep2() {
-  document.getElementById('pay-step-1').style.display = 'none';
-  document.getElementById('pay-step-2').style.display = 'block';
-  const label = selectedPlan === 'mensual' ? 'Suscripción mensual · $2.490' : 'Suscripción anual · $19.900';
-  const titleEl = document.getElementById('pay-step2-title');
-  if (titleEl) titleEl.textContent = label;
-  const amountEl = document.getElementById('pay-amount-display');
-  if (amountEl) amountEl.textContent = PLAN_PRICES[selectedPlan];
-}
-
-function goPayStep1() {
-  document.getElementById('pay-step-1').style.display = 'block';
-  document.getElementById('pay-step-2').style.display = 'none';
-}
-
-function selectPayMethod(method) {
-  document.querySelectorAll('.pay-method-btn').forEach(el => el.classList.remove('active'));
-  document.getElementById('pm-'+method).classList.add('active');
-  document.getElementById('pay-mp').style.display = method === 'mp' ? 'block' : 'none';
-  document.getElementById('pay-transfer').style.display = method === 'transfer' ? 'block' : 'none';
-}
-
-function copyText(text, el) {
-  navigator.clipboard.writeText(text).then(() => {
-    const orig = el.textContent;
-    el.textContent = '✓ Copiado';
-    el.style.color = 'var(--green)';
-    setTimeout(() => { el.textContent = orig; el.style.color = ''; }, 1800);
-  }).catch(() => {
-    // fallback
-    const ta = document.createElement('textarea');
-    ta.value = text; document.body.appendChild(ta); ta.select();
-    document.execCommand('copy'); document.body.removeChild(ta);
-  });
-}
-
-// ═══════════════════════════════════════════════
-// EXPORT PDF MEJORADO — con gráficos y proyección
-// ═══════════════════════════════════════════════
-async function goToMercadoPago() {
-  // Si no hay sesión, pedir que se loguee primero
-  if (!currentUser) {
-    showAuthModal('register');
-    return;
-  }
-
-  const btn = document.getElementById('btn-go-mp');
-  if (btn) { btn.innerHTML = '⏳ Generando link de pago…'; btn.disabled = true; }
-
-  try {
-    // Crear preferencia desde Edge Function (evita CORS con API de MP)
-    const res = await fetch(
-      'https://jpmphuqutcwqbcqdaayk.supabase.co/functions/v1/mp-webhook',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'create_preference',
-          user_id: currentUser.id,
-          plan: selectedPlan || 'mensual'
-        })
-      }
-    );
-
-    if (res.ok) {
-      const data = await res.json();
-      if (data.init_point) {
-        window.location.href = data.init_point;
-        return;
-      }
-    }
-    throw new Error('No se pudo crear el link de pago');
-  } catch(e) {
-    console.warn('MP preference error:', e.message);
-    // Fallback: redirigir al link estático (el webhook no sabrá el user_id)
-    // pero el usuario puede contactar soporte
-    showToast('Hubo un error. Reintentá en unos segundos.', 'error');
-  } finally {
-    if (btn) { btn.innerHTML = '🔵 Pagar con Mercado Pago →'; btn.disabled = false; }
-  }
-}
-
-// Detectar retorno de MP — reintenta hasta que el webhook procese
-async function checkPaymentReturn() {
-  const params = new URLSearchParams(window.location.search);
-  const status = params.get('payment');
-  const paymentId = params.get('payment_id') || params.get('collection_id');
-
-  if (!status) return;
-
-  // Limpiar URL inmediatamente
-  window.history.replaceState({}, '', window.location.pathname);
-
-  if (status === 'failure' || status === 'rejected') {
-    showToast('El pago no se completó. Podés intentarlo de nuevo.', 'error');
-    return;
-  }
-
-  if (status === 'success' || status === 'approved') {
-    showToast('Procesando tu pago…', 'success');
-
-    // Reintentar hasta 15 segundos para que el webhook procese
-    let attempts = 0;
-    const maxAttempts = 6;
-    const checkPremium = async () => {
-      attempts++;
-      // Consultar directamente la tabla para ver si ya es premium
-      const { data } = await _sb
-        .from('user_state')
-        .select('is_premium')
-        .eq('user_id', currentUser?.id)
-        .single();
-
-      if (data?.is_premium) {
-        isPremiumUser = true;
-        // Recargar todo el estado
-        await loadUserState();
-        // Actualizar UI
-        renderHistorial();
-        renderFamilyPanel();
-        renderCanastaSelector();
-        showToast('¡Premium activado! Bienvenido 🎉', 'success');
-        return;
-      }
-
-      if (attempts < maxAttempts) {
-        setTimeout(checkPremium, 2500); // reintenta cada 2.5s
-      } else {
-        // Después de 15 segundos, avisar que puede demorar
-        showToast('Tu pago está siendo procesado. Si en unos minutos no ves el Premium, recargá la página.', 'success');
-      }
-    };
-
-    // Primera verificación a los 3 segundos
-    setTimeout(checkPremium, 3000);
   }
 }
 
@@ -5635,7 +5203,7 @@ function exportMonthReport() {
   for (var i = 0; i < count3; i++) sum3 += hist[i].ipcPersonal;
   var ipcProy = (sum3 / count3).toFixed(2);
 
-  var colors = ['#22D3A6','#3DDC84','#5BC8FF','#F5A623','#B39DFF','#FF7070','#FFD166','#A8E6CF','#FF9F9F','#9BB3FF'];
+  var colors = ['#C8F135','#3DDC84','#5BC8FF','#F5A623','#B39DFF','#FF7070','#FFD166','#A8E6CF','#FF9F9F','#9BB3FF'];
 
   // SVG torta
   function buildPieSVG(rubros) {
@@ -5844,9 +5412,8 @@ function toggleCanastaDropdown(e) {
 
 function showAddCanasta(e) {
   if (e) e.stopPropagation();
-  const isPremium = isPremiumUser;
-  if (!isPremium && canastas.length >= MAX_CANASTAS_FREE) {
-    showUpgrade();
+  if (canastas.length >= MAX_CANASTAS) {
+    showToast('Podés crear hasta ' + MAX_CANASTAS + ' canastas', 'success');
     return;
   }
   const dd = document.getElementById('canasta-dropdown');
@@ -5861,8 +5428,10 @@ function createCanasta() {
   const inp = document.getElementById('canasta-name-inp');
   const name = inp ? inp.value.trim() : '';
   if (!name) return;
-  const maxC = isPremiumUser ? MAX_CANASTAS_PRO : MAX_CANASTAS_FREE;
-  if (canastas.length >= maxC) { showUpgrade(); return; }
+  if (canastas.length >= MAX_CANASTAS) {
+    showToast('Podés crear hasta ' + MAX_CANASTAS + ' canastas', 'success');
+    return;
+  }
   const newC = {
     id: 'c' + Date.now(),
     name,
@@ -5966,14 +5535,9 @@ function renderFamilyPanel() {
   const emptyEl = document.getElementById('family-empty');
   const combinedEl = document.getElementById('family-combined');
   const compWrap = document.getElementById('family-comparison-wrap');
-  const gateEl = document.getElementById('family-premium-gate');
   if (!cardsEl) return;
 
-  const isPremium = isPremiumUser;
   const hasMultiple = canastas.length > 1;
-
-  // Premium gate
-  if (gateEl) gateEl.style.display = (!isPremium && canastas.length >= MAX_CANASTAS_FREE) ? 'block' : 'none';
 
   if (!hasMultiple) {
     emptyEl && (emptyEl.style.display = 'block');
@@ -6232,9 +5796,10 @@ function resetSubMonto(catId, subId) {
 }
 
 function showFamilyAddForm() {
-  const isPremium = isPremiumUser;
-  if (!isPremium && canastas.length >= MAX_CANASTAS_PRO) { showUpgrade(); return; }
-  if (!isPremium && canastas.length >= MAX_CANASTAS_FREE) { showUpgrade(); return; }
+  if (canastas.length >= MAX_CANASTAS) {
+    showToast('Podés crear hasta ' + MAX_CANASTAS + ' canastas', 'success');
+    return;
+  }
   const form = document.getElementById('family-add-form');
   if (form) {
     form.style.display = 'block';
@@ -6252,8 +5817,10 @@ function submitFamilyAdd() {
   const inp = document.getElementById('family-name-inp');
   const name = inp ? inp.value.trim() : '';
   if (!name) { if(inp) inp.focus(); return; }
-  const maxCF = isPremiumUser ? MAX_CANASTAS_PRO : MAX_CANASTAS_FREE;
-  if (canastas.length >= maxCF) { showUpgrade(); return; }
+  if (canastas.length >= MAX_CANASTAS) {
+    showToast('Podés crear hasta ' + MAX_CANASTAS + ' canastas', 'success');
+    return;
+  }
   const newC = {
     id: 'c' + Date.now(),
     name,
@@ -6289,36 +5856,24 @@ function initSidebar() {
 // ═══════════════════════════════════════════════
 // GRÁFICO DE LÍNEAS — evolución IPC personal vs INDEC
 // ═══════════════════════════════════════════════
-function renderEvolucionChart(hist, isPremium, totalCount) {
+function renderEvolucionChart(hist, totalCount) {
   const canvas = document.getElementById('evolucion-chart');
-  const lockEl = document.getElementById('evolucion-lock');
   if (!canvas || hist.length < 2) {
     const empty = document.getElementById('evolucion-empty');
     if (empty) empty.style.display = 'flex';
     if (canvas) canvas.style.display = 'none';
-    if (lockEl) lockEl.style.display = 'none';
     return;
   }
   const empty = document.getElementById('evolucion-empty');
   if (empty) empty.style.display = 'none';
   canvas.style.display = 'block';
 
-  if (lockEl) {
-    const oculto = !isPremium && totalCount > hist.length;
-    if (oculto) {
-      lockEl.style.display = 'block';
-      lockEl.textContent = '🔒 ' + (totalCount - hist.length) + ' mes' + (totalCount - hist.length > 1 ? 'es' : '') + ' más en el gráfico — desbloqueá con Premium';
-    } else {
-      lockEl.style.display = 'none';
-    }
-  }
-
   const dpr = window.devicePixelRatio || 1;
   const W = canvas.parentElement.offsetWidth - 2;
   if (W < 100) {
     // El panel todavía no tiene ancho real (recién se mostró) — reintentar
     // en el próximo frame en vez de dibujar un gráfico aplastado/roto.
-    requestAnimationFrame(() => renderEvolucionChart(hist, isPremium, totalCount));
+    requestAnimationFrame(() => renderEvolucionChart(hist, totalCount));
     return;
   }
   const H = 240;
@@ -6367,7 +5922,7 @@ function renderEvolucionChart(hist, isPremium, totalCount) {
   ctx.lineTo(xPos(data.length - 1), PAD.top + cH);
   ctx.lineTo(xPos(0), PAD.top + cH);
   ctx.closePath();
-  ctx.fillStyle = 'rgba(34,211,166,0.07)';
+  ctx.fillStyle = 'rgba(200,241,53,0.07)';
   ctx.fill();
 
   // Línea IPC INDEC
@@ -6384,7 +5939,7 @@ function renderEvolucionChart(hist, isPremium, totalCount) {
 
   // Línea IPC personal
   ctx.beginPath();
-  ctx.strokeStyle = '#22D3A6';
+  ctx.strokeStyle = '#C8F135';
   ctx.lineWidth = 2.5;
   data.forEach((d, i) => {
     const x = xPos(i), y = yPos(d.ipcPersonal);
@@ -6397,9 +5952,9 @@ function renderEvolucionChart(hist, isPremium, totalCount) {
     const x = xPos(i), y = yPos(d.ipcPersonal);
     ctx.beginPath();
     ctx.arc(x, y, 4, 0, Math.PI * 2);
-    ctx.fillStyle = '#22D3A6';
+    ctx.fillStyle = '#C8F135';
     ctx.fill();
-    ctx.fillStyle = '#22D3A6';
+    ctx.fillStyle = '#C8F135';
     ctx.font = 'bold 10px monospace';
     ctx.textAlign = 'center';
     ctx.fillText(d.ipcPersonal.toFixed(1) + '%', x, y - 10);
@@ -6419,7 +5974,7 @@ function renderEvolucionChart(hist, isPremium, totalCount) {
   ctx.font = '11px sans-serif';
   ctx.textAlign = 'left';
   // Personal
-  ctx.fillStyle = '#22D3A6';
+  ctx.fillStyle = '#C8F135';
   ctx.fillRect(PAD.left, H - 18, 16, 2);
   ctx.fillText('Tu IPC personal', PAD.left + 22, H - 14);
   // INDEC
@@ -6562,7 +6117,8 @@ function applyMacroData(data) {
   const miniRiesgoEl = document.getElementById('mini-riesgo');
   if (miniRiesgoEl) miniRiesgoEl.textContent = rv.toLocaleString('es-AR');
 
-  updateIpcAcumCard();
+  setMacro('mc-ipc-acum', '14,7%', '');
+  setMacro('mc-tasa', '47%', '');
   document.querySelectorAll('.macro-card.loading').forEach(c => c.classList.remove('loading'));
 }
 
@@ -6790,7 +6346,7 @@ const OB_STEPS_CONTENT = [
     title: 'Paso 3 de 3 — Tu cuenta',
     steps: [
       { icon: '☁️', title: 'Tus datos en la nube', desc: 'Registrarte es gratis. Tu canasta se sincroniza entre todos tus dispositivos automáticamente.' },
-      { icon: '⭐', title: 'Plan Premium', desc: 'Historial ilimitado, diagnóstico financiero completo, deudas ilimitadas, herramientas de inversión y modo familia. $2.490/mes.' },
+      { icon: '⭐', title: 'Todo 100% gratis', desc: 'Historial ilimitado, diagnóstico financiero completo, deudas ilimitadas, herramientas de inversión y modo familia — sin costo, sin límites.' },
       { icon: '🔒', title: 'Tus datos son privados', desc: 'Nunca vendemos tu información. Podés eliminar tu cuenta y todos tus datos en cualquier momento.' },
     ],
     btn: '¡Empezar!'
@@ -6847,109 +6403,6 @@ function checkOnboarding() {
   if (!done) {
     setTimeout(showOnboarding, 800); // pequeño delay para que cargue la app primero
   }
-}
-
-// ═══════════════════════════════════════════════
-// CÓDIGO PROMOCIONAL / ACCESO PREMIUM
-// ═══════════════════════════════════════════════
-const PROMO_CODES = {
-  'AGUS': { type: 'premium', label: 'Acceso Premium activado ✓' },
-};
-
-async function applyPromoCode() {
-  const inp = document.getElementById('promo-code-inp');
-  const msg = document.getElementById('promo-msg');
-  const code = inp ? inp.value.trim().toUpperCase() : '';
-
-  if (!code) return;
-
-  const promo = PROMO_CODES[code];
-  if (!promo) {
-    if (msg) {
-      msg.textContent = 'Código inválido. Verificá que esté bien escrito.';
-      msg.style.color = 'var(--red)';
-      msg.style.display = 'block';
-    }
-    return;
-  }
-
-  // Si no está logueado, pedir que se registre primero
-  if (!currentUser) {
-    if (msg) {
-      msg.textContent = 'Primero registrate o ingresá con tu cuenta para activar el código.';
-      msg.style.color = 'var(--amber)';
-      msg.style.display = 'block';
-    }
-    return;
-  }
-
-  // Activar premium en Supabase
-  if (msg) {
-    msg.textContent = 'Activando…';
-    msg.style.color = 'var(--t2)';
-    msg.style.display = 'block';
-  }
-
-  // Primero intentar actualizar, si no existe la fila, insertarla
-  let error = null;
-
-  // Verificar si existe la fila
-  const { data: existing } = await _sb
-    .from('user_state')
-    .select('user_id')
-    .eq('user_id', currentUser.id)
-    .single();
-
-  if (existing) {
-    // Actualizar fila existente
-    const { error: updErr } = await _sb
-      .from('user_state')
-      .update({ is_premium: true, premium_since: new Date().toISOString() })
-      .eq('user_id', currentUser.id);
-    error = updErr;
-  } else {
-    // Insertar fila nueva con premium
-    const { error: insErr } = await _sb
-      .from('user_state')
-      .insert({
-        user_id: currentUser.id,
-        is_premium: true,
-        premium_since: new Date().toISOString(),
-        version: 3
-      });
-    error = insErr;
-  }
-
-  if (error) {
-    console.error('Error activando premium:', error);
-    if (msg) {
-      msg.textContent = 'Error: ' + (error.message || 'Intentá de nuevo');
-      msg.style.color = 'var(--red)';
-    }
-    return;
-  }
-
-  // Actualizar estado local inmediatamente sin esperar loadUserState
-  isPremiumUser = true;
-  await loadUserState();
-
-  if (msg) {
-    msg.textContent = '🎉 ' + promo.label;
-    msg.style.color = 'var(--green)';
-  }
-
-  if (inp) inp.value = '';
-
-  // Actualizar UI
-  renderHistorial();
-  renderFamilyPanel();
-  renderCanastaSelector();
-
-  // Cerrar modal después de 2 segundos
-  setTimeout(() => {
-    hideUpgrade();
-    showToast('¡Premium activado! Bienvenido 🎉', 'success');
-  }, 2000);
 }
 
 // ═══════════════════════════════════════════════
@@ -7113,7 +6566,7 @@ function calcFinanzas() {
     color = '#5aaa00'; label = '🟢 Buena';
     desc = 'Tu situación financiera es saludable. Hay espacio para mejorar el ahorro o reducir deudas. Revisá las recomendaciones.';
   } else if (score >= 50) {
-    color = '#22D3A6'; label = '🟡 Regular';
+    color = '#C8F135'; label = '🟡 Regular';
     desc = 'Tu situación es manejable pero con vulnerabilidades. Priorizá reducir deudas costosas y aumentar el margen mensual.';
   } else if (score >= 35) {
     color = '#b86000'; label = '🟠 En riesgo';
@@ -7157,7 +6610,7 @@ function calcFinanzas() {
   // Ahorro
   setMetric('met-ahorro', fmtPct(tasaAhorro),
     'bar-ahorro', Math.min(tasaAhorro / 25 * 100, 100),
-    tasaAhorro >= 15 ? '#2a7a00' : tasaAhorro >= 10 ? '#22D3A6' : tasaAhorro >= 5 ? '#b86000' : '#cc2200');
+    tasaAhorro >= 15 ? '#2a7a00' : tasaAhorro >= 10 ? '#C8F135' : tasaAhorro >= 5 ? '#b86000' : '#cc2200');
 
   // Gasto
   setMetric('met-gasto', fmtPct(ratioGasto),
@@ -7294,16 +6747,9 @@ async function saveFinanzasData(data) {
 
 function initFinanzasGate() {
   const unlocked = document.getElementById('finanzas-unlocked');
-  const locked = document.getElementById('finanzas-locked');
-  if (!unlocked || !locked) return;
-  if (isPremiumUser) {
-    unlocked.style.display = 'contents'; // sus hijos pasan a ser celdas directas de .fin-grid-4
-    locked.style.display = 'none';
-    initAgendaPagos();
-  } else {
-    unlocked.style.display = 'none';
-    locked.style.display = 'block';
-  }
+  if (!unlocked) return;
+  unlocked.style.display = 'contents'; // sus hijos pasan a ser celdas directas de .fin-grid-4
+  initAgendaPagos();
 }
 
 // ═══════════════════════════════════════════════
@@ -7344,9 +6790,9 @@ function renderEventoPresets() {
   const wrap = document.getElementById('evento-presets');
   if (!wrap) return;
   wrap.innerHTML = EVENTO_PRESETS.map((p, i) =>
-    '<button type="button" class="premium-btn" style="font-size:11px;padding:6px 10px;background:var(--surf);color:var(--t2);border:1px solid var(--b1)" onclick="aplicarPresetEvento(' + i + ')">' + p.icon + ' ' + p.nombre + '</button>'
+    '<button type="button" class="chip-btn" style="font-size:11px;padding:6px 10px;background:var(--surf);color:var(--t2);border:1px solid var(--b1)" onclick="aplicarPresetEvento(' + i + ')">' + p.icon + ' ' + p.nombre + '</button>'
   ).join('') +
-  '<button type="button" class="premium-btn" style="font-size:11px;padding:6px 10px;background:var(--surf);color:var(--t2);border:1px solid var(--b1)" onclick="aplicarPresetEvento(-1)">✏️ Personalizado</button>';
+  '<button type="button" class="chip-btn" style="font-size:11px;padding:6px 10px;background:var(--surf);color:var(--t2);border:1px solid var(--b1)" onclick="aplicarPresetEvento(-1)">✏️ Personalizado</button>';
 }
 
 function renderEventoCategoriaOptions() {
@@ -7711,12 +7157,15 @@ function calcDeuda(d) {
   const cantidadCuotasRestantes = parseInt(d.cuotasRest) || 0;
   const valorTasa              = parseFloat(d.tasa)    || 0;
   const tipoTasa                = d.tipoTasa || 'tna'; // 'tna' | 'tea' | 'mensual'
-  const esRevolvente            = !!d.revolvente; // tarjeta u otra deuda sin plazo fijo
 
   // ── 1. Conversión de tasas → TEM ──
+  // (tasaMensual ya implementa exactamente esta conversión:
+  //   TNA: se divide linealmente por 12
+  //   TEA: se "desanualiza" con la raíz 12, no se divide
+  //   TEM: se usa tal cual)
   const tem = tasaMensual(valorTasa, tipoTasa);
 
-  // ── 2. Interés de este mes (sobre el capital de HOY) ──
+  // ── 2. Interés de este mes ──
   const interesEsteMes = capitalPendiente * tem;
 
   // ── 3. Amortización de este mes (SIN pisar el valor negativo) ──
@@ -7727,84 +7176,48 @@ function calcDeuda(d) {
   // baja este mes (o incluso crece) — hay que alertar al usuario en la UI.
   const alertaAmortizacion = cuotaMensualIngresada > 0 && amortizacion <= 0;
 
-  const ipcMensual = (ipcLastVal || 2.5) / 100;
-  const ajustaUva = d.ajuste === 'uva';
-
-  // ── 5. Simulación real mes a mes ──
-  // En vez de "cuota × cuotas restantes" (que ignora que el capital baja o
-  // sube cada mes), se simula pago a pago: interés sobre saldo, amortización,
-  // hasta cancelar o hasta el horizonte. Para deudas revolventes (tarjeta)
-  // no hay plazo fijo declarado: se simula hasta cancelar (tope defensivo
-  // 600 meses) y se detecta si con la cuota actual nunca se cancela.
-  const topeMeses = esRevolvente ? 600 : Math.max(cantidadCuotasRestantes, 0);
-  let capitalSim = capitalPendiente;
-  let interesTotal = 0;
-  let totalPagado = 0;
-  let mesesReales = 0;
-  let divergiendo = false;   // el capital no baja hace varios meses seguidos → nunca cancela
-  let mesesEstancado = 0;
-  let capitalPrevio = capitalSim;
-
-  if (cuotaMensualIngresada > 0 && capitalSim > 0.01 && topeMeses > 0) {
-    for (let i = 0; i < topeMeses; i++) {
-      if (ajustaUva) capitalSim *= (1 + ipcMensual);
-      const intMes = capitalSim * tem;
-      const deudaEsteMes = capitalSim + intMes;
-      const pago = Math.min(cuotaMensualIngresada, deudaEsteMes);
-      interesTotal += intMes;
-      totalPagado += pago;
-      capitalSim = Math.max(0, capitalSim + intMes - pago);
-      mesesReales++;
-      if (capitalSim <= 0.01) break;
-      // Frenar la simulación apenas queda claro que diverge, en vez de
-      // dejar crecer el capital sin límite hasta números sin sentido.
-      mesesEstancado = capitalSim >= capitalPrevio - 0.01 ? mesesEstancado + 1 : 0;
-      capitalPrevio = capitalSim;
-      if (mesesEstancado >= 6) { divergiendo = true; break; }
-    }
-  }
-  const nuncaSeCancela = divergiendo || capitalSim > 0.01; // no llegó a $0 dentro del horizonte
-  const costoTotal = totalPagado;
+  // Costo total = cuotas restantes × monto cuota
+  const costoTotal   = cuotaMensualIngresada * cantidadCuotasRestantes;
+  // Interés total = costo total - capital pendiente
+  const interesTotal = Math.max(0, costoTotal - capitalPendiente);
 
   // TEA equivalente, para mostrar siempre sin importar qué tasa ingresó el usuario
   const tea = tasaAnualEfectiva(valorTasa, tipoTasa);
   const temPct = tem * 100; // TEM en % para mostrar en la UI
 
   // Inflación anual de referencia
-  const inflAnual = (Math.pow(1 + ipcMensual, 12) - 1) * 100;
+  const ipcMensual = (ipcLastVal || 2.5) / 100;
+  const inflAnual  = (Math.pow(1 + ipcMensual, 12) - 1) * 100;
 
   // Tasa real (Fisher): si es positiva, la deuda cuesta en términos reales.
   // Si es negativa, la inflación licúa la deuda.
   const tasaReal = ((1 + tea/100) / (1 + inflAnual/100) - 1) * 100;
 
-  // ── 6. Relación de interés por cada $1.000 de cuota ──
+  // ── 5. Relación de interés por cada $1.000 de cuota ──
   const relacionInteresPorMil = cuotaMensualIngresada > 0
     ? (interesEsteMes / cuotaMensualIngresada) * 1000
     : 0;
 
-  // Fecha de cancelación real, según lo que dio la simulación
+  // Fecha de cancelación
   let fechaCancelacion = '—';
-  if (!nuncaSeCancela && mesesReales > 0) {
+  if (cantidadCuotasRestantes > 0) {
     const fecha = new Date();
-    fecha.setMonth(fecha.getMonth() + mesesReales);
+    fecha.setMonth(fecha.getMonth() + cantidadCuotasRestantes);
     fechaCancelacion = fecha.toLocaleDateString('es-AR', {month:'short', year:'numeric'});
   }
 
   // Notas según tipo de ajuste
   let notaAjuste = '';
-  if (ajustaUva) notaAjuste = 'UVA: el capital se ajusta mes a mes por inflación (proxy de CER) antes de calcular el interés.';
+  if (d.ajuste === 'uva') notaAjuste = 'UVA: el capital aumenta con la inflación (CER). Usá la TEA como referencia mínima de costo.';
   if (d.ajuste === 'usd') notaAjuste = 'Deuda en USD: el capital en pesos varía con el tipo de cambio.';
 
-  // ── 7. Resultado estructurado ──
+  // ── 6. Resultado estructurado ──
   return {
     interesMes: interesEsteMes,     // $ de interés este mes
     amortizacion,                   // $ que bajan la deuda este mes (puede ser negativo)
     alertaAmortizacion,             // true si la cuota no alcanza a cubrir el interés
-    costoTotal,       // $ total a pagar hasta cancelar (simulado, no lineal)
-    interesTotal,     // $ total de intereses (simulado)
-    mesesReales,      // meses que tarda en cancelarse según la simulación
-    nuncaSeCancela,   // true si con la cuota actual la deuda no se cancela nunca
-    esRevolvente,
+    costoTotal,       // $ total a pagar hasta cancelar
+    interesTotal,     // $ total de intereses
     tea,              // tasa efectiva anual %
     tem: temPct,      // tasa efectiva mensual %
     tasaReal,         // tasa real vs inflación %
@@ -7817,13 +7230,8 @@ function calcDeuda(d) {
 
 // ── UI ──
 function showAddDeudaForm() {
-  if (!isPremiumUser && getDeudas().length >= MAX_DEUDAS_FREE) {
-    showUpgrade();
-    return;
-  }
   document.getElementById('add-deuda-form').style.display = 'block';
   document.getElementById('d-nombre')?.focus();
-  onDeudaTipoChange();
   reinitNumInputs();
 }
 function hideAddDeudaForm() {
@@ -7832,9 +7240,6 @@ function hideAddDeudaForm() {
     const el = document.getElementById(id);
     if (el) el.value = '';
   });
-  const revEl = document.getElementById('d-revolvente');
-  if (revEl) revEl.checked = false;
-  onDeudaTipoChange();
   const errEl = document.getElementById('d-error');
   if (errEl) errEl.classList.remove('show');
 }
@@ -7847,25 +7252,7 @@ function updateTasaLabel() {
   lbl.textContent = labels[tipo] || 'Tasa %';
 }
 
-// Al elegir "tarjeta" se tilda "revolvente" por default (el usuario puede desmarcarlo)
-// y se oculta "cuotas restantes", que no aplica a deuda sin plazo fijo.
-function onDeudaTipoChange() {
-  const tipo = document.getElementById('d-tipo')?.value;
-  const revEl = document.getElementById('d-revolvente');
-  if (revEl && tipo === 'tarjeta') revEl.checked = true;
-  onDeudaRevolventeChange();
-}
-function onDeudaRevolventeChange() {
-  const revolvente = document.getElementById('d-revolvente')?.checked;
-  const wrap = document.getElementById('d-cuotas-rest-wrap');
-  if (wrap) wrap.style.display = revolvente ? 'none' : '';
-}
-
 function agregarDeuda() {
-  if (!isPremiumUser && getDeudas().length >= MAX_DEUDAS_FREE) {
-    showUpgrade();
-    return;
-  }
   const nombre = document.getElementById('d-nombre')?.value.trim();
   const tipo = document.getElementById('d-tipo')?.value;
   // getRawValue maneja correctamente "45.000" → 45000
@@ -7875,7 +7262,6 @@ function agregarDeuda() {
   const tasa = parseFloat(document.getElementById('d-tasa')?.value?.replace(',','.')) || 0;
   const cuotasRest = parseInt(document.getElementById('d-cuotas-rest')?.value) || 0;
   const ajuste = document.getElementById('d-ajuste')?.value;
-  const revolvente = !!document.getElementById('d-revolvente')?.checked;
   const errEl = document.getElementById('d-error');
 
   if (!nombre) {
@@ -7886,15 +7272,11 @@ function agregarDeuda() {
     if (errEl) { errEl.textContent = 'Ingresá el monto de la cuota mensual'; errEl.classList.add('show'); }
     return;
   }
-  if (!revolvente && cuotasRest <= 0) {
-    if (errEl) { errEl.textContent = 'Ingresá la cantidad de cuotas restantes (o marcá "deuda revolvente")'; errEl.classList.add('show'); }
-    return;
-  }
 
   const nuevaDeuda = {
     id: 'd' + Date.now(),
-    nombre, tipo, capital, capitalOriginal: capital, cuota,
-    tipoTasa, tasa, cuotasRest, ajuste, revolvente,
+    nombre, tipo, capital, cuota,
+    tipoTasa, tasa, cuotasRest, ajuste,
     fechaAlta: new Date().toISOString()
   };
 
@@ -7989,21 +7371,19 @@ function renderDeudas() {
       ? '+' + c.tasaReal.toFixed(1) + '% real (te cuesta en términos reales)'
       : c.tasaReal.toFixed(1) + '% real (la inflación licúa la deuda)';
 
-    const originalRef = d.capitalOriginal > 0 ? d.capitalOriginal : d.capital;
-    const pctPagado = originalRef > 0
-      ? Math.max(0, Math.min(100, (1 - (d.capital / originalRef)) * 100))
+    const pctPagado = d.capital > 0 && c.costoTotal > 0
+      ? Math.max(0, Math.min(100, (1 - (d.capital / (d.capital + c.interesTotal))) * 100))
       : 0;
-
-    const metaTxt = c.esRevolvente
-      ? (c.nuncaSeCancela ? 'Revolvente — no se cancela con esta cuota · ' : '~' + c.mesesReales + ' meses para cancelar · ')
-      : (d.cuotasRest ? d.cuotasRest + ' cuotas restantes · ' : '');
 
     card.innerHTML =
       '<div class="deuda-header" onclick="toggleDeudaBody(this)">' +
         '<div class="deuda-tipo-icon">' + (DEUDA_ICONS[d.tipo] || '📋') + '</div>' +
         '<div class="deuda-info">' +
           '<div class="deuda-nombre">' + d.nombre + '</div>' +
-          '<div class="deuda-meta">' + metaTxt + 'Cancela: ' + c.fechaCancelacion + '</div>' +
+          '<div class="deuda-meta">' +
+            (d.cuotasRest ? d.cuotasRest + ' cuotas restantes · ' : '') +
+            'Cancela: ' + c.fechaCancelacion +
+          '</div>' +
         '</div>' +
         '<div class="deuda-cuota">' + fmtP(d.cuota) + '/mes</div>' +
         '<button class="deuda-del-btn" data-del-deuda="' + d.id + '" onclick="event.stopPropagation();eliminarDeuda(this)">✕</button>' +
@@ -8014,12 +7394,7 @@ function renderDeudas() {
             '<span style="flex-shrink:0">⚠️</span>' +
             '<span><b>La cuota no cubre el interés de este mes.</b> El capital no baja' + (c.amortizacion < 0 ? ' — de hecho crece ' + fmtP(Math.abs(c.amortizacion)) : '') + '. Con esta cuota, esta deuda no se cancela sola.</span>' +
           '</div>'
-        : (c.nuncaSeCancela ?
-          '<div style="background:rgba(184,96,0,.1);border:1px solid var(--amber);border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:var(--t1);display:flex;gap:8px;align-items:flex-start">' +
-            '<span style="flex-shrink:0">⚠️</span>' +
-            '<span><b>A este ritmo no se cancela en un horizonte razonable</b> (simulado hasta 50 años). Subí la cuota o revisá la tasa.</span>' +
-          '</div>'
-        : '')) +
+        : '') +
         '<div class="deuda-metrics">' +
           '<div class="deuda-metric">' +
             '<div class="deuda-metric-lbl">💸 Interés este mes</div>' +
@@ -8072,16 +7447,6 @@ function renderDeudas() {
 
     lista.appendChild(card);
   });
-
-  // Límite freemium: 1 deuda gratis, el resto Premium
-  if (!isPremiumUser && deudas.length >= MAX_DEUDAS_FREE) {
-    const lockRow = document.createElement('div');
-    lockRow.className = 'mh-lock-row';
-    lockRow.style.cursor = 'pointer';
-    lockRow.onclick = showUpgrade;
-    lockRow.textContent = '🔒 Ya cargaste tu deuda de prueba — desbloqueá deudas ilimitadas con Premium';
-    lista.appendChild(lockRow);
-  }
 
   // Listener para pago de cuotas
   initDeudasPagoListeners(lista);
@@ -8275,6 +7640,242 @@ function initNumInputs() {
 // Re-inicializar cuando se agregan inputs dinámicamente
 function reinitNumInputs() {
   setTimeout(initNumInputs, 100);
+}
+
+// ═══════════════════════════════════════════════
+// IMPORTAR RESUMEN DE TARJETA (CSV)
+// ═══════════════════════════════════════════════
+const CSV_KEYWORDS = {
+  alimentos: ['SUPERMERCADO','COTO','CARREFOUR','DIA %','DIA S.A','DISCO','JUMBO','VEA','CHANGOMAS','ALMACEN','VERDULERIA','DIETETICA','LA ANONIMA'],
+  vivienda: ['EDESUR','EDENOR','METROGAS','AYSA','ABSA','EDELAP','EDEN ','CAMUZZI'],
+  expensas: ['EXPENSAS','CONSORCIO'],
+  transporte: ['YPF','SHELL','AXION','PUMA ENERGY','SUBE','UBER','CABIFY','DIDI','PEAJE','AUTOPISTA','ESTACIONAMIENTO','GNC'],
+  salud: ['FARMACIA','FARMACITY','OSDE','SWISS MEDICAL','GALENO','MEDICUS','ACCORD SALUD','LABORATORIO'],
+  educacion: ['COLEGIO','UNIVERSIDAD','INSTITUTO','UBA ','UTDT','UCA ','CURSO','ACADEMIA'],
+  indumentaria: ['ZARA','H&M','NIKE','ADIDAS','C&A ','TODOMODA','PRUNE','KOSIUKO'],
+  recreacion: ['NETFLIX','SPOTIFY','DISNEY','HBO','YOUTUBE PREMIUM','CINE','TEATRO','GIMNASIO',' GYM','CLUB ','PLAYSTATION','STEAM'],
+  restaurantes: ['RAPPI','PEDIDOSYA','MCDONALD','BURGER','RESTO','RESTAURANT','CAFE ','STARBUCKS','HAVANNA'],
+  comunicaciones: ['PERSONAL','MOVISTAR','CLARO','TELECOM','FIBERTEL','TELECENTRO'],
+  hogar: ['SODIMAC','EASY','FALABELLA','MUEBLES','ELECTRODOM'],
+  banco_deudas: ['SEGURO','INTERES','COMISION','MANTENIMIENTO DE CUENTA'],
+};
+const CSV_EXCLUDE = ['PAGO SU FACTURA','PAGO MINIMO','SALDO ANTERIOR','SU PAGO EN','PAGO TARJETA','DEBITO AUTOMATICO SU PAGO','IMPUESTO LEY'];
+
+let csvParsedGroups = null;
+
+function showCsvImport() {
+  document.getElementById('csv-import-modal').style.display = 'flex';
+  backToCsvInput();
+}
+function hideCsvImport() {
+  document.getElementById('csv-import-modal').style.display = 'none';
+}
+function backToCsvInput() {
+  document.getElementById('csv-step-input').style.display = 'block';
+  document.getElementById('csv-step-review').style.display = 'none';
+  const errEl = document.getElementById('csv-error');
+  if (errEl) errEl.style.display = 'none';
+}
+
+function handleCsvFileSelect(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    document.getElementById('csv-paste-inp').value = ev.target.result;
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+// Convierte "12.345,67", "12345.67", "$12.345" o "(1.200)" a número
+function parseArgMoney(raw) {
+  if (raw == null) return NaN;
+  let s = String(raw).trim().replace(/[$\s]/g, '');
+  if (!s) return NaN;
+  const neg = /^-/.test(s) || /^\(.*\)$/.test(s);
+  s = s.replace(/^-/, '').replace(/^\(|\)$/g, '');
+  // Rechazar cualquier cosa que no sea estrictamente dígitos/puntos/comas
+  // (evita que fechas como "01/07/2026" se lean como "1" via parseFloat parcial)
+  if (!/^[0-9.,]+$/.test(s)) return NaN;
+  const hasComma = s.includes(',');
+  const hasDot = s.includes('.');
+  if (hasComma && hasDot) {
+    if (s.lastIndexOf(',') > s.lastIndexOf('.')) s = s.replace(/\./g, '').replace(',', '.');
+    else s = s.replace(/,/g, '');
+  } else if (hasComma) {
+    const parts = s.split(',');
+    if (parts[parts.length-1].length <= 2) s = s.replace(',', '.');
+    else s = s.replace(/,/g, '');
+  } else if (hasDot) {
+    const parts = s.split('.');
+    if (parts.length > 1 && parts[parts.length-1].length === 3) s = s.replace(/\./g, '');
+  }
+  const n = parseFloat(s);
+  if (isNaN(n)) return NaN;
+  return neg ? -Math.abs(n) : n;
+}
+
+function csvDetectDelimiter(text) {
+  const firstLine = text.split(/\r?\n/)[0] || '';
+  const counts = { ',': (firstLine.match(/,/g)||[]).length, ';': (firstLine.match(/;/g)||[]).length, '\t': (firstLine.match(/\t/g)||[]).length };
+  return Object.keys(counts).reduce((a,b) => counts[a] >= counts[b] ? a : b);
+}
+
+function csvSplitLine(line, delim) {
+  const out = [];
+  let cur = '', inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') { inQ = !inQ; continue; }
+    if (ch === delim && !inQ) { out.push(cur); cur = ''; continue; }
+    cur += ch;
+  }
+  out.push(cur);
+  return out.map(s => s.trim());
+}
+
+function csvCategorize(desc) {
+  const d = desc.toUpperCase();
+  for (const ex of CSV_EXCLUDE) { if (d.includes(ex)) return null; }
+  for (const catId in CSV_KEYWORDS) {
+    for (const kw of CSV_KEYWORDS[catId]) { if (d.includes(kw)) return catId; }
+  }
+  return 'sin_categorizar';
+}
+
+function processCsvImport() {
+  const errEl = document.getElementById('csv-error');
+  errEl.style.display = 'none';
+  const text = document.getElementById('csv-paste-inp').value.trim();
+  if (!text) {
+    errEl.textContent = 'Subí un archivo o pegá el texto del resumen primero.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  const delim = csvDetectDelimiter(text);
+  const lines = text.split(/\r?\n/).filter(l => l.trim());
+  if (lines.length < 2) {
+    errEl.textContent = 'No se detectaron suficientes filas. Revisá el formato del archivo.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  const rows = lines.map(l => csvSplitLine(l, delim));
+  const numCols = Math.max(...rows.map(r => r.length));
+
+  const firstRowNumericCount = rows[0].filter(c => c !== undefined && c.trim() !== '' && !isNaN(parseArgMoney(c))).length;
+  const dataRows = firstRowNumericCount >= 2 ? rows : rows.slice(1);
+
+  if (dataRows.length === 0) {
+    errEl.textContent = 'No se detectaron filas de datos. Revisá el formato del archivo.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  // Detectar columna de monto: la que tiene más valores numéricos no-cero
+  let bestCol = -1, bestScore = -1;
+  for (let c = 0; c < numCols; c++) {
+    let validCount = 0;
+    dataRows.forEach(r => { const v = r[c]; if (v !== undefined && !isNaN(parseArgMoney(v)) && parseArgMoney(v) !== 0) validCount++; });
+    if (validCount > bestScore) { bestScore = validCount; bestCol = c; }
+  }
+
+  if (bestCol === -1 || bestScore < dataRows.length * 0.25) {
+    errEl.textContent = 'No pude identificar la columna de montos. Verificá que el archivo tenga una columna numérica clara.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  // Detectar columna de descripción: texto no-numérico más largo en promedio
+  let descCol = -1, bestLen = -1;
+  for (let c = 0; c < numCols; c++) {
+    if (c === bestCol) continue;
+    let totalLen = 0, textCount = 0;
+    dataRows.forEach(r => { const v = r[c]; if (v && isNaN(parseArgMoney(v))) { totalLen += v.length; textCount++; } });
+    const avgLen = textCount > 0 ? totalLen / textCount : 0;
+    if (avgLen > bestLen) { bestLen = avgLen; descCol = c; }
+  }
+  if (descCol === -1) descCol = (bestCol === 0 && numCols > 1) ? 1 : 0;
+
+  const groups = {};
+  let excludedCount = 0, excludedTotal = 0;
+
+  dataRows.forEach(r => {
+    const monto = parseArgMoney(r[bestCol]);
+    const desc = (r[descCol] || '').trim();
+    if (isNaN(monto) || monto === 0) return;
+    const cat = csvCategorize(desc || '(sin descripción)');
+    if (cat === null) { excludedCount++; excludedTotal += Math.abs(monto); return; }
+    if (!groups[cat]) groups[cat] = { total: 0, count: 0 };
+    groups[cat].total += Math.abs(monto);
+    groups[cat].count += 1;
+  });
+
+  csvParsedGroups = groups;
+  renderCsvReview(groups, excludedCount, excludedTotal, dataRows.length);
+}
+
+function renderCsvReview(groups, excludedCount, excludedTotal, totalRows) {
+  document.getElementById('csv-step-input').style.display = 'none';
+  document.getElementById('csv-step-review').style.display = 'block';
+
+  const catById = {};
+  CATS.forEach(c => catById[c.id] = c);
+
+  const catIds = Object.keys(groups).filter(id => id !== 'sin_categorizar' && catById[id]);
+
+  document.getElementById('csv-review-summary').textContent =
+    'Se detectaron ' + totalRows + ' movimientos. Tildá los rubros que querés aplicar — vas a poder seguir editando los montos a mano después.';
+
+  let html = '';
+  catIds.forEach(id => {
+    const c = catById[id];
+    const g = groups[id];
+    html += '<label style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--surf2);border-radius:8px;cursor:pointer">' +
+      '<input type="checkbox" class="csv-row-check" data-cat="' + id + '" checked style="width:16px;height:16px;flex-shrink:0" />' +
+      '<span style="font-size:18px">' + c.icon + '</span>' +
+      '<span style="flex:1;font-size:13px;color:var(--t1)">' + c.name + '<span style="color:var(--t3);font-size:11px"> · ' + g.count + ' gasto' + (g.count>1?'s':'') + '</span></span>' +
+      '<span style="font-family:var(--mono);font-size:14px;font-weight:700;color:var(--t1)">$' + Math.round(g.total).toLocaleString('es-AR') + '</span>' +
+      '</label>';
+  });
+
+  document.getElementById('csv-review-list').innerHTML = html || '<div style="font-size:13px;color:var(--t3);text-align:center;padding:20px">No se pudo identificar ningún gasto por rubro automáticamente.</div>';
+
+  const sinCat = groups['sin_categorizar'];
+  const exEl = document.getElementById('csv-review-excluded');
+  let notas = [];
+  if (sinCat && sinCat.count > 0) {
+    notas.push(sinCat.count + ' gasto' + (sinCat.count>1?'s':'') + ' por $' + Math.round(sinCat.total).toLocaleString('es-AR') + ' no se pudieron identificar — sumalos a mano al rubro que corresponda.');
+  }
+  if (excludedCount > 0) {
+    notas.push('Se excluyeron ' + excludedCount + ' movimientos que no son consumo (pagos de resumen, saldo anterior, etc.) por $' + Math.round(excludedTotal).toLocaleString('es-AR') + '.');
+  }
+  exEl.textContent = notas.join(' ');
+}
+
+function applyCsvImport() {
+  if (!csvParsedGroups) { hideCsvImport(); return; }
+  const checks = document.querySelectorAll('.csv-row-check:checked');
+  if (checks.length === 0) { hideCsvImport(); return; }
+
+  checks.forEach(chk => {
+    const catId = chk.dataset.cat;
+    const g = csvParsedGroups[catId];
+    if (!g) return;
+    const total = Math.round(g.total);
+    const inp = document.getElementById('monto-' + catId);
+    if (inp) { inp.value = formatNumStr(total); inp.dataset.rawValue = total; }
+    if (!state[catId]) state[catId] = { w: 0, monto: 0 };
+    state[catId].monto = total;
+    const c = CATS.find(x => x.id === catId);
+    if (c) { recalcSubWeightsFromMoney(c); updatePresupuesto(catId); }
+  });
+
+  recalcFromMoney();
+  saveCurrentState();
+  hideCsvImport();
+  showToast('Gastos importados — revisá los montos en tu canasta', 'success');
 }
 
 // ═══════════════════════════════════════════════
@@ -8493,9 +8094,10 @@ function registrarPagoCuota(id) {
   box.querySelector('#conf-pago-btn').addEventListener('click', () => {
     // Descontar amortización del capital
     const nuevoCap = Math.max(0, (d.capital || 0) - c.amortizacion);
+    const nuevasCuotas = Math.max(0, (d.cuotasRest || 0) - 1);
 
     d.capital = nuevoCap;
-    if (!d.revolvente) d.cuotasRest = Math.max(0, (d.cuotasRest || 0) - 1);
+    d.cuotasRest = nuevasCuotas;
 
     // Registrar el pago en el historial de la deuda
     if (!d.pagos) d.pagos = [];
@@ -8514,7 +8116,7 @@ function registrarPagoCuota(id) {
     // Toast de confirmación
     showToast('Pago registrado · Capital restante: ' + fmtP(nuevoCap), 'success');
 
-    if (nuevoCap <= 0) {
+    if (nuevasCuotas === 0) {
       setTimeout(() => showToast('🎉 ¡Deuda cancelada! ' + d.nombre + ' pagada al 100%', 'success'), 1500);
     }
   });
@@ -8647,16 +8249,8 @@ async function consultarBCRA() {
     loadingEl.style.display = 'none';
     resultEl.style.display = 'block';
 
-    const errMsgs = data?.errorMessages || (data?.errorMessage ? [data.errorMessage] : []);
-    const esNoEncontrado = data?.status === 404 && errMsgs.some(m => /no se encontr/i.test(m));
-
-    if (esNoEncontrado) {
-      // CUIT válido, sin deudas registradas en la Central — no es un error de la app.
-      renderBCRAResult({ results: { periodos: [] } }, resultEl);
-      return;
-    }
-    if (errMsgs.length || data?.error) {
-      // Falla real del proxy — ir directo a la API del BCRA
+    if (data.errorMessage || data.error) {
+      // Si el proxy no soporta deudores todavía, ir directo a la API del BCRA
       await consultarBCRADirecto(cuit, resultEl);
       return;
     }
@@ -8700,20 +8294,9 @@ const SIT_LABELS = {
   5: { label: '5 — Irrecuperable', cls: 'sit-5' },
 };
 
-function _fmtPeriodoBCRA(p) {
-  // "202606" → "Junio 2026"
-  if (!p || String(p).length !== 6) return p || '—';
-  const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  const mes = parseInt(String(p).slice(4, 6), 10) - 1;
-  return (meses[mes] || '') + ' ' + String(p).slice(0, 4);
-}
-
 function renderBCRAResult(data, el) {
-  // La API real anida las entidades en results.periodos[0].entidades, no en results.entidades.
-  const results = data?.deudas?.results || data?.results || {};
-  const periodoData = Array.isArray(results.periodos) && results.periodos.length > 0 ? results.periodos[0] : null;
-  const deudas = periodoData?.entidades || results.entidades || [];
-  const periodoUltimo = _fmtPeriodoBCRA(periodoData?.periodo || results.periodo);
+  const deudas = data?.deudas?.results?.entidades || data?.results?.entidades || [];
+  const periodoUltimo = data?.deudas?.results?.periodo || '—';
 
   if (!deudas || deudas.length === 0) {
     el.innerHTML =
@@ -8783,7 +8366,7 @@ const RF_INSTRUMENTOS = [
     icon: '🏦',
     getTNA: () => _tasasPF || 37,
     plazoMin: 30, plazoMax: 365,
-    desc: (tna) => 'TNA ' + tna.toFixed(1) + '% · Promedio de bancos, ~30 días',
+    desc: (tna) => 'TNA ' + tna.toFixed(1) + '% · Ref. BCRA',
     calcRendimiento: (monto, plazo, tna) => monto * (tna/100/365 * plazo),
   },
   {
@@ -8970,70 +8553,48 @@ async function calcRentaFija() {
   renderCotizacionD912(plazo);
 }
 
-// Helper compartido — API BCRA v4.0 (la v2/v3 fueron dadas de baja, HTTP 410).
-// Devuelve el detalle [{fecha,valor}] de una variable, más reciente primero.
-async function fetchBCRAVariable(idVariable, params) {
-  try {
-    const url = 'https://api.bcra.gob.ar/estadisticas/v4.0/monetarias/' + idVariable + '?' + (params || 'limit=1');
-    const res = await fetch(url);
-    if (!res.ok) return null;
-    const data = await res.json();
-    const detalle = data?.results?.[0]?.detalle;
-    return Array.isArray(detalle) && detalle.length > 0 ? detalle : null;
-  } catch(e) { return null; }
-}
-
 async function fetchTasasBCRA() {
-  // Id 6 ("tasa de política monetaria") fue discontinuada por el BCRA.
-  // TAMAR de bancos privados (id 44) es la referencia de tasa corta vigente hoy.
-  const detalle = await fetchBCRAVariable(44, 'limit=1');
-  if (!detalle) return;
-  const tamar = detalle[0].valor || 37;
-  const tasaEl = document.getElementById('mc-tasa');
-  if (tasaEl) tasaEl.textContent = tamar.toFixed(1) + '%';
-  setMacro('mc-tasa', tamar.toFixed(1) + '%', '');
-  if (!_tasasPF) _tasasPF = tamar; // fallback hasta que responda fetchTasaPlazoFijo
-}
-
-// TNA real de plazo fijo tradicional, promediada entre bancos (tramo ~30 días)
-// — reemplaza usar una tasa de referencia genérica (TAMAR/pases) para un
-// instrumento que en la realidad tiene su propia tasa publicada por banco.
-async function fetchTasaPlazoFijo() {
   try {
-    const res = await fetch('https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo');
+    // API pública del BCRA — tasa de pases/política monetaria
+    const res = await fetch('https://api.bcra.gob.ar/estadisticas/v2.0/datosvariable/6/1/5');
     if (!res.ok) return;
-    const bancos = await res.json();
-    if (!Array.isArray(bancos)) return;
-    const tnas = bancos.map(b => {
-      if (Array.isArray(b.tasas) && b.tasas.length) {
-        const t30 = [...b.tasas].sort((a, c) =>
-          Math.abs((a.plazoMinDias || 30) - 30) - Math.abs((c.plazoMinDias || 30) - 30))[0];
-        if (t30?.tna > 0) return t30.tna;
-      }
-      return b.tnaClientes > 0 ? b.tnaClientes : null;
-    }).filter(t => t);
-    if (tnas.length) {
-      _tasasPF = (tnas.reduce((a, b) => a + b, 0) / tnas.length) * 100;
-      calcRentaFija();
+    const data = await res.json();
+    const results = data?.results;
+    if (Array.isArray(results) && results.length > 0) {
+      // Tomar el último valor
+      const ultimo = results[results.length - 1];
+      _tasasPF = ultimo.valor || 37;
+      // Actualizar tasa BCRA en Argentina Hoy también
+      const tasaEl = document.getElementById('mc-tasa');
+      if (tasaEl) tasaEl.textContent = _tasasPF.toFixed(1) + '%';
+      setMacro('mc-tasa', _tasasPF.toFixed(1) + '%', '');
     }
-  } catch (e) { /* silencioso — queda el fallback de fetchTasasBCRA */ }
+  } catch(e) { /* silencioso */ }
 }
 
 // ── E: CALCULADORA UVA ──
 let _uvaActual = null;
 
 async function fetchUVAActual() {
-  const detalle = await fetchBCRAVariable(31, 'limit=1');
-  if (detalle) _uvaActual = detalle[0].valor;
+  try {
+    const res = await fetch('https://api.bcra.gob.ar/estadisticas/v2.0/datosvariable/31/1/1');
+    if (res.ok) {
+      const d = await res.json();
+      const results = d?.results;
+      if (Array.isArray(results) && results.length > 0) {
+        _uvaActual = results[results.length - 1]?.valor;
+      }
+    }
+  } catch(e) {}
   // Fallback hardcodeado si la API no responde
   if (!_uvaActual) _uvaActual = 1850; // valor aproximado junio 2026
 }
 
-async function calcUVA() {
+function calcUVA() {
   const monto = getRawValue(document.getElementById('uva-monto')) || 0;
   const tipo = document.getElementById('uva-tipo')?.value;
   const resultEl = document.getElementById('uva-result');
-  if (!resultEl || !monto) { if (resultEl) resultEl.style.display = 'none'; return; }
+  if (!resultEl || !monto) { resultEl.style.display = 'none'; return; }
 
   const uvaHoy = _uvaActual || 1850;
   const fmtP = v => '$' + Math.round(v).toLocaleString('es-AR');
@@ -9054,38 +8615,19 @@ async function calcUVA() {
       '<div style="font-size:12px;color:var(--t3);margin-top:4px">Valor UVA hoy: ' + fmtP(uvaHoy) + '</div>';
 
   } else if (tipo === 'ajuste') {
+    // Mostrar campos de fecha y UVA original
     const fechaInp = document.getElementById('uva-fecha')?.value;
     if (!fechaInp) {
       html = '<div style="font-size:13px;color:var(--t3)">Ingresá la fecha original para calcular el ajuste.</div>';
     } else {
-      resultEl.innerHTML = '<div style="font-size:13px;color:var(--t3)">Buscando el valor UVA real de esa fecha…</div>';
-      resultEl.style.display = 'block';
-
+      // Estimación usando inflación acumulada aproximada
       const fechaOrig = _parseFechaLocal(fechaInp + '-01');
       const hoy = new Date();
       const meses = (hoy.getFullYear() - fechaOrig.getFullYear()) * 12 + hoy.getMonth() - fechaOrig.getMonth();
-
-      // Buscar el valor UVA real publicado por el BCRA en los primeros días de ese mes
-      // (más recientes primero → el último del array es el más cercano al día 1).
-      const desde = fechaInp + '-01';
-      const hastaD = new Date(fechaOrig.getFullYear(), fechaOrig.getMonth(), 7);
-      const hasta = hastaD.toISOString().slice(0, 10);
-      const detalle = await fetchBCRAVariable(31, 'desde=' + desde + '&hasta=' + hasta + '&limit=10');
-      const uvaOrigen = detalle && detalle.length ? detalle[detalle.length - 1].valor : null;
-
-      let montoHoy, aumento, notaFuente;
-      if (uvaOrigen) {
-        montoHoy = monto / uvaOrigen * uvaHoy;
-        aumento = montoHoy - monto;
-        notaFuente = 'Calculado con el valor real de UVA del BCRA: ' + fmtP(uvaOrigen) + ' (' + fechaInp + ') → ' + fmtP(uvaHoy) + ' (hoy).';
-      } else {
-        // Sin dato histórico disponible (ej. fecha fuera de rango) — estimar con IPC como último recurso
-        const ipcMens = ipcLastVal || 2.5;
-        const ajusteAcum = Math.pow(1 + ipcMens / 100, meses) - 1;
-        montoHoy = monto * (1 + ajusteAcum);
-        aumento = montoHoy - monto;
-        notaFuente = 'No se encontró el valor UVA histórico del BCRA para esa fecha — estimado componiendo el IPC mensual (' + ipcMens + '%). El ajuste real depende del CER.';
-      }
+      const ipcMens = ipcLastVal || 2.5;
+      const ajusteAcum = Math.pow(1 + ipcMens/100, meses) - 1;
+      const montoHoy = monto * (1 + ajusteAcum);
+      const aumento = montoHoy - monto;
 
       html =
         '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">' +
@@ -9098,8 +8640,8 @@ async function calcUVA() {
             '<div style="font-family:var(--mono);font-size:18px;font-weight:700;color:var(--red)">' + fmtP(montoHoy) + '</div>' +
           '</div>' +
         '</div>' +
-        '<div style="margin-top:10px;font-size:13px;color:var(--t2)">Aumento de <b style="color:var(--red)">' + fmtP(aumento) + '</b> en ' + meses + ' meses</div>' +
-        '<div style="font-size:11px;color:var(--t3);margin-top:4px">' + notaFuente + '</div>';
+        '<div style="margin-top:10px;font-size:13px;color:var(--t2)">Aumento de <b style="color:var(--red)">' + fmtP(aumento) + '</b> en ' + meses + ' meses (' + (ajusteAcum * 100).toFixed(1) + '% acumulado estimado)</div>' +
+        '<div style="font-size:11px;color:var(--t3);margin-top:4px">Estimación basada en IPC mensual promedio de ' + ipcMens + '%. El ajuste real depende del índice CER publicado por el BCRA.</div>';
     }
   }
 
@@ -9129,10 +8671,13 @@ async function initIPCAlerta() {
   if (!statusEl) return;
 
   try {
-    const detalle = await fetchBCRAVariable(27, 'limit=1');
-    if (!detalle) throw new Error('Sin datos');
+    const res = await fetch('https://api.bcra.gob.ar/estadisticas/v2.0/datosvariable/27/1/2');
+    if (!res.ok) throw new Error('API no disponible');
+    const data = await res.json();
+    const results = data?.results;
+    if (!Array.isArray(results) || results.length === 0) throw new Error('Sin datos');
 
-    const ultimo = detalle[0];
+    const ultimo = results[results.length - 1];
     const ipcVal = ultimo.valor;
     const ipcFecha = _parseFechaLocal(ultimo.fecha);
     const mesLabel = ipcFecha.toLocaleDateString('es-AR', { month: 'long', year: 'numeric' });
@@ -9152,7 +8697,7 @@ async function initIPCAlerta() {
         bannerEl.style.cssText += ';background:rgba(42,122,0,.08);border:1px solid rgba(42,122,0,.2);color:var(--green)';
         bannerEl.textContent = '✅ Ya cerraste tu mes de ' + mesLabel + ' · IPC personal registrado';
       } else {
-        bannerEl.style.cssText += ';background:rgba(34,211,166,.1);border:1px solid rgba(34,211,166,.3);color:var(--t1)';
+        bannerEl.style.cssText += ';background:rgba(200,241,53,.1);border:1px solid rgba(200,241,53,.3);color:var(--t1)';
         bannerEl.textContent = '📢 Nuevo IPC disponible — cerrá tu mes para comparar tu inflación personal vs la oficial';
         if (btnEl) btnEl.style.display = 'block';
       }
@@ -9381,7 +8926,7 @@ function drawInteresCompuestoChart(serieBaja, serieBase, serieAlta) {
 
   drawLinea(serieBaja, 'rgba(255,255,255,0.28)', [4, 3]);
   drawLinea(serieAlta, 'rgba(255,255,255,0.28)', [4, 3]);
-  drawLinea(serieBase, '#22D3A6');
+  drawLinea(serieBase, '#C8F135');
 
   // Labels eje X (años)
   ctx.fillStyle = 'rgba(255,255,255,0.3)';
@@ -9397,38 +8942,24 @@ function drawInteresCompuestoChart(serieBaja, serieBase, serieAlta) {
 
 
 function initHerramientas() {
-  initIPCAlertaGate();           // gratis para todos
-  initHerramientasPremiumGate(); // BCRA / UVA / Renta Fija / Jubilación → Premium
+  initIPCAlertaGate();       // alerta IPC
+  initHerramientasTools();   // BCRA / UVA / Renta Fija / Jubilación
 }
 
 function initIPCAlertaGate() {
   const unlocked = document.getElementById('ipc-alert-unlocked');
-  const locked = document.getElementById('ipc-alert-locked');
   if (unlocked) unlocked.style.display = 'block';
-  if (locked) locked.style.display = 'none';
   initIPCAlerta();
 }
 
-function initHerramientasPremiumGate() {
-  const secciones = [
-    { unlocked: 'bcra-unlocked', locked: 'bcra-locked' },
-    { unlocked: 'uva-unlocked', locked: 'uva-locked' },
-    { unlocked: 'rf-unlocked', locked: 'rf-locked' },
-    { unlocked: 'jub-unlocked', locked: 'jub-locked' },
-  ];
-  secciones.forEach(s => {
-    const u = document.getElementById(s.unlocked);
-    const l = document.getElementById(s.locked);
-    if (!u || !l) return;
-    if (isPremiumUser) { u.style.display = 'block'; l.style.display = 'none'; }
-    else { u.style.display = 'none'; l.style.display = 'block'; }
+function initHerramientasTools() {
+  ['bcra-unlocked', 'uva-unlocked', 'rf-unlocked', 'jub-unlocked'].forEach(id => {
+    const u = document.getElementById(id);
+    if (u) u.style.display = 'block';
   });
-  if (isPremiumUser) {
-    fetchUVAActual();
-    fetchTasasBCRA();
-    fetchTasaPlazoFijo();
-    fetchRentaFijaIOL();
-  }
+  fetchUVAActual();
+  fetchTasasBCRA();
+  fetchRentaFijaIOL();
 }
 
 // ═══════════════════════════════════════════════
@@ -9557,7 +9088,7 @@ function showCierreBanner(label, dias) {
 
   const banner = document.createElement('div');
   banner.id = 'cierre-banner';
-  banner.style.cssText = 'background:linear-gradient(135deg,rgba(34,211,166,.12),rgba(34,211,166,.06));border:1px solid rgba(34,211,166,.3);border-radius:10px;padding:14px 16px;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap';
+  banner.style.cssText = 'background:linear-gradient(135deg,rgba(200,241,53,.12),rgba(200,241,53,.06));border:1px solid rgba(200,241,53,.3);border-radius:10px;padding:14px 16px;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap';
 
   const txtDiv = document.createElement('div');
   txtDiv.innerHTML =
