@@ -9,7 +9,7 @@ const FEEDS = [
   { medio: 'Infobae',     url: 'https://www.infobae.com/arc/outboundfeeds/rss/category/economia/' },
   { medio: 'La Nación',   url: 'https://www.lanacion.com.ar/arc/outboundfeeds/rss/category/economia/?outputType=xml', filtrar: true },
   { medio: 'iProfesional',url: 'https://www.iprofesional.com/rss/economia' },
-  { medio: 'Perfil',      url: 'https://www.perfil.com/feed/economia' },
+  { medio: 'Perfil',      url: 'https://www.perfil.com/feed/economia', filtrar: true },
 ];
 
 const decode = s => String(s || '')

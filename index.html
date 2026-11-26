@@ -1732,6 +1732,9 @@ body.light-mode .slogan-banner { border-left-color: rgba(228,233,242,.9); }
 .family-combined { background: var(--surf); border: 1px solid var(--b1) !important; box-shadow: var(--shadow); padding: 20px 22px !important; }
 body.light-mode .family-combined { border-color: rgba(228,233,242,.9) !important; }
 
+.tool-card::before { display: none; }
+.tool-icon-chip { border-radius: 12px; }
+
 /* Noticias de economía */
 .nt-filtros { display: flex; gap: 6px; flex-wrap: wrap; }
 .nt-chip { border: 1px solid var(--b1); background: var(--surf); color: var(--t2); font: 600 12px var(--sans); padding: 6px 12px; border-radius: 99px; cursor: pointer; transition: all .15s; }
@@ -2042,6 +2045,14 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
 </div><!-- /panel-inicio -->
 
 <div class="panel container" id="panel-canasta">
+
+  <div class="pg-head">
+    <div>
+      <div class="hero-eyebrow">Tu inflación personalizada</div>
+      <div class="pg-title">Mi canasta</div>
+      <div class="pg-sub">Cargá cuánto gastás por rubro y compará tu inflación con la del INDEC</div>
+    </div>
+  </div>
 
   <!-- WIDGET MACRO MINI -->
   <div class="macro-mini-bar" id="macro-mini-bar">
@@ -2369,7 +2380,7 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
       <span>Guardá al menos 2 meses para ver la evolución comparativa</span>
     </div>
     <canvas id="evolucion-chart" style="display:none;width:100%"></canvas>
-    <div style="display:flex;gap:20px;justify-content:center;margin-top:12px;font-size:11px;color:var(--t2)">
+    <div style="display:none;gap:20px;justify-content:center;margin-top:12px;font-size:11px;color:var(--t2)">
       <span style="display:flex;align-items:center;gap:6px"><span style="width:16px;height:2px;background:var(--accent);display:inline-block"></span>Tu IPC personal</span>
       <span style="display:flex;align-items:center;gap:6px"><span style="width:16px;height:2px;background:rgba(255,255,255,.3);display:inline-block;border-top:2px dashed rgba(255,255,255,.3)"></span>IPC INDEC</span>
     </div>
