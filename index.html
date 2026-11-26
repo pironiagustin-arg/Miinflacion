@@ -1826,8 +1826,91 @@ body:not(.light-mode) .seg-pills button.on { background: var(--surf3); }
 .rf-real.up { color: var(--green); } .rf-real.down { color: var(--red); }
 .rf-real.eq { color: var(--t3); }
 .fin-input-wrap .fin-inp, .fin-input-wrap .fin-inp:focus { border: none !important; box-shadow: none !important; background: transparent !important; border-radius: 0 !important; min-height: 0 !important; }
+.rf-subhd { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; margin: 20px 0 10px; }
+.rf-subhd span { font-size: 14px; font-weight: 700; color: var(--t1); }
+.rf-subhd em { font-style: normal; font-size: 12px; color: var(--t3); }
+.rf-ent-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
+.rf-ent { border: 1px solid var(--b1); border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; transition: background .15s; }
+.rf-ent:hover { background: var(--surf2); }
+.rf-ent-top { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.rf-ent-top b { font-size: 13.5px; color: var(--t1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rf-ent-tipo { font-size: 10.5px; font-weight: 700; color: var(--t3); background: var(--surf2); padding: 2px 7px; border-radius: 99px; flex-shrink: 0; }
+.rf-ent-fondo { font-size: 11.5px; color: var(--t3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rf-ent-bottom { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; margin-top: 6px; }
+.rf-ent-tna { font-family: var(--mono); font-size: 17px; font-weight: 800; color: var(--t1); }
+.rf-ent-tna small { font-family: var(--sans); font-size: 10.5px; font-weight: 600; color: var(--t3); }
+.rf-ent-gan { font-family: var(--mono); font-size: 12.5px; font-weight: 700; }
+.rf-ent-gan.up { color: var(--green); } .rf-ent-gan.down { color: var(--red); } .rf-ent-gan.eq { color: var(--t3); }
+@media (max-width: 1100px) { .rf-ent-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+@media (max-width: 600px) { .rf-ent-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
 .rf-foot { font-size: 11.5px; color: var(--t3); margin-top: 12px; line-height: 1.5; }
 @media (max-width: 600px) { .rf-row { grid-template-columns: 1fr; gap: 8px; } .rf-nums { text-align: left; min-width: 0; } .rf-bench em { margin-left: 0; } }
+
+/* ═════ BACKTEST: correcciones de claridad y simetría ═════ */
+/* Mi canasta: fila de rubro con el monto a la vista */
+.cat-head { grid-template-columns: 38px minmax(0,1fr) 64px 180px 52px 22px !important; gap: 12px; padding: 12px 16px; }
+.cat-contrib { display: none !important; }
+.cat-pill { justify-self: end; font-size: 11px; padding: 3px 9px; border-radius: 99px; }
+.cat-amount { display: flex; align-items: center; gap: 6px; background: var(--surf2); border: 1.5px solid transparent; border-radius: 12px; padding: 0 12px; height: 40px; cursor: text; transition: border-color .15s, box-shadow .15s; min-width: 0; }
+.cat-amount:focus-within { border-color: rgba(var(--accent-rgb),.55); box-shadow: 0 0 0 4px rgba(var(--accent-rgb),.12); background: var(--surf); }
+.cat-amount span { color: var(--t3); font-family: var(--mono); font-size: 14px; }
+.cat-amount .money-inp { font-size: 15px !important; padding: 0 !important; height: 100%; min-width: 0; border: none !important; box-shadow: none !important; background: transparent !important; text-align: right; }
+.cat-weight { font-size: 14px; }
+.cat-weight::after { content: ' del gasto'; display: block; font-family: var(--sans); font-size: 10px; font-weight: 500; color: var(--t3); }
+.cat-head .cat-sub { font-size: 11.5px; color: var(--t3); }
+.canasta-sep-financiero { display: flex; align-items: baseline; justify-content: space-between; margin: 1.4rem 0 10px; padding: 0; border: none !important; }
+.canasta-sep-financiero span { font-size: 15px; font-weight: 700; color: var(--t1); text-transform: none; letter-spacing: 0; }
+.canasta-sep-financiero em { font-style: normal; font-size: 12px; color: var(--t3); }
+#panel-canasta .status-bar { display: none !important; }
+.hero { align-items: stretch; }
+.hero-num.empty { font-size: 0 !important; }
+.hero-num.empty::after { content: 'Cargá tus gastos'; font-family: var(--sans); font-size: 24px; font-weight: 700; color: var(--t3); letter-spacing: -.01em; }
+.hero-label { font-size: 13px; color: var(--t2); margin-bottom: 6px; }
+@media (max-width: 860px) {
+  .cat-head { grid-template-columns: 34px minmax(0,1fr) 22px !important; grid-template-areas: "ico info chev" "amt amt amt" !important; row-gap: 10px; }
+  .cat-head .cat-ico { grid-area: ico; } .cat-head .cat-info { grid-area: info; } .cat-head .cat-chev { grid-area: chev; }
+  .cat-head .cat-amount { grid-area: amt; height: 44px; }
+  .cat-head .cat-pill, .cat-head .cat-weight { display: none; }
+}
+/* Mi historial: título arriba y 4 indicadores en una fila */
+.mh-hero { grid-template-columns: 1fr !important; gap: 1rem; }
+.mh-hero-right { grid-template-columns: repeat(4, minmax(0,1fr)) !important; gap: 14px !important; }
+.mh-table-empty { background: var(--surf); border: 1px solid var(--b1); border-radius: var(--soft-r); box-shadow: var(--shadow); padding: 28px; }
+body.light-mode .mh-table-empty { border-color: rgba(228,233,242,.9); }
+@media (max-width: 860px) { .mh-hero-right { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 10px !important; } }
+/* Herramientas: tarjetas de la misma fila con la misma altura */
+.tool-grid { align-items: stretch !important; }
+/* Etiquetas de métricas sin mayúsculas forzadas */
+:is(.fin-metric-lbl,.deuda-metric-lbl,.rt-head) { text-transform: none !important; letter-spacing: 0 !important; font-size: 12px !important; color: var(--t3) !important; font-weight: 500 !important; }
+@media (max-width: 860px) {
+  .fin-metrics-grid, .deuda-metrics { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+}
+/* Ingresos: tipo arriba, monto abajo (sin textos cortados) */
+.fuente-row { display: grid !important; grid-template-columns: minmax(0,1fr) 36px; gap: 8px 10px; align-items: center; margin-bottom: 12px; }
+.fuente-row .fuente-tipo { grid-column: 1 / -1; }
+.fuente-row > * { min-width: 0; flex: none !important; }
+/* Inicio: estados vacíos legibles en vez de "—" */
+.inicio-hero-val.is-empty { font-size: 15px !important; font-family: var(--sans) !important; font-weight: 600 !important; color: var(--t3) !important; line-height: 26px; }
+/* Franjas superiores más compactas */
+.ipc-status-bar { justify-content: center; }
+@media (max-width: 860px) {
+  .ipc-status-bar { padding: 6px 14px; font-size: 11px; text-align: center; }
+  .demo-banner { padding: 10px 14px !important; gap: 10px !important; flex-wrap: nowrap !important; }
+  .demo-banner-icon, .demo-cta-secondary { display: none !important; }
+  .demo-banner-txt { font-size: 12px; line-height: 1.35; }
+  .demo-cta-primary { white-space: nowrap; padding: 8px 12px !important; }
+}
+
+.jub-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; margin-bottom: 12px; }
+.jub-metric { background: var(--surf2); border-radius: 14px; padding: 12px 14px; }
+.jub-metric-lbl { font-size: 12px !important; color: var(--t3) !important; text-transform: none !important; letter-spacing: 0 !important; font-weight: 500; }
+.jub-metric-val { font-family: var(--mono); font-size: 20px; font-weight: 800; color: var(--t1); margin-top: 2px; }
+.jub-metric-sub { font-size: 11px; color: var(--t3); margin-top: 2px; }
+.jub-note { font-size: 12.5px; color: var(--t2); line-height: 1.6; background: var(--surf2); border-radius: 14px; padding: 12px 14px; }
+
+.fin-grid-4 { align-items: stretch !important; }
+.deuda-resumen-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin-bottom: 16px; }
+@media (max-width: 860px) { .deuda-resumen-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; } }
 </style>
 </head>
 <body>
@@ -2056,7 +2139,7 @@ body:not(.light-mode) .seg-pills button.on { background: var(--surf3); }
       <div class="ini-kpis">
         <div class="ini-kpi"><div class="inicio-hero-val" id="inicio-ipc-personal">—</div><div class="inicio-hero-lbl">Tu inflación este mes</div></div>
         <div class="ini-kpi"><div class="inicio-hero-val ini-accent" id="inicio-ipc-oficial">—</div><div class="inicio-hero-lbl" id="inicio-ipc-oficial-lbl">IPC INDEC</div></div>
-        <div class="ini-kpi"><div class="inicio-hero-val" id="inicio-ipc-diff">—</div><div class="inicio-hero-lbl">Diferencia</div></div>
+        <div class="ini-kpi"><div class="inicio-hero-val" id="inicio-ipc-diff">—</div><div class="inicio-hero-lbl">Diferencia con INDEC</div></div>
       </div>
       <div class="ini-chart" id="inicio-ipc-chart"></div>
     </section>
@@ -2118,7 +2201,7 @@ body:not(.light-mode) .seg-pills button.on { background: var(--surf3); }
   </div>
 
   <!-- WIDGET MACRO MINI -->
-  <div class="macro-mini-bar" id="macro-mini-bar">
+  <div class="macro-mini-bar" id="macro-mini-bar" style="display:none">
     <div class="mmi-item">
       <span class="mmi-lbl">Oficial</span>
       <span class="mmi-val" id="mini-oficial">—</span>
@@ -2143,17 +2226,9 @@ body:not(.light-mode) .seg-pills button.on { background: var(--surf3); }
     </div>
   </div>
 
-  <div class="slogan-banner">
-    <div class="slogan-banner-text">
-      <div class="slogan-banner-q">¿La inflación <em>no coincide</em> con tus gastos?</div>
-      <div class="slogan-banner-a"><strong>Ponele un número real a tus consumos.</strong> Calculá tu IPC personal según lo que vos gastás cada mes.</div>
-    </div>
-  </div>
-
   <div class="hero">
     <div class="hero-left">
-      <div class="hero-eyebrow">Inflación personalizada</div>
-      <div class="hero-label">Tu inflación mensual estimada</div>
+      <div class="hero-label">Tu inflación este mes</div>
       <div class="hero-num empty" id="hero-num">—</div>
       <div class="hero-caption" id="hero-cap">Registrá tus gastos para calcular</div>
     </div>
@@ -2211,7 +2286,7 @@ body:not(.light-mode) .seg-pills button.on { background: var(--surf3); }
   <div class="sec-hd">
     <div class="sec-title">Rubros de tu canasta</div>
     <div style="display:flex;align-items:center;gap:12px">
-      <span class="sec-hint">Cargá montos en $ · Expandí para ver subrubros</span>
+      <span class="sec-hint">Escribí cuánto gastás por mes en cada rubro</span>
       <button class="arg-add-btn" onclick="showCsvImport()">📄 Importar resumen (CSV)</button>
     </div>
   </div>
@@ -2262,7 +2337,7 @@ body:not(.light-mode) .seg-pills button.on { background: var(--surf3); }
       <div>
         <div class="hero-eyebrow">Modo familia</div>
         <div class="family-hero-title">Inflación de tu grupo familiar</div>
-        <div class="family-hero-sub">Cada integrante con su propia canasta · IPC combinado ponderado por gasto real</div>
+        <div class="family-hero-sub">Cada integrante con su propia canasta · la inflación familiar pesa más a quien más gasta</div>
       </div>
       <button class="btn-save-month" onclick="showFamilyAddForm()" id="btn-add-canasta">+ Agregar canasta</button>
     </div>
@@ -2367,7 +2442,7 @@ body:not(.light-mode) .seg-pills button.on { background: var(--surf3); }
       <div class="save-month-icon">📅</div>
       <div>
         <div class="save-month-title" id="save-month-title">Guardar canasta de este mes</div>
-        <div class="save-month-desc" id="save-month-desc">Cargá tus gastos en "Mi canasta" y guardá el snapshot mensual</div>
+        <div class="save-month-desc" id="save-month-desc">Cargá tus gastos en "Mi canasta" y guardá el resumen del mes</div>
       </div>
     </div>
     <div style="display:flex;gap:8px;flex-shrink:0">
@@ -2449,12 +2524,12 @@ body:not(.light-mode) .seg-pills button.on { background: var(--surf3); }
     </div>
   </div>
 
-  <div class="sec-hd" style="margin-top:1.4rem"><div class="sec-title">Variación por división — último mes</div></div>
+  <div class="sec-hd" style="margin-top:1.4rem"><div class="sec-title" id="div-title">Variación por división</div></div>
   <div class="rubros-table">
     <div class="rt-head">
       <span>División</span>
       <span style="text-align:right">Var. mensual</span>
-      <span>Barra</span>
+      <span></span>
     </div>
     <div id="rubros-hist-rows"></div>
   </div>
@@ -2464,15 +2539,15 @@ body:not(.light-mode) .seg-pills button.on { background: var(--surf3); }
     <div class="stat-c"><div class="slabel">IPC Núcleo</div><div class="sval" id="ctx-nucleo">1,9%</div><div class="ssub">Sin estacionales ni regulados</div></div>
     <div class="stat-c"><div class="slabel">Precios regulados</div><div class="sval" style="color:var(--amber)" id="ctx-reg">2,4%</div><div class="ssub">Tarifas, combustibles</div></div>
     <div class="stat-c"><div class="slabel">Precios estacionales</div><div class="sval" style="color:var(--red)" id="ctx-est">3,5%</div><div class="ssub">Verduras, frutas, turismo</div></div>
-    <div class="stat-c"><div class="slabel">Servicios</div><div class="sval">2,5%</div><div class="ssub">vs. Bienes: 2,0%</div></div>
+    <div class="stat-c"><div class="slabel">Servicios</div><div class="sval" id="ctx-serv">—</div><div class="ssub" id="ctx-serv-sub">Bienes: —</div></div>
   </div>
 
   <div class="cbt-card">
     <div class="cbt-left">
-      <div class="cbt-lbl">Canasta Básica Total — Último mes disponible</div>
-      <div class="cbt-desc">Línea de pobreza para familia tipo de 4 integrantes (GBA) · Fuente: INDEC</div>
+      <div class="cbt-lbl" id="cbt-lbl">Canasta básica total</div>
+      <div class="cbt-desc">Lo que necesita por mes una familia de 4 (2 adultos y 2 chicos) para no ser pobre · GBA · INDEC</div>
     </div>
-    <div class="cbt-val">$1.498.741</div>
+    <div class="cbt-val" id="cbt-val">—</div>
   </div>
 </div><!-- /panel-historial -->
 
@@ -2687,18 +2762,14 @@ body:not(.light-mode) .seg-pills button.on { background: var(--surf3); }
       <div class="tool-icon-chip"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
       <div class="tool-card-titles">
         <div class="tool-card-title">Score de salud financiera</div>
-        <div class="tool-card-tag">DTI, flujo, ahorro y gasto combinados</div>
+        <div class="tool-card-tag">Qué tan sanas están tus finanzas, de 0 a 100</div>
       </div>
-      <a href="https://tirr.com.ar" target="_blank" rel="noopener"
-        style="font-size:11px;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:4px;white-space:nowrap">
-        Score oficial en TIRR ↗
-      </a>
     </div>
     <div class="fin-scroll-cell" id="fin-score-card">
       <!-- Configuración de umbrales personalizados -->
       <div id="fin-umbrales-cfg" style="margin-bottom:16px;padding:12px 14px;background:var(--surf2);border-radius:8px;border:1px solid var(--b1)">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <span style="font-size:12px;font-weight:700;color:var(--t2)">⚙️ Umbrales personalizados</span>
+          <span style="font-size:12px;font-weight:600;color:var(--t2)">Criterios del puntaje</span>
           <button onclick="toggleUmbralesCfg()" id="umbrales-toggle-btn" style="font-size:11px;color:var(--accent);background:none;border:none;cursor:pointer;padding:0">Configurar</button>
         </div>
         <div id="umbrales-cfg-body" style="display:none">
@@ -2722,7 +2793,7 @@ body:not(.light-mode) .seg-pills button.on { background: var(--surf3); }
           </div>
           <button onclick="guardarUmbrales()" class="btn-primary" style="width:100%;padding:8px;font-size:12px">Guardar y recalcular</button>
         </div>
-        <div id="umbrales-resumen" style="font-size:11px;color:var(--t3)">
+        <div id="umbrales-resumen" style="display:none;font-size:11px;color:var(--t3)">
           Gasto: 🟡 &lt;85% · 🟠 &lt;90% · Ahorro: 🟡 &gt;5% · 🟢 &gt;10%
         </div>
       </div>
@@ -2917,7 +2988,7 @@ body:not(.light-mode) .seg-pills button.on { background: var(--surf3); }
       </div>
     </div>
     <div id="deudas-resumen-wrap">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px">
+      <div class="deuda-resumen-grid">
         <div class="fin-metric">
           <div class="fin-metric-lbl">Deuda total</div>
           <div class="fin-metric-val" id="d-total-capital">$0</div>
@@ -4463,6 +4534,8 @@ const INDEC_SERIES_DIV = [
   { id: '146.3_IRESTAUNAL_DICI_M_33', name: 'Restaurantes y hoteles', cat: 'restaurantes' },
 ];
 const INDEC_SERIES_CAT = {
+  servicios: '147.3_ISERVICNAL_DICI_T_22',
+  bienes: '147.3_IBIENESNAL_DICI_T_19',
   nucleo: '148.3_INUCLEONAL_DICI_M_19',
   regulados: '148.3_IREGULANAL_DICI_M_22',
   estacionales: '148.3_IESTACINAL_DICI_M_25',
@@ -4568,14 +4641,31 @@ async function _refrescarIPC() {
 }
 
 // IPC por división + núcleo/regulados/estacionales (INDEC)
+// Canasta básica total (INDEC, por adulto equivalente) × 3,09 = familia tipo de 4
+async function fetchCanastaBasica() {
+  let d = _cacheGet('mi_cbt', 12 * 3600e3);
+  if (!d) {
+    try {
+      const j = await _fetchJSON(INDEC_SERIES_API + '?ids=150.1_CSTA_BATAL_0_D_20&last=1&format=json', 12000);
+      const f = j?.data?.[0]; if (f) { d = { fecha: f[0], valor: f[1] }; _cacheSet('mi_cbt', d); }
+    } catch (e) { d = _cacheGet('mi_cbt'); }
+  }
+  if (!d) return;
+  const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const dt = _parseFechaLocal(String(d.fecha).slice(0, 10));
+  const v = document.getElementById('cbt-val'); if (v) v.textContent = '$' + Math.round(d.valor * 3.09).toLocaleString('es-AR');
+  const l = document.getElementById('cbt-lbl'); if (l) l.textContent = 'Canasta básica total · ' + meses[dt.getMonth()] + ' ' + dt.getFullYear();
+}
+
 async function fetchIPCDivisiones() {
-  let datos = _cacheGet('mi_ipc_div', 6 * 3600e3);
+  fetchCanastaBasica();
+  let datos = _cacheGet('mi_ipc_div2', 6 * 3600e3);
   if (!datos && INDEC_PROXY) {
     try { datos = await _fetchJSON(INDEC_PROXY, 12000); } catch (e) { console.warn('INDEC proxy', e.message); }
   }
   if (!datos) {
     try {
-      const ids = [...INDEC_SERIES_DIV.map(d => d.id), INDEC_SERIES_CAT.nucleo, INDEC_SERIES_CAT.regulados, INDEC_SERIES_CAT.estacionales];
+      const ids = [...INDEC_SERIES_DIV.map(d => d.id), INDEC_SERIES_CAT.nucleo, INDEC_SERIES_CAT.regulados, INDEC_SERIES_CAT.estacionales, INDEC_SERIES_CAT.servicios, INDEC_SERIES_CAT.bienes];
       const j = await _fetchJSON(INDEC_SERIES_API + '?ids=' + ids.join(',') + '&representation_mode=percent_change&last=1&format=json', 12000);
       const fila = j?.data?.[j.data.length - 1];
       if (!fila) throw new Error('datos.gob.ar sin datos');
@@ -4584,13 +4674,26 @@ async function fetchIPCDivisiones() {
       datos = {
         fecha: String(fila[0]).slice(0, 7) + '-01',
         divisiones: INDEC_SERIES_DIV.map((d, i) => ({ name: d.name, cat: d.cat, v: pct(i + 1) })).filter(d => d.v != null),
-        nucleo: pct(n + 1), regulados: pct(n + 2), estacionales: pct(n + 3),
+        nucleo: pct(n + 1), regulados: pct(n + 2), estacionales: pct(n + 3), servicios: pct(n + 4), bienes: pct(n + 5),
         fuente: 'INDEC (datos.gob.ar)',
       };
-    } catch (e) { console.warn('IPC divisiones', e.message); datos = _cacheGet('mi_ipc_div'); }
-    if (datos) _cacheSet('mi_ipc_div', datos);
+    } catch (e) { console.warn('IPC divisiones', e.message); datos = _cacheGet('mi_ipc_div2'); }
+    if (datos) _cacheSet('mi_ipc_div2', datos);
   }
   if (datos) aplicarIPCDivisiones(datos);
+}
+
+// Tarjetas de rubros de Mi canasta: mostrar el IPC oficial vigente
+function refreshCatIPCLabels() {
+  try {
+    CATS.forEach(c => {
+      const head = document.getElementById('head-' + c.id); if (!head) return;
+      const v = adj(c.ipc_base), txt = v.toFixed(1).replace('.', ',') + '%';
+      const sub = head.querySelector('.cat-sub');
+      if (sub) sub.textContent = c.ipc_base ? 'IPC oficial ' + IPC_DIVISIONES.mes.toLowerCase() + ': ' + txt : 'No entra en el cálculo de inflación';
+      const pill = head.querySelector('.cat-pill'); if (pill) { pill.textContent = txt; pill.className = 'cat-pill ' + pillCls(v); }
+    });
+  } catch (e) {}
 }
 
 function aplicarIPCDivisiones(datos) {
@@ -4607,7 +4710,10 @@ function aplicarIPCDivisiones(datos) {
   IPC_DIVISIONES.estacionales = fmt(datos.estacionales);
   // Correr cada rubro de la canasta al valor oficial nuevo. Los subrubros se
   // mueven en la misma magnitud para mantener su dispersión relativa.
-  datos.divisiones.forEach(x => {
+  // Expensas no es una división del INDEC: se mueve con "Vivienda y servicios", donde INDEC la incluye
+  const viv = datos.divisiones.find(x => x.cat === 'vivienda');
+  const divisiones = viv ? [...datos.divisiones, { name: 'Expensas', cat: 'expensas', v: viv.v }] : datos.divisiones;
+  divisiones.forEach(x => {
     if (!x.cat) return;
     const c = CATS.find(c => c.id === x.cat);
     if (!c) return;
@@ -4616,6 +4722,12 @@ function aplicarIPCDivisiones(datos) {
     (c.subs || []).forEach(s => { if (typeof s.ipc === 'number') s.ipc = Math.round((s.ipc + delta) * 10) / 10; });
   });
   try { if (typeof buildRubrosHist === 'function') buildRubrosHist(); } catch (e) {}
+  refreshCatIPCLabels();
+  const divT = document.getElementById('div-title'); if (divT) divT.textContent = 'Variación por división · ' + IPC_DIVISIONES.mes.toLowerCase();
+  if (datos.servicios != null) {
+    setMacro('ctx-serv', datos.servicios.toFixed(1).replace('.', ',') + '%', '');
+    const sb = document.getElementById('ctx-serv-sub'); if (sb && datos.bienes != null) sb.textContent = 'Bienes: ' + datos.bienes.toFixed(1).replace('.', ',') + '%';
+  }
   try { if (typeof updateMain === 'function') updateMain(); } catch (e) {}
 }
 
@@ -4634,6 +4746,7 @@ function aplicarDatosIPC(data) {
   if (badge) badge.textContent = ipcLastMes.slice(0,3).toUpperCase() + ' ' + String(d.getFullYear()).slice(2);
   updateMain();
   buildTimeline(data);
+  try { renderIPCStatus(); } catch (e) {}
   try { if (document.getElementById('panel-inicio')?.classList.contains('active')) renderInicioLine(); } catch (e) {}
 }
 
@@ -4797,7 +4910,7 @@ function buildCatGrid() {
     if (c.id === 'ahorro') {
       const sep = document.createElement('div');
       sep.className = 'canasta-sep-financiero';
-      sep.innerHTML = '<span>Ahorro e Inversión</span><span style="font-size:10px;color:var(--t3)">No entra en el IPC personal</span>';
+      sep.innerHTML = '<span>Ahorro e inversión</span><em>No entra en tu inflación</em>';
       grid.appendChild(sep);
     }
 
@@ -4814,20 +4927,21 @@ function buildCatGrid() {
         <div class="cat-ico">${c.icon}</div>
         <div class="cat-info">
           <div class="cat-name">${c.name}</div>
-          <div class="cat-sub">IPC oficial: ${ipc.toFixed(1).replace('.',',')}%</div>
+          <div class="cat-sub">${c.ipc_base ? 'IPC oficial ' + IPC_DIVISIONES.mes.toLowerCase() + ': ' + ipc.toFixed(1).replace('.',',') + '%' : 'No entra en el cálculo de inflación'}</div>
         </div>
-        <span class="cat-pill ${pillCls(ipc)}">${ipc.toFixed(1).replace('.',',')}% mens.</span>
-        <span class="cat-weight" id="cw-${c.id}">${catW}%</span>
-        <span class="cat-contrib" id="cc-${c.id}">${contrib}pp</span>
-        <span class="cat-chev" id="chev-${c.id}">▾</span>
+        <span class="cat-pill ${pillCls(ipc)}">${ipc.toFixed(1).replace('.',',')}%</span>
+        <label class="cat-amount" onclick="event.stopPropagation()">
+          <span>$</span>
+          <input type="text" class="money-inp" id="monto-${c.id}" placeholder="0" value="${monto||''}" min="0" step="100" inputmode="numeric" aria-label="Gasto mensual en ${c.name}" />
+        </label>
+        <span class="cat-weight" id="cw-${c.id}" title="Parte de tu gasto total">${catW}%</span>
+        <span class="cat-contrib" id="cc-${c.id}">${contrib} pts</span>
+        <span class="cat-chev" id="chev-${c.id}" title="Ver subrubros">▾</span>
       </div>
       <div class="cat-body" id="body-${c.id}">
-        <!-- Monto total del rubro -->
-        <div class="money-row" id="mrow-${c.id}">
-          <div class="money-prefix">$</div>
+        <!-- (el monto del rubro ahora se carga en la fila) -->
+        <div class="money-row" id="mrow-${c.id}" style="display:none">
           <div class="money-inner">
-            <span class="money-label-sm">Total gastado en este rubro por mes</span>
-            <input type="text" class="money-inp" id="monto-${c.id}" placeholder="0" value="${monto||''}" min="0" step="100" inputmode="numeric" />
           </div>
           <div class="money-sep"></div>
           <div class="money-pct-box">
@@ -4852,7 +4966,7 @@ function buildCatGrid() {
           <span class="slider-val" id="msv-${c.id}">${catW}%</span>
         </div>
         <!-- Subrubros -->
-        <div class="sub-sect-title">Distribución interna — clickeá para expandir y asignar</div>
+        <div class="sub-sect-title">Opcional: detallá por subrubro para mayor precisión</div>
         <div class="sub-list" id="sublist-${c.id}">${subItemsHTML}</div>
         <!-- Barra distribución total -->
         <div class="sub-distrib-bar">
@@ -4920,7 +5034,7 @@ function buildSubItemsHTML(c) {
     const _subTotM = c.subs.reduce((a,sx) => a+(state[c.id+'_'+sx.id]?.monto||0), 0);
     const _subPctInt = _subTotM > 0 && sm > 0 ? Math.round((sm/_subTotM)*100) : sw;
     const pctTxt = _subPctInt > 0 ? _subPctInt+'%' : '—';
-    const ppTxt = isActive ? pp + 'pp' : '—';
+    const ppTxt = isActive ? String(pp).replace('.', ',') + ' pts' : '—';
     return '<div class="sub-item' + (isActive ? ' active' : '') + '" id="sub-item-' + c.id + '-' + s.id + '">' +
       '<div class="sub-item-head" id="sub-head-' + c.id + '-' + s.id + '">' +
         '<span class="sub-item-name">' + s.name + '</span>' +
@@ -5024,7 +5138,7 @@ function refreshSubItem(c, s) {
   }
 
   const ppEl = document.getElementById('sub-pp-'+c.id+'-'+s.id);
-  if (ppEl) ppEl.textContent = isActive ? pp+'pp' : '—';
+  if (ppEl) ppEl.textContent = isActive ? String(pp).replace('.', ',') + ' pts' : '—';
 }
 
 function updateSubDistrib(c) {
@@ -5188,7 +5302,7 @@ function updateMain() {
     document.getElementById('dif-val').className = 'sval';
   } else {
     const normed = (miIpc*100/totW).toFixed(2);
-    heroNum.innerHTML = normed.replace('.',',')+`<span class="hero-unit">%</span>`;
+    heroNum.innerHTML = parseFloat(normed).toFixed(1).replace('.',',')+`<span class="hero-unit">%</span>`;
     const ipcNum = parseFloat(normed);
     // Color del número según si es mayor o menor al INDEC
     if(oficial !== null) {
@@ -5199,10 +5313,10 @@ function updateMain() {
     }
 
     if(oficial !== null) {
-      const diff = (ipcNum - oficial).toFixed(2);
+      const diff = (ipcNum - oficial).toFixed(1);
       const sign = parseFloat(diff) > 0 ? '+' : '';
       const difEl = document.getElementById('dif-val');
-      difEl.textContent = sign + diff.replace('.',',') + ' pp';
+      difEl.textContent = sign + diff.replace('.',',') + ' pts';
       const cls = parseFloat(diff) > 0 ? 'red' : parseFloat(diff) < 0 ? 'green' : '';
       difEl.className = 'sval' + (cls ? ' '+cls : '');
 
@@ -5212,9 +5326,9 @@ function updateMain() {
       if(Math.abs(vsIndec) < 0.2) {
         contexto = `Igual al INDEC · ${REGION_ADJ[region].label}`;
       } else if(vsIndec > 0) {
-        contexto = `<span style="color:var(--red)">↑ ${sign}${diff.replace('.',',')} pp</span> sobre el INDEC · Tu inflación es mayor`;
+        contexto = `<span style="color:var(--red)">↑ ${sign}${diff.replace('.',',')} pts</span> sobre el INDEC · Tu inflación es mayor`;
       } else {
-        contexto = `<span style="color:var(--green)">↓ ${diff.replace('.',',')} pp</span> bajo el INDEC · Tu inflación es menor`;
+        contexto = `<span style="color:var(--green)">↓ ${diff.replace('.',',')} pts</span> bajo el INDEC · Tu inflación es menor`;
       }
       heroCap.innerHTML = (totW===100 ? '' : `Canasta al ${totW}% · `) + contexto;
     } else {
@@ -5402,7 +5516,7 @@ function buildContrib(miIpc, totW) {
         ${it.name.split(' y ')[0]}
       </span>
       <div class="contrib-track"><div class="contrib-fill" style="width:${pct}%;background:${col}30;border-right:2px solid ${col}"></div></div>
-      <span class="contrib-v" style="color:${it.contrib>0?col:'var(--t3)'}">${it.contrib.toFixed(2).replace('.',',')}pp</span>
+      <span class="contrib-v" style="color:${it.contrib>0?col:'var(--t3)'}">${it.contrib.toFixed(2).replace('.',',')} pts</span>
     </div>`;
   }).join('');
 }
@@ -5736,14 +5850,15 @@ function renderInicioInflacion() {
   const dEl = document.getElementById('inicio-ipc-diff');
   if (oEl) oEl.textContent = ipcOficial.toFixed(1).replace('.', ',') + '%';
   if (ipcPersonal === null) {
-    if (pEl) pEl.textContent = '—';
-    if (dEl) { dEl.textContent = '—'; dEl.style.color = 'var(--t2)'; }
+    if (pEl) { pEl.textContent = 'Sin gastos'; pEl.classList.add('is-empty'); }
+    if (dEl) { dEl.textContent = 'Sin datos'; dEl.style.color = ''; dEl.classList.add('is-empty'); }
     return;
   }
+  pEl?.classList.remove('is-empty'); dEl?.classList.remove('is-empty');
   if (pEl) pEl.textContent = ipcPersonal.toFixed(1).replace('.', ',') + '%';
   const diff = ipcPersonal - ipcOficial;
   if (dEl) {
-    dEl.textContent = (diff > 0 ? '+' : '') + diff.toFixed(1).replace('.', ',') + ' pp';
+    dEl.textContent = (diff > 0 ? '+' : '') + diff.toFixed(1).replace('.', ',') + ' pts';
     dEl.style.color = diff > 0 ? 'var(--red)' : 'var(--green)';
   }
 }
@@ -5769,6 +5884,10 @@ function renderInicioGastos() {
 }
 
 function renderInicioSalud() {
+  try {
+    if (!(getRawValue(document.getElementById('fin-ingreso')) > 0) && typeof getFuentesIngreso === 'function'
+        && getFuentesIngreso().some(f => (f.monto || 0) > 0)) actualizarTotalIngresos();
+  } catch (e) {}
   const ingreso = getRawValue(document.getElementById('fin-ingreso')) || 0;
   if (ingreso > 0) calcFinanzas(); // refresca los globals si hay ingreso cargado
   const valEl = document.getElementById('inicio-salud-val');
@@ -5776,7 +5895,7 @@ function renderInicioSalud() {
   if (!valEl || !subEl) return;
 
   if (_finScoreVal == null) {
-    valEl.textContent = '—';
+    valEl.textContent = '';
     valEl.style.color = 'var(--t2)';
     subEl.textContent = 'Cargá tu ingreso en Diagnóstico para verla';
     return;
@@ -5859,7 +5978,7 @@ function renderInicioRecortar() {
     return '<div style="background:rgba(204,34,0,.06);border:1px solid rgba(204,34,0,.15);border-radius:8px;padding:12px 14px;margin-bottom:8px">' +
       '<div style="display:flex;justify-content:space-between;margin-bottom:4px">' +
         '<span style="font-size:13px;font-weight:700;color:var(--t1)">' + r.name + '</span>' +
-        '<span style="font-family:var(--mono);font-size:12px;color:var(--red)">' + r.pctTotal.toFixed(1) + '% del gasto</span>' +
+        '<span style="font-family:var(--mono);font-size:12px;color:var(--red)">' + r.pctTotal.toFixed(1).replace('.', ',') + '% del gasto</span>' +
       '</div>' +
       '<div style="font-size:12px;color:var(--t2)">Exceso estimado: <b>' + fmtP(montoExceso) + '/mes</b>' + (sug ? ' · ' + sug : '') + '</div>' +
     '</div>';
@@ -6102,7 +6221,7 @@ async function renderHistorial() {
     if (acumIndecEl) acumIndecEl.textContent = ai + '%';
     if (acumDiffEl) {
       const sign = parseFloat(diff) > 0 ? '+' : '';
-      acumDiffEl.textContent = sign + diff + 'pp';
+      acumDiffEl.textContent = sign + diff.replace('.', ',') + ' pts';
       acumDiffEl.className = 'sval ' + (parseFloat(diff) > 0 ? 'red' : parseFloat(diff) < 0 ? 'green' : '');
     }
     if (acumSubEl) acumSubEl.textContent = hist[hist.length-1].label + ' → ' + hist[0].label;
@@ -6124,7 +6243,7 @@ async function renderHistorial() {
     : 'Guardar canasta de ' + getCurrentMonthLabel();
   if (btnDesc) btnDesc.textContent = alreadySaved
     ? 'Ya tenés un registro guardado para este mes'
-    : 'Cargá tus gastos en "Mi canasta" y guardá el snapshot mensual';
+    : 'Cargá tus gastos en "Mi canasta" y guardá el resumen del mes';
 
   // Tabla
   renderHistTable(hist);
@@ -6152,16 +6271,16 @@ function renderHistTable(hist) {
   </div>`;
 
   hist.forEach((h, i) => {
-    const diff = (h.ipcPersonal - h.ipcOficial).toFixed(2);
+    const diff = (h.ipcPersonal - h.ipcOficial).toFixed(1);
     const sign = parseFloat(diff) > 0 ? '+' : '';
     const diffClass = parseFloat(diff) > 0 ? 'pos' : parseFloat(diff) < 0 ? 'neg' : 'zero';
     const ipcColor = h.ipcPersonal >= 3 ? 'var(--red)' : h.ipcPersonal >= 2 ? 'var(--amber)' : 'var(--green)';
 
     html += `<div class="mh-row">
       <span class="mh-mes">${h.label}</span>
-      <span class="mh-ipc-personal" style="color:${ipcColor}">${h.ipcPersonal.toFixed(2).replace('.',',')}%</span>
+      <span class="mh-ipc-personal" style="color:${ipcColor}">${h.ipcPersonal.toFixed(1).replace('.',',')}%</span>
       <span class="mh-ipc-indec">${h.ipcOficial.toFixed(1).replace('.',',')}%</span>
-      <span class="mh-diff ${diffClass}">${sign}${diff.replace('.',',')}pp</span>
+      <span class="mh-diff ${diffClass}">${sign}${diff.replace('.',',')} pts</span>
       <span class="mh-top-rubro">${h.topRubro}${h.totalGasto > 0 ? ' · $'+Math.round(h.totalGasto).toLocaleString('es-AR') : ''}</span>
       <button class="mh-del" onclick="deleteSnapshot('${h.key}')" title="Eliminar">✕</button>
     </div>`;
@@ -6214,7 +6333,7 @@ function renderMiniBarChart(hist) {
     ctx.beginPath(); ctx.moveTo(PAD_SIDES, y); ctx.lineTo(W - PAD_SIDES, y); ctx.stroke();
     ctx.fillStyle = ink(0.2);
     ctx.font = '9px monospace';
-    ctx.fillText(((maxVal/4)*i).toFixed(1)+'%', 2, y + 3);
+    ctx.fillText(((maxVal/4)*i).toFixed(1).replace('.', ',')+'%', 2, y + 3);
   }
 
   // Barras
@@ -6240,7 +6359,7 @@ function renderMiniBarChart(hist) {
     ctx.fillStyle = accentColor;
     ctx.font = 'bold 9px monospace';
     ctx.textAlign = 'center';
-    ctx.fillText(h.ipcPersonal.toFixed(1)+'%', x - barW/2 - 2, PAD_TOP + chartH - hP - 4);
+    ctx.fillText(h.ipcPersonal.toFixed(1).replace('.', ',')+'%', x - barW/2 - 2, PAD_TOP + chartH - hP - 4);
 
     // Label mes
     ctx.fillStyle = ink(0.35);
@@ -6261,106 +6380,45 @@ function renderMiniBarChart(hist) {
 // CALENDARIO IPC — cuándo sale el próximo dato
 // ═══════════════════════════════════════════════
 function getIPCPublishStatus() {
-  const now = new Date();
-  const day = now.getDate();
-  const month = now.getMonth(); // 0-indexed
-  const year = now.getFullYear();
-
-  // El INDEC publica entre el día 10 y 15 de cada mes
-  // Si hoy es entre 1 y 9 → el dato de este mes todavía no salió
-  // Si hoy es entre 10 y 15 → puede que salga hoy o estos días (zona de publicación)
-  // Si hoy es 16+ → el dato ya salió, el próximo es el mes que viene
-
+  // Se basa en el último mes que INDEC ya publicó (dato en vivo), no en el día del mes.
+  // INDEC publica el IPC de un mes a mediados del mes siguiente (≈ día 12).
   const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-
-  let status, daysToNext, nextMonth, nextYear, hint;
-
-  if (day < 10) {
-    // Esperando dato del mes anterior (que se publica ahora)
-    // Ej: estamos en junio 7 → el dato de mayo sale en ~10-15 de junio
-    const diasFaltantes = 10 - day;
-    const mesEspera = months[month > 0 ? month - 1 : 11];
-    status = 'waiting';
-    daysToNext = diasFaltantes;
-    hint = `Se espera el IPC de ${mesEspera} ${year} entre el 10 y 15 de ${months[month]}`;
-  } else if (day <= 15) {
-    // Zona de publicación: puede haber salido o salir hoy
-    status = 'published';
-    // Próximo: entre 10 y 15 del mes siguiente
-    nextMonth = months[(month + 1) % 12];
-    nextYear = month === 11 ? year + 1 : year;
-    const diasProximo = (month === 11 ? new Date(nextYear, 0, 10) : new Date(year, month+1, 10)) - now;
-    daysToNext = Math.max(0, Math.ceil(diasProximo / (1000*60*60*24)));
-    hint = `IPC de ${months[month]} sale en unos ${daysToNext} días`;
-  } else {
-    // Dato del mes ya salió, próximo es el mes que viene
-    nextMonth = months[(month + 1) % 12];
-    nextYear = month === 11 ? year + 1 : year;
-    const targetDate = month === 11 ? new Date(nextYear, 0, 12) : new Date(year, month+1, 12);
-    const diasProximo = targetDate - now;
-    daysToNext = Math.max(1, Math.ceil(diasProximo / (1000*60*60*24)));
-    status = 'expected';
-    hint = `El IPC de ${months[month]} ya fue publicado`;
-  }
-
-  return { status, daysToNext, hint, day, month, months };
+  const now = new Date(); now.setHours(0, 0, 0, 0);
+  const lastFecha = (typeof ipcLiveData !== 'undefined' && ipcLiveData && ipcLiveData.length) ? ipcLiveData[ipcLiveData.length - 1].fecha : null;
+  const last = lastFecha ? _parseFechaLocal(lastFecha) : new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  const pend = new Date(last.getFullYear(), last.getMonth() + 1, 1);
+  const pub = new Date(pend.getFullYear(), pend.getMonth() + 1, 12);
+  const daysToNext = Math.ceil((pub - now) / 864e5);
+  const lastName = months[last.getMonth()].toLowerCase(), pendName = months[pend.getMonth()].toLowerCase();
+  const pubTxt = '12 de ' + months[pub.getMonth()].toLowerCase();
+  const status = daysToNext > 4 ? 'expected' : 'published';
+  const hint = status === 'expected' ? 'El de ' + pendName + ' sale cerca del ' + pubTxt : 'El IPC de ' + pendName + ' puede salir en cualquier momento';
+  return { status, daysToNext: Math.max(0, daysToNext), hint, lastName, pendName, pubTxt, months, day: now.getDate(), month: now.getMonth() };
 }
 
 function renderIPCStatus() {
   const s = getIPCPublishStatus();
   const dot = document.getElementById('ipc-dot');
   const txt = document.getElementById('ipc-status-txt');
-  const nextRow = document.getElementById('ipc-status-next');
-  const nextTxt = document.getElementById('ipc-next-txt');
   const hintRow = document.getElementById('ipc-status-hint');
-  const hintTxt = document.getElementById('ipc-hint-txt');
-
-  if (!dot || !txt) return;
-
-  dot.className = 'ipc-status-dot ' + s.status;
-
-  if (s.status === 'waiting') {
-    txt.innerHTML = `Dato pendiente: IPC de <b style="color:var(--t2)">${s.months[s.month > 0 ? s.month-1 : 11]}</b> — se publica en aprox. <b style="color:var(--amber)">${s.daysToNext} días</b>`;
-  } else if (s.status === 'published') {
-    txt.innerHTML = `✓ Zona de publicación activa — el INDEC puede publicar el IPC de <b style="color:var(--t2)">${s.months[s.month]}</b> hoy o en los próximos días`;
-  } else {
-    txt.innerHTML = `IPC publicado · Próximo dato en <b style="color:var(--t2)">${s.daysToNext} días</b>`;
-  }
-
-  if (hintRow && hintTxt) {
-    hintRow.style.display = 'flex';
-    hintTxt.textContent = s.hint;
-  }
-
-  // Update countdown en panel planes
+  const nextRow = document.getElementById('ipc-status-next');
+  if (dot) dot.className = 'ipc-status-dot ' + s.status;
+  if (txt) txt.innerHTML = 'Último IPC publicado: <b>' + s.lastName + '</b> · ' + (s.status === 'expected'
+    ? 'el de ' + s.pendName + ' sale cerca del ' + s.pubTxt + ' (en <b>' + s.daysToNext + ' días</b>)'
+    : 'el de ' + s.pendName + ' puede salir en cualquier momento');
+  if (hintRow) hintRow.style.display = 'none';
+  if (nextRow) nextRow.style.display = 'none';
   const countdown = document.getElementById('ipc-cal-countdown');
   const calSub = document.getElementById('ipc-cal-sub');
   const calTitle = document.getElementById('ipc-cal-title');
   const calDesc = document.getElementById('ipc-cal-desc');
-  const calIcon = document.getElementById('ipc-cal-icon');
-
   if (countdown) {
-    if (s.status === 'published') {
-      countdown.textContent = '🟢';
-      countdown.className = 'ipc-cal-countdown';
-      if (calSub) calSub.textContent = 'publicando ahora';
-      if (calTitle) calTitle.textContent = 'El INDEC está publicando el IPC';
-      if (calDesc) calDesc.textContent = s.hint + ' — actualizá la app para ver el dato oficial';
-      if (calIcon) calIcon.textContent = '📡';
-    } else if (s.status === 'waiting') {
-      countdown.textContent = s.daysToNext;
-      countdown.className = 'ipc-cal-countdown soon';
-      if (calSub) calSub.textContent = 'días hasta la publicación';
-      if (calTitle) calTitle.textContent = 'Próxima publicación del IPC';
-      if (calDesc) calDesc.textContent = s.hint + '. Guardá tu canasta antes de que salga el dato.';
-    } else {
-      countdown.textContent = s.daysToNext;
-      countdown.className = 'ipc-cal-countdown';
-      if (calSub) calSub.textContent = 'días hasta el próximo IPC';
-      if (calTitle) calTitle.textContent = 'Próxima publicación del IPC';
-      if (calDesc) calDesc.textContent = s.hint + '. Te avisamos acá cuando esté disponible.';
-    }
+    countdown.textContent = s.status === 'expected' ? s.daysToNext : '¡Ya!';
+    countdown.className = 'ipc-cal-countdown' + (s.daysToNext <= 7 ? ' soon' : '');
   }
+  if (calSub) calSub.textContent = s.status === 'expected' ? 'días para el próximo IPC' : 'sale estos días';
+  if (calTitle) calTitle.textContent = 'IPC de ' + s.pendName + ': sale cerca del ' + s.pubTxt;
+  if (calDesc) calDesc.textContent = 'El último publicado es el de ' + s.lastName + '. Guardá tu mes para compararlo cuando salga.';
 }
 
 function showToast(msg, type) {
@@ -6425,7 +6483,7 @@ function exportMonthReport() {
     // Línea de IPC oficial de referencia
     var xRef = padL + ((ipcOf / maxIpc) * (W - padL - 20));
     svg += '<line x1="' + xRef + '" y1="0" x2="' + xRef + '" y2="' + totalH + '" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3"/>';
-    svg += '<text x="' + (xRef+3) + '" y="10" font-size="9" fill="#aaa" font-family="sans-serif">INDEC ' + ipcOf.toFixed(1) + '%</text>';
+    svg += '<text x="' + (xRef+3) + '" y="10" font-size="9" fill="#aaa" font-family="sans-serif">INDEC ' + ipcOf.toFixed(1).replace('.', ',') + '%</text>';
     for (var i = 0; i < sorted.length; i++) {
       var rb = sorted[i];
       var y = padTop + i * (barH + gap);
@@ -6435,7 +6493,7 @@ function exportMonthReport() {
       if (isTop) svg += '<rect x="' + padL + '" y="' + y + '" width="' + (W-padL-2) + '" height="' + barH + '" fill="#fffbe6" rx="3"/>';
       svg += '<text x="0" y="' + (y + 16) + '" font-size="11" fill="' + (isTop?'#333':'#555') + '" font-weight="' + (isTop?'bold':'normal') + '" font-family="sans-serif">' + rb.name.slice(0,18) + (isTop?' ▲':'') + '</text>';
       svg += '<rect x="' + padL + '" y="' + (y+3) + '" width="' + bw + '" height="' + (barH-6) + '" fill="' + col + '" rx="3"/>';
-      svg += '<text x="' + (padL+bw+4) + '" y="' + (y+16) + '" font-size="11" fill="' + col + '" font-weight="bold" font-family="monospace">' + rb.ipc.toFixed(1) + '%</text>';
+      svg += '<text x="' + (padL+bw+4) + '" y="' + (y+16) + '" font-size="11" fill="' + col + '" font-weight="bold" font-family="monospace">' + rb.ipc.toFixed(1).replace('.', ',') + '%</text>';
     }
     svg += '</svg>';
     return svg;
@@ -6467,12 +6525,12 @@ function exportMonthReport() {
       var montoStr = rb.monto > 0 ? '$' + Math.round(rb.monto).toLocaleString('es-AR') : '&mdash;';
       rows += '<tr' + bg + '><td>' + rb.name + (isTop ? ' ▲' : '') + '</td>' +
               '<td>' + rb.w + '%</td><td>' + montoStr + '</td>' +
-              '<td>' + rb.ipc.toFixed(1) + '%</td><td>' + contrib + 'pp</td></tr>';
+              '<td>' + rb.ipc.toFixed(1).replace('.', ',') + '%</td><td>' + contrib + 'pp</td></tr>';
     }
     return rows;
   }
 
-  var diffVal = (h.ipcPersonal - h.ipcOficial).toFixed(2);
+  var diffVal = (h.ipcPersonal - h.ipcOficial).toFixed(1).replace('.', ',');
   var diffSign = parseFloat(diffVal) > 0 ? '+' : '';
   var diffCol = parseFloat(diffVal) > 0 ? '#CC3333' : '#339944';
   var gastStr = h.totalGasto > 0 ? '$' + Math.round(h.totalGasto).toLocaleString('es-AR') : '&mdash;';
@@ -6520,9 +6578,9 @@ function exportMonthReport() {
     '<div class="sub">' + h.label + ' &nbsp;&middot;&nbsp; Regi\u00f3n: ' + h.region + ' &nbsp;&middot;&nbsp; Generado el ' + today + '</div></div>' +
     '<div class="brand">MI<em>INFLACI\u00d3N</em><div style="font-size:10px;color:#999;margin-top:2px;font-weight:400">miinflacion.ar</div></div></div>' +
     '<div class="kpis">' +
-    '<div class="kpi hi"><div class="klbl">Tu inflaci\u00f3n personal</div><div class="kval g">' + h.ipcPersonal.toFixed(2) + '%</div></div>' +
-    '<div class="kpi"><div class="klbl">IPC INDEC oficial</div><div class="kval">' + h.ipcOficial.toFixed(1) + '%</div></div>' +
-    '<div class="kpi"><div class="klbl">Diferencia</div><div class="kval" style="color:' + diffCol + '">' + diffSign + diffVal + 'pp</div></div>' +
+    '<div class="kpi hi"><div class="klbl">Tu inflaci\u00f3n personal</div><div class="kval g">' + h.ipcPersonal.toFixed(1).replace('.', ',') + '%</div></div>' +
+    '<div class="kpi"><div class="klbl">IPC INDEC oficial</div><div class="kval">' + h.ipcOficial.toFixed(1).replace('.', ',') + '%</div></div>' +
+    '<div class="kpi"><div class="klbl">Diferencia</div><div class="kval" style="color:' + diffCol + '">' + diffSign + diffVal + ' pts</div></div>' +
     '<div class="kpi"><div class="klbl">Gasto registrado</div><div class="kval" style="font-size:16px">' + gastStr + '</div></div>' +
     '</div>' +
     '<div class="sec"><div class="sec-title">Distribuci\u00f3n de tu canasta</div>' +
@@ -6569,7 +6627,7 @@ function renderCanastaList() {
   if (!list) return;
   list.innerHTML = canastas.map((c, i) => {
     const ipc = calcCanastaIPC(c);
-    const ipcStr = ipc > 0 ? ipc.toFixed(2)+'%' : '—';
+    const ipcStr = ipc > 0 ? ipc.toFixed(1).replace('.', ',')+'%' : '—';
     return `<div class="canasta-dropdown-item${i===activeCanastaIdx?' active-c':''}" onclick="switchCanasta(${i})">
       <span class="cdi-dot cc-${i}"></span>
       <span class="cdi-name">${c.name}</span>
@@ -6751,7 +6809,7 @@ function renderFamilyPanel() {
   // Mostrar IPC combinado
   if (combinedEl) combinedEl.style.display = 'flex';
   const combVal = document.getElementById('family-ipc-combined');
-  if (combVal) combVal.textContent = ipcCombinado.toFixed(2) + '%';
+  if (combVal) combVal.textContent = ipcCombinado.toFixed(1).replace('.', ',') + '%';
 
   // Mini barras de contribución por canasta
   const miniBars = document.getElementById('family-mini-bars');
@@ -6762,7 +6820,7 @@ function renderFamilyPanel() {
         <div style="flex:1;height:4px;background:var(--b2);border-radius:2px;overflow:hidden">
           <div style="height:100%;width:${Math.min((c.ipc/5)*100,100)}%;background:${c.color};border-radius:2px"></div>
         </div>
-        <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:${c.color};min-width:40px;text-align:right">${c.ipc.toFixed(2)}%</span>
+        <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:${c.color};min-width:40px;text-align:right">${c.ipc.toFixed(1).replace('.', ',')}%</span>
       </div>`).join('');
   }
 
@@ -6786,7 +6844,7 @@ function renderFamilyPanel() {
         <span class="fc-name">${c.name}</span>
         <span class="fc-region">${REGION_ADJ[c.region||'nacional'].label}</span>
       </div>
-      <div class="fc-ipc" style="color:${c.color}">${c.ipc > 0 ? c.ipc.toFixed(2)+'%' : '—'}</div>
+      <div class="fc-ipc" style="color:${c.color}">${c.ipc > 0 ? c.ipc.toFixed(1).replace('.', ',')+'%' : '—'}</div>
       <div class="fc-ipc-sub">inflación personal mensual${c.gasto>0?' · $'+Math.round(c.gasto).toLocaleString('es-AR'):''}</div>
       <div class="fc-bar-wrap"><div class="fc-bar-fill" style="width:${Math.round((c.ipc/maxIpc)*100)}%;background:${c.color}"></div></div>
       <div class="fc-rubros">
@@ -7102,7 +7160,7 @@ function renderEvolucionChart(hist, totalCount) {
     ctx.fillStyle = ink(0.25);
     ctx.font = '10px monospace';
     ctx.textAlign = 'right';
-    ctx.fillText(v.toFixed(1) + '%', PAD.left - 6, y + 3);
+    ctx.fillText(v.toFixed(1).replace('.', ',') + '%', PAD.left - 6, y + 3);
   }
 
   // Área rellena IPC personal
@@ -7149,7 +7207,7 @@ function renderEvolucionChart(hist, totalCount) {
     ctx.fillStyle = cssVar('--accent');
     ctx.font = 'bold 10px monospace';
     ctx.textAlign = 'center';
-    ctx.fillText(d.ipcPersonal.toFixed(1) + '%', x, y - 10);
+    ctx.fillText(d.ipcPersonal.toFixed(1).replace('.', ',') + '%', x, y - 10);
   });
 
   // Labels del eje X
@@ -7839,11 +7897,11 @@ function calcFinanzas() {
   const _u = getUmbrales();
   let scoreDTI    = dti <= 10 ? 100 : dti <= 20 ? 90 : dti <= 30 ? 70 : dti <= 40 ? 45 : dti <= 50 ? 25 : 10;
   let scoreFlujo  = flujo >= ingreso * 0.3 ? 100 : flujo >= ingreso * 0.15 ? 80 : flujo >= ingreso * 0.05 ? 60 : flujo >= 0 ? 40 : flujo >= -ingreso * 0.1 ? 20 : 5;
-  let scoreAhorro = tasaAhorro >= _u.ahorroVerde * 2 ? 100 : tasaAhorro >= _u.ahorroVerde ? 75 : tasaAhorro >= _u.ahorroMin ? 50 : tasaAhorro > 0 ? 25 : (ahorroTotal === 0 ? 50 : 0);
+  let scoreAhorro = tasaAhorro >= _u.ahorroVerde * 2 ? 100 : tasaAhorro >= _u.ahorroVerde ? 75 : tasaAhorro >= _u.ahorroMin ? 50 : tasaAhorro > 0 ? 25 : 15; // monótono: más ahorro nunca puntúa menos
   let scoreGasto  = ratioGasto <= 55 ? 100 : ratioGasto <= _u.gastoAmarillo ? 80 : ratioGasto <= _u.gastoNaranja ? 50 : 15;
 
   // Si no hay datos de deuda/ahorro, no penalizar
-  if (deudaTotal === 0) scoreDTI = 75;
+  if (deudaTotal === 0) scoreDTI = 100; // sin deudas es lo mejor posible (antes 75: tener una deuda chica subía el score)
   if (ahorroTotal === 0 && totalGastos === 0) { scoreAhorro = 50; scoreFlujo = 50; scoreGasto = 50; }
 
   const score = Math.round(
@@ -7899,7 +7957,7 @@ function calcFinanzas() {
 
   // Actualizar métricas
   const fmtPeso = v => '$' + Math.round(v).toLocaleString('es-AR');
-  const fmtPct  = v => v.toFixed(1) + '%';
+  const fmtPct  = v => v.toFixed(1).replace('.', ',') + '%';
 
   // DTI
   setMetric('met-dti', fmtPct(dti),
@@ -8016,7 +8074,7 @@ function calcMonotributo(cat, facturacion) {
   const fmtM = v => '$' + Math.round(v).toLocaleString('es-AR');
 
   if (bar) bar.style.width = Math.min(porcentaje, 100) + '%';
-  if (pct) pct.textContent = porcentaje.toFixed(1) + '%';
+  if (pct) pct.textContent = porcentaje.toFixed(1).replace('.', ',') + '%';
 
   let barColor, alertClass, alertMsg;
   if (porcentaje >= 100) {
@@ -8026,7 +8084,7 @@ function calcMonotributo(cat, facturacion) {
   } else if (porcentaje >= 80) {
     barColor = '#b86000';
     alertClass = 'mono-alert-warn';
-    alertMsg = '⚠️ <b>Cerca del límite.</b> Proyección anual: ' + fmtM(anual) + ' (' + porcentaje.toFixed(0) + '% del límite de ' + fmtM(mono.limite) + '). Te quedan ' + fmtM(mono.limite - anual) + ' de margen. Revisá si conviene recategorizarte.';
+    alertMsg = '⚠️ <b>Cerca del límite.</b> Proyección anual: ' + fmtM(anual) + ' (' + porcentaje.toFixed(0).replace('.', ',') + '% del límite de ' + fmtM(mono.limite) + '). Te quedan ' + fmtM(mono.limite - anual) + ' de margen. Revisá si conviene recategorizarte.';
   } else {
     barColor = '#2a7a00';
     alertClass = 'mono-alert-ok';
@@ -8671,13 +8729,13 @@ function renderDeudas() {
     sem.style.display = 'block';
     if (dti > 40) {
       sem.style.cssText = 'display:block;padding:10px 14px;border-radius:8px;font-size:13px;background:rgba(204,34,0,.08);border:1px solid rgba(204,34,0,.2);color:var(--red)';
-      sem.innerHTML = '🔴 <b>Carga de deuda crítica:</b> tus cuotas representan el ' + dti.toFixed(1) + '% de tu ingreso. Lo máximo recomendado es 35%. Considerá refinanciar o cancelar las deudas más caras primero.';
+      sem.innerHTML = '🔴 <b>Carga de deuda crítica:</b> tus cuotas representan el ' + dti.toFixed(1).replace('.', ',') + '% de tu ingreso. Lo máximo recomendado es 35%. Considerá refinanciar o cancelar las deudas más caras primero.';
     } else if (dti > 25) {
       sem.style.cssText = 'display:block;padding:10px 14px;border-radius:8px;font-size:13px;background:rgba(184,96,0,.08);border:1px solid rgba(184,96,0,.2);color:var(--amber)';
-      sem.innerHTML = '🟠 <b>Carga moderada:</b> tus cuotas son el ' + dti.toFixed(1) + '% de tu ingreso. Manejable, pero evitá tomar más deuda hasta reducirlo al 20%.';
+      sem.innerHTML = '🟠 <b>Carga moderada:</b> tus cuotas son el ' + dti.toFixed(1).replace('.', ',') + '% de tu ingreso. Manejable, pero evitá tomar más deuda hasta reducirlo al 20%.';
     } else {
       sem.style.cssText = 'display:block;padding:10px 14px;border-radius:8px;font-size:13px;background:rgba(42,122,0,.08);border:1px solid rgba(42,122,0,.2);color:var(--green)';
-      sem.innerHTML = '🟢 <b>Carga saludable:</b> tus cuotas representan el ' + dti.toFixed(1) + '% de tu ingreso. Estás dentro del límite recomendado.';
+      sem.innerHTML = '🟢 <b>Carga saludable:</b> tus cuotas representan el ' + dti.toFixed(1).replace('.', ',') + '% de tu ingreso. Estás dentro del límite recomendado.';
     }
   } else if (sem) {
     if (totalCuota > 0) {
@@ -8696,8 +8754,8 @@ function renderDeudas() {
 
     const tasaRealColor = c.tasaReal > 0 ? 'var(--red)' : 'var(--green)';
     const tasaRealTxt = c.tasaReal > 0
-      ? '+' + c.tasaReal.toFixed(1) + '% real (te cuesta en términos reales)'
-      : c.tasaReal.toFixed(1) + '% real (la inflación licúa la deuda)';
+      ? '+' + c.tasaReal.toFixed(1).replace('.', ',') + '% real (te cuesta en términos reales)'
+      : c.tasaReal.toFixed(1).replace('.', ',') + '% real (la inflación licúa la deuda)';
 
     // % realmente pagado del capital original (no una cuenta de interés/costo
     // disfrazada de "progreso" — usa capitalOriginal, con fallback para
@@ -8740,15 +8798,15 @@ function renderDeudas() {
           '</div>' +
           '<div class="deuda-metric">' +
             '<div class="deuda-metric-lbl">📊 TEM efectiva</div>' +
-            '<div class="deuda-metric-val">' + c.tem.toFixed(2) + '%</div>' +
+            '<div class="deuda-metric-val">' + c.tem.toFixed(2).replace('.', ',') + '%</div>' +
           '</div>' +
           '<div class="deuda-metric">' +
             '<div class="deuda-metric-lbl">📈 TEA efectiva</div>' +
-            '<div class="deuda-metric-val">' + c.tea.toFixed(1) + '%</div>' +
+            '<div class="deuda-metric-val">' + c.tea.toFixed(1).replace('.', ',') + '%</div>' +
           '</div>' +
           '<div class="deuda-metric">' +
             '<div class="deuda-metric-lbl">🔥 Tasa real</div>' +
-            '<div class="deuda-metric-val" style="color:' + tasaRealColor + '">' + (c.tasaReal > 0 ? '+' : '') + c.tasaReal.toFixed(1) + '%</div>' +
+            '<div class="deuda-metric-val" style="color:' + tasaRealColor + '">' + (c.tasaReal > 0 ? '+' : '') + c.tasaReal.toFixed(1).replace('.', ',') + '%</div>' +
           '</div>' +
           '<div class="deuda-metric">' +
             '<div class="deuda-metric-lbl">💰 Total intereses</div>' +
@@ -8763,7 +8821,7 @@ function renderDeudas() {
         '<div class="deuda-progress-wrap">' +
           '<div class="deuda-progress-lbl">' +
             '<span>Capital pendiente: ' + fmtP(d.capital) + (cuotasPagadas != null ? ' · cuota ' + (cuotasPagadas+1) + ' de ' + cuotasOriginal : '') + '</span>' +
-            '<span>' + pctPagado.toFixed(0) + '% pagado</span>' +
+            '<span>' + pctPagado.toFixed(0).replace('.', ',') + '% pagado</span>' +
           '</div>' +
           '<div class="deuda-progress-bar">' +
             '<div class="deuda-progress-fill" style="width:' + pctPagado + '%;background:var(--accent)"></div>' +
@@ -8771,7 +8829,7 @@ function renderDeudas() {
         '</div>' +
         // Nota tasa real
         '<div style="margin-top:10px;font-size:11px;color:' + tasaRealColor + ';padding:6px 10px;background:var(--surf);border-radius:5px">' +
-          '📊 ' + tasaRealTxt + ' (vs inflación anual ~' + c.inflAnual.toFixed(0) + '%)' +
+          '📊 ' + tasaRealTxt + ' (vs inflación anual ~' + c.inflAnual.toFixed(0).replace('.', ',') + '%)' +
         '</div>' +
         (c.notaAjuste ? '<div style="margin-top:6px;font-size:11px;color:var(--amber);padding:6px 10px;background:var(--surf);border-radius:5px">⚠️ ' + c.notaAjuste + '</div>' : '') +
         '<div style="margin-top:12px;display:flex;gap:8px">' +
@@ -8950,13 +9008,13 @@ function onInputMoneyFormat(e) {
 
 function getRawValue(input) {
   if (!input) return 0;
-  // Priorizar el rawValue guardado por el formateador
-  if (input.dataset.rawValue !== undefined && input.dataset.rawValue !== '') {
-    return parseFloat(input.dataset.rawValue) || 0;
-  }
-  // Fallback: parsear el string eliminando puntos de miles (formato es-AR)
-  const raw = (input.value || '').replace(/\./g, '').replace(',', '.');
-  return parseFloat(raw) || 0;
+  // Se lee SIEMPRE el texto actual del campo. Antes se priorizaba dataset.rawValue,
+  // que el formateador actualiza DESPUÉS de los otros listeners: el valor guardado
+  // quedaba una tecla atrasado (escribir 400000 registraba 40000).
+  if (input.type === 'number') return parseFloat(input.value) || 0;
+  const v = String(input.value || '').replace(/[^0-9.,-]/g, '');
+  if (!v) return 0;
+  return parseFloat(v.replace(/\./g, '').replace(',', '.')) || 0;
 }
 
 // Aplicar a todos los inputs de tipo money
@@ -9726,6 +9784,21 @@ function renderBCRAResult(data, el) {
 //  · FCI money market: rendimiento real de la cuotaparte en los últimos ~30 días
 //  · Inflación esperada: mediana del REM del BCRA (próximos 12 meses)
 const ARGD_FIN = 'https://api.argentinadatos.com/v1/finanzas/';
+// Fondos money market conocidos, por entidad (clase A = la que usa una persona común)
+const RF_MM_ENTIDADES = [
+  { ent: 'Mercado Pago', tipo: 'Billetera', fondo: 'Mercado Fondo' },
+  { ent: 'Ualá',         tipo: 'Billetera', fondo: 'Ualintec Ahorro Pesos' },
+  { ent: 'Cocos',        tipo: 'ALyC',      fondo: 'Cocos Ahorro' },
+  { ent: 'Galicia',      tipo: 'Banco',     fondo: 'Fima Premium' },
+  { ent: 'BBVA',         tipo: 'Banco',     fondo: 'FBA Money Market Pesos' },
+  { ent: 'Santander',    tipo: 'Banco',     fondo: 'Super Ahorro $' },
+  { ent: 'Macro',        tipo: 'Banco',     fondo: 'Pionero Pesos Plus' },
+  { ent: 'Banco Nación', tipo: 'Banco',     fondo: 'Pellegrini Renta Pesos' },
+  { ent: 'Banco Provincia', tipo: 'Banco',  fondo: '1822 Raices Ahorro Pesos' },
+  { ent: 'ICBC',         tipo: 'Banco',     fondo: 'Alpha Pesos' },
+  { ent: 'Balanz',       tipo: 'ALyC',      fondo: 'Balanz Capital Money Market' },
+  { ent: 'Adcap',        tipo: 'ALyC',      fondo: 'Adcap Ahorro Pesos Fondo de Dinero' },
+];
 let _rf = null;
 let _rfPlazo = 30;
 let _rfCargando = false;
@@ -9740,7 +9813,7 @@ const _ymd = d => d.getFullYear() + '/' + String(d.getMonth() + 1).padStart(2, '
 
 async function fetchRentaFijaIOL() { // (nombre histórico; ya no usa IOL ni data912)
   initRfPlazos();
-  const c = _cacheGet('mi_rf_v2', 3 * 3600e3);
+  const c = _cacheGet('mi_rf_v4', 3 * 3600e3);
   if (c) { _rf = c; calcRentaFija(); updateRatesStrip(); return; }
   if (_rfCargando) return;
   _rfCargando = true;
@@ -9759,29 +9832,49 @@ async function fetchRentaFijaIOL() { // (nombre histórico; ya no usa IOL ni dat
     }
     // FCI money market en pesos: rendimiento real de los últimos ~30 días
     if (Array.isArray(mmHoy) && mmHoy.length) {
-      const fechaHoy = mmHoy.map(f => f.fecha).sort().pop();
-      const hoy = mmHoy.filter(f => f.fecha === fechaHoy && f.vcp > 0 && !/d[oó]lar|usd|u\$s/i.test(f.fondo) && (f.patrimonio || 0) >= 5e9);
-      let antes = null, fechaAntes = null;
-      for (let k = 30; k <= 37 && !antes; k++) {
-        const d = new Date(fechaHoy + 'T00:00:00'); d.setDate(d.getDate() - k);
-        try { const r = await _fetchJSON(ARGD_FIN + 'fci/mercadoDinero/' + _ymd(d), 10000); if (Array.isArray(r) && r.length) { antes = r; fechaAntes = d; } } catch (e) {}
+      const fechaMax = mmHoy.map(f => f.fecha).sort().pop();
+      const limite = new Date(fechaMax + 'T00:00:00'); limite.setDate(limite.getDate() - 7);
+      const limiteStr = limite.toISOString().slice(0, 10);
+      // Fondos en pesos con dato reciente (cada uno con su propia fecha: algunos informan un día después)
+      const hoy = mmHoy.filter(f => f.fecha >= limiteStr && f.vcp > 0 && !/d[oó]lar|usd|u\$s|fcic|inmobiliari/i.test(f.fondo));
+      // Foto de hace ~30 días: se juntan dos días hábiles seguidos porque algunas
+      // gestoras (ej. Fima, Pionero) informan la cuotaparte con un día de atraso
+      const porNombre = {};
+      let fotos = 0;
+      const faltan = () => RF_MM_ENTIDADES.some(e => !Object.keys(porNombre).some(n => n === e.fondo || n.startsWith(e.fondo + ' - ')));
+      for (let k = 30; k <= 40 && (fotos < 2 || faltan()); k++) {
+        const d = new Date(fechaMax + 'T00:00:00'); d.setDate(d.getDate() - k);
+        if (d.getDay() === 0 || d.getDay() === 6) continue;
+        try {
+          const r = await _fetchJSON(ARGD_FIN + 'fci/mercadoDinero/' + _ymd(d), 10000);
+          if (Array.isArray(r) && r.length) {
+            fotos++;
+            r.forEach(f => { if (f.vcp > 0 && !porNombre[f.fondo]) porNombre[f.fondo] = { vcp: f.vcp, fecha: f.fecha }; });
+          }
+        } catch (e) {}
       }
-      if (antes) {
-        const dias = Math.round((new Date(fechaHoy + 'T00:00:00') - fechaAntes) / 864e5);
-        const porNombre = Object.fromEntries(antes.filter(f => f.vcp > 0).map(f => [f.fondo, f.vcp]));
-        const fondos = hoy.filter(f => porNombre[f.fondo]).map(f => ({
-          fondo: f.fondo, patrimonio: f.patrimonio,
-          tna: (f.vcp / porNombre[f.fondo] - 1) * 365 / dias * 100,
-        })).filter(f => f.tna > 0 && f.tna < 80);
-        if (fondos.length) {
-          const top = [...fondos].sort((a, b) => b.tna - a.tna)[0];
-          const grande = [...fondos].sort((a, b) => b.patrimonio - a.patrimonio)[0];
-          out.mm = { dias, n: fondos.length, top, grande, mediana: _mediana(fondos.map(f => f.tna)) };
+      if (fotos) {
+        const fondos = hoy.filter(f => porNombre[f.fondo]).map(f => {
+          const ant = porNombre[f.fondo];
+          const dias = Math.round((new Date(f.fecha + 'T00:00:00') - new Date(ant.fecha + 'T00:00:00')) / 864e5);
+          return { fondo: f.fondo, patrimonio: f.patrimonio || 0, dias, tna: (f.vcp / ant.vcp - 1) * 365 / dias * 100 };
+        }).filter(f => f.dias >= 20 && f.tna > 0 && f.tna < 80);
+        const grandes = fondos.filter(f => f.patrimonio >= 5e9);
+        if (grandes.length) {
+          const top = [...grandes].sort((a, b) => b.tna - a.tna)[0];
+          const grande = [...grandes].sort((a, b) => b.patrimonio - a.patrimonio)[0];
+          out.mm = { dias: Math.round(_mediana(grandes.map(f => f.dias))), n: grandes.length, top, grande, mediana: _mediana(grandes.map(f => f.tna)) };
         }
+        // Por entidad: clase A si existe; si no, la clase más grande de ese fondo
+        out.mmEnt = RF_MM_ENTIDADES.map(e => {
+          const base = fondos.filter(f => f.fondo === e.fondo || f.fondo.startsWith(e.fondo + ' - '));
+          const elegido = base.find(f => /- Clase A$/.test(f.fondo)) || base.sort((a, b) => b.patrimonio - a.patrimonio)[0];
+          return elegido ? { ...e, fondoNombre: elegido.fondo, tna: elegido.tna } : null;
+        }).filter(Boolean);
       }
     }
-    if (out.pf.length || out.mm) { _rf = out; _cacheSet('mi_rf_v2', out); }
-    else _rf = _cacheGet('mi_rf_v2') || null;
+    if (out.pf.length || out.mm) { _rf = out; _cacheSet('mi_rf_v4', out); }
+    else _rf = _cacheGet('mi_rf_v4') || null;
   } finally {
     _rfCargando = false;
     calcRentaFija();
@@ -9829,9 +9922,9 @@ function calcRentaFija() {
     filas.push({ nombre: 'Plazo fijo · promedio bancos', sub: pf.length + ' entidades · al vencimiento', tna: med, r: pfRend(med) });
   }
   if (_rf.mm) {
-    filas.push({ nombre: 'Money market · el que más rindió', sub: _rf.mm.top.fondo + ' · liquidez inmediata', tna: _rf.mm.top.tna, r: mmRend(_rf.mm.top.tna) });
+    filas.push({ nombre: 'Money market · el que más rindió', sub: _rf.mm.top.fondo.replace(/ - Clase .*$/, '') + ' · liquidez inmediata', tna: _rf.mm.top.tna, r: mmRend(_rf.mm.top.tna) });
     if (_rf.mm.grande.fondo !== _rf.mm.top.fondo)
-      filas.push({ nombre: 'Money market · el más grande', sub: _rf.mm.grande.fondo + ' · liquidez inmediata', tna: _rf.mm.grande.tna, r: mmRend(_rf.mm.grande.tna) });
+      filas.push({ nombre: 'Money market · el más grande', sub: _rf.mm.grande.fondo.replace(/ - Clase .*$/, '') + ' · liquidez inmediata', tna: _rf.mm.grande.tna, r: mmRend(_rf.mm.grande.tna) });
   }
   filas.sort((a, b) => b.r - a.r);
   const maxR = Math.max(...filas.map(f => f.r), infl || 0) || 1;
@@ -9856,9 +9949,24 @@ function calcRentaFija() {
         : '<div class="rf-real ' + (gana ? 'up' : 'down') + '">' + (gana ? 'Le gana a la inflación +' : 'Pierde contra la inflación ') + real.toFixed(1).replace('.', ',') + '%</div>') +
       '</div></div>';
   }).join('') + '</div>';
+  if (_rf.mmEnt && _rf.mmEnt.length) {
+    const ents = [..._rf.mmEnt].sort((a, b) => b.tna - a.tna);
+    html += '<div class="rf-subhd"><span>Fondos money market por entidad</span><em>Rendimiento real de los últimos 30 días · liquidez inmediata</em></div>';
+    html += '<div class="rf-ent-grid">' + ents.map(e => {
+      const r = mmRend(e.tna);
+      const real = infl != null ? ((1 + r) / (1 + infl) - 1) * 100 : null;
+      const cls = real == null ? '' : Math.abs(real) < 0.05 ? 'eq' : real > 0 ? 'up' : 'down';
+      return '<div class="rf-ent" title="' + _esc(e.fondoNombre) + '">' +
+        '<div class="rf-ent-top"><b>' + e.ent + '</b><span class="rf-ent-tipo">' + e.tipo + '</span></div>' +
+        '<div class="rf-ent-fondo">' + _esc(e.fondoNombre.replace(/ - Clase .*$/, '')) + '</div>' +
+        '<div class="rf-ent-bottom"><span class="rf-ent-tna">' + fmt1(e.tna) + '<small> TNA</small></span>' +
+        '<span class="rf-ent-gan ' + cls + '">' + (monto ? '+' + fmtP(monto * r) : fmt1(r * 100)) + '</span></div>' +
+      '</div>';
+    }).join('') + '</div>';
+  }
   const actualizado = new Date(_rf.fecha).toLocaleDateString('es-AR', { day: 'numeric', month: 'short' });
   html += '<div class="rf-foot">' + (infl != null ? 'La línea vertical marca la inflación esperada. ' : '') +
-    'Money market: rendimiento real de los últimos ' + (_rf.mm?.dias || 30) + ' días proyectado. Fuentes: BCRA y CNV vía ArgentinaDatos · ' + actualizado + '</div>';
+    'TNA = tasa nominal anual. Money market: rendimiento real de los últimos ' + (_rf.mm?.dias || 30) + ' días, proyectado al plazo elegido. Fuentes: BCRA y CNV vía ArgentinaDatos · ' + actualizado + '</div>';
   el.innerHTML = html;
 }
 
@@ -10033,65 +10141,35 @@ function calcJubilacion() {
   const edad = parseInt(document.getElementById('jub-edad')?.value) || 0;
   const genero = document.getElementById('jub-genero')?.value || 'm';
   const resultEl = document.getElementById('jub-result');
-
-  if (!resultEl || sueldo <= 0 || edad <= 0) { resultEl.style.display = 'none'; return; }
+  if (!resultEl) return;
+  if (sueldo <= 0 || edad <= 0) { resultEl.style.display = 'none'; return; }
 
   const edadJub = genero === 'm' ? 65 : 60;
   const anosHastaJub = Math.max(0, edadJub - edad);
   const añosTotales = años + anosHastaJub;
-
-  // Fórmula SIPA: haber = 70% del promedio de los últimos 10 años de aportes
-  // + 1% adicional por año que exceda 30 años de aportes
-  const BASE_PCT = 0.70;
-  const anosExtra = Math.max(0, añosTotales - 30);
-  const pctTotal = Math.min(BASE_PCT + anosExtra * 0.01, 0.82);
-
-  // Haber estimado (en pesos actuales)
-  const haberBruto = sueldo * pctTotal;
-
-  // Haber mínimo garantizado (PUAM - referencia junio 2026)
-  const PUAM_REF = 280000; // ARS junio 2026 aproximado
-  const haberFinal = Math.max(haberBruto, PUAM_REF);
-
-  // Relación jubilación/sueldo
-  const ratio = (haberFinal / sueldo) * 100;
-
-  // Poder adquisitivo estimado al jubilarse (si inflación promedio 50% anual)
-  // Con 50% anual, en N años el poder adquisitivo cae significativamente
-  // Lo mostramos en "canastas básicas" para contexto
-  const CANASTA_BASICA = 250000; // ARS aprox junio 2026
-  const canastasHoy = haberFinal / CANASTA_BASICA;
-
+  // Ley 24.241 (SIPA): PC + PAP = 1,5% del sueldo promedio de los últimos 10 años
+  // por cada año de aportes, con tope de 35 años (52,5%), más la PBU (monto fijo de ANSES).
+  const pct = Math.min(añosTotales, 35) * 1.5;
+  const parteAportes = sueldo * pct / 100;
+  const llega = añosTotales >= 30;
   const fmtP = v => '$' + Math.round(v).toLocaleString('es-AR');
-  const fmtPct = v => v.toFixed(1) + '%';
+  const fmt1 = v => v.toFixed(1).replace('.', ',');
+  const cbt = _cacheGet('mi_cbt');
+  const canastas = cbt?.valor ? parteAportes / cbt.valor : null;
 
   resultEl.innerHTML =
-    '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px">' +
-      '<div class="jub-metric">' +
-        '<div class="jub-metric-lbl">Haber estimado</div>' +
-        '<div class="jub-metric-val" style="color:var(--accent)">' + fmtP(haberFinal) + '</div>' +
-      '</div>' +
-      '<div class="jub-metric">' +
-        '<div class="jub-metric-lbl">% del sueldo</div>' +
-        '<div class="jub-metric-val" style="color:' + (ratio < 60 ? 'var(--red)' : 'var(--green)') + '">' + fmtPct(ratio) + '</div>' +
-      '</div>' +
-      '<div class="jub-metric">' +
-        '<div class="jub-metric-lbl">Años para jubilar</div>' +
-        '<div class="jub-metric-val">' + anosHastaJub + '</div>' +
-      '</div>' +
-      '<div class="jub-metric">' +
-        '<div class="jub-metric-lbl">Canastas básicas</div>' +
-        '<div class="jub-metric-val">' + canastasHoy.toFixed(1) + '</div>' +
-      '</div>' +
+    '<div class="jub-grid">' +
+      '<div class="jub-metric"><div class="jub-metric-lbl">Según tus aportes</div><div class="jub-metric-val" style="color:var(--accent)">' + fmtP(parteAportes) + '</div><div class="jub-metric-sub">por mes, + PBU</div></div>' +
+      '<div class="jub-metric"><div class="jub-metric-lbl">% de tu sueldo</div><div class="jub-metric-val">' + fmt1(pct) + '%</div><div class="jub-metric-sub">sin contar la PBU</div></div>' +
+      '<div class="jub-metric"><div class="jub-metric-lbl">Aportes al jubilarte</div><div class="jub-metric-val" style="color:' + (llega ? 'var(--green)' : 'var(--red)') + '">' + añosTotales + ' años</div><div class="jub-metric-sub">' + (llega ? 'llegás a los 30 exigidos' : 'te faltan ' + (30 - añosTotales) + ' para los 30') + '</div></div>' +
+      '<div class="jub-metric"><div class="jub-metric-lbl">Te faltan</div><div class="jub-metric-val">' + anosHastaJub + ' años</div><div class="jub-metric-sub">para los ' + edadJub + '</div></div>' +
     '</div>' +
-    '<div style="font-size:13px;color:var(--t2);line-height:1.6;padding:12px;background:var(--surf2);border-radius:8px">' +
-      '<b>Con ' + añosTotales + ' años de aportes totales</b> al momento de jubilarte, te corresponde el <b>' + fmtPct(pctTotal * 100) + '</b> de tu promedio salarial. ' +
-      'El haber estimado es <b>' + fmtP(haberFinal) + '/mes</b>. ' +
-      (haberBruto < PUAM_REF ? 'Como es menor al mínimo garantizado (PUAM), cobrarías la jubilación mínima.' : '') +
-      '<br><br>💡 <b>Consejo:</b> para mejorar tu jubilación, considerá hacer aportes voluntarios o invertir la diferencia entre tu sueldo actual y tu haber proyectado.' +
-      '<br><br><span style="font-size:11px;color:var(--t3)">📌 PUAM (' + fmtP(PUAM_REF) + ') y Canasta Básica (' + fmtP(CANASTA_BASICA) + ') son valores de referencia aproximados, no se actualizan en vivo — no hay una fuente pública gratuita para eso. Puede haber cambiado desde que se cargó esta calculadora.</span>' +
+    '<div class="jub-note">' +
+      (llega
+        ? 'Con <b>' + añosTotales + ' años de aportes</b> cobrarías <b>' + fmt1(pct) + '%</b> de tu sueldo promedio de los últimos 10 años' + (añosTotales > 35 ? ' (el tope es 35 años)' : '') + ', más la PBU, un monto fijo que ANSES paga a todos.'
+        : '<b>No llegarías a los 30 años de aportes</b> que pide la jubilación ordinaria. Podrías acceder a la PUAM (80% de la mínima) o completar aportes con una moratoria si está vigente.') +
+      (canastas != null ? ' Hoy, lo que sale de tus aportes equivale a <b>' + fmt1(canastas) + ' canastas básicas</b> por adulto (INDEC).' : '') +
     '</div>';
-
   resultEl.style.display = 'block';
 }
 
@@ -10153,7 +10231,7 @@ function calcInteresCompuesto() {
     const real = valorFinal / deflactor;
     return '<div style="background:var(--surf2);border-radius:8px;padding:12px;text-align:center;' +
       (highlight ? 'border:1px solid var(--accent)' : 'border:1px solid var(--b1)') + '">' +
-      '<div style="font-size:11px;color:var(--t3);margin-bottom:4px">' + label + ' (' + tasa.toFixed(1) + '%)</div>' +
+      '<div style="font-size:11px;color:var(--t3);margin-bottom:4px">' + label + ' (' + tasa.toFixed(1).replace('.', ',') + '%)</div>' +
       '<div style="font-family:var(--mono);font-size:16px;font-weight:700;color:' + (highlight ? 'var(--accent)' : 'var(--t1)') + '">' + fmtP(valorFinal) + '</div>' +
       (descontarInflacion ? '<div style="font-size:10px;color:var(--t3);margin-top:2px">≈ ' + fmtP(real) + ' de hoy</div>' : '') +
       '</div>';
@@ -10572,7 +10650,7 @@ async function mostrarAnalisisMes(snapshot) {
   const ipcPersonal = snapshot.ipcPersonal || 0;
   const ipcOficial = snapshot.ipcOficial || 0;
   const fmtP = v => '$' + Math.round(v).toLocaleString('es-AR');
-  const fmtPct = v => v.toFixed(1) + '%';
+  const fmtPct = v => v.toFixed(1).replace('.', ',') + '%';
 
   // Construir el modal
   const overlay = document.createElement('div');
@@ -10631,8 +10709,8 @@ async function mostrarAnalisisMes(snapshot) {
           const diff = r.monto - prev.monto;
           const pct = Math.abs(diff / prev.monto * 100);
           return diff > 0
-            ? ' <span style="font-size:10px;color:var(--red)">↑ +' + pct.toFixed(0) + '% vs mes ant.</span>'
-            : ' <span style="font-size:10px;color:var(--green)">↓ -' + pct.toFixed(0) + '% vs mes ant.</span>';
+            ? ' <span style="font-size:10px;color:var(--red)">↑ +' + pct.toFixed(0).replace('.', ',') + '% vs mes ant.</span>'
+            : ' <span style="font-size:10px;color:var(--green)">↓ -' + pct.toFixed(0).replace('.', ',') + '% vs mes ant.</span>';
         })() : '';
         return '<div style="margin-bottom:10px">' +
           '<div style="display:flex;justify-content:space-between;margin-bottom:4px">' +
