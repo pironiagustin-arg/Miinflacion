@@ -1765,6 +1765,69 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
   .fin-subnav { display: flex; }
   .fin-subnav-btn { flex: 1; padding: 9px 8px !important; }
 }
+
+/* ═════ HERRAMIENTAS / FINANZAS — formularios limpios, sin desbordes ═════ */
+.fin-inp { min-width: 0; width: 100%; }
+.form-input { min-width: 0; max-width: 100%; box-sizing: border-box; }
+.tool-card .form-input, .tool-card .fin-input-wrap, .tool-card select { width: 100%; }
+.tool-card [style*="grid-template-columns"] > *, .tool-fields > * { min-width: 0; }
+.tool-card .form-label { display: block; font-size: 12px; font-weight: 500; color: var(--t3); margin: 0 0 6px; }
+.tool-card .fin-input-wrap, .tool-card .form-input { border-radius: 12px; min-height: 46px; }
+.tool-card .fin-inp { font-size: 16px; padding: 11px 0; }
+.tool-card .fin-prefix { padding: 0 10px 0 14px; font-size: 15px; }
+.tool-card .form-input { padding: 11px 14px; font-size: 14px; }
+.tool-fields { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; margin-bottom: 16px; }
+.tool-fields .tf-full { grid-column: 1 / -1; }
+.tool-fields-rf { grid-template-columns: minmax(0,1fr) auto; align-items: end; }
+.tf-check { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--t2); margin: -4px 0 14px; cursor: pointer; }
+.tf-check input { width: 16px; height: 16px; flex-shrink: 0; accent-color: var(--accent); }
+.tf-row { display: flex; gap: 10px; margin-bottom: 12px; align-items: stretch; }
+.tool-card-hd { margin-bottom: 16px; }
+.tool-card-title { font-size: 15px; font-weight: 700; }
+.tool-card-tag { font-size: 12px; color: var(--t3); display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+.tool-icon-chip { color: var(--tool-accent, var(--accent)); }
+.tool-icon-chip .ico { width: 19px; height: 19px; }
+.tool-info-panel { border-radius: 12px; }
+.tool-card-muted { opacity: 1; }
+.tool-grid { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 18px !important; }
+.rate-chip { border-radius: 99px; padding: 8px 14px; }
+.rates-strip { gap: 8px; }
+@media (max-width: 860px) {
+  .tool-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .tool-fields-rf { grid-template-columns: 1fr; }
+}
+/* Selector de plazo (pastillas) */
+.seg-pills { display: flex; background: var(--surf2); border-radius: 14px; padding: 4px; gap: 3px; }
+.seg-pills button { flex: 1; border: none; background: transparent; color: var(--t2); font: 600 12.5px var(--sans); padding: 10px 12px; border-radius: 10px; cursor: pointer; white-space: nowrap; transition: all .15s; }
+.seg-pills button:hover { color: var(--t1); }
+.seg-pills button.on { background: var(--surf); color: var(--accent); box-shadow: 0 2px 8px rgba(27,39,94,.08); }
+body:not(.light-mode) .seg-pills button.on { background: var(--surf3); }
+/* Renta fija */
+.rf-empty { display: flex; align-items: center; gap: 8px; justify-content: center; padding: 24px; color: var(--t3); font-size: 13px; }
+.rf-bench { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 10px; background: var(--surf2); border-radius: 14px; padding: 12px 16px; margin-bottom: 12px; font-size: 12.5px; color: var(--t2); }
+.rf-bench b { font-family: var(--mono); font-size: 16px; color: var(--amber); }
+.rf-bench em { font-style: normal; color: var(--t3); font-size: 12px; margin-left: auto; }
+.rf-list { display: flex; flex-direction: column; gap: 8px; }
+.rf-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 16px; align-items: center; padding: 14px 16px; border: 1px solid var(--b1); border-radius: 16px; transition: background .15s, border-color .15s; }
+.rf-row:hover { background: var(--surf2); }
+.rf-row.best { border-color: rgba(18,161,80,.35); background: var(--green-bg); }
+.rf-main { min-width: 0; }
+.rf-name { font-size: 14px; font-weight: 700; color: var(--t1); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.rf-tag { font-size: 10.5px; font-weight: 700; color: #fff; background: var(--green); padding: 2px 8px; border-radius: 99px; }
+.rf-sub { font-size: 12px; color: var(--t3); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rf-bar { position: relative; height: 6px; background: var(--surf3); border-radius: 99px; margin-top: 10px; }
+.rf-bar i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 99px; background: var(--accent-grad); }
+.rf-row.best .rf-bar i { background: linear-gradient(90deg,#12A150,#3DDC84); }
+.rf-bar u { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--amber); border-radius: 2px; }
+.rf-nums { text-align: right; min-width: 150px; }
+.rf-gan { font-family: var(--mono); font-size: 18px; font-weight: 800; color: var(--t1); }
+.rf-tna { font-size: 12px; color: var(--t3); margin-top: 1px; }
+.rf-real { font-size: 11.5px; font-weight: 600; margin-top: 3px; }
+.rf-real.up { color: var(--green); } .rf-real.down { color: var(--red); }
+.rf-real.eq { color: var(--t3); }
+.fin-input-wrap .fin-inp, .fin-input-wrap .fin-inp:focus { border: none !important; box-shadow: none !important; background: transparent !important; border-radius: 0 !important; min-height: 0 !important; }
+.rf-foot { font-size: 11.5px; color: var(--t3); margin-top: 12px; line-height: 1.5; }
+@media (max-width: 600px) { .rf-row { grid-template-columns: 1fr; gap: 8px; } .rf-nums { text-align: left; min-width: 0; } .rf-bench em { margin-left: 0; } }
 </style>
 </head>
 <body>
@@ -2546,7 +2609,7 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
   <!-- INGRESOS MÚLTIPLES -->
   <div class="tool-card" style="--tool-accent:var(--green);--tool-accent-bg:var(--green-bg)">
     <div class="tool-card-hd">
-      <div class="tool-icon-chip">💰</div>
+      <div class="tool-icon-chip"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 7V5.5A1.5 1.5 0 0 0 16.5 4H5a2 2 0 0 0-2 2"/><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M16 13.5h2"/></svg></div>
       <div class="tool-card-titles">
         <div class="tool-card-title">Ingresos mensuales</div>
         <div class="tool-card-tag">Base de todo el diagnóstico</div>
@@ -2570,7 +2633,7 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
   <!-- MONOTRIBUTO -->
   <div class="tool-card" style="--tool-accent:var(--purple);--tool-accent-bg:var(--purple-bg)">
     <div class="tool-card-hd">
-      <div class="tool-icon-chip">🧾</div>
+      <div class="tool-icon-chip"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg></div>
       <div class="tool-card-titles">
         <div class="tool-card-title">Categoría Monotributo</div>
         <div class="tool-card-tag">Valores 2026</div>
@@ -2599,7 +2662,7 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
           <label class="form-label">Facturación mensual estimada $</label>
           <div class="fin-input-wrap">
             <span class="fin-prefix">$</span>
-            <input type="text" id="fin-facturacion" class="fin-inp" placeholder="Ej: 700.000"
+            <input type="text" id="fin-facturacion" class="fin-inp"
               min="0" step="10000" inputmode="numeric" oninput="calcFinanzas()" />
           </div>
         </div>
@@ -2621,7 +2684,7 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
   <!-- SCORE DE DEUDA -->
   <div class="tool-card tool-card-wide" style="--tool-accent:var(--accent);--tool-accent-bg:var(--accent-bg)">
     <div class="tool-card-hd">
-      <div class="tool-icon-chip">🩺</div>
+      <div class="tool-icon-chip"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
       <div class="tool-card-titles">
         <div class="tool-card-title">Score de salud financiera</div>
         <div class="tool-card-tag">DTI, flujo, ahorro y gasto combinados</div>
@@ -2741,7 +2804,7 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
   <!-- ══ AGENDA DE PAGOS (calendario + recomendaciones) ══ -->
   <div class="tool-card tool-card-wide" style="--tool-accent:var(--red);--tool-accent-bg:rgba(204,34,0,.1)">
     <div class="tool-card-hd">
-      <div class="tool-icon-chip">📅</div>
+      <div class="tool-icon-chip"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/></svg></div>
       <div class="tool-card-titles">
         <div class="tool-card-title">Agenda de Pagos</div>
         <div class="tool-card-tag">Lo que se ve en Inicio sale de acá</div>
@@ -2760,7 +2823,7 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
           <div>
             <label class="form-label">Nombre</label>
-            <input type="text" class="form-input" id="ev-nombre" placeholder="Ej: Alquiler" />
+            <input type="text" class="form-input" id="ev-nombre" />
           </div>
           <div>
             <label class="form-label">Tipo</label>
@@ -2773,7 +2836,7 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
             <label class="form-label">Monto estimado $</label>
             <div class="fin-input-wrap">
               <span class="fin-prefix">$</span>
-              <input type="text" class="fin-inp" id="ev-monto" placeholder="0" inputmode="numeric" />
+              <input type="text" class="fin-inp" id="ev-monto" inputmode="numeric" />
             </div>
           </div>
           <div>
@@ -2801,11 +2864,11 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
           </div>
           <div id="ev-dia-wrap">
             <label class="form-label" id="ev-dia-label">Día del mes</label>
-            <input type="number" class="form-input" id="ev-dia" min="1" max="31" placeholder="Ej: 10" />
+            <input type="number" class="form-input" id="ev-dia" min="1" max="31" />
           </div>
           <div id="ev-diahasta-wrap" style="display:none">
             <label class="form-label">Hasta el día</label>
-            <input type="number" class="form-input" id="ev-diahasta" min="1" max="31" placeholder="Ej: 31" />
+            <input type="number" class="form-input" id="ev-diahasta" min="1" max="31" />
           </div>
           <div id="ev-fecha-wrap" style="display:none">
             <label class="form-label">Fecha</label>
@@ -2847,7 +2910,7 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
   <!-- RESUMEN GENERAL -->
   <div class="tool-card" style="--tool-accent:var(--red);--tool-accent-bg:rgba(204,34,0,.1);margin-bottom:1.4rem;cursor:default">
     <div class="tool-card-hd">
-      <div class="tool-icon-chip">💳</div>
+      <div class="tool-icon-chip"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/></svg></div>
       <div class="tool-card-titles">
         <div class="tool-card-title">Resumen de carga de deuda</div>
         <div class="tool-card-tag">Alimenta el score de Diagnóstico</div>
@@ -2898,7 +2961,7 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
       <div class="form-group" style="grid-column:1/-1">
         <label class="form-label">Nombre de la deuda</label>
-        <input class="form-input" type="text" id="d-nombre" placeholder="Ej: Tarjeta Visa, Préstamo personal, Cuotas TV..." maxlength="60" />
+        <input class="form-input" type="text" id="d-nombre" maxlength="60" />
       </div>
       <div class="form-group">
         <label class="form-label">Tipo</label>
@@ -2915,14 +2978,14 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
         <label class="form-label">Capital pendiente $</label>
         <div class="fin-input-wrap">
           <span class="fin-prefix">$</span>
-          <input type="text" class="fin-inp" id="d-capital" placeholder="500.000" min="0" step="1000" inputmode="numeric" />
+          <input type="text" class="fin-inp" id="d-capital" min="0" step="1000" inputmode="numeric" />
         </div>
       </div>
       <div class="form-group">
         <label class="form-label">Cuota mensual $</label>
         <div class="fin-input-wrap">
           <span class="fin-prefix">$</span>
-          <input type="text" class="fin-inp" id="d-cuota" placeholder="45.000" min="0" step="100" inputmode="numeric" />
+          <input type="text" class="fin-inp" id="d-cuota" min="0" step="100" inputmode="numeric" />
         </div>
       </div>
       <div class="form-group">
@@ -2936,14 +2999,14 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
       <div class="form-group">
         <label class="form-label" id="d-tasa-label">TNA %</label>
         <div class="fin-input-wrap">
-          <input type="number" class="fin-inp" id="d-tasa" data-no-money-format="1" placeholder="Ej: 120" min="0" step="0.1"
+          <input type="number" class="fin-inp" id="d-tasa" data-no-money-format="1" min="0" step="0.1"
             style="padding-left:14px" />
           <span style="padding:0 14px;color:var(--t3);font-size:14px">%</span>
         </div>
       </div>
       <div class="form-group">
         <label class="form-label">Cuotas restantes</label>
-        <input class="form-input" type="number" id="d-cuotas-rest" placeholder="Ej: 18" min="1" />
+        <input class="form-input" type="number" id="d-cuotas-rest" min="1" />
       </div>
       <div class="form-group">
         <label class="form-label">Ajuste por inflación</label>
@@ -2972,158 +3035,104 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
 
   <div class="fin-subpanel" id="fin-sub-herramientas">
 
-  <!-- Franja de tasas en vivo: mismo dato real que alimenta las tarjetas de abajo -->
+  <!-- Franja de tasas en vivo -->
   <div class="rates-strip" id="rates-strip">
+    <div class="rate-chip"><span class="live-dot"></span><span class="rate-lbl">Plazo fijo 30d</span><span class="rate-val" id="strip-pf">—</span></div>
     <div class="rate-chip"><span class="live-dot"></span><span class="rate-lbl">BADLAR</span><span class="rate-val" id="strip-badlar">—</span></div>
-    <div class="rate-chip"><span class="live-dot"></span><span class="rate-lbl">UVA</span><span class="rate-val" id="strip-uva">—</span></div>
+    <div class="rate-chip"><span class="rate-lbl">Inflación esperada 12m</span><span class="rate-val" id="strip-rem">—</span></div>
     <div class="rate-chip"><span class="rate-lbl">Dólar blue</span><span class="rate-val" id="strip-dolar">—</span></div>
   </div>
 
   <div class="tool-grid">
 
-  <!-- ══ ALERTA IPC (gratis) ══ -->
-  <div class="tool-card" id="ipc-alert-card" style="--tool-accent:var(--accent);--tool-accent-bg:var(--accent-bg)">
-    <div class="tool-card-hd">
-      <div class="tool-icon-chip">📢</div>
-      <div class="tool-card-titles">
-        <div class="tool-card-title">Alerta cuando sale el IPC</div>
-        <div class="tool-card-tag">Gratis</div>
-      </div>
-    </div>
-    <div id="ipc-alert-unlocked" style="display:none">
-      <div id="ipc-alert-banner" style="display:none;padding:12px 14px;border-radius:8px;font-size:13px;line-height:1.5;margin-bottom:10px"></div>
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div>
-          <div style="font-size:13px;color:var(--t1)" id="ipc-alert-status">Verificando...</div>
-          <div style="font-size:11px;color:var(--t3)" id="ipc-alert-sub"></div>
-        </div>
-        <div style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--accent)" id="ipc-alert-val">—</div>
-      </div>
-      <button class="btn-primary" id="ipc-cerrar-mes-btn" style="display:none;width:100%;margin-top:12px" onclick="document.querySelector('[data-panel=mi-historial]').click()">Ir a cerrar mi mes →</button>
-    </div>
-  </div>
-
-  <!-- ══ E: CALCULADORA UVA ══ -->
-  <div class="tool-card" style="--tool-accent:var(--purple);--tool-accent-bg:var(--purple-bg)">
-    <div class="tool-card-hd">
-      <div class="tool-icon-chip">🏠</div>
-      <div class="tool-card-titles">
-        <div class="tool-card-title">Calculadora UVA</div>
-        <div class="tool-card-tag"><span class="live-dot" style="background:var(--purple);box-shadow:none;animation:none"></span> UVA en vivo</div>
-      </div>
-      <button class="tool-info-btn" id="uva-info-btn" onclick="toggleToolInfo('uva-info')" title="Cómo funciona">ⓘ</button>
-    </div>
-    <div id="uva-unlocked">
-      <div class="tool-info-panel" id="uva-info">
-        Calculá cuánto aumentó tu deuda o depósito en UVA desde que lo contrataste hasta hoy.
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
-        <div>
-          <label class="form-label">Monto original en UVA o $</label>
-          <div class="fin-input-wrap">
-            <span class="fin-prefix">$</span>
-            <input type="text" class="fin-inp" id="uva-monto" placeholder="1.000.000" min="0" step="1000" inputmode="numeric" oninput="calcUVA()" />
-          </div>
-        </div>
-        <div>
-          <label class="form-label">Tipo</label>
-          <select class="form-input" id="uva-tipo" onchange="calcUVA()">
-            <option value="pesos_a_uva">Pesos → UVAs (cuántas UVA son hoy)</option>
-            <option value="uva_a_pesos">UVAs → Pesos (cuánto valen hoy en $)</option>
-            <option value="ajuste">Ajuste desde fecha (cuánto aumentó)</option>
-          </select>
-        </div>
-        <div id="uva-fecha-wrap">
-          <label class="form-label">Fecha original</label>
-          <input type="month" class="form-input" id="uva-fecha" oninput="calcUVA()" />
-        </div>
-        <div id="uva-cantidad-wrap" style="display:none">
-          <label class="form-label">Cantidad de UVAs</label>
-          <input type="text" class="fin-inp" id="uva-cantidad" placeholder="500" min="0" inputmode="numeric" oninput="calcUVA()" />
-        </div>
-      </div>
-      <div id="uva-result" style="display:none;padding:14px;background:var(--surf2);border-radius:8px;border:1px solid var(--b1)"></div>
-    </div>
-  </div>
-
-  <!-- ══ B: COMPARADOR RENTA FIJA ══ -->
+  <!-- ══ RENTA FIJA: dónde rinden más tus pesos ══ -->
   <div class="tool-card tool-card-wide" style="--tool-accent:var(--green);--tool-accent-bg:var(--green-bg)">
     <div class="tool-card-hd">
-      <div class="tool-icon-chip">📊</div>
+      <div class="tool-icon-chip"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
       <div class="tool-card-titles">
-        <div class="tool-card-title">Comparador de Renta Fija</div>
-        <div class="tool-card-tag"><span class="live-dot" style="background:var(--green)"></span> Tasas y letras en vivo</div>
+        <div class="tool-card-title">¿Dónde rinden más tus pesos?</div>
+        <div class="tool-card-tag"><span class="live-dot" style="background:var(--green)"></span> Plazo fijo y fondos money market, contra la inflación esperada</div>
       </div>
       <button class="tool-info-btn" id="rf-info-btn" onclick="toggleToolInfo('rf-info')" title="Cómo funciona">ⓘ</button>
     </div>
     <div id="rf-unlocked">
       <div class="tool-info-panel" id="rf-info">
-        Renta fija argentina · Plazo fijo, Money Market, Bono CER, Plazo Fijo UVA y LECAP/BONCAP con precio en vivo, todas comparadas.<br>
-        📌 LECAP/BONCAP: TNA derivada del precio en vivo (fuente: data912.com). Plazo Fijo/Money Market: tasas reales de depósitos del BCRA. No constituye asesoramiento financiero.
+        Plazo fijo: tasa que publica cada banco en el BCRA (se asume que lo renovás cada 30 días). Fondos money market: lo que rindió de verdad la cuotaparte en los últimos 30 días, proyectado al plazo elegido. Inflación esperada: mediana del REM del BCRA. Rendimientos pasados no garantizan los futuros; no es asesoramiento financiero.
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+      <div class="tool-fields tool-fields-rf">
         <div>
-          <label class="form-label">Monto a invertir $</label>
+          <label class="form-label">Monto a invertir</label>
           <div class="fin-input-wrap">
             <span class="fin-prefix">$</span>
-            <input type="text" class="fin-inp" id="rf-monto" placeholder="500.000" min="0" step="10000" inputmode="numeric" oninput="calcRentaFija()" />
+            <input type="text" class="fin-inp" id="rf-monto" inputmode="numeric" oninput="calcRentaFija()" />
           </div>
         </div>
         <div>
-          <label class="form-label">Plazo (días)</label>
-          <select class="form-input" id="rf-plazo" onchange="calcRentaFija()">
-            <option value="30">30 días</option>
-            <option value="60">60 días</option>
-            <option value="90">90 días</option>
-            <option value="180">180 días</option>
-            <option value="365">365 días</option>
-          </select>
+          <label class="form-label">Plazo</label>
+          <div class="seg-pills" id="rf-plazos">
+            <button data-d="30" class="on">30 días</button><button data-d="90">90 días</button><button data-d="180">6 meses</button><button data-d="365">1 año</button>
+          </div>
         </div>
       </div>
-      <div id="rf-loading" style="display:none;text-align:center;padding:12px;color:var(--t3);font-size:12px">
-        <div class="loading-spinner" style="margin:0 auto 6px;width:16px;height:16px"></div>Actualizando tasas…
-      </div>
-      <div id="rf-result" style="display:none"></div>
-      <div id="rf-live-note" style="display:none;font-size:11px;margin-top:10px;line-height:1.5"></div>
+      <div id="rf-result"><div class="rf-empty"><span class="loading-spinner" style="width:16px;height:16px"></span> Buscando tasas en vivo…</div></div>
     </div>
   </div>
 
-  <!-- ══ H: PROYECCIÓN JUBILACIÓN ══ -->
+  <!-- ══ ALERTA IPC ══ -->
+  <div class="tool-card" id="ipc-alert-card" style="--tool-accent:var(--accent);--tool-accent-bg:var(--accent-bg)">
+    <div class="tool-card-hd">
+      <div class="tool-icon-chip"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></div>
+      <div class="tool-card-titles">
+        <div class="tool-card-title">Último IPC publicado</div>
+      </div>
+    </div>
+    <div id="ipc-alert-unlocked" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+        <div>
+          <div style="font-size:13px;color:var(--t1)" id="ipc-alert-status">Verificando...</div>
+          <div style="font-size:11.5px;color:var(--t3)" id="ipc-alert-sub"></div>
+        </div>
+        <div style="font-family:var(--mono);font-size:26px;font-weight:800;color:var(--accent)" id="ipc-alert-val">—</div>
+      </div>
+      <div id="ipc-alert-banner" style="display:none;padding:10px 12px;border-radius:12px;font-size:12.5px;line-height:1.5;margin-top:12px"></div>
+      <button class="btn-primary" id="ipc-cerrar-mes-btn" style="display:none;width:100%;margin-top:12px" onclick="document.querySelector('[data-panel=mi-historial]').click()">Cerrar mi mes →</button>
+    </div>
+  </div>
+
+  <!-- ══ PROYECCIÓN JUBILACIÓN ══ -->
   <div class="tool-card" style="--tool-accent:var(--amber);--tool-accent-bg:var(--amber-bg)">
     <div class="tool-card-hd">
-      <div class="tool-icon-chip">🏛️</div>
+      <div class="tool-icon-chip"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10M19 21V10M9 21v-11M15 21v-11M2 10l10-6 10 6"/></svg></div>
       <div class="tool-card-titles">
         <div class="tool-card-title">Proyección de jubilación</div>
-        <div class="tool-card-tag">Fórmula SIPA</div>
       </div>
       <button class="tool-info-btn" id="jub-info-btn" onclick="toggleToolInfo('jub-info')" title="Cómo funciona">ⓘ</button>
     </div>
     <div id="jub-unlocked">
       <div class="tool-info-panel" id="jub-info">
-        Estimá cuánto podrías cobrar de jubilación según tu sueldo actual y los años de aportes. Basado en la fórmula SIPA vigente.<br>
-        ⚠️ Estimación orientativa. El haber real depende de tu historial de aportes, actualizaciones y cambios en la legislación. No reemplaza una consulta en ANSES.
+        Estimación con la fórmula del SIPA según tu sueldo y años de aportes. Es orientativa: el haber real depende de tu historial y de la legislación. No reemplaza una consulta en ANSES.
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
-        <div>
-          <label class="form-label">Sueldo bruto promedio $</label>
+      <div class="tool-fields">
+        <div class="tf-full">
+          <label class="form-label">Sueldo bruto promedio</label>
           <div class="fin-input-wrap">
             <span class="fin-prefix">$</span>
-            <input type="text" class="fin-inp" id="jub-sueldo" placeholder="1.200.000" min="0" step="10000" inputmode="numeric" oninput="calcJubilacion()" />
+            <input type="text" class="fin-inp" id="jub-sueldo" inputmode="numeric" oninput="calcJubilacion()" />
           </div>
         </div>
         <div>
-          <label class="form-label">Años de aportes actuales</label>
-          <input type="number" class="form-input" id="jub-años" placeholder="Ej: 15" min="0" oninput="calcJubilacion()" />
+          <label class="form-label">Años aportados</label>
+          <input type="number" class="form-input" id="jub-años" min="0" oninput="calcJubilacion()" />
         </div>
         <div>
-          <label class="form-label">Edad actual</label>
-          <input type="number" class="form-input" id="jub-edad" placeholder="Ej: 35" min="18" max="65" oninput="calcJubilacion()" />
+          <label class="form-label">Edad</label>
+          <input type="number" class="form-input" id="jub-edad" min="18" max="65" oninput="calcJubilacion()" />
         </div>
-        <div>
-          <label class="form-label">Género</label>
+        <div class="tf-full">
+          <label class="form-label">Edad de retiro</label>
           <select class="form-input" id="jub-genero" onchange="calcJubilacion()">
-            <option value="m">Masculino (jubilación a los 65)</option>
-            <option value="f">Femenino (jubilación a los 60)</option>
+            <option value="m">65 años (hombres)</option>
+            <option value="f">60 años (mujeres)</option>
           </select>
         </div>
       </div>
@@ -3131,95 +3140,75 @@ body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
     </div>
   </div>
 
-  <!-- ══ I: SIMULADOR DE INTERÉS COMPUESTO (jubilación por tu cuenta) ══ -->
+  <!-- ══ INTERÉS COMPUESTO ══ -->
   <div class="tool-card" style="--tool-accent:var(--purple);--tool-accent-bg:var(--purple-bg)">
     <div class="tool-card-hd">
-      <div class="tool-icon-chip">📈</div>
+      <div class="tool-icon-chip"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
       <div class="tool-card-titles">
         <div class="tool-card-title">Interés compuesto</div>
-        <div class="tool-card-tag">Contrapunto de la jubilación estatal</div>
       </div>
       <button class="tool-info-btn" id="ic-info-btn" onclick="toggleToolInfo('ic-info')" title="Cómo funciona">ⓘ</button>
     </div>
     <div class="tool-info-panel" id="ic-info">
-      Contrapunto: compará el haber estatal de arriba con lo que podrías juntar invirtiendo por tu cuenta con aportes regulares y capitalización de intereses.<br>
-      📌 El rango ±3% muestra qué tan sensible es el resultado a variaciones en el rendimiento esperado. Simulación con tasa nominal simple, no descuenta comisiones ni impuestos. Esto no constituye asesoramiento financiero.
+      Cuánto podrías juntar invirtiendo por tu cuenta con aportes mensuales y capitalización mensual. La banda muestra el resultado con ±3% de rendimiento. No descuenta comisiones ni impuestos.
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+    <div class="tool-fields">
       <div>
-        <label class="form-label">Aporte inicial $</label>
+        <label class="form-label">Aporte inicial</label>
         <div class="fin-input-wrap">
           <span class="fin-prefix">$</span>
-          <input type="text" class="fin-inp" id="ic-inicial" placeholder="0" min="0" inputmode="numeric" oninput="calcInteresCompuesto()" />
+          <input type="text" class="fin-inp" id="ic-inicial" inputmode="numeric" oninput="calcInteresCompuesto()" />
         </div>
       </div>
       <div>
-        <label class="form-label">Aporte periódico $</label>
+        <label class="form-label">Aporte mensual</label>
         <div class="fin-input-wrap">
           <span class="fin-prefix">$</span>
-          <input type="text" class="fin-inp" id="ic-periodico" placeholder="50.000" min="0" inputmode="numeric" oninput="calcInteresCompuesto()" />
+          <input type="text" class="fin-inp" id="ic-periodico" inputmode="numeric" oninput="calcInteresCompuesto()" />
         </div>
       </div>
       <div>
-        <label class="form-label">Frecuencia de aporte</label>
-        <select class="form-input" id="ic-frecuencia" onchange="calcInteresCompuesto()">
-          <option value="12">Mensual</option>
-          <option value="4">Trimestral</option>
-          <option value="1">Anual</option>
-        </select>
+        <label class="form-label">Rendimiento anual %</label>
+        <input type="number" class="form-input" id="ic-tasa" min="0" step="0.5" oninput="calcInteresCompuesto()" />
       </div>
       <div>
-        <label class="form-label">Capitalización</label>
-        <select class="form-input" id="ic-capitalizacion" onchange="calcInteresCompuesto()">
-          <option value="12">Mensual</option>
-          <option value="4">Trimestral</option>
-          <option value="1" selected>Anual</option>
-        </select>
+        <label class="form-label">Años</label>
+        <input type="number" class="form-input" id="ic-anos" min="1" max="60" oninput="calcInteresCompuesto()" />
       </div>
-      <div>
-        <label class="form-label">Rendimiento esperado % anual</label>
-        <input type="number" class="form-input" id="ic-tasa" placeholder="Ej: 15" min="0" step="0.5" oninput="calcInteresCompuesto()" />
-      </div>
-      <div>
-        <label class="form-label">Plazo (años)</label>
-        <input type="number" class="form-input" id="ic-anos" placeholder="Ej: 25" min="1" max="60" oninput="calcInteresCompuesto()" />
-      </div>
+      <!-- Frecuencia y capitalización fijas en mensual (menos campos) -->
+      <select id="ic-frecuencia" style="display:none"><option value="12" selected>Mensual</option></select>
+      <select id="ic-capitalizacion" style="display:none"><option value="12" selected>Mensual</option></select>
     </div>
-    <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--t2);margin-bottom:14px;cursor:pointer">
-      <input type="checkbox" id="ic-inflacion-usa" onchange="calcInteresCompuesto()" style="width:16px;height:16px;flex-shrink:0" />
-      Descontar inflación promedio de EE.UU. (~3%/año histórica) para ver el poder adquisitivo de hoy
+    <label class="tf-check">
+      <input type="checkbox" id="ic-inflacion-usa" onchange="calcInteresCompuesto()" />
+      Ver en dólares de hoy (descuenta 3% anual de inflación de EE.UU.)
     </label>
-
     <canvas id="ic-chart" style="display:none;width:100%"></canvas>
     <div id="ic-result" style="display:none"></div>
   </div>
 
-  <!-- ══ A: CENTRAL DE DEUDORES BCRA ══ -->
-  <div class="tool-card tool-card-wide tool-card-muted" style="--tool-accent:var(--t3);--tool-accent-bg:var(--b2)">
+  <!-- ══ CENTRAL DE DEUDORES BCRA ══ -->
+  <div class="tool-card" style="--tool-accent:var(--t3);--tool-accent-bg:var(--surf2)">
     <div class="tool-card-hd">
-      <div class="tool-icon-chip" style="font-size:16px">🏦</div>
+      <div class="tool-icon-chip"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
       <div class="tool-card-titles">
-        <div class="tool-card-title" style="font-size:14px;color:var(--t2)">Central de Deudores BCRA</div>
-        <div class="tool-card-tag">Utilidad aparte — no es sobre inflación</div>
+        <div class="tool-card-title">Central de Deudores BCRA</div>
       </div>
       <button class="tool-info-btn" id="bcra-info-btn" onclick="toggleToolInfo('bcra-info')" title="Cómo funciona">ⓘ</button>
     </div>
     <div id="bcra-unlocked">
       <div class="tool-info-panel" id="bcra-info">
-        Ingresá tu CUIT/CUIL para ver tu situación crediticia oficial en el BCRA.<br>
-        🔒 Tu CUIT no se guarda ni se comparte. La consulta es pública, igual que en la web del BCRA.
+        Tu situación crediticia oficial en el BCRA. El CUIT no se guarda ni se comparte.
       </div>
-      <div style="display:flex;gap:8px;margin-bottom:12px">
-        <div class="fin-input-wrap" style="flex:1">
+      <div class="tf-row">
+        <div class="fin-input-wrap" style="flex:1;min-width:0">
           <span class="fin-prefix" style="font-size:13px">CUIT</span>
           <input type="text" class="fin-inp" id="bcra-cuit-inp" data-no-money-format="1"
-            placeholder="20123456789" maxlength="11" inputmode="numeric"
-            style="font-size:16px;letter-spacing:.08em"
+            maxlength="11" inputmode="numeric" placeholder="sin guiones"
+            style="font-size:16px;letter-spacing:.06em"
             onkeydown="if(event.key==='Enter')consultarBCRA()" />
         </div>
-        <button class="btn-primary" id="bcra-btn" onclick="consultarBCRA()" style="padding:0 20px;white-space:nowrap">
-          Consultar
-        </button>
+        <button class="btn-primary" id="bcra-btn" onclick="consultarBCRA()" style="padding:0 20px;white-space:nowrap;margin-top:0">Consultar</button>
       </div>
       <div id="bcra-result" style="display:none"></div>
       <div id="bcra-loading" style="display:none;text-align:center;padding:20px;color:var(--t3);font-size:13px">
@@ -9731,212 +9720,146 @@ function renderBCRAResult(data, el) {
   el.innerHTML = html;
 }
 
-// ── B: COMPARADOR DE RENTA FIJA ARGENTINA ──
-// (_tasaPF30, _tasaPF60 y _tasaBadlar se declaran junto a fetchTasasBCRA, más abajo)
+// ── RENTA FIJA: ¿dónde rinden más tus pesos? ──
+// Solo datos reales y abiertos (sin tasas inventadas ni "de referencia"):
+//  · Plazo fijo: tasa que publica cada banco en el BCRA (vía ArgentinaDatos)
+//  · FCI money market: rendimiento real de la cuotaparte en los últimos ~30 días
+//  · Inflación esperada: mediana del REM del BCRA (próximos 12 meses)
+const ARGD_FIN = 'https://api.argentinadatos.com/v1/finanzas/';
+let _rf = null;
+let _rfPlazo = 30;
+let _rfCargando = false;
 
-// Instrumentos de renta fija con TNA/TIR de referencia (actualizables)
-// Lecaps y bonos CER: valores orientativos de mercado, se actualizan manualmente
-// o via API cuando esté disponible
-const RF_INSTRUMENTOS = [
-  {
-    id: 'pf_tradicional',
-    nombre: 'Plazo Fijo tradicional',
-    tipo: 'Tasa fija en $',
-    icon: '🏦',
-    // Tasa real de depósitos a plazo fijo (BCRA), no la de política monetaria:
-    // usa el tramo de 30 días o el de 60+ según el plazo que elija el usuario.
-    getTNA: () => {
-      const plazoSel = parseInt(document.getElementById('rf-plazo')?.value) || 30;
-      return (plazoSel < 60 ? _tasaPF30 : _tasaPF60) || _tasaPF30 || _tasaPF60 || 21;
-    },
-    plazoMin: 30, plazoMax: 365,
-    desc: (tna) => 'TNA ' + tna.toFixed(1) + '% · depósitos reales BCRA',
-    calcRendimiento: (monto, plazo, tna) => monto * (tna/100/365 * plazo),
-  },
-  {
-    id: 'mm_mp',
-    nombre: 'Fondo Money Market (MP)',
-    tipo: 'Renta diaria · Liquidez inmediata',
-    icon: '💰',
-    getTNA: () => (_tasaPF30 || 21) * 0.92, // ~92% de la tasa de plazo fijo a 30d
-    plazoMin: 1, plazoMax: 365,
-    desc: (tna) => 'TNA aprox ' + tna.toFixed(1) + '% · Retira cuando quieras',
-    calcRendimiento: (monto, plazo, tna) => monto * (tna/100/365 * plazo),
-  },
-  {
-    id: 'bono_cer',
-    nombre: 'Bono CER (ajuste inflación)',
-    tipo: 'Ajuste CER + spread',
-    icon: '📈',
-    getTNA: () => null, // No aplica TNA fija
-    plazoMin: 60, plazoMax: 365,
-    desc: () => 'CER + 2% spread orientativo · Protege contra inflación',
-    calcRendimiento: (monto, plazo) => {
-      const ipcMens = (ipcLastVal || 2.5) / 100;
-      const meses = plazo / 30;
-      return monto * (Math.pow(1 + ipcMens, meses) - 1) * 1.02;
-    },
-  },
-  {
-    id: 'pf_uva',
-    nombre: 'Plazo Fijo UVA',
-    tipo: 'Ajuste CER · Mínimo 90 días',
-    icon: '🏗️',
-    getTNA: () => null,
-    plazoMin: 90, plazoMax: 365,
-    desc: () => 'CER + 1% adicional garantizado · Mínimo 90 días',
-    calcRendimiento: (monto, plazo) => {
-      const ipcMens = (ipcLastVal || 2.5) / 100;
-      const meses = plazo / 30;
-      return monto * (Math.pow(1 + ipcMens, meses) - 1) * 1.01;
-    },
-  },
-];
+const _rfNombre = n => String(n || '')
+  .replace(/\s+(S\.?A\.?U?\.?|SAU|COMPA[ÑN][IÍ]A FINANCIERA S\.?A\.?|C\.?F\.?)\s*$/i, '')
+  .toLowerCase().replace(/(^|\s|\()(\S)/g, (m, a, b) => a + b.toUpperCase())
+  .replace(/\bDe\b/g, 'de').replace(/\bDel\b/g, 'del').replace(/\bLa\b(?!$)/g, 'la')
+  .replace(/^Banco de la Nacion Argentina$/i, 'Banco Nación').trim();
+const _mediana = arr => { const a = [...arr].sort((x, y) => x - y); const m = Math.floor(a.length / 2); return a.length ? (a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2) : null; };
+const _ymd = d => d.getFullYear() + '/' + String(d.getMonth() + 1).padStart(2, '0') + '/' + String(d.getDate()).padStart(2, '0');
 
-// ── Cotización en vivo de LECAP/BONCAP vía data912 (precio por 100 VN).
-// La TIR/TNA se deriva del precio de descuento — ver _instrumentosIOLDinamicos() ──
-let _d912Cotizaciones = null;
-let _d912FetchedAt = null;
-let _d912Error = null;
-
-async function fetchRentaFijaIOL() {
-  // (nombre de función sin cambiar para no romper otras referencias)
+async function fetchRentaFijaIOL() { // (nombre histórico; ya no usa IOL ni data912)
+  initRfPlazos();
+  const c = _cacheGet('mi_rf_v2', 3 * 3600e3);
+  if (c) { _rf = c; calcRentaFija(); updateRatesStrip(); return; }
+  if (_rfCargando) return;
+  _rfCargando = true;
   try {
-    _d912Error = null;
-    const res = await fetch(DATA912_PROXY);
-    let data;
-    try {
-      data = await res.json();
-    } catch {
-      // La respuesta no era JSON (ej: 404/401 de Supabase, HTML de error) —
-      // mostrar el status para poder diagnosticar en vez de "desconocido".
-      _d912Error = 'HTTP ' + res.status + ' — la función data912-proxy no respondió JSON (¿está deployada? ¿JWT verification apagado?)';
-      return;
+    const [pf, mmHoy, rem] = await Promise.all([
+      _fetchJSON(ARGD_FIN + 'tasas/plazoFijo', 12000).catch(() => null),
+      _fetchJSON(ARGD_FIN + 'fci/mercadoDinero/ultimo', 12000).catch(() => null),
+      bcraUltimoCache(29), // REM: mediana de inflación esperada próximos 12 meses
+    ]);
+    const out = { fecha: new Date().toISOString(), rem: rem?.valor ?? null, pf: [], mm: null };
+
+    // Plazo fijo por banco (TNA a 30 días, clientes)
+    if (Array.isArray(pf)) {
+      out.pf = pf.map(b => ({ entidad: _rfNombre(b.entidad), tna: (b.tnaClientes || b.tnaNoClientes || 0) * 100 }))
+        .filter(b => b.tna > 0).sort((a, b) => b.tna - a.tna);
     }
-    if (!data.ok) {
-      _d912Error = (data.error || 'sin detalle') + ' (HTTP ' + res.status + ')';
-      return;
+    // FCI money market en pesos: rendimiento real de los últimos ~30 días
+    if (Array.isArray(mmHoy) && mmHoy.length) {
+      const fechaHoy = mmHoy.map(f => f.fecha).sort().pop();
+      const hoy = mmHoy.filter(f => f.fecha === fechaHoy && f.vcp > 0 && !/d[oó]lar|usd|u\$s/i.test(f.fondo) && (f.patrimonio || 0) >= 5e9);
+      let antes = null, fechaAntes = null;
+      for (let k = 30; k <= 37 && !antes; k++) {
+        const d = new Date(fechaHoy + 'T00:00:00'); d.setDate(d.getDate() - k);
+        try { const r = await _fetchJSON(ARGD_FIN + 'fci/mercadoDinero/' + _ymd(d), 10000); if (Array.isArray(r) && r.length) { antes = r; fechaAntes = d; } } catch (e) {}
+      }
+      if (antes) {
+        const dias = Math.round((new Date(fechaHoy + 'T00:00:00') - fechaAntes) / 864e5);
+        const porNombre = Object.fromEntries(antes.filter(f => f.vcp > 0).map(f => [f.fondo, f.vcp]));
+        const fondos = hoy.filter(f => porNombre[f.fondo]).map(f => ({
+          fondo: f.fondo, patrimonio: f.patrimonio,
+          tna: (f.vcp / porNombre[f.fondo] - 1) * 365 / dias * 100,
+        })).filter(f => f.tna > 0 && f.tna < 80);
+        if (fondos.length) {
+          const top = [...fondos].sort((a, b) => b.tna - a.tna)[0];
+          const grande = [...fondos].sort((a, b) => b.patrimonio - a.patrimonio)[0];
+          out.mm = { dias, n: fondos.length, top, grande, mediana: _mediana(fondos.map(f => f.tna)) };
+        }
+      }
     }
-    _d912Cotizaciones = data.resultados || [];
-    _d912FetchedAt = data.actualizado;
-  } catch (e) {
-    _d912Error = 'No se pudo conectar: ' + String(e);
+    if (out.pf.length || out.mm) { _rf = out; _cacheSet('mi_rf_v2', out); }
+    else _rf = _cacheGet('mi_rf_v2') || null;
   } finally {
+    _rfCargando = false;
     calcRentaFija();
+    updateRatesStrip();
   }
 }
 
-function _cotizacionesOrdenadas(plazoDias) {
-  if (!_d912Cotizaciones) return [];
-  return [..._d912Cotizaciones]
-    .filter(c => c.diasAlVencimiento > 0 && c.ultimoPrecio)
-    .sort((a, b) => Math.abs(a.diasAlVencimiento - plazoDias) - Math.abs(b.diasAlVencimiento - plazoDias));
+function initRfPlazos() {
+  const wrap = document.getElementById('rf-plazos');
+  if (!wrap || wrap.dataset.ok) return;
+  wrap.dataset.ok = '1';
+  wrap.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    _rfPlazo = +b.dataset.d;
+    wrap.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+    calcRentaFija();
+  }));
 }
 
-function _instrumentosIOLDinamicos(plazo) {
-  // LECAP/BONCAP son instrumentos a descuento: cotizan a precio por cada 100
-  // VN y pagan 100 al vencimiento. Con precio + días al vencimiento alcanza
-  // para derivar la TIR real — no hace falta un campo de TIR aparte.
-  if (!_d912Cotizaciones || !_d912Cotizaciones.length) return [];
-  const candidatos = _cotizacionesOrdenadas(plazo);
-  if (!candidatos.length) return [];
-
-  // Tomar la LECAP más cercana al plazo elegido y la BONCAP más cercana,
-  // cada una comparada por su propia TNA equivalente (anualizada real).
-  const porTipo = {};
-  for (const c of candidatos) {
-    const key = c.tipo === 'LECAP' ? 'LECAP' : 'BONCAP';
-    if (!porTipo[key] && c.ultimoPrecio > 0 && c.diasAlVencimiento > 0) porTipo[key] = c;
-  }
-
-  return Object.values(porTipo).map(c => {
-    const tirTotal = (100 / c.ultimoPrecio) - 1; // rendimiento total a vencimiento real
-    const tnaEq = tirTotal * (365 / c.diasAlVencimiento) * 100; // TNA equivalente
-    const esLecap = c.tipo === 'LECAP';
-    return {
-      id: 'd912_' + c.simbolo,
-      nombre: (esLecap ? 'Letra ' : 'Bono ') + c.simbolo,
-      tipo: esLecap ? 'LECAP' : 'BONCAP',
-      icon: esLecap ? '📄' : '📑',
-      getTNA: () => tnaEq,
-      plazoMin: 1, plazoMax: 9999,
-      desc: (tna) => 'TNA ' + tna.toFixed(1) + '% en vivo · vence en ' + c.diasAlVencimiento + 'd (' + (c.diasAlVencimiento===plazo?'exacto':c.diasAlVencimiento>plazo?'+'+(c.diasAlVencimiento-plazo)+'d':'-'+(plazo-c.diasAlVencimiento)+'d') + ' vs tu plazo)',
-      calcRendimiento: (monto, plazoElegido, tna) => monto * (tna/100/365 * plazoElegido),
-    };
-  });
-}
-
-async function calcRentaFija() {
-  const monto = getRawValue(document.getElementById('rf-monto')) || 0;
-  const plazo = parseInt(document.getElementById('rf-plazo')?.value) || 30;
-  const resultEl = document.getElementById('rf-result');
-  if (!resultEl || monto <= 0) {
-    if (resultEl) resultEl.style.display = 'none';
+function calcRentaFija() {
+  const el = document.getElementById('rf-result');
+  if (!el) return;
+  initRfPlazos();
+  if (!_rf) {
+    el.innerHTML = _rfCargando
+      ? '<div class="rf-empty"><span class="loading-spinner" style="width:16px;height:16px"></span> Buscando tasas en vivo…</div>'
+      : '<div class="rf-empty">No se pudieron cargar las tasas. Probá de nuevo en un rato.</div>';
     return;
   }
-
+  const d = _rfPlazo;
+  const monto = getRawValue(document.getElementById('rf-monto')) || 0;
   const fmtP = v => '$' + Math.round(v).toLocaleString('es-AR');
-  const ipcMens = ipcLastVal || 2.5;
-  const inflPeriodo = (Math.pow(1 + ipcMens/100, plazo/30) - 1) * 100;
+  const fmt1 = v => v.toFixed(1).replace('.', ',') + '%';
+  const pfRend = tna => Math.pow(1 + tna / 100 * 30 / 365, d / 30) - 1;   // renovando cada 30 días
+  const mmRend = tna => Math.pow(1 + tna / 100 / 365, d) - 1;             // capitaliza diario
+  const infl = _rf.rem != null ? Math.pow(1 + _rf.rem / 100, d / 365) - 1 : null;
 
-  // Instrumentos fijos (Plazo Fijo, Money Market, Bono CER, Plazo Fijo UVA)
-  // + LECAP/BONCAP con TIR real derivada del precio en vivo — todo en el mismo ranking
-  const disponibles = RF_INSTRUMENTOS.filter(i => plazo >= i.plazoMin && plazo <= i.plazoMax)
-    .concat(_instrumentosIOLDinamicos(plazo));
-
-  const resultados = disponibles.map(inst => {
-    const tna = inst.getTNA();
-    const rendimiento = inst.calcRendimiento(monto, plazo, tna);
-    const rendPct = (rendimiento / monto) * 100;
-    const rendReal = rendPct - inflPeriodo; // rendimiento real vs inflación del período
-    return { inst, tna, rendimiento, rendPct, rendReal };
-  }).sort((a, b) => b.rendimiento - a.rendimiento);
-
-  const maxRend = resultados.length ? resultados[0].rendimiento : 1;
-  let html = '';
-
-  resultados.forEach((r, i) => {
-    const pct = maxRend > 0 ? Math.max(6, Math.round((r.rendimiento / maxRend) * 100)) : 0;
-    const barColor = i === 0 ? 'var(--accent)' : 'var(--b3)';
-    const rendColor = r.rendReal > 0 ? 'var(--green)' : r.rendReal > -2 ? 'var(--amber)' : 'var(--red)';
-    html +=
-      '<div class="rank-row">' +
-        '<div class="rank-row-top">' +
-          '<div class="rank-name">' + r.inst.icon + ' ' + r.inst.nombre + ' <span class="rank-sub">' + r.inst.desc(r.tna) + '</span></div>' +
-          '<div class="rank-val" style="' + (i===0?'color:var(--accent)':'') + '">' + fmtP(r.rendimiento) + '</div>' +
-        '</div>' +
-        '<div class="rank-bar-track"><div class="rank-bar-fill" style="width:' + pct + '%;background:' + barColor + '"></div></div>' +
-        '<div class="rank-delta" style="color:' + rendColor + '">' +
-          (r.rendReal > 0 ? '▲ +' : '▼ ') + r.rendReal.toFixed(1) + '% vs inflación' +
-        '</div>' +
-      '</div>';
-  });
-
-  // Referencia inflación del período
-  html +=
-    '<div style="margin-top:12px;padding:10px;background:var(--surf2);border-radius:6px;font-size:11px;line-height:1.5;color:var(--t3)">' +
-    '📊 Inflación estimada ' + plazo + ' días: <b style="color:var(--amber)">' + inflPeriodo.toFixed(1) + '%</b>' +
-    ' (' + fmtP(monto * inflPeriodo / 100) + ') — hay que superarla para no perder poder adquisitivo.' +
-    '</div>';
-
-  resultEl.innerHTML = html;
-  resultEl.style.display = 'block';
-
-  // Mostrar si no hay cotización en vivo de LECAP/BONCAP disponible todavía
-  const liveNote = document.getElementById('rf-live-note');
-  if (liveNote) {
-    if (_d912Error) {
-      liveNote.style.display = 'block';
-      liveNote.style.color = 'var(--amber)';
-      liveNote.textContent = '⚠️ No se pudo actualizar la cotización en vivo de LECAP/BONCAP (' + _d912Error + ') — se muestran solo los instrumentos de referencia.';
-    } else if (!_d912Cotizaciones) {
-      liveNote.style.display = 'block';
-      liveNote.style.color = 'var(--t3)';
-      liveNote.textContent = '🔄 Buscando cotización en vivo de LECAP/BONCAP…';
-    } else {
-      liveNote.style.display = 'none';
-    }
+  const filas = [];
+  const pf = _rf.pf || [];
+  if (pf.length) {
+    const empatados = pf.filter(b => b.tna === pf[0].tna).length - 1;
+    filas.push({ nombre: 'Plazo fijo · mejor tasa', sub: pf[0].entidad + (empatados ? ' y ' + empatados + ' más' : '') + ' · al vencimiento', tna: pf[0].tna, r: pfRend(pf[0].tna) });
+    const bna = pf.find(b => /naci[oó]n/i.test(b.entidad));
+    if (bna && bna !== pf[0]) filas.push({ nombre: 'Plazo fijo · Banco Nación', sub: 'al vencimiento', tna: bna.tna, r: pfRend(bna.tna) });
+    const med = _mediana(pf.map(b => b.tna));
+    filas.push({ nombre: 'Plazo fijo · promedio bancos', sub: pf.length + ' entidades · al vencimiento', tna: med, r: pfRend(med) });
   }
+  if (_rf.mm) {
+    filas.push({ nombre: 'Money market · el que más rindió', sub: _rf.mm.top.fondo + ' · liquidez inmediata', tna: _rf.mm.top.tna, r: mmRend(_rf.mm.top.tna) });
+    if (_rf.mm.grande.fondo !== _rf.mm.top.fondo)
+      filas.push({ nombre: 'Money market · el más grande', sub: _rf.mm.grande.fondo + ' · liquidez inmediata', tna: _rf.mm.grande.tna, r: mmRend(_rf.mm.grande.tna) });
+  }
+  filas.sort((a, b) => b.r - a.r);
+  const maxR = Math.max(...filas.map(f => f.r), infl || 0) || 1;
+
+  const plazoTxt = d === 365 ? '1 año' : d === 180 ? '6 meses' : d + ' días';
+  let html = '';
+  if (infl != null) {
+    html += '<div class="rf-bench"><span>Inflación esperada en ' + plazoTxt + '</span><b>' + fmt1(infl * 100) + '</b>' +
+      (monto ? '<em>Para no perder poder de compra necesitás ganar ' + fmtP(monto * infl) + '</em>' : '<em>REM del BCRA</em>') + '</div>';
+  }
+  html += '<div class="rf-list">' + filas.map((f, i) => {
+    const real = infl != null ? ((1 + f.r) / (1 + infl) - 1) * 100 : null;
+    const gana = real != null && real >= 0;
+    return '<div class="rf-row' + (i === 0 ? ' best' : '') + '">' +
+      '<div class="rf-main"><div class="rf-name">' + f.nombre + (i === 0 ? ' <span class="rf-tag">Rinde más</span>' : '') + '</div>' +
+      '<div class="rf-sub">' + _esc(f.sub) + '</div>' +
+      '<div class="rf-bar"><i style="width:' + Math.max(3, f.r / maxR * 100) + '%"></i>' + (infl != null ? '<u style="left:' + (infl / maxR * 100) + '%"></u>' : '') + '</div></div>' +
+      '<div class="rf-nums"><div class="rf-gan">' + (monto ? '+' + fmtP(monto * f.r) : fmt1(f.r * 100)) + '</div>' +
+      '<div class="rf-tna">TNA ' + fmt1(f.tna) + '</div>' +
+      (real == null ? '' : Math.abs(real) < 0.05
+        ? '<div class="rf-real eq">Empata con la inflación</div>'
+        : '<div class="rf-real ' + (gana ? 'up' : 'down') + '">' + (gana ? 'Le gana a la inflación +' : 'Pierde contra la inflación ') + real.toFixed(1).replace('.', ',') + '%</div>') +
+      '</div></div>';
+  }).join('') + '</div>';
+  const actualizado = new Date(_rf.fecha).toLocaleDateString('es-AR', { day: 'numeric', month: 'short' });
+  html += '<div class="rf-foot">' + (infl != null ? 'La línea vertical marca la inflación esperada. ' : '') +
+    'Money market: rendimiento real de los últimos ' + (_rf.mm?.dias || 30) + ' días proyectado. Fuentes: BCRA y CNV vía ArgentinaDatos · ' + actualizado + '</div>';
+  el.innerHTML = html;
 }
 
 // ── Tasas BCRA — API v4.0 (la v2.0 que se usaba antes fue discontinuada,
@@ -9966,7 +9889,7 @@ async function fetchTasasBCRA() {
   if (pf60 != null) _tasaPF60 = pf60;
   if (badlar != null) {
     _tasaBadlar = badlar;
-    setMacro('mc-tasa', _tasaBadlar.toFixed(1) + '%', '');
+    setMacro('mc-tasa', _tasaBadlar.toFixed(1).replace('.', ',') + '%', '');
   }
   // Refrescar el comparador de Renta Fija si ya estaba dibujado con el valor viejo
   const rfResult = document.getElementById('rf-result');
@@ -10345,7 +10268,6 @@ function initHerramientasTools() {
     const u = document.getElementById(id);
     if (u) u.style.display = 'block';
   });
-  fetchUVAActual().then(updateRatesStrip);
   fetchTasasBCRA().then(updateRatesStrip);
   fetchRentaFijaIOL();
   updateRatesStrip(); // pinta lo que ya tengamos mientras llegan los fetches
@@ -10355,9 +10277,11 @@ function initHerramientasTools() {
 // alimenta el comparador de Renta Fija y la calculadora UVA, no un número aparte.
 function updateRatesStrip() {
   const badlarEl = document.getElementById('strip-badlar');
-  if (badlarEl) badlarEl.textContent = _tasaBadlar != null ? _tasaBadlar.toFixed(1) + '%' : '—';
-  const uvaEl = document.getElementById('strip-uva');
-  if (uvaEl) uvaEl.textContent = _uvaActual != null ? '$' + _uvaActual.toFixed(2) : '—';
+  if (badlarEl) badlarEl.textContent = _tasaBadlar != null ? _tasaBadlar.toFixed(1).replace('.', ',') + '%' : '—';
+  const pfEl = document.getElementById('strip-pf');
+  if (pfEl) pfEl.textContent = _tasaPF30 != null ? _tasaPF30.toFixed(1).replace('.', ',') + '%' : '—';
+  const remEl = document.getElementById('strip-rem');
+  if (remEl) remEl.textContent = _rf?.rem != null ? _rf.rem.toFixed(1).replace('.', ',') + '%' : '—';
   const dolarEl = document.getElementById('strip-dolar');
   const miniBlue = document.getElementById('mini-blue');
   if (dolarEl && miniBlue && miniBlue.textContent && miniBlue.textContent !== '—') {
@@ -10864,7 +10788,6 @@ function initUmbrales() {
 // Boot
 checkSession();
 setTimeout(fetchTasasBCRA, 3000); // Actualizar tasa BCRA al iniciar
-setTimeout(fetchUVAActual, 3000);  // Actualizar valor UVA al iniciar
 </script>
 </body>
 </html>
