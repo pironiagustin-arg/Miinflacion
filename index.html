@@ -4657,8 +4657,14 @@ async function fetchCanastaBasica() {
   const l = document.getElementById('cbt-lbl'); if (l) l.textContent = 'Canasta básica total · ' + meses[dt.getMonth()] + ' ' + dt.getFullYear();
 }
 
+// Respaldo (último dato verificado de INDEC, septiembre 2026): se aplica al instante para
+// no mostrar nunca el de mayo mientras datos.gob.ar responde (a veces tarda >7 s).
+const IPC_DIV_RESPALDO = { fecha: '2026-09-01', divisiones: [{ name: 'Alimentos y bebidas', cat: 'alimentos', v: 2.0 }, { name: 'Bebidas alc./tabaco', cat: null, v: 1.4 }, { name: 'Indumentaria/calzado', cat: 'indumentaria', v: 1.4 }, { name: 'Vivienda y servicios', cat: 'vivienda', v: 3.1 }, { name: 'Equipam. del hogar', cat: 'hogar', v: 1.6 }, { name: 'Salud', cat: 'salud', v: 2.4 }, { name: 'Transporte', cat: 'transporte', v: 1.5 }, { name: 'Comunicación', cat: 'comunicaciones', v: 2.5 }, { name: 'Recreación y cultura', cat: 'recreacion', v: 1.9 }, { name: 'Educación', cat: 'educacion', v: 3.0 }, { name: 'Restaurantes y hoteles', cat: 'restaurantes', v: 1.1 }],
+  nucleo: 1.7, regulados: 2.3, estacionales: 2.9, servicios: 2.4, bienes: 1.7, fuente: 'INDEC (respaldo)' };
+
 async function fetchIPCDivisiones() {
   fetchCanastaBasica();
+  aplicarIPCDivisiones(_cacheGet('mi_ipc_div2') || IPC_DIV_RESPALDO);
   let datos = _cacheGet('mi_ipc_div2', 6 * 3600e3);
   if (!datos && INDEC_PROXY) {
     try { datos = await _fetchJSON(INDEC_PROXY, 12000); } catch (e) { console.warn('INDEC proxy', e.message); }
