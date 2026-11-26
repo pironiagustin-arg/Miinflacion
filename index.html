@@ -1978,8 +1978,8 @@ body.light-mode .deuda-body {
     <div class="macro-section-title" style="margin-top:16px">Economía</div>
     <div class="macro-cards">
       <div class="macro-card loading"><div class="mc-lbl">Riesgo País</div><div class="mc-val" id="mc-riesgo">—</div><div class="mc-sub">EMBI+ Argentina</div></div>
-
-      <div class="macro-card loading"><div class="mc-lbl">Tasa BCRA</div><div class="mc-val" id="mc-tasa">—</div><div class="mc-sub">TNA política monetaria</div></div>
+      <div class="macro-card loading"><div class="mc-lbl">Reservas BCRA</div><div class="mc-val" id="mc-reservas">—</div><div class="mc-sub">Brutas · millones USD</div></div>
+      <div class="macro-card loading"><div class="mc-lbl">Tasa BADLAR</div><div class="mc-val" id="mc-tasa">—</div><div class="mc-sub">TNA bancos privados · BCRA</div></div>
       <div class="macro-card loading"><div class="mc-lbl">Inflación acum.</div><div class="mc-val" id="mc-ipc-acum">—</div><div class="mc-sub">Acumulada 2026</div></div>
     </div>
   </div>
@@ -3226,6 +3226,7 @@ const REGION_ADJ = {
 // La clave es el mes al que corresponde el dato
 const IPC_DIVISIONES = {
   mes: "Mayo 2026",
+  fecha: "2026-05-01", // se reemplaza solo con el dato en vivo de INDEC
   divisiones: [
     {name:"Comunicación",           v:3.4},
     {name:"Educación",              v:2.9},
@@ -3242,7 +3243,8 @@ const IPC_DIVISIONES = {
   nucleo:"1,9%", regulados:"2,4%", estacionales:"3,5%"
 };
 
-// Subrubros con IPC de mayo 2026 (actualizar mensualmente)
+// Subrubros con IPC de mayo 2026 — cuando llega el dato nuevo de INDEC por división,
+// aplicarIPCDivisiones() corre cada rubro (y sus subrubros) al valor oficial en vivo
 const CATS = [
   {id:"alimentos",name:"Alimentos y bebidas",icon:"🛒",ipc_base:2.5,
     subs:[
@@ -3857,36 +3859,38 @@ setInterval(() => {
 // ═══════════════════════════════════════════════
 // IPC MENSUAL — dato oficial INDEC cargado a mano
 // ═══════════════════════════════════════════════
-// Se actualiza UNA VEZ POR MES, cuando INDEC publica el dato nuevo
-// (día 12-14 del mes siguiente). Agregar una línea al final del array
-// con el mes recién publicado y listo — la app no depende de ninguna
-// API externa para mostrar el dato "actual", así nunca se cuelga
-// esperando una respuesta de red.
-// Fuente para actualizar: indec.gob.ar (sección IPC) o argentinadatos.com
+// Respaldo offline: solo se usa si BCRA y ArgentinaDatos están caídos y no hay
+// caché local. Ya NO hace falta actualizarlo a mano — fetchIPC() trae el dato
+// nuevo solo apenas lo publica INDEC (lo replica el BCRA en su API v4.0).
 const IPC_DATOS_MANUALES = [
   { fecha: '2025-01-01', valor: 2.2 },
   { fecha: '2025-02-01', valor: 2.4 },
   { fecha: '2025-03-01', valor: 3.7 },
   { fecha: '2025-04-01', valor: 2.8 },
   { fecha: '2025-05-01', valor: 1.5 },
-  { fecha: '2025-06-01', valor: 4.6 },
-  { fecha: '2025-07-01', valor: 4.0 },
-  { fecha: '2025-08-01', valor: 4.2 },
-  { fecha: '2025-09-01', valor: 3.5 },
-  { fecha: '2025-10-01', valor: 2.7 },
-  { fecha: '2025-11-01', valor: 2.4 },
+  { fecha: '2025-06-01', valor: 1.6 },
+  { fecha: '2025-07-01', valor: 1.9 },
+  { fecha: '2025-08-01', valor: 1.9 },
+  { fecha: '2025-09-01', valor: 2.1 },
+  { fecha: '2025-10-01', valor: 2.3 },
+  { fecha: '2025-11-01', valor: 2.5 },
   { fecha: '2025-12-01', valor: 2.8 },
   { fecha: '2026-01-01', valor: 2.9 },
   { fecha: '2026-02-01', valor: 2.9 },
   { fecha: '2026-03-01', valor: 3.4 },
   { fecha: '2026-04-01', valor: 2.6 },
   { fecha: '2026-05-01', valor: 2.1 },
-  // 👆 Agregar acá la próxima línea cuando salga el dato de junio 2026
+  { fecha: '2026-06-01', valor: 1.9 },
+  { fecha: '2026-07-01', valor: 2.1 },
+  { fecha: '2026-08-01', valor: 1.7 },
+  { fecha: '2026-09-01', valor: 1.9 },
+  { fecha: '2026-10-01', valor: 2.2 },
 ];
 
 let ipcLiveData = null;
 let ipcLastVal = null;
-let ipcLastMes = 'Mayo 2026';
+let ipcLastMes = 'Octubre 2026';
+let ipcFuente = 'INDEC';
 
 function _parseFechaLocal(fecha) {
   // Evita el bug clásico de JS donde 'YYYY-MM-DD' se interpreta como UTC
@@ -3894,29 +3898,191 @@ function _parseFechaLocal(fecha) {
   return new Date(fecha.length === 10 ? fecha + 'T00:00:00' : fecha);
 }
 
-function fetchIPC() {
-  // Fuente primaria: el array cargado a mano arriba. Sin fetch, sin
-  // spinner, sin depender de que una API externa esté online.
-  aplicarDatosIPC(IPC_DATOS_MANUALES);
+// ═══════════════════════════════════════════════
+// DATOS OFICIALES EN VIVO — BCRA API v4.0 + INDEC
+// Las tres fuentes son públicas, sin token y aceptan llamadas desde el
+// navegador (CORS abierto), así que no hace falta proxy.
+// ═══════════════════════════════════════════════
+const BCRA_API = 'https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias/';
+const BCRA_VAR = {
+  reservas: 1,      // Reservas internacionales (MM USD)
+  badlar: 7,        // BADLAR bancos privados (TNA %)
+  pf30: 12,         // Tasa de depósitos a plazo fijo 30 días (TNA %)
+  ipcMensual: 27,   // Inflación mensual INDEC (%)
+  ipcInteranual: 28,// Inflación interanual INDEC (%)
+  uva: 31,          // Unidad de Valor Adquisitivo ($)
+};
+const ARGDATOS_IPC = 'https://api.argentinadatos.com/v1/finanzas/indices/inflacion';
+// Series oficiales del IPC de INDEC publicadas en datos.gob.ar (Total nacional, base dic-2016)
+const INDEC_SERIES_API = 'https://apis.datos.gob.ar/series/api/series/';
+const INDEC_SERIES_DIV = [
+  { id: '146.3_IALIMENNAL_DICI_M_45', name: 'Alimentos y bebidas',    cat: 'alimentos' },
+  { id: '146.3_IBEBIDANAL_DICI_M_39', name: 'Bebidas alc./tabaco',    cat: null },
+  { id: '146.3_IPRENDANAL_DICI_M_35', name: 'Indumentaria/calzado',   cat: 'indumentaria' },
+  { id: '146.3_IVIVIENNAL_DICI_M_52', name: 'Vivienda y servicios',   cat: 'vivienda' },
+  { id: '146.3_IEQUIPANAL_DICI_M_46', name: 'Equipam. del hogar',     cat: 'hogar' },
+  { id: '146.3_ISALUDNAL_DICI_M_18',  name: 'Salud',                  cat: 'salud' },
+  { id: '146.3_ITRANSPNAL_DICI_M_23', name: 'Transporte',             cat: 'transporte' },
+  { id: '146.3_ICOMUNINAL_DICI_M_27', name: 'Comunicación',           cat: 'comunicaciones' },
+  { id: '146.3_IRECREANAL_DICI_M_31', name: 'Recreación y cultura',   cat: 'recreacion' },
+  { id: '146.3_IEDUCACNAL_DICI_M_22', name: 'Educación',              cat: 'educacion' },
+  { id: '146.3_IRESTAUNAL_DICI_M_33', name: 'Restaurantes y hoteles', cat: 'restaurantes' },
+];
+const INDEC_SERIES_CAT = {
+  nucleo: '148.3_INUCLEONAL_DICI_M_19',
+  regulados: '148.3_IREGULANAL_DICI_M_22',
+  estacionales: '148.3_IESTACINAL_DICI_M_25',
+};
+// Opcional: Edge Function con token de la API nueva de INDEC (api.indec.gob.ar),
+// ver supabase/functions/indec-ipc en el repo. Vacío = se usa datos.gob.ar.
+const INDEC_PROXY = '';
 
-  // Intento silencioso de refresco en segundo plano: si ArgentinaDatos
-  // responde y tiene un mes MÁS nuevo que el cargado a mano, lo usa.
-  // Si falla, tarda, o está caído, no pasa absolutamente nada — el
-  // usuario ya vio el dato manual apenas entró.
+function _hoyISO() {
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+async function _fetchJSON(url, ms = 10000) {
   const ctrl = new AbortController();
-  const timeoutId = setTimeout(() => ctrl.abort(), 8000);
-  fetch('https://argentinadatos.com/api/v1/finanzas/indices/inflacion', { signal: ctrl.signal })
-    .then(r => r.ok ? r.json() : null)
-    .then(data => {
-      if (!Array.isArray(data) || !data.length) return;
-      const liveLast = _parseFechaLocal(data[data.length - 1].fecha);
-      const manualLast = _parseFechaLocal(IPC_DATOS_MANUALES[IPC_DATOS_MANUALES.length - 1].fecha);
-      if (liveLast > manualLast) aplicarDatosIPC(data);
-    })
-    .catch(() => {}) // silencioso a propósito
-    .finally(() => clearTimeout(timeoutId));
+  const t = setTimeout(() => ctrl.abort(), ms);
+  try {
+    const r = await fetch(url, { signal: ctrl.signal });
+    if (!r.ok) throw new Error('HTTP ' + r.status + ' ' + url);
+    return await r.json();
+  } finally { clearTimeout(t); }
+}
+function _cacheGet(key, maxAgeMs) {
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return null;
+    const o = JSON.parse(raw);
+    if (maxAgeMs && Date.now() - o.t > maxAgeMs) return null;
+    return o.d;
+  } catch (e) { return null; }
+}
+function _cacheSet(key, data) {
+  try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), d: data })); } catch (e) {}
+}
+// Serie del BCRA v4.0, ordenada de más vieja a más nueva. `hasta` = hoy porque
+// algunas variables (UVA, CER) vienen publicadas por adelantado.
+async function bcraSerie(id, { desde = null, limit = 10 } = {}) {
+  const url = BCRA_API + id + '?hasta=' + _hoyISO() + '&limit=' + limit + (desde ? '&desde=' + desde : '');
+  const j = await _fetchJSON(url);
+  const det = j?.results?.[0]?.detalle;
+  if (!Array.isArray(det) || !det.length) throw new Error('BCRA sin datos para variable ' + id);
+  return det
+    .map(d => ({ fecha: String(d.fecha).slice(0, 10), valor: Number(d.valor) }))
+    .filter(d => isFinite(d.valor))
+    .sort((a, b) => (a.fecha < b.fecha ? -1 : 1));
+}
+async function bcraUltimo(id) {
+  const s = await bcraSerie(id, { limit: 1 });
+  return s[s.length - 1];
+}
+async function bcraUltimoCache(id, maxAgeMs = 6 * 3600e3) {
+  const key = 'mi_bcra_' + id;
+  const c = _cacheGet(key, maxAgeMs);
+  if (c) return c;
+  try {
+    const v = await bcraUltimo(id);
+    _cacheSet(key, v);
+    return v;
+  } catch (e) {
+    console.warn('BCRA v4', id, e.message);
+    return _cacheGet(key); // aunque esté vieja, mejor que nada
+  }
+}
+// Normaliza cualquier serie de IPC a {fecha:'YYYY-MM-01', valor:1 decimal}, un dato por mes
+function _normalizarIPC(arr) {
+  const porMes = {};
+  (arr || []).forEach(d => {
+    if (!d || !d.fecha || !isFinite(Number(d.valor))) return;
+    porMes[String(d.fecha).slice(0, 7)] = Math.round(Number(d.valor) * 10) / 10;
+  });
+  return Object.keys(porMes).sort().map(m => ({ fecha: m + '-01', valor: porMes[m] }));
+}
+const _ultimoMesIPC = serie => (serie && serie.length ? serie[serie.length - 1].fecha.slice(0, 7) : '');
 
+function fetchIPC() {
+  // 1) Pintar al instante lo mejor que haya: caché local o respaldo
+  const cache = _cacheGet('mi_ipc_serie');
+  const base = (cache && _ultimoMesIPC(cache.serie) >= _ultimoMesIPC(IPC_DATOS_MANUALES)) ? cache.serie : IPC_DATOS_MANUALES;
+  if (base === cache?.serie) ipcFuente = cache.fuente || 'INDEC';
+  aplicarDatosIPC(base);
+  // 2) Refrescar en segundo plano contra las APIs oficiales
+  _refrescarIPC();
+  fetchIPCDivisiones();
   return true;
+}
+
+async function _refrescarIPC() {
+  const fuentes = [
+    { nombre: 'INDEC vía BCRA', get: () => bcraSerie(BCRA_VAR.ipcMensual, { desde: '2017-01-01', limit: 500 }) },
+    { nombre: 'INDEC vía ArgentinaDatos', get: async () => (await _fetchJSON(ARGDATOS_IPC)).filter(d => d.fecha >= '2017') },
+  ];
+  for (const f of fuentes) {
+    try {
+      const serie = _normalizarIPC(await f.get());
+      if (!serie.length) continue;
+      const actual = ipcLiveData || [];
+      if (_ultimoMesIPC(serie) < _ultimoMesIPC(actual)) continue; // esta fuente está más atrasada, probar la siguiente
+      _cacheSet('mi_ipc_serie', { serie, fuente: f.nombre });
+      ipcFuente = f.nombre;
+      if (_ultimoMesIPC(serie) > _ultimoMesIPC(actual) || serie.length !== actual.length) aplicarDatosIPC(serie);
+      return;
+    } catch (e) { console.warn('IPC', f.nombre, e.message); }
+  }
+}
+
+// IPC por división + núcleo/regulados/estacionales (INDEC)
+async function fetchIPCDivisiones() {
+  let datos = _cacheGet('mi_ipc_div', 6 * 3600e3);
+  if (!datos && INDEC_PROXY) {
+    try { datos = await _fetchJSON(INDEC_PROXY, 12000); } catch (e) { console.warn('INDEC proxy', e.message); }
+  }
+  if (!datos) {
+    try {
+      const ids = [...INDEC_SERIES_DIV.map(d => d.id), INDEC_SERIES_CAT.nucleo, INDEC_SERIES_CAT.regulados, INDEC_SERIES_CAT.estacionales];
+      const j = await _fetchJSON(INDEC_SERIES_API + '?ids=' + ids.join(',') + '&representation_mode=percent_change&last=1&format=json', 12000);
+      const fila = j?.data?.[j.data.length - 1];
+      if (!fila) throw new Error('datos.gob.ar sin datos');
+      const pct = i => (fila[i] == null ? null : Math.round(fila[i] * 1000) / 10);
+      const n = INDEC_SERIES_DIV.length;
+      datos = {
+        fecha: String(fila[0]).slice(0, 7) + '-01',
+        divisiones: INDEC_SERIES_DIV.map((d, i) => ({ name: d.name, cat: d.cat, v: pct(i + 1) })).filter(d => d.v != null),
+        nucleo: pct(n + 1), regulados: pct(n + 2), estacionales: pct(n + 3),
+        fuente: 'INDEC (datos.gob.ar)',
+      };
+    } catch (e) { console.warn('IPC divisiones', e.message); datos = _cacheGet('mi_ipc_div'); }
+    if (datos) _cacheSet('mi_ipc_div', datos);
+  }
+  if (datos) aplicarIPCDivisiones(datos);
+}
+
+function aplicarIPCDivisiones(datos) {
+  if (!datos?.fecha || !Array.isArray(datos.divisiones) || !datos.divisiones.length) return;
+  if (datos.fecha.slice(0, 7) <= IPC_DIVISIONES.fecha.slice(0, 7)) return; // ya tenemos este mes o uno más nuevo
+  const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const d = _parseFechaLocal(datos.fecha);
+  const fmt = v => (v == null ? '—' : v.toFixed(1).replace('.', ',') + '%');
+  IPC_DIVISIONES.fecha = datos.fecha;
+  IPC_DIVISIONES.mes = meses[d.getMonth()] + ' ' + d.getFullYear();
+  IPC_DIVISIONES.divisiones = datos.divisiones.map(x => ({ name: x.name, v: x.v }));
+  IPC_DIVISIONES.nucleo = fmt(datos.nucleo);
+  IPC_DIVISIONES.regulados = fmt(datos.regulados);
+  IPC_DIVISIONES.estacionales = fmt(datos.estacionales);
+  // Correr cada rubro de la canasta al valor oficial nuevo. Los subrubros se
+  // mueven en la misma magnitud para mantener su dispersión relativa.
+  datos.divisiones.forEach(x => {
+    if (!x.cat) return;
+    const c = CATS.find(c => c.id === x.cat);
+    if (!c) return;
+    const delta = x.v - c.ipc_base;
+    c.ipc_base = x.v;
+    (c.subs || []).forEach(s => { if (typeof s.ipc === 'number') s.ipc = Math.round((s.ipc + delta) * 10) / 10; });
+  });
+  try { if (typeof buildRubrosHist === 'function') buildRubrosHist(); } catch (e) {}
+  try { if (typeof updateMain === 'function') updateMain(); } catch (e) {}
 }
 
 function aplicarDatosIPC(data) {
@@ -3928,11 +4094,22 @@ function aplicarDatosIPC(data) {
   ipcLastMes = months[d.getMonth()] + ' ' + d.getFullYear();
   document.getElementById('ipc-oficial-val').textContent = ipcLastVal.toFixed(1).replace('.',',') + '%';
   document.getElementById('ipc-oficial-mes').textContent = ipcLastMes + ' · INDEC';
+  _setIPCAcumMacro(data);
   document.getElementById('ticker-val').textContent = ipcLastVal.toFixed(1).replace('.',',') + '%';
   const badge = document.getElementById('nav-badge-mes');
   if (badge) badge.textContent = ipcLastMes.slice(0,3).toUpperCase() + ' ' + String(d.getFullYear()).slice(2);
   updateMain();
   buildTimeline(data);
+}
+
+function _setIPCAcumMacro(data) {
+  try {
+    const ac = computeAcum(data);
+    const last = ac[ac.length - 1];
+    if (last != null) setMacro('mc-ipc-acum', last.toFixed(1).replace('.', ',') + '%', '');
+    const sub = document.querySelector('#mc-ipc-acum')?.parentElement?.querySelector('.mc-sub');
+    if (sub) sub.textContent = 'Acumulada ' + _parseFechaLocal(data[data.length - 1].fecha).getFullYear() + ' · a ' + ipcLastMes.toLowerCase();
+  } catch (e) {}
 }
 
 function buildTimeline(data) {
@@ -6117,9 +6294,16 @@ function applyMacroData(data) {
   const miniRiesgoEl = document.getElementById('mini-riesgo');
   if (miniRiesgoEl) miniRiesgoEl.textContent = rv.toLocaleString('es-AR');
 
-  setMacro('mc-ipc-acum', '14,7%', '');
-  setMacro('mc-tasa', '47%', '');
+  if (ipcLiveData) _setIPCAcumMacro(ipcLiveData);
+  fetchMacroBCRA();
   document.querySelectorAll('.macro-card.loading').forEach(c => c.classList.remove('loading'));
+}
+
+// Reservas y BADLAR directo de la API v4.0 del BCRA
+async function fetchMacroBCRA() {
+  const [res, bad] = await Promise.all([bcraUltimoCache(BCRA_VAR.reservas), bcraUltimoCache(BCRA_VAR.badlar)]);
+  if (res?.valor) setMacro('mc-reservas', 'US$ ' + Math.round(res.valor).toLocaleString('es-AR') + ' M', '');
+  if (bad?.valor) setMacro('mc-tasa', bad.valor.toFixed(1).replace('.', ',') + '%', '');
 }
 
 function setMacro(id, val, cls) {
@@ -8364,7 +8548,7 @@ const RF_INSTRUMENTOS = [
     nombre: 'Plazo Fijo tradicional',
     tipo: 'Tasa fija en $',
     icon: '🏦',
-    getTNA: () => _tasasPF || 37,
+    getTNA: () => _tasasPF || 21,
     plazoMin: 30, plazoMax: 365,
     desc: (tna) => 'TNA ' + tna.toFixed(1) + '% · Ref. BCRA',
     calcRendimiento: (monto, plazo, tna) => monto * (tna/100/365 * plazo),
@@ -8374,7 +8558,7 @@ const RF_INSTRUMENTOS = [
     nombre: 'Fondo Money Market (MP)',
     tipo: 'Renta diaria · Liquidez inmediata',
     icon: '💰',
-    getTNA: () => (_tasasPF || 37) * 0.92, // ~92% de la tasa de pases
+    getTNA: () => (_tasasPF || 21) * 0.92, // ~92% de la tasa de plazo fijo
     plazoMin: 1, plazoMax: 365,
     desc: (tna) => 'TNA aprox ' + tna.toFixed(1) + '% · Retira cuando quieras',
     calcRendimiento: (monto, plazo, tna) => monto * (tna/100/365 * plazo),
@@ -8554,40 +8738,21 @@ async function calcRentaFija() {
 }
 
 async function fetchTasasBCRA() {
-  try {
-    // API pública del BCRA — tasa de pases/política monetaria
-    const res = await fetch('https://api.bcra.gob.ar/estadisticas/v2.0/datosvariable/6/1/5');
-    if (!res.ok) return;
-    const data = await res.json();
-    const results = data?.results;
-    if (Array.isArray(results) && results.length > 0) {
-      // Tomar el último valor
-      const ultimo = results[results.length - 1];
-      _tasasPF = ultimo.valor || 37;
-      // Actualizar tasa BCRA en Argentina Hoy también
-      const tasaEl = document.getElementById('mc-tasa');
-      if (tasaEl) tasaEl.textContent = _tasasPF.toFixed(1) + '%';
-      setMacro('mc-tasa', _tasasPF.toFixed(1) + '%', '');
-    }
-  } catch(e) { /* silencioso */ }
+  // BCRA API v4.0 — tasa promedio de depósitos a plazo fijo a 30 días (TNA)
+  const pf = await bcraUltimoCache(BCRA_VAR.pf30);
+  if (pf?.valor) _tasasPF = pf.valor;
+  const bad = await bcraUltimoCache(BCRA_VAR.badlar);
+  if (bad?.valor) setMacro('mc-tasa', bad.valor.toFixed(1).replace('.', ',') + '%', '');
 }
 
 // ── E: CALCULADORA UVA ──
 let _uvaActual = null;
 
 async function fetchUVAActual() {
-  try {
-    const res = await fetch('https://api.bcra.gob.ar/estadisticas/v2.0/datosvariable/31/1/1');
-    if (res.ok) {
-      const d = await res.json();
-      const results = d?.results;
-      if (Array.isArray(results) && results.length > 0) {
-        _uvaActual = results[results.length - 1]?.valor;
-      }
-    }
-  } catch(e) {}
-  // Fallback hardcodeado si la API no responde
-  if (!_uvaActual) _uvaActual = 1850; // valor aproximado junio 2026
+  // BCRA API v4.0 — valor diario de la UVA (hasta hoy; la serie viene publicada por adelantado)
+  const u = await bcraUltimoCache(BCRA_VAR.uva, 12 * 3600e3);
+  if (u?.valor) _uvaActual = u.valor;
+  if (!_uvaActual) _uvaActual = 2215; // respaldo: valor aprox. nov-2026
 }
 
 function calcUVA() {
@@ -8596,7 +8761,7 @@ function calcUVA() {
   const resultEl = document.getElementById('uva-result');
   if (!resultEl || !monto) { resultEl.style.display = 'none'; return; }
 
-  const uvaHoy = _uvaActual || 1850;
+  const uvaHoy = _uvaActual || 2215;
   const fmtP = v => '$' + Math.round(v).toLocaleString('es-AR');
   const fmtU = v => Math.round(v * 100) / 100;
 
@@ -8671,13 +8836,7 @@ async function initIPCAlerta() {
   if (!statusEl) return;
 
   try {
-    const res = await fetch('https://api.bcra.gob.ar/estadisticas/v2.0/datosvariable/27/1/2');
-    if (!res.ok) throw new Error('API no disponible');
-    const data = await res.json();
-    const results = data?.results;
-    if (!Array.isArray(results) || results.length === 0) throw new Error('Sin datos');
-
-    const ultimo = results[results.length - 1];
+    const ultimo = await bcraUltimo(BCRA_VAR.ipcMensual); // BCRA API v4.0 — IPC mensual INDEC
     const ipcVal = ultimo.valor;
     const ipcFecha = _parseFechaLocal(ultimo.fecha);
     const mesLabel = ipcFecha.toLocaleDateString('es-AR', { month: 'long', year: 'numeric' });
@@ -8703,16 +8862,13 @@ async function initIPCAlerta() {
       }
     }
 
-    // Actualizar ipcLastVal global si es más reciente
-    if (ipcVal) {
-      ipcLastVal = ipcVal;
-      fetchIPC(); // refrescar el panel IPC también
-    }
+    // Si el BCRA ya tiene un mes más nuevo que el que se está mostrando, refrescar toda la serie
+    if (ipcVal && String(ultimo.fecha).slice(0, 7) > _ultimoMesIPC(ipcLiveData)) _refrescarIPC();
 
   } catch(e) {
     if (statusEl) statusEl.textContent = 'Último IPC disponible';
     if (valEl && ipcLastVal) valEl.textContent = ipcLastVal.toFixed(1).replace('.', ',') + '%';
-    if (subEl) subEl.textContent = 'Fuente: ArgentinaDatos';
+    if (subEl) subEl.textContent = 'Fuente: ' + ipcFuente;
   }
 }
 
