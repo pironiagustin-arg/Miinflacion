@@ -4876,23 +4876,25 @@ async function fetchCanastaBasica() {
 
 // Respaldo (último dato verificado de INDEC, septiembre 2026): se aplica al instante para
 // no mostrar nunca el de mayo mientras datos.gob.ar responde (a veces tarda >7 s).
-const IPC_DIV_RESPALDO = { fecha: '2026-09-01', divisiones: [{ name: 'Alimentos y bebidas', cat: 'alimentos', v: 2.0 }, { name: 'Bebidas alc./tabaco', cat: null, v: 1.4 }, { name: 'Indumentaria/calzado', cat: 'indumentaria', v: 1.4 }, { name: 'Vivienda y servicios', cat: 'vivienda', v: 3.1 }, { name: 'Equipam. del hogar', cat: 'hogar', v: 1.6 }, { name: 'Salud', cat: 'salud', v: 2.4 }, { name: 'Transporte', cat: 'transporte', v: 1.5 }, { name: 'Comunicación', cat: 'comunicaciones', v: 2.5 }, { name: 'Recreación y cultura', cat: 'recreacion', v: 1.9 }, { name: 'Educación', cat: 'educacion', v: 3.0 }, { name: 'Restaurantes y hoteles', cat: 'restaurantes', v: 1.1 }],
-  nucleo: 1.7, regulados: 2.3, estacionales: 2.9, servicios: 2.4, bienes: 1.7, fuente: 'INDEC (respaldo)' };
+const IPC_DIV_RESPALDO = { fecha: '2026-10-01', divisiones: [{ name: 'Alimentos y bebidas', cat: 'alimentos', v: 2.0 }, { name: 'Bebidas alc./tabaco', cat: null, v: 0.8 }, { name: 'Indumentaria/calzado', cat: 'indumentaria', v: 2.2 }, { name: 'Vivienda y servicios', cat: 'vivienda', v: 4.2 }, { name: 'Equipam. del hogar', cat: 'hogar', v: 1.4 }, { name: 'Salud', cat: 'salud', v: 1.7 }, { name: 'Transporte', cat: 'transporte', v: 2.1 }, { name: 'Comunicación', cat: 'comunicaciones', v: 2.0 }, { name: 'Recreación y cultura', cat: 'recreacion', v: 3.3 }, { name: 'Educación', cat: 'educacion', v: 1.3 }, { name: 'Restaurantes y hoteles', cat: 'restaurantes', v: 1.5 }],
+  nucleo: 1.5, regulados: 2.9, estacionales: 5.5, servicios: 2.7, bienes: 1.9, fuente: 'INDEC (respaldo)' };
 
 async function fetchIPCDivisiones() {
   fetchCanastaBasica();
-  aplicarIPCDivisiones(_cacheGet('mi_ipc_div2') || IPC_DIV_RESPALDO);
-  let datos = _cacheGet('mi_ipc_div2', 6 * 3600e3);
+  aplicarIPCDivisiones(_cacheGet('mi_ipc_div3') || IPC_DIV_RESPALDO);
+  let datos = _cacheGet('mi_ipc_div3', 6 * 3600e3);
   if (!datos && INDEC_PROXY) {
     try { datos = await _fetchJSON(INDEC_PROXY, 12000); } catch (e) { console.warn('INDEC proxy', e.message); }
   }
   if (!datos) {
     try {
       const ids = [...INDEC_SERIES_DIV.map(d => d.id), INDEC_SERIES_CAT.nucleo, INDEC_SERIES_CAT.regulados, INDEC_SERIES_CAT.estacionales, INDEC_SERIES_CAT.servicios, INDEC_SERIES_CAT.bienes];
-      const j = await _fetchJSON(INDEC_SERIES_API + '?ids=' + ids.join(',') + '&representation_mode=percent_change&last=1&format=json', 12000);
-      const fila = j?.data?.[j.data.length - 1];
-      if (!fila) throw new Error('datos.gob.ar sin datos');
-      const pct = i => (fila[i] == null ? null : Math.round(fila[i] * 1000) / 10);
+      // Se piden los índices (no la variación) porque representation_mode=percent_change
+      // de datos.gob.ar queda un mes atrasado: la variación se calcula acá con los 2 últimos meses
+      const j = await _fetchJSON(INDEC_SERIES_API + '?ids=' + ids.join(',') + '&last=2&format=json', 12000);
+      const fila = j?.data?.[j.data.length - 1], ant = j?.data?.[j.data.length - 2];
+      if (!fila || !ant) throw new Error('datos.gob.ar sin datos');
+      const pct = i => (fila[i] == null || !ant[i] ? null : Math.round((fila[i] / ant[i] - 1) * 1000) / 10);
       const n = INDEC_SERIES_DIV.length;
       datos = {
         fecha: String(fila[0]).slice(0, 7) + '-01',
@@ -4900,8 +4902,8 @@ async function fetchIPCDivisiones() {
         nucleo: pct(n + 1), regulados: pct(n + 2), estacionales: pct(n + 3), servicios: pct(n + 4), bienes: pct(n + 5),
         fuente: 'INDEC (datos.gob.ar)',
       };
-    } catch (e) { console.warn('IPC divisiones', e.message); datos = _cacheGet('mi_ipc_div2'); }
-    if (datos) _cacheSet('mi_ipc_div2', datos);
+    } catch (e) { console.warn('IPC divisiones', e.message); datos = _cacheGet('mi_ipc_div3'); }
+    if (datos) _cacheSet('mi_ipc_div3', datos);
   }
   if (datos) aplicarIPCDivisiones(datos);
 }
