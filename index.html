@@ -22,16 +22,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:#0B0B0B; --surf:#141414; --surf2:#1C1C1C; --surf3:#222222;
-  --b1:#242424; --b2:#2E2E2E; --b3:#3A3A3A;
-  --t1:#F0F0F0; --t2:#A0A0A0; --t3:#606060;
-  --accent:#C8F135; --accent2:#96BE1E; --accent-bg:rgba(var(--accent-rgb),.08);
-  --accent-rgb:200,241,53; --on-accent:#000; --accent-grad:var(--accent);
+  --bg:#0A0E1A; --surf:#121828; --surf2:#0E1424; --surf3:#1E2740;
+  --b1:#1E2740; --b2:#2A3452; --b3:#3A4560;
+  --t1:#E8ECF7; --t2:#A5AEC9; --t3:#7F89A8;
+  --accent:#C8F135; --accent2:#A8D11E; --accent-bg:rgba(var(--accent-rgb),.10);
+  --accent-rgb:200,241,53; --on-accent:#0A0E1A;
+  --violet:#7C5CFF; --violet2:#4F8BFF; --violet-rgb:124,92,255;
+  --accent-grad:linear-gradient(135deg,#7C5CFF 0%,#4F8BFF 100%); --on-grad:#fff;
   --shadow:none; --shadow-hover:none; --soft-r:var(--rl); --ink-rgb:255,255,255;
-  --red:#FF5555; --red-bg:rgba(255,85,85,.08);
-  --amber:#F5A623; --amber-bg:rgba(245,166,35,.08);
-  --green:#3DDC84; --green-bg:rgba(61,220,132,.08);
-  --purple:#B39DFF; --purple-bg:rgba(179,157,255,.08);
+  --red:#FF6B8B; --red-bg:rgba(255,107,139,.13);
+  --amber:#FFB547; --amber-bg:rgba(255,181,71,.13);
+  --green:#C8F135; --green-bg:rgba(200,241,53,.12);
+  --purple:#A99BFF; --purple-bg:rgba(169,155,255,.12);
   --mono:'Space Grotesk',sans-serif;
   --sans:'Inter',sans-serif;
   --r:10px; --rl:16px; --rxl:20px;
@@ -817,6 +819,7 @@ body.light-mode {
   --accent-rgb: 59,91,253;
   --on-accent: #FFFFFF;
   --accent-grad: linear-gradient(135deg,#3B5BFD 0%,#6C8CFF 100%);
+  --violet:#3B5BFD; --violet2:#6C8CFF; --violet-rgb:59,91,253; --on-grad:#fff;
   --red:   #E5484D; --red-bg: rgba(229,72,77,.08);
   --green: #12A150; --green-bg: rgba(18,161,80,.08);
   --amber: #E08A00; --amber-bg: rgba(224,138,0,.09);
@@ -1599,8 +1602,8 @@ body.light-mode .mbn-item.active { color: var(--accent); }
 .ini-eyebrow::first-letter { text-transform: uppercase; }
 .ini-title { font-size:28px; font-weight:800; letter-spacing:-.02em; color:var(--t1); margin:0; }
 .ini-cta { display:inline-flex; align-items:center; gap:8px; border:none; cursor:pointer; font-family:var(--sans);
-  background:var(--accent-grad); color:var(--on-accent); font-weight:700; font-size:14px; padding:12px 20px; border-radius:16px;
-  box-shadow:0 10px 24px rgba(var(--accent-rgb),.28); transition: transform .15s, box-shadow .15s; }
+  background:var(--accent-grad); color:var(--on-grad); font-weight:700; font-size:14px; padding:12px 20px; border-radius:16px;
+  box-shadow:0 10px 24px rgba(var(--violet-rgb),.30); transition: transform .15s, box-shadow .15s; }
 .ini-cta span { font-size:18px; line-height:1; }
 .ini-cta:hover { transform: translateY(-2px); box-shadow:0 14px 30px rgba(var(--accent-rgb),.36); }
 .ini-grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:18px; }
@@ -1739,7 +1742,7 @@ body.light-mode .family-combined { border-color: rgba(228,233,242,.9) !important
 .nt-filtros { display: flex; gap: 6px; flex-wrap: wrap; }
 .nt-chip { border: 1px solid var(--b1); background: var(--surf); color: var(--t2); font: 600 12px var(--sans); padding: 6px 12px; border-radius: 99px; cursor: pointer; transition: all .15s; }
 .nt-chip:hover { color: var(--t1); border-color: var(--b2); }
-.nt-chip.on { background: var(--accent-grad); color: var(--on-accent); border-color: transparent; box-shadow: 0 6px 16px rgba(var(--accent-rgb),.25); }
+.nt-chip.on { background: var(--accent-grad); color: var(--on-grad); border-color: transparent; box-shadow: 0 6px 16px rgba(var(--accent-rgb),.25); }
 .nt-card { background: var(--surf); border: 1px solid var(--b1); box-shadow: var(--shadow); padding: 8px; }
 body.light-mode .nt-card { border-color: rgba(228,233,242,.9); }
 .nt-row { display: grid; grid-template-columns: 92px minmax(0,1fr) auto; gap: 14px; align-items: center; padding: 13px 14px; border-radius: 14px; text-decoration: none; color: var(--t1); transition: background .15s; }
@@ -1911,6 +1914,110 @@ body.light-mode .mh-table-empty { border-color: rgba(228,233,242,.9); }
 .fin-grid-4 { align-items: stretch !important; }
 .deuda-resumen-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin-bottom: 16px; }
 @media (max-width: 860px) { .deuda-resumen-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; } }
+
+/* ═══════════════════════════════════════════════════════════
+   TEMA OSCURO "A+B" (por defecto): azul noche, lima para los
+   números que importan, violeta para botones, menú y gráficos
+   ═══════════════════════════════════════════════════════════ */
+body:not(.light-mode) { background: var(--bg); }
+body:not(.light-mode) .topbar { background: rgba(10,14,26,.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid #161D30; }
+body:not(.light-mode) .nav-brand span { color: var(--accent); }
+body:not(.light-mode) .sidebar { background: var(--surf); border-right: 1px solid #161D30; }
+body:not(.light-mode) .nav-tab { color: var(--t2); border-radius: 14px; padding: 11px 12px; font-weight: 500; }
+body:not(.light-mode) .nav-tab:hover { background: var(--surf3); color: var(--t1); }
+body:not(.light-mode) .nav-tab.active { background: var(--accent-grad); color: #fff; box-shadow: 0 8px 20px rgba(var(--violet-rgb),.35); }
+body:not(.light-mode) .nav-tab.active .nav-badge { background: rgba(255,255,255,.2); color: #fff; }
+body:not(.light-mode) .mobile-bottom-nav { background: rgba(18,24,40,.95); backdrop-filter: blur(14px); border-top: 1px solid #1E2740; }
+body:not(.light-mode) .mbn-item.active { color: var(--accent); }
+/* Tarjetas: borde fino en vez de sombra */
+body:not(.light-mode) :is(.auth-card,.stat-c,.cat-card,.t-card,.rubros-table,.cbt-card,.how-step,.src-card,.save-month-box,.mh-chart-box,.ipc-calendar-box,.salary-calc,.family-card,.family-comparison,.family-empty,.macro-card,.macro-hero-card,.noticia-card,.onboarding-box,.fin-card,.deuda-card,.inicio-card,.tool-card,.rate-chip,.h-stat,.family-combined,.nt-card,.mh-table-empty,.cat-table) {
+  background: var(--surf); border: 1px solid var(--b1); box-shadow: none;
+}
+body:not(.light-mode) :is(.inicio-card,.macro-card,.macro-hero-card,.tool-card,.noticia-card,.family-card,.t-card,.src-card):hover { border-color: rgba(var(--violet-rgb),.45); transform: translateY(-2px); }
+body:not(.light-mode) :is(.inicio-card,.macro-card,.macro-hero-card,.tool-card,.noticia-card,.family-card,.t-card,.src-card) { transition: transform .2s, border-color .2s; }
+/* Botones: violeta */
+body:not(.light-mode) :is(.btn-primary,.btn-save-month,.canasta-create-btn,.demo-cta-primary,.sub-quick-btn,.arg-add-btn,.ob-btn-primary,.rbtn.active),
+body:not(.light-mode) .panel [style*="background:var(--accent);"][style*="color:var(--on-accent)"] {
+  background: var(--accent-grad) !important; color: #fff !important; border: none; border-radius: 12px; box-shadow: 0 8px 20px rgba(var(--violet-rgb),.30);
+}
+body:not(.light-mode) .theme-toggle { background: var(--surf3); border-color: transparent; border-radius: 12px; }
+/* Campos */
+body:not(.light-mode) :is(.form-input,.fin-inp,.money-inp,.canasta-name-inp,select,input[type=text],input[type=number],input[type=date],input[type=email],input[type=password]) { background: var(--surf2); border: 1px solid #232D48; border-radius: 12px; color: var(--t1); }
+body:not(.light-mode) .fin-input-wrap { background: var(--surf2); border: 1px solid #232D48; border-radius: 12px; }
+body:not(.light-mode) :is(.form-input,select,input):focus, body:not(.light-mode) .fin-input-wrap:focus-within { border-color: rgba(var(--violet-rgb),.7); box-shadow: 0 0 0 4px rgba(var(--violet-rgb),.18); outline: none; }
+body:not(.light-mode) .seg-pills button.on, body:not(.light-mode) .fin-subnav-btn.active { background: var(--surf3) !important; color: var(--accent) !important; box-shadow: none; }
+body:not(.light-mode) .fin-subnav, body:not(.light-mode) .seg-pills { background: var(--surf2); border: 1px solid var(--b1); }
+/* Números que importan en lima; el INDEC en blanco */
+body:not(.light-mode) :is(#hero-num,#inicio-ipc-personal,#mh-acum-personal,#family-ipc-combined) { color: var(--accent) !important; }
+body:not(.light-mode) .ini-accent { color: var(--t1) !important; }
+body:not(.light-mode) .ini-bar-fill::after { background: var(--bg); }
+body:not(.light-mode) .demo-banner { background: linear-gradient(90deg, rgba(var(--violet-rgb),.16), rgba(79,139,255,.08)); border-bottom: 1px solid #1E2740; }
+body:not(.light-mode) .demo-cta-secondary { background: transparent; border: 1px solid var(--b2); border-radius: 12px; color: var(--t1); }
+body:not(.light-mode) .ipc-status-bar { background: transparent; border: none; }
+body:not(.light-mode) .chart-tip { background: #E8ECF7; color: #0A0E1A; }
+
+/* ═════ MI CANASTA: fila bento + tabla de rubros (ambos temas) ═════ */
+.pg-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.pg-btn { height: 44px; padding: 0 18px; border-radius: 12px; border: 1px solid var(--b2); background: var(--surf); color: var(--t1); font: 600 14px var(--sans); cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.pg-btn.primary { border: none; background: var(--accent-grad); color: var(--on-grad); box-shadow: 0 8px 20px rgba(var(--violet-rgb),.3); }
+.pg-btn:hover { transform: translateY(-1px); }
+.cz-bento { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 18px; margin-bottom: 18px; }
+.cz-infl { grid-column: span 2; display: flex; flex-direction: column; gap: 6px; }
+body:not(.light-mode) .cz-infl { background: linear-gradient(135deg, #1B1640 0%, #121828 65%); }
+.cz-infl-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.cz-lbl { font-size: 13px; color: var(--t2); font-weight: 500; }
+.cz-lbl::first-letter { text-transform: uppercase; }
+.cz-infl #hero-num { font-family: var(--mono); font-size: 56px !important; font-weight: 700; letter-spacing: -.03em; line-height: 1.05; margin: 2px 0 2px; }
+.cz-infl #hero-num .hero-unit { font-size: 28px; }
+.cz-infl .hero-caption { font-size: 12px; color: var(--t3); }
+.cz-infl-right { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.cz-diff { white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; background: var(--surf2); border: 1px solid var(--b1); border-radius: 99px; padding: 6px 12px; font-size: 12.5px; color: var(--t2); }
+.cz-diff .sval { font-family: var(--mono); font-size: 13px !important; font-weight: 700; }
+.cz-indec { font-size: 12px; color: var(--t3); line-height: 1.5; }
+.cz-indec b { font-family: var(--mono); font-size: 14px; color: var(--t1) !important; }
+.cz-chart { height: 120px !important; margin-top: 4px; }
+.cz-gasto { display: flex; flex-direction: column; gap: 6px; }
+.cz-big { font-family: var(--mono); font-size: 32px; font-weight: 700; letter-spacing: -.02em; color: var(--t1); }
+.cz-gasto .ini-budget { margin: 6px 0 4px; }
+.cz-sub { font-size: 12px; color: var(--t3); margin-top: auto; }
+.cz-sub b { color: var(--accent); font-family: var(--mono); }
+.cz-dona { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.cz-dona .cz-lbl { align-self: stretch; }
+.cz-donut { width: 170px !important; height: 170px !important; }
+.cz-donut .ini-donut-c { padding: 0 34px; }
+.cz-donut .ini-donut-c b { font-size: 18px; }
+.cz-dona .cz-sub { margin-top: 0; text-align: center; color: var(--t2); }
+/* Tabla de rubros */
+.cat-table { border-radius: 20px; overflow: hidden; background: var(--surf); border: 1px solid var(--b1); }
+.cat-thead, .cat-table .cat-head { display: grid !important; grid-template-columns: 34px minmax(0,1fr) 76px 200px 190px 22px !important; gap: 14px !important; align-items: center; }
+.cat-thead { padding: 12px 18px 8px; font-size: 11.5px; font-weight: 600; color: var(--t3); border-bottom: 1px solid var(--b1); }
+.cat-thead span:nth-child(4) { text-align: right; }
+.cat-table .cat-grid { display: flex !important; flex-direction: column; gap: 0 !important; }
+.cat-table .cat-card { border: none !important; border-radius: 0 !important; box-shadow: none !important; background: transparent !important; border-bottom: 1px solid var(--b1) !important; }
+.cat-table .cat-card:last-child { border-bottom: none !important; }
+.cat-table .cat-card:hover, .cat-table .cat-card.open { background: var(--surf2) !important; }
+.cat-table .cat-head { padding: 8px 18px !important; min-height: 56px; }
+.cat-table .cat-ico { width: 34px; height: 34px; border-radius: 10px; background: var(--surf2); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.cat-table .cat-pill { justify-self: start; }
+.cat-wcell { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.cat-wbar { flex: 1; height: 6px; background: var(--surf3); border-radius: 99px; overflow: hidden; }
+.cat-wbar i { display: block; height: 100%; border-radius: 99px; background: var(--accent-grad); transition: width .4s; }
+.cat-wcell .cat-weight { width: 40px; text-align: right; font-family: var(--mono); font-size: 12.5px; font-weight: 600; color: var(--t2); }
+.cat-wcell .cat-weight::after { display: none !important; }
+.canasta-sep-financiero { padding: 0 18px !important; margin: 0 !important; height: 44px; align-items: center !important; background: var(--surf2); border-bottom: 1px solid var(--b1) !important; }
+@media (max-width: 1100px) {
+  .cz-bento { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .cz-infl { grid-column: 1 / -1; }
+  .cat-thead, .cat-table .cat-head { grid-template-columns: 34px minmax(0,1fr) 70px 170px 130px 22px !important; }
+}
+@media (max-width: 860px) {
+  .cz-bento { grid-template-columns: 1fr; gap: 12px; }
+  .cz-infl #hero-num { font-size: 44px !important; }
+  .pg-actions { width: 100%; } .pg-btn { flex: 1; }
+  .cat-thead { display: none !important; }
+  .cat-table .cat-head { grid-template-columns: 34px minmax(0,1fr) 22px !important; grid-template-areas: "ico info chev" "amt amt amt" !important; }
+  .cat-table .cat-wcell, .cat-table .cat-pill { display: none !important; }
+}
 </style>
 </head>
 <body>
@@ -2198,6 +2305,10 @@ body.light-mode .mh-table-empty { border-color: rgba(228,233,242,.9); }
       <div class="pg-title">Mi canasta</div>
       <div class="pg-sub">Cargá cuánto gastás por rubro y compará tu inflación con la del INDEC</div>
     </div>
+    <div class="pg-actions">
+      <button class="pg-btn" onclick="showCsvImport()">Importar resumen</button>
+      <button class="pg-btn primary" onclick="saveMonthSnapshot().then(()=>renderHistorial())">Guardar mes</button>
+    </div>
   </div>
 
   <!-- WIDGET MACRO MINI -->
@@ -2226,34 +2337,32 @@ body.light-mode .mh-table-empty { border-color: rgba(228,233,242,.9); }
     </div>
   </div>
 
-  <div class="hero">
-    <div class="hero-left">
-      <div class="hero-label">Tu inflación este mes</div>
-      <div class="hero-num empty" id="hero-num">—</div>
-      <div class="hero-caption" id="hero-cap">Registrá tus gastos para calcular</div>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-c hi">
-        <div class="slabel">IPC oficial</div>
-        <div class="sval accent" id="ipc-oficial-val">—</div>
-        <div class="ssub" id="ipc-oficial-mes">Cargando…</div>
+  <div class="cz-bento">
+    <section class="inicio-card cz-infl">
+      <div class="cz-infl-top">
+        <div>
+          <div class="cz-lbl" id="cz-mes-lbl">Tu inflación este mes</div>
+          <div class="hero-num empty" id="hero-num">—</div>
+          <div class="hero-caption" id="hero-cap">Registrá tus gastos para calcular</div>
+        </div>
+        <div class="cz-infl-right">
+          <div class="cz-diff"><span class="sval" id="dif-val">—</span> vs INDEC</div>
+          <div class="cz-indec">IPC oficial <b class="sval accent" id="ipc-oficial-val">—</b><br><span id="ipc-oficial-mes">Cargando…</span></div>
+        </div>
       </div>
-      <div class="stat-c">
-        <div class="slabel">Diferencia</div>
-        <div class="sval" id="dif-val">—</div>
-        <div class="ssub">vs. canasta oficial</div>
-      </div>
-      <div class="stat-c">
-        <div class="slabel">Gastos del mes</div>
-        <div class="sval" id="monto-gastos-val">$0</div>
-        <div class="ssub">Sin ahorro ni inversión</div>
-      </div>
-      <div class="stat-c">
-        <div class="slabel">Ahorro + Inversión</div>
-        <div class="sval" id="monto-ahorro-val" style="color:var(--accent)">$0</div>
-        <div class="ssub" id="monto-ahorro-pct">— del ingreso</div>
-      </div>
-    </div>
+      <div class="ini-chart cz-chart" id="canasta-ipc-chart"></div>
+    </section>
+    <section class="inicio-card cz-gasto">
+      <div class="cz-lbl">Gastos del mes</div>
+      <div class="cz-big" id="monto-gastos-val">$0</div>
+      <div class="ini-budget" id="canasta-budget"></div>
+      <div class="cz-sub">Ahorro e inversión: <b id="monto-ahorro-val">$0</b> · <span id="monto-ahorro-pct">— del ingreso</span></div>
+    </section>
+    <section class="inicio-card cz-dona">
+      <div class="cz-lbl">En qué se va tu plata</div>
+      <div class="ini-donut cz-donut" id="canasta-donut"></div>
+      <div class="cz-sub" id="canasta-donut-txt"></div>
+    </section>
   </div>
 
   <div class="status-bar">
@@ -2286,17 +2395,19 @@ body.light-mode .mh-table-empty { border-color: rgba(228,233,242,.9); }
   <div class="sec-hd">
     <div class="sec-title">Rubros de tu canasta</div>
     <div style="display:flex;align-items:center;gap:12px">
-      <span class="sec-hint">Escribí cuánto gastás por mes en cada rubro</span>
-      <button class="arg-add-btn" onclick="showCsvImport()">📄 Importar resumen (CSV)</button>
+      <span class="sec-hint">Escribí cuánto gastás por mes en cada rubro · IPC del último mes por rubro (INDEC)</span>
     </div>
   </div>
 
-  <div class="cat-grid" id="cat-grid"></div>
+  <div class="cat-table">
+    <div class="cat-thead"><span></span><span>Rubro</span><span>IPC</span><span>Gasto mensual</span><span>% del gasto</span><span></span></div>
+    <div class="cat-grid" id="cat-grid"></div>
+  </div>
 
 
 
   <!-- ACCESO RÁPIDO AL HISTORIAL -->
-  <div class="save-month-box" style="margin-bottom:1.4rem" id="quick-save-box">
+  <div class="save-month-box" style="display:none" id="quick-save-box">
     <div class="save-month-left">
       <div class="save-month-icon">📅</div>
       <div>
@@ -2309,7 +2420,7 @@ body.light-mode .mh-table-empty { border-color: rgba(228,233,242,.9); }
     </button>
   </div>
 
-  <div class="contrib-box">
+  <div class="contrib-box" style="display:none">
     <div class="contrib-hd">
       <span class="contrib-title">Tu canasta personal</span>
       <span class="contrib-sub">distribución del gasto · contribución al IPC</span>
@@ -4940,7 +5051,7 @@ function buildCatGrid() {
           <span>$</span>
           <input type="text" class="money-inp" id="monto-${c.id}" placeholder="0" value="${monto||''}" min="0" step="100" inputmode="numeric" aria-label="Gasto mensual en ${c.name}" />
         </label>
-        <span class="cat-weight" id="cw-${c.id}" title="Parte de tu gasto total">${catW}%</span>
+        <span class="cat-wcell"><span class="cat-wbar"><i id="cwb-${c.id}" style="width:${Math.min(100, catW * 2.5)}%"></i></span><span class="cat-weight" id="cw-${c.id}" title="Parte de tu gasto total">${catW}%</span></span>
         <span class="cat-contrib" id="cc-${c.id}">${contrib} pts</span>
         <span class="cat-chev" id="chev-${c.id}" title="Ver subrubros">▾</span>
       </div>
@@ -5184,6 +5295,7 @@ function refreshCatHeader(c) {
   const sv = document.getElementById('msv-'+c.id);
   const mp = document.getElementById('mpct-'+c.id);
   if(cw) cw.textContent = catW+'%';
+  const cwb = document.getElementById('cwb-'+c.id); if (cwb) cwb.style.width = Math.min(100, catW * 2.5) + '%';
   if(cc) cc.textContent = contrib+'pp';
   if(sl) sl.value = catW;
   if(sv) sv.textContent = catW+'%';
@@ -5330,13 +5442,13 @@ function updateMain() {
       const vsIndec = parseFloat(diff);
       let contexto = '';
       if(Math.abs(vsIndec) < 0.2) {
-        contexto = `Igual al INDEC · ${REGION_ADJ[region].label}`;
+        contexto = `En línea con el INDEC · región ${REGION_ADJ[region].label}`;
       } else if(vsIndec > 0) {
-        contexto = `<span style="color:var(--red)">↑ ${sign}${diff.replace('.',',')} pts</span> sobre el INDEC · Tu inflación es mayor`;
+        contexto = `Tu inflación es mayor que la del INDEC · región ${REGION_ADJ[region].label}`;
       } else {
-        contexto = `<span style="color:var(--green)">↓ ${diff.replace('.',',')} pts</span> bajo el INDEC · Tu inflación es menor`;
+        contexto = `Tu inflación es menor que la del INDEC · región ${REGION_ADJ[region].label}`;
       }
-      heroCap.innerHTML = (totW===100 ? '' : `Canasta al ${totW}% · `) + contexto;
+      heroCap.innerHTML = contexto;
     } else {
       heroCap.innerHTML = totW===100
         ? `Canasta completa · ${REGION_ADJ[region].label}`
@@ -5351,6 +5463,7 @@ function updateMain() {
     void heroNumPulse.offsetWidth;
     heroNumPulse.classList.add('pulse');
   }
+  try { renderCanastaCharts(); } catch (e) {}
 }
 
 // Paleta de colores para la torta (10 rubros)
@@ -5603,7 +5716,9 @@ function ink(a) { return 'rgba(' + (cssVar('--ink-rgb') || '255,255,255') + ',' 
 function goPanel(p) { document.querySelector('.nav-tab[data-panel="' + p + '"]')?.click(); }
 
 const _MESES_C = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-const DONUT_COLORS = ['#3B5BFD','#7C5CFF','#22B8CF','#12A150','#F59F00','#F06595','#A0AEC0'];
+const DONUT_COLORS_LIGHT = ['#3B5BFD','#7C5CFF','#22B8CF','#12A150','#F59F00','#F06595','#A0AEC0'];
+const DONUT_COLORS_DARK = ['#7C5CFF','#C8F135','#4F8BFF','#38D9F5','#FFB547','#FF6B8B','#4A5578'];
+const donutColors = () => document.body.classList.contains('light-mode') ? DONUT_COLORS_LIGHT : DONUT_COLORS_DARK;
 const _fmtPct = v => (v == null || !isFinite(v)) ? '—' : v.toFixed(1).replace('.', ',') + '%';
 const _fmtP = v => '$' + Math.round(v).toLocaleString('es-AR');
 
@@ -5634,11 +5749,13 @@ function renderInicioRing() {
 }
 
 // ── Donut de gastos por rubro + barra de presupuesto ──
-function renderInicioDonut() {
-  const el = document.getElementById('inicio-donut');
-  const leg = document.getElementById('inicio-donut-legend');
-  const bud = document.getElementById('inicio-budget');
-  if (!el || !leg) return;
+function renderInicioDonut(ids) {
+  ids = ids || { donut: 'inicio-donut', legend: 'inicio-donut-legend', budget: 'inicio-budget' };
+  const el = document.getElementById(ids.donut);
+  const leg = (ids.legend && document.getElementById(ids.legend)) || document.createElement('div');
+  const bud = ids.budget ? document.getElementById(ids.budget) : null;
+  const txtEl = ids.txt ? document.getElementById(ids.txt) : null;
+  if (!el) return;
   const items = CATS.map(c => ({ id: c.id, name: c.name, icon: c.icon, monto: getCatMonto(c) }))
     .filter(x => x.monto > 0).sort((a, b) => b.monto - a.monto);
   const total = items.reduce((a, x) => a + x.monto, 0);
@@ -5665,12 +5782,14 @@ function renderInicioDonut() {
     el.innerHTML = '<svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="78" fill="none" stroke="' + cssVar('--surf3') + '" stroke-width="22"/></svg>' +
       '<div class="ini-donut-c"><b>$0</b><span>Sin gastos cargados</span></div>';
     leg.innerHTML = '';
+    if (txtEl) txtEl.textContent = 'Cargá tus gastos para verlo';
     return;
   }
   // Top 6 + "Otros"
   let segs = items.slice(0, 6);
   if (items.length > 6) segs.push({ id: '_otros', name: 'Otros', icon: '•', monto: items.slice(6).reduce((a, x) => a + x.monto, 0) });
-  segs = segs.map((x, i) => ({ ...x, color: DONUT_COLORS[i % DONUT_COLORS.length], pct: x.monto / total * 100 }));
+  const _dc = donutColors();
+  segs = segs.map((x, i) => ({ ...x, color: _dc[i % _dc.length], pct: x.monto / total * 100 }));
 
   const r = 78, C = 2 * Math.PI * r, gap = segs.length > 1 ? 2.5 : 0;
   let off = 0;
@@ -5681,8 +5800,9 @@ function renderInicioDonut() {
     off += C * x.pct / 100;
     return c;
   }).join('');
-  el.innerHTML = '<svg viewBox="0 0 200 200">' + circles + '</svg><div class="ini-donut-c" id="ini-donut-c"></div>';
-  const center = el.querySelector('#ini-donut-c');
+  el.innerHTML = '<svg viewBox="0 0 200 200">' + circles + '</svg><div class="ini-donut-c"></div>';
+  const center = el.querySelector('.ini-donut-c');
+  if (txtEl) txtEl.textContent = segs.slice(0, 2).map(x => x.name.split(' ')[0] + ' ' + Math.round(x.pct) + '%').join(' · ');
   const setCenter = i => {
     if (i == null) { center.innerHTML = '<b>' + _fmtP(total) + '</b><span>en ' + items.length + ' rubro' + (items.length > 1 ? 's' : '') + '</span>'; return; }
     const x = segs[i];
@@ -5706,8 +5826,8 @@ function renderInicioDonut() {
 }
 
 // ── Línea: tu inflación vs INDEC (últimos 6 meses + mes en curso) ──
-async function renderInicioLine() {
-  const el = document.getElementById('inicio-ipc-chart');
+async function renderInicioLine(elId) {
+  const el = document.getElementById(elId || 'inicio-ipc-chart');
   if (!el) return;
   const ofLbl = document.getElementById('inicio-ipc-oficial-lbl');
   if (ofLbl && typeof ipcLastMes === 'string') ofLbl.textContent = 'IPC INDEC · ' + ipcLastMes.slice(0, 3).toLowerCase() + ' ' + ipcLastMes.slice(-2);
@@ -5736,7 +5856,8 @@ async function renderInicioLine() {
 // pts = [{ key, label, ofi, per, enCurso }]
 function drawIpcLineChart(el, pts) {
   const W = Math.max(260, el.clientWidth || 600), H = el.clientHeight || 190;
-  const P = { l: 34, r: 14, t: 14, b: 26 };
+  const angosto = W < 560;
+  const P = { l: 34, r: 14, t: angosto ? 34 : 18, b: 26 };
   const vals = pts.flatMap(p => [p.ofi, p.per]).filter(v => v != null);
   let lo = Math.min(...vals), hi2 = Math.max(...vals);
   const pad = Math.max(0.3, (hi2 - lo) * 0.25); lo = Math.max(0, lo - pad); hi2 = hi2 + pad;
@@ -5766,10 +5887,12 @@ function drawIpcLineChart(el, pts) {
   const nPer = pts.filter(p => p.per != null).length;
   const hayPersonal = nPer >= 2; // con 1 solo punto (mes en curso) la línea principal es INDEC
   const mainKey = hayPersonal ? 'per' : 'ofi';
-  const mainCol = acc;
+  // Lima = lo tuyo; si todavía no hay historial, el INDEC va en violeta y vos como punto lima
+  const mainCol = hayPersonal ? acc : cssVar('--violet');
+  const youCol = document.body.classList.contains('light-mode') ? cssVar('--purple') : acc;
   const ticks = [lo, (lo + hi2) / 2, hi2];
   let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">' +
-    '<defs><linearGradient id="iniArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + acc + '" stop-opacity=".22"/><stop offset="1" stop-color="' + acc + '" stop-opacity="0"/></linearGradient></defs>';
+    '<defs><linearGradient id="iniArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + mainCol + '" stop-opacity=".22"/><stop offset="1" stop-color="' + mainCol + '" stop-opacity="0"/></linearGradient></defs>';
   ticks.forEach(t => {
     svg += '<line x1="' + P.l + '" x2="' + (W - P.r) + '" y1="' + Y(t) + '" y2="' + Y(t) + '" stroke="' + grid + '" stroke-dasharray="3 5"/>' +
       '<text x="' + (P.l - 8) + '" y="' + (Y(t) + 4) + '" text-anchor="end" font-size="10.5" fill="' + sec + '" font-family="Inter,sans-serif">' + t.toFixed(1).replace('.', ',') + '%</text>';
@@ -5786,14 +5909,14 @@ function drawIpcLineChart(el, pts) {
     if (p.ofi != null && hayPersonal) svg += '<circle class="lc-dot" data-i="' + i + '" cx="' + X(i) + '" cy="' + Y(p.ofi) + '" r="3.5" fill="' + cssVar('--surf') + '" stroke="' + sec + '" stroke-width="2"/>';
     if (p[mainKey] != null) svg += '<circle class="lc-dot" data-i="' + i + '" cx="' + X(i) + '" cy="' + Y(p[mainKey]) + '" r="' + (i === pts.length - 1 ? 5.5 : 4) + '" fill="' + cssVar('--surf') + '" stroke="' + mainCol + '" stroke-width="2.5"/>';
     // Sin historial: tu inflación del mes en curso como punto destacado
-    if (!hayPersonal && p.per != null) svg += '<circle class="lc-dot lc-you" data-i="' + i + '" cx="' + X(i) + '" cy="' + Y(p.per) + '" r="6" fill="' + cssVar('--purple') + '" stroke="' + cssVar('--surf') + '" stroke-width="3"/>' +
-      '<text x="' + X(i) + '" y="' + (Y(p.per) - 12) + '" text-anchor="middle" font-size="11" font-weight="700" fill="' + cssVar('--purple') + '" font-family="Inter,sans-serif">Vos ' + _fmtPct(p.per) + '</text>';
+    if (!hayPersonal && p.per != null) svg += '<circle class="lc-dot lc-you" data-i="' + i + '" cx="' + X(i) + '" cy="' + Y(p.per) + '" r="6" fill="' + youCol + '" stroke="' + cssVar('--surf') + '" stroke-width="3"/>' +
+      '<text x="' + X(i) + '" y="' + (Y(p.per) - 12) + '" text-anchor="middle" font-size="11" font-weight="700" fill="' + youCol + '" font-family="Inter,sans-serif">Vos ' + _fmtPct(p.per) + '</text>';
   });
   svg += '<line class="lc-cross" x1="0" x2="0" y1="' + P.t + '" y2="' + (H - P.b) + '" stroke="' + acc + '" stroke-opacity=".35" stroke-width="1.5" style="display:none"/>';
   svg += '<rect class="lc-hit" x="0" y="0" width="' + W + '" height="' + H + '" fill="transparent"/></svg>';
   const leyenda = hayPersonal
     ? '<div style="position:absolute;top:-6px;right:0;display:flex;gap:14px;font-size:11.5px;color:var(--t3)"><span><i style="display:inline-block;width:14px;height:3px;border-radius:2px;background:' + acc + ';vertical-align:middle;margin-right:5px"></i>Vos</span><span><i style="display:inline-block;width:14px;border-top:2px dashed ' + sec + ';vertical-align:middle;margin-right:5px"></i>INDEC</span></div>'
-    : '<div style="position:absolute;top:-6px;right:0;font-size:11.5px;color:var(--t3)"><i style="display:inline-block;width:14px;height:3px;border-radius:2px;background:' + acc + ';vertical-align:middle;margin-right:5px"></i>IPC INDEC' + (nPer ? ' · <span style="color:var(--purple)">●</span> vos este mes' : '') + ' · cerrá tus meses para ver tu evolución</div>';
+    : '<div style="position:absolute;top:-6px;right:0;font-size:11.5px;color:var(--t3)"><i style="display:inline-block;width:14px;height:3px;border-radius:2px;background:' + mainCol + ';vertical-align:middle;margin-right:5px"></i>IPC INDEC' + (nPer ? ' · <span style="color:' + youCol + '">●</span> vos este mes' : '') + (angosto ? '' : ' · cerrá tus meses para ver tu evolución') + '</div>';
   el.innerHTML = svg + leyenda + '<div class="chart-tip"></div>';
 
   // Animación de trazo
@@ -5829,7 +5952,25 @@ function drawIpcLineChart(el, pts) {
 }
 // Redibujar el gráfico de línea si cambia el ancho (responsive)
 let _iniResizeT = null;
-window.addEventListener('resize', () => { clearTimeout(_iniResizeT); _iniResizeT = setTimeout(() => { if (document.getElementById('panel-inicio')?.classList.contains('active')) renderInicioLine(); }, 200); });
+window.addEventListener('resize', () => { clearTimeout(_iniResizeT); _iniResizeT = setTimeout(() => { if (document.getElementById('panel-inicio')?.classList.contains('active')) renderInicioLine(); renderCanastaCharts(); }, 200); });
+
+// Mi canasta: misma fila de tarjetas que Inicio (curva, gasto vs ingreso, dona)
+let _czT = null;
+document.addEventListener('click', e => {
+  if (e.target.closest('.nav-tab, .mbn-item, [data-panel]')) setTimeout(renderCanastaCharts, 60);
+}, true);
+function renderCanastaCharts() {
+  clearTimeout(_czT);
+  _czT = setTimeout(() => {
+    if (!document.getElementById('panel-canasta')?.classList.contains('active')) return;
+    try { renderInicioDonut({ donut: 'canasta-donut', budget: 'canasta-budget', txt: 'canasta-donut-txt' }); } catch (e) {}
+    try { renderInicioLine('canasta-ipc-chart'); } catch (e) {}
+    try {
+      const l = document.getElementById('cz-mes-lbl');
+      if (l) l.textContent = 'Tu inflación de ' + new Date().toLocaleDateString('es-AR', { month: 'long' });
+    } catch (e) {}
+  }, 120);
+}
 
 function initInicio() {
   const saludo = document.getElementById('inicio-saludo');
@@ -7767,9 +7908,9 @@ function updateThemeIcon(isLight) {
 }
 
 function initTheme() {
-  // Soft UI claro por defecto; el oscuro queda como opción
+  // Oscuro (azul noche + lima + violeta) por defecto; el claro queda como opción
   const saved = localStorage.getItem('theme');
-  const light = saved !== 'dark';
+  const light = saved === 'light';
   document.body.classList.toggle('light-mode', light);
   updateThemeIcon(light);
 }
@@ -7920,7 +8061,7 @@ function calcFinanzas() {
   // ── SEMÁFORO ──
   let color, label, desc;
   if (score >= 80) {
-    color = '#2a7a00'; label = '🟢 Excelente';
+    color = cssVar('--green'); label = '🟢 Excelente';
     desc = 'Tus finanzas están sólidas: flujo positivo, deuda controlada y hábito de ahorro. Enfocate en hacer crecer tus inversiones.';
   } else if (score >= 65) {
     color = '#5aaa00'; label = '🟢 Buena';
@@ -7929,10 +8070,10 @@ function calcFinanzas() {
     color = cssVar('--amber'); label = '🟡 Regular';
     desc = 'Tu situación es manejable pero con vulnerabilidades. Priorizá reducir deudas costosas y aumentar el margen mensual.';
   } else if (score >= 35) {
-    color = '#b86000'; label = '🟠 En riesgo';
+    color = cssVar('--amber'); label = '🟠 En riesgo';
     desc = 'Hay señales de alerta claras. Tu flujo de caja o nivel de deuda necesitan atención. Actuá antes de que se agrave.';
   } else {
-    color = '#cc2200'; label = '🔴 Crítico';
+    color = cssVar('--red'); label = '🔴 Crítico';
     desc = 'Tu situación financiera requiere acción urgente. Priorizá reducir la deuda más cara y evitar nuevos gastos no esenciales.';
   }
 
@@ -7968,7 +8109,7 @@ function calcFinanzas() {
   // DTI
   setMetric('met-dti', fmtPct(dti),
     'bar-dti', Math.min(dti / 50 * 100, 100),
-    dti <= 20 ? '#2a7a00' : dti <= 35 ? '#b86000' : '#cc2200');
+    dti <= 20 ? cssVar('--green') : dti <= 35 ? cssVar('--amber') : cssVar('--red'));
   const dtiRefEl = document.getElementById('met-dti-ref');
   if (dtiRefEl) {
     dtiRefEl.textContent = usaDeudaTrackeada
@@ -7979,7 +8120,7 @@ function calcFinanzas() {
   }
 
   // Flujo
-  const flujoColor = flujo >= 0 ? (flujo >= ingreso * 0.15 ? '#2a7a00' : '#b86000') : '#cc2200';
+  const flujoColor = flujo >= 0 ? (flujo >= ingreso * 0.15 ? cssVar('--green') : cssVar('--amber')) : cssVar('--red');
   setMetric('met-flujo', fmtPeso(flujo),
     'bar-flujo', flujo >= 0 ? Math.min((flujo / ingreso) * 100 * 2, 100) : 0,
     flujoColor);
@@ -7987,12 +8128,12 @@ function calcFinanzas() {
   // Ahorro
   setMetric('met-ahorro', fmtPct(tasaAhorro),
     'bar-ahorro', Math.min(tasaAhorro / 25 * 100, 100),
-    tasaAhorro >= 15 ? '#2a7a00' : tasaAhorro >= 10 ? cssVar('--amber') : tasaAhorro >= 5 ? '#b86000' : '#cc2200');
+    tasaAhorro >= 15 ? cssVar('--green') : tasaAhorro >= 10 ? cssVar('--amber') : tasaAhorro >= 5 ? cssVar('--amber') : cssVar('--red'));
 
   // Gasto
   setMetric('met-gasto', fmtPct(ratioGasto),
     'bar-gasto', Math.min(ratioGasto, 100),
-    ratioGasto <= 55 ? '#2a7a00' : ratioGasto <= 70 ? '#b86000' : '#cc2200');
+    ratioGasto <= 55 ? cssVar('--green') : ratioGasto <= 70 ? cssVar('--amber') : cssVar('--red'));
 
   // ── RECOMENDACIONES ──
   const recs = [];
@@ -8084,15 +8225,15 @@ function calcMonotributo(cat, facturacion) {
 
   let barColor, alertClass, alertMsg;
   if (porcentaje >= 100) {
-    barColor = '#cc2200';
+    barColor = cssVar('--red');
     alertClass = 'mono-alert-bad';
     alertMsg = '🚨 <b>Excediste el límite de tu categoría.</b> Facturación anual proyectada: ' + fmtM(anual) + ' vs límite ' + fmtM(mono.limite) + '. Debés recategorizarte a ' + getNextMono(cat) + ' o pasarte a Responsable Inscripto para evitar sanciones de AFIP.';
   } else if (porcentaje >= 80) {
-    barColor = '#b86000';
+    barColor = cssVar('--amber');
     alertClass = 'mono-alert-warn';
     alertMsg = '⚠️ <b>Cerca del límite.</b> Proyección anual: ' + fmtM(anual) + ' (' + porcentaje.toFixed(0).replace('.', ',') + '% del límite de ' + fmtM(mono.limite) + '). Te quedan ' + fmtM(mono.limite - anual) + ' de margen. Revisá si conviene recategorizarte.';
   } else {
-    barColor = '#2a7a00';
+    barColor = cssVar('--green');
     alertClass = 'mono-alert-ok';
     alertMsg = '✅ <b>Dentro del límite.</b> Facturación proyectada: ' + fmtM(anual) + ' de ' + fmtM(mono.limite) + ' permitidos. Margen disponible: ' + fmtM(mono.limite - anual) + '.';
   }
@@ -8724,7 +8865,7 @@ function renderDeudas() {
   };
   setEl('d-total-capital', fmtP(totalCapital));
   setEl('d-total-cuota', fmtP(totalCuota));
-  setEl('d-total-interes', fmtP(totalInteres), '#cc2200');
+  setEl('d-total-interes', fmtP(totalInteres), cssVar('--red'));
   setEl('d-total-costo', fmtP(totalCosto));
 
   // Semáforo de carga

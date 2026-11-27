@@ -29,7 +29,7 @@ const CATS = [
   ['fiscal',    /fmi|super[áa]vit|d[ée]ficit|impuesto|arca|afip|presupuesto|deuda/i],
 ];
 // Para feeds que mezclan otras secciones: quedarse solo con lo económico
-const ECONO = /econom|d[óo]lar|inflaci|precio|empleo|despid|salari|sueld|banco|tasa|mercad|consum|export|import|impuest|fiscal|deuda|bono|acci[óo]n|empresa|industri|comerci|venta|cr[ée]dit|hipotec|jubil|tarifa|paritari|pyme|fmi|bcra|indec|reserva|cosecha|soja|energ|petr[óo]le|vaca muerta|inversi|pbi|actividad|recaudaci|subsidi|alquiler/i;
+const ECONO = /econom|d[óo]lar|inflaci|precio|empleo|despid|salari|sueld|banco|tasa|mercad|consum|export|import|impuest|fiscal|deuda|bono|acci[óo]n|empresas?\b|industri|comerci|venta|cr[ée]dit|hipotec|jubil|tarifa|paritari|pyme|fmi|bcra|indec|reserva|cosecha|soja|energ|petr[óo]le|vaca muerta|inversi|pbi|actividad|recaudaci|subsidi|alquiler/i;
 const categoria = t => (CATS.find(([, re]) => re.test(t)) || ['general'])[0];
 
 async function leerFeed({ medio, url, filtrar }) {
