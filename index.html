@@ -2018,6 +2018,22 @@ body:not(.light-mode) .cz-infl { background: linear-gradient(135deg, #1B1640 0%,
   .cat-table .cat-head { grid-template-columns: 34px minmax(0,1fr) 22px !important; grid-template-areas: "ico info chev" "amt amt amt" !important; }
   .cat-table .cat-wcell, .cat-table .cat-pill { display: none !important; }
 }
+
+/* Pills de IPC parejas: mismo ancho, centradas, sin cortes */
+.cat-pill { white-space: nowrap !important; text-align: center; min-width: 54px; box-sizing: border-box; font-variant-numeric: tabular-nums; }
+.cat-table .cat-pill { width: 58px; padding: 4px 0 !important; justify-self: start; }
+.cat-thead span:nth-child(3) { white-space: nowrap; }
+
+/* Inflación esperada (REM BCRA) */
+.ini-kpis { grid-template-columns: repeat(4, minmax(0,1fr)) !important; }
+.ini-kpi-rem { background: rgba(var(--violet-rgb), .12) !important; border: 1px dashed rgba(var(--violet-rgb), .45); cursor: help; }
+.ini-kpi-rem .inicio-hero-val { white-space: nowrap; }
+@media (max-width: 760px) { .ini-kpis { grid-template-columns: repeat(2, minmax(0,1fr)) !important; } }
+.cz-rem { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; padding: 7px 11px; border-radius: 12px; border: 1px dashed rgba(var(--violet-rgb), .5); background: rgba(var(--violet-rgb), .1); cursor: help; }
+.cz-rem-lbl { font-size: 10.5px; color: var(--t3); text-transform: uppercase; letter-spacing: .04em; font-weight: 600; }
+.cz-rem-val { font-family: var(--mono); font-size: 17px; color: var(--t1); white-space: nowrap; }
+.cz-rem-src { font-size: 10.5px; color: var(--t3); white-space: nowrap; }
+#quick-add-modal .form-group { margin-bottom: 12px; }
 </style>
 </head>
 <body>
@@ -2247,6 +2263,7 @@ body:not(.light-mode) .cz-infl { background: linear-gradient(135deg, #1B1640 0%,
         <div class="ini-kpi"><div class="inicio-hero-val" id="inicio-ipc-personal">—</div><div class="inicio-hero-lbl">Tu inflación este mes</div></div>
         <div class="ini-kpi"><div class="inicio-hero-val ini-accent" id="inicio-ipc-oficial">—</div><div class="inicio-hero-lbl" id="inicio-ipc-oficial-lbl">IPC INDEC</div></div>
         <div class="ini-kpi"><div class="inicio-hero-val" id="inicio-ipc-diff">—</div><div class="inicio-hero-lbl">Diferencia con INDEC</div></div>
+        <div class="ini-kpi ini-kpi-rem" id="inicio-rem"><div class="inicio-hero-val" id="inicio-rem-val">—</div><div class="inicio-hero-lbl" id="inicio-rem-lbl">Esperada próximo mes</div></div>
       </div>
       <div class="ini-chart" id="inicio-ipc-chart"></div>
     </section>
@@ -2348,6 +2365,7 @@ body:not(.light-mode) .cz-infl { background: linear-gradient(135deg, #1B1640 0%,
         <div class="cz-infl-right">
           <div class="cz-diff"><span class="sval" id="dif-val">—</span> vs INDEC</div>
           <div class="cz-indec">IPC oficial <b class="sval accent" id="ipc-oficial-val">—</b><br><span id="ipc-oficial-mes">Cargando…</span></div>
+          <div class="cz-rem" id="cz-rem" style="display:none"></div>
         </div>
       </div>
       <div class="ini-chart cz-chart" id="canasta-ipc-chart"></div>
@@ -2400,7 +2418,7 @@ body:not(.light-mode) .cz-infl { background: linear-gradient(135deg, #1B1640 0%,
   </div>
 
   <div class="cat-table">
-    <div class="cat-thead"><span></span><span>Rubro</span><span>IPC</span><span>Gasto mensual</span><span>% del gasto</span><span></span></div>
+    <div class="cat-thead"><span></span><span>Rubro</span><span>IPC mensual</span><span>Gasto mensual</span><span>% del gasto</span><span></span></div>
     <div class="cat-grid" id="cat-grid"></div>
   </div>
 
@@ -3872,7 +3890,11 @@ body:not(.light-mode) .cz-infl { background: linear-gradient(135deg, #1B1640 0%,
       <div class="upgrade-title">Registrar un gasto</div>
       <div class="form-group">
         <label class="form-label">Rubro</label>
-        <select class="form-input" id="qa-cat"></select>
+        <select class="form-input" id="qa-cat" onchange="qaLlenarSubs()"></select>
+      </div>
+      <div class="form-group" id="qa-sub-wrap">
+        <label class="form-label">Subrubro</label>
+        <select class="form-input" id="qa-sub"></select>
       </div>
       <div class="form-group">
         <label class="form-label">Monto $</label>
@@ -3881,7 +3903,7 @@ body:not(.light-mode) .cz-infl { background: linear-gradient(135deg, #1B1640 0%,
           <input type="text" class="fin-inp" id="qa-monto" placeholder="5.000" inputmode="numeric" onkeydown="if(event.key==='Enter')agregarGastoRapido()" />
         </div>
       </div>
-      <div style="font-size:11px;color:var(--t3);margin-bottom:14px">Se suma a lo que ya tenías cargado en ese rubro este mes.</div>
+      <div style="font-size:11px;color:var(--t3);margin-bottom:14px" id="qa-nota">Se suma a lo que ya tenías cargado en ese subrubro este mes.</div>
       <button class="btn-primary" style="width:100%" onclick="agregarGastoRapido()">Agregar →</button>
     </div>
   </div>
@@ -4198,13 +4220,28 @@ function switchAuthTab(tab) {
   hideErrors();
 }
 
+// URL limpia a la que vuelve Google / el mail (sin #tokens ni ?code viejos)
+function _urlRetorno() { return window.location.origin + window.location.pathname; }
+// Saca de la barra de direcciones los tokens que deja el retorno de OAuth
+function _limpiarUrlAuth() {
+  try {
+    const u = new URL(window.location.href);
+    const err = u.searchParams.get('error_description') || new URLSearchParams(u.hash.slice(1)).get('error_description');
+    if (err) setTimeout(() => showToast('No se pudo iniciar sesión: ' + err.replace(/\+/g, ' '), 'error'), 400);
+    if (/access_token|refresh_token|error_description|[?&]code=/.test(u.hash + u.search)) {
+      ['code', 'error', 'error_code', 'error_description', 'state'].forEach(k => u.searchParams.delete(k));
+      history.replaceState(null, '', u.pathname + (u.searchParams.toString() ? '?' + u.searchParams : ''));
+    }
+  } catch (_) {}
+}
+
 // ── Google OAuth ──
 async function doGoogleLogin() {
   hideErrors();
   showAuthLoading('Conectando con Google…');
   const { error } = await _sb.auth.signInWithOAuth({
     provider: 'google',
-    options: { redirectTo: window.location.href }
+    options: { redirectTo: _urlRetorno(), queryParams: { prompt: 'select_account' } }
   });
   if (error) { hideAuthLoading(); showError('l-error', error.message); }
   // Si no hay error, Supabase redirige a Google — onAuthStateChange maneja el retorno
@@ -4245,7 +4282,7 @@ async function doRegister() {
 async function doForgotPassword() {
   const email = document.getElementById('l-email').value.trim().toLowerCase();
   if (!email) return showError('l-error', 'Ingresá tu email primero');
-  const { error } = await _sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.href });
+  const { error } = await _sb.auth.resetPasswordForEmail(email, { redirectTo: _urlRetorno() });
   if (error) return showError('l-error', error.message);
   showSuccess('l-success', 'Te enviamos un email para restablecer tu contraseña.');
 }
@@ -4279,7 +4316,15 @@ async function doLogout() {
 }
 
 // ── loginSuccess: entrada a la app (desde modal o desde pantalla de auth) ──
-async function loginSuccess(sbUser) {
+let _loginPromesa = null, _loginUid = null;
+function loginSuccess(sbUser) {
+  // Supabase avisa el login dos veces al volver de Google (evento + getSession): procesarlo una sola vez
+  if (_loginPromesa && _loginUid === sbUser.id) return _loginPromesa;
+  _loginUid = sbUser.id;
+  _loginPromesa = _loginSuccess(sbUser).catch(e => { _loginPromesa = null; _loginUid = null; throw e; });
+  return _loginPromesa;
+}
+async function _loginSuccess(sbUser) {
   const name = sbUser.user_metadata?.full_name || sbUser.email.split('@')[0];
   // Capturar estado demo actual ANTES de sobrescribir
   const demoCanastas = JSON.parse(JSON.stringify(canastas));
@@ -4329,10 +4374,11 @@ async function loginSuccess(sbUser) {
 
 // ── Supabase Auth state change: maneja login, logout, OAuth return ──
 _sb.auth.onAuthStateChange(async (event, session) => {
-  if (event === 'SIGNED_IN' && session?.user) {
-    if (!currentUser) await loginSuccess(session.user);
+  if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION') && session?.user) {
+    _limpiarUrlAuth();
+    if (currentUser?.id !== session.user.id) await loginSuccess(session.user);
   } else if (event === 'SIGNED_OUT') {
-    currentUser = null;
+    currentUser = null; _loginPromesa = null; _loginUid = null;
   } else if (event === 'PASSWORD_RECOVERY') {
     // Mostrar pantalla de cambio de contraseña si es necesario
   }
@@ -4347,7 +4393,8 @@ async function checkSession() {
   // Luego verificar si hay sesión activa
   try {
     const { data: { session } } = await _sb.auth.getSession();
-    if (session?.user) {
+    _limpiarUrlAuth();
+    if (session?.user && currentUser?.id !== session.user.id) {
       await loginSuccess(session.user);
     }
   } catch(e) {
@@ -4729,7 +4776,66 @@ function fetchIPC() {
   // 2) Refrescar en segundo plano contra las APIs oficiales
   _refrescarIPC();
   fetchIPCDivisiones();
+  fetchREM();
   return true;
+}
+
+// ── Inflación esperada: REM del BCRA, analistas "Top 10" ──
+// El BCRA encuesta todos los meses a ~45 consultoras y bancos, y rankea a los 10 que
+// mejor vienen pronosticando. Mostramos su mediana y la mitad central de sus
+// pronósticos (percentil 25 a 75) para el próximo IPC que va a publicar el INDEC.
+const REM_API = 'https://miinflacion-eta.vercel.app/api/rem';
+// Respaldo: REM publicado en noviembre 2026 (relevamiento de octubre 2026)
+const REM_RESPALDO = { relevamiento: '2026-10', fuente: 'REM - BCRA',
+  top10:   [{ mes: '2026-11', mediana: 1.7, p25: 1.7, p75: 1.82 }, { mes: '2026-12', mediana: 1.91, p25: 1.8, p75: 2 }, { mes: '2027-01', mediana: 1.7, p25: 1.63, p75: 1.91 }],
+  general: [{ mes: '2026-11', mediana: 1.7, p25: 1.61, p75: 1.8 }, { mes: '2026-12', mediana: 1.84, p25: 1.71, p75: 1.9 }, { mes: '2027-01', mediana: 1.7, p25: 1.6, p75: 1.8 }] };
+let remData = null;
+function _mesesREM() { return ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre']; }
+function fetchREM() {
+  const c = _cacheGet('mi_rem_v1');
+  remData = (c && c.relevamiento >= REM_RESPALDO.relevamiento) ? c : REM_RESPALDO;
+  renderREM();
+  if (_cacheGet('mi_rem_v1', 12 * 3600e3)) return;
+  _fetchJSON(REM_API, 15000).then(d => {
+    if (!d || !Array.isArray(d.general) || !d.general.length) return;
+    _cacheSet('mi_rem_v1', d);
+    if (!remData || d.relevamiento >= remData.relevamiento) { remData = d; renderREM(); }
+  }).catch(() => {});
+}
+// Próximo mes que va a publicar el INDEC = el siguiente al último IPC disponible
+function _remObjetivo() {
+  if (!remData) return null;
+  let ult;
+  const last = ipcLiveData?.[ipcLiveData.length - 1];
+  if (last?.fecha) ult = String(last.fecha).slice(0, 7);
+  else { const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - 1); ult = d.toISOString().slice(0, 7); }
+  const lista = (remData.top10 && remData.top10.length) ? remData.top10 : remData.general;
+  const fila = lista.find(f => f.mes > ult && f.mediana != null);
+  if (!fila) return null;
+  return { ...fila, top10: lista === remData.top10 };
+}
+function renderREM() {
+  const r = _remObjetivo();
+  const kpi = document.getElementById('inicio-rem'), box = document.getElementById('cz-rem');
+  if (!r) { if (kpi) kpi.style.display = 'none'; if (box) box.style.display = 'none'; return; }
+  const f1 = v => (Math.round(v * 10) / 10).toFixed(1).replace('.', ',');
+  const lo = r.p25 ?? r.mediana, hi = r.p75 ?? r.mediana;
+  const rango = f1(lo) === f1(hi) ? f1(r.mediana) + '%' : f1(lo) + '–' + f1(hi) + '%';
+  const mes = _mesesREM()[+r.mes.slice(5, 7) - 1];
+  const quien = r.top10 ? 'REM Top 10 · BCRA' : 'REM · BCRA';
+  const relev = remData.relevamiento ? _mesesREM()[+remData.relevamiento.slice(5, 7) - 1] + ' ' + remData.relevamiento.slice(0, 4) : '';
+  const tip = 'Relevamiento de Expectativas de Mercado del BCRA' + (relev ? ' (encuesta de ' + relev + ')' : '') + '. ' +
+    (r.top10 ? 'Top 10 = los 10 analistas que mejor vienen acertando según el ranking del BCRA. ' : '') +
+    'El rango es la mitad central de sus pronósticos (percentil 25 a 75); la mediana es ' + f1(r.mediana) + '%. Es una expectativa, no un dato: el IPC real puede salir fuera del rango.';
+  if (kpi) {
+    kpi.style.display = ''; kpi.title = tip;
+    document.getElementById('inicio-rem-val').textContent = rango;
+    document.getElementById('inicio-rem-lbl').textContent = 'Esperada ' + mes.slice(0, 3) + '. · ' + (r.top10 ? 'REM Top 10' : 'REM BCRA');
+  }
+  if (box) {
+    box.style.display = ''; box.title = tip;
+    box.innerHTML = '<span class="cz-rem-lbl">Esperada ' + mes + '</span><b class="cz-rem-val">' + rango + '</b><span class="cz-rem-src">' + quien + '</span>';
+  }
 }
 
 async function _refrescarIPC() {
@@ -4864,6 +4970,7 @@ function aplicarDatosIPC(data) {
   updateMain();
   buildTimeline(data);
   try { renderIPCStatus(); } catch (e) {}
+  try { renderREM(); } catch (e) {}
   try { if (document.getElementById('panel-inicio')?.classList.contains('active')) renderInicioLine(); } catch (e) {}
 }
 
@@ -5333,7 +5440,7 @@ function recalcFromMoney() {
     if (subSum > 0) {
       state[c.id].monto = subSum;
       const montoInp = document.getElementById('monto-'+c.id);
-      if (montoInp && montoInp !== document.activeElement) montoInp.value = subSum || '';
+      if (montoInp && montoInp !== document.activeElement) { montoInp.value = formatNumStr(subSum); montoInp.dataset.rawValue = subSum; }
     }
     const m = getCatMonto(c);
     // Siempre 100%: cada rubro es su proporción del total gastado
@@ -6139,29 +6246,53 @@ function showQuickAddGasto() {
     sel.innerHTML = CATS.map(c => '<option value="' + c.id + '">' + c.icon + ' ' + c.name + '</option>').join('');
     sel.dataset.filled = '1';
   }
+  qaLlenarSubs();
   document.getElementById('quick-add-modal').style.display = 'flex';
   const inp = document.getElementById('qa-monto');
-  if (inp) { inp.value = ''; setTimeout(() => inp.focus(), 50); }
+  if (inp) { inp.value = ''; delete inp.dataset.rawValue; setTimeout(() => inp.focus(), 50); }
+}
+// Subrubros del rubro elegido (mismos que en Mi canasta), con lo ya cargado este mes
+function qaLlenarSubs() {
+  const c = CATS.find(x => x.id === document.getElementById('qa-cat')?.value);
+  const wrap = document.getElementById('qa-sub-wrap'), sub = document.getElementById('qa-sub');
+  if (!wrap || !sub) return;
+  if (!c || !c.subs?.length) { wrap.style.display = 'none'; sub.innerHTML = ''; return; }
+  wrap.style.display = '';
+  const prev = sub.value;
+  sub.innerHTML = '<option value="">Elegí el subrubro…</option>' + c.subs.map(s => {
+    const m = state[c.id + '_' + s.id]?.monto || 0;
+    return '<option value="' + s.id + '">' + s.name + (m > 0 ? ' · ya cargado $' + Math.round(m).toLocaleString('es-AR') : '') + '</option>';
+  }).join('');
+  if (prev && c.subs.some(s => s.id === prev)) sub.value = prev;
 }
 function hideQuickAddGasto() {
   document.getElementById('quick-add-modal').style.display = 'none';
 }
 function agregarGastoRapido() {
   const catId = document.getElementById('qa-cat')?.value;
-  const monto = getRawValue(document.getElementById('qa-monto'));
-  if (!catId || monto <= 0) { showToast('Ingresá un monto válido', 'error'); return; }
-
-  if (!state[catId]) state[catId] = { w: 0, monto: 0 };
-  state[catId].monto = (state[catId].monto || 0) + monto;
+  const montoInp = document.getElementById('qa-monto');
+  const monto = getRawValue(montoInp);
   const c = CATS.find(x => x.id === catId);
-  const inp = document.getElementById('monto-' + catId);
-  if (inp) { inp.value = formatNumStr(state[catId].monto); inp.dataset.rawValue = state[catId].monto; }
-  if (c) { recalcSubWeightsFromMoney(c); updatePresupuesto(catId); }
-  recalcFromMoney();
-  saveCurrentState();
-
+  if (!c) return;
+  if (monto <= 0) { showToast('Ingresá un monto válido', 'error'); montoInp?.focus(); return; }
+  let destino = c.name, repartido = 0;
+  if (c.subs?.length) {
+    const subSel = document.getElementById('qa-sub');
+    const subId = subSel?.value;
+    if (!subId) { showToast('Elegí el subrubro, así el análisis queda detallado', 'error'); subSel?.focus(); return; }
+    ({ repartido } = sumarASubrubro(catId, subId, monto));
+    destino = c.name + ' › ' + (c.subs.find(s => s.id === subId)?.name || subId);
+  } else {
+    if (!state[catId]) state[catId] = { w: 0, monto: 0 };
+    state[catId].monto = (state[catId].monto || 0) + monto;
+    const inp = document.getElementById('monto-' + catId);
+    if (inp) { inp.value = formatNumStr(state[catId].monto); inp.dataset.rawValue = state[catId].monto; }
+    updatePresupuesto(catId);
+    recalcFromMoney();
+    saveCurrentState();
+  }
   hideQuickAddGasto();
-  showToast('+' + monto.toLocaleString('es-AR') + ' agregado a ' + (c?.name || catId), 'success');
+  showToast('+$' + monto.toLocaleString('es-AR') + ' en ' + destino + (repartido > 0 ? ' (lo que tenías en el rubro se repartió entre sus subrubros)' : ''), 'success');
   initInicio();
 }
 
@@ -6192,7 +6323,7 @@ document.querySelectorAll('.rbtn').forEach(btn => {
         const sub = head.querySelector('.cat-sub');
         if(sub) sub.textContent = 'IPC oficial: '+ipc.toFixed(1).replace('.',',')+"%";
         const pill = head.querySelector('.cat-pill');
-        if(pill){ pill.textContent=ipc.toFixed(1).replace('.',',')+'% mens.'; pill.className='cat-pill '+pillCls(ipc); }
+        if(pill){ pill.textContent=ipc.toFixed(1).replace('.',',')+'%'; pill.className='cat-pill '+pillCls(ipc); }
       }
       refreshCatHeader(c);
       updateSubDistrib(c);
@@ -7101,7 +7232,7 @@ async function doModalLogin() {
 async function doModalForgot() {
   const email = document.getElementById('ml-email')?.value.trim().toLowerCase();
   if (!email) return showError('ml-error', 'Ingresá tu email primero');
-  await _sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.href });
+  await _sb.auth.resetPasswordForEmail(email, { redirectTo: _urlRetorno() });
   const errEl = document.getElementById('ml-error');
   if (errEl) { errEl.textContent = 'Te enviamos un email para restablecer tu contraseña.'; errEl.style.color='var(--green)'; errEl.classList.add('show'); }
 }
@@ -7118,52 +7249,60 @@ document.addEventListener('keydown', e => {
 // ═══════════════════════════════════════════════
 // CONTADOR DE GASTOS POR SUBRUBRO
 // ═══════════════════════════════════════════════
+// Suma un monto a un subrubro sin perder lo que ya estaba cargado en el rubro.
+// Si el rubro tenía un total "general" (sin subrubros), ese total se reparte primero
+// según la canasta típica del INDEC, para que el rubro no se achique al detallar.
+function sumarASubrubro(catId, subId, amount) {
+  const cat = CATS.find(c => c.id === catId);
+  if (!cat || !(amount > 0)) return { repartido: 0 };
+  const ac = getActiveCanasta();
+  const setSub = (sk, v) => {
+    if (!state[sk]) state[sk] = { w: 0, monto: 0 };
+    state[sk].monto = v;
+    if (ac) { if (!ac.state) ac.state = {}; if (!ac.state[sk]) ac.state[sk] = { w: 0, monto: 0 }; ac.state[sk].monto = v; }
+  };
+  let repartido = 0;
+  const subSum = cat.subs.reduce((a, s) => a + (state[catId + '_' + s.id]?.monto || 0), 0);
+  const general = state[catId]?.monto || 0;
+  if (subSum === 0 && general > 0) {
+    const totW = cat.subs.reduce((a, s) => a + (s.w || 0), 0) || cat.subs.length;
+    let resto = general;
+    cat.subs.forEach((s, i) => {
+      const v = i === cat.subs.length - 1 ? resto : Math.round(general * ((s.w || 1) / totW));
+      resto -= v; setSub(catId + '_' + s.id, v);
+    });
+    repartido = general;
+  }
+  const sk = catId + '_' + subId;
+  setSub(sk, (state[sk]?.monto || 0) + amount);
+  recalcSubWeightsFromMoney(cat);
+  // Refrescar los acumulados y % visibles de cada subrubro
+  const subTot = cat.subs.reduce((a, s) => a + (state[catId + '_' + s.id]?.monto || 0), 0);
+  cat.subs.forEach(s => {
+    const m2 = state[catId + '_' + s.id]?.monto || 0;
+    const row = document.getElementById('sub-acum-row-' + catId + '-' + s.id);
+    const val = document.getElementById('sub-acum-val-' + catId + '-' + s.id);
+    if (row && m2 > 0) row.style.display = 'flex';
+    if (val) val.textContent = '$' + Math.round(m2).toLocaleString('es-AR');
+    const pctEl = document.getElementById('sub-pct-' + catId + '-' + s.id);
+    if (pctEl) { const pct = subTot > 0 ? Math.round((m2 / subTot) * 100) : 0; pctEl.textContent = pct > 0 ? pct + '%' : '—'; }
+  });
+  recalcFromMoney();
+  if (typeof updatePresupuesto === 'function') updatePresupuesto(catId);
+  saveCurrentState();
+  return { repartido };
+}
+
 function addSubMonto(catId, subId) {
   const inp = document.getElementById('sub-quick-' + catId + '-' + subId);
   if (!inp) return;
-  const amount = parseFloat(inp.value) || 0;
+  const amount = getRawValue(inp);
   if (amount <= 0) { inp.focus(); return; }
-
-  const sk = catId + '_' + subId;
-  if (!state[sk]) state[sk] = { w: 0, monto: 0 };
-  state[sk].monto = (state[sk].monto || 0) + amount;
-
-  const ac = getActiveCanasta();
-  if (ac) {
-    if (!ac.state[sk]) ac.state[sk] = { w: 0, monto: 0 };
-    ac.state[sk].monto = state[sk].monto;
-  }
-
-  inp.value = '';
-
-  // Mostrar acumulado
-  const acumRow = document.getElementById('sub-acum-row-' + catId + '-' + subId);
-  const acumVal = document.getElementById('sub-acum-val-' + catId + '-' + subId);
-  if (acumRow) acumRow.style.display = 'flex';
-  if (acumVal) acumVal.textContent = '$' + Math.round(state[sk].monto).toLocaleString('es-AR');
-
-  // Actualizar % internos en los headers de todos los subrubros del rubro
-  const cat = CATS.find(c => c.id === catId);
-  if (cat) {
-    recalcSubWeightsFromMoney(cat);
-    const subTotMonto = cat.subs.reduce((a,s) => a+(state[catId+'_'+s.id]?.monto||0), 0);
-    cat.subs.forEach(s => {
-      const sm2 = state[catId+'_'+s.id]?.monto || 0;
-      const pctEl = document.getElementById('sub-pct-' + catId + '-' + s.id);
-      if (pctEl) {
-        const pct = subTotMonto > 0 ? Math.round((sm2/subTotMonto)*100) : 0;
-        pctEl.textContent = pct > 0 ? pct+'%' : '—';
-      }
-    });
-  }
-
-  recalcFromMoney();
-
-  // Feedback
-  const wrap = document.getElementById('sub-quick-' + catId + '-' + subId)?.parentElement;
-  if (wrap) { wrap.style.borderColor='var(--accent)'; setTimeout(()=>{wrap.style.borderColor='';},500); }
-
-  saveCurrentState();
+  const { repartido } = sumarASubrubro(catId, subId, amount);
+  inp.value = ''; delete inp.dataset.rawValue;
+  if (repartido > 0) showToast('Los $' + Math.round(repartido).toLocaleString('es-AR') + ' que tenías en el rubro se repartieron entre sus subrubros', 'success');
+  const wrap = inp.parentElement;
+  if (wrap) { wrap.style.borderColor = 'var(--accent)'; setTimeout(() => { wrap.style.borderColor = ''; }, 500); }
 }
 
 function resetSubMonto(catId, subId) {
