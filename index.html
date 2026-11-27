@@ -2034,6 +2034,43 @@ body:not(.light-mode) .cz-infl { background: linear-gradient(135deg, #1B1640 0%,
 .cz-rem-val { font-family: var(--mono); font-size: 17px; color: var(--t1); white-space: nowrap; }
 .cz-rem-src { font-size: 10.5px; color: var(--t3); white-space: nowrap; }
 #quick-add-modal .form-group { margin-bottom: 12px; }
+/* Herramientas de inflación: salario real, cuotas, actualizar */
+.tr-empty { font-size: 12.5px; color: var(--t3); line-height: 1.5; padding: 12px 14px; border-radius: 12px; background: var(--surf2); }
+.tr-hint { font-weight: 400; color: var(--t3); }
+.tr-verdict { font-size: 14px; font-weight: 700; padding: 11px 14px; border-radius: 12px; margin-bottom: 10px; line-height: 1.35; }
+.tr-good { background: rgba(61,220,132,.12); color: var(--green); }
+.tr-bad { background: rgba(255,85,85,.12); color: var(--red); }
+.tr-neutral { background: var(--surf2); color: var(--t1); }
+.tr-stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; }
+.tr-stats-4 { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.tr-stat { background: var(--surf2); border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.tr-stat span { font-size: 11px; color: var(--t3); line-height: 1.3; }
+.tr-stat b { font-family: var(--mono); font-size: 16px; color: var(--t1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tr-stat b.tr-acc { color: var(--accent); font-size: 19px; }
+.tr-stat em { font-style: normal; font-size: 10.5px; color: var(--t3); }
+.tr-note { font-size: 12.5px; color: var(--t2); line-height: 1.5; margin-top: 10px; }
+.tr-note b { color: var(--t1); }
+.tr-src { font-size: 10.5px; color: var(--t3); margin-top: 8px; }
+.ai-modo { max-width: 280px; margin-bottom: 14px; }
+.ai-f-alq { grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1.2fr); align-items: end; }
+.tr-tabla { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 12.5px; }
+.tr-tabla th { text-align: left; font-weight: 600; color: var(--t3); font-size: 11px; padding: 6px 8px; border-bottom: 1px solid var(--b1); }
+.tr-tabla td { padding: 7px 8px; border-bottom: 1px solid var(--b1); font-family: var(--mono); color: var(--t1); }
+.tr-tabla td:first-child { font-family: var(--sans); }
+.tr-tabla th:not(:first-child), .tr-tabla td:not(:first-child) { text-align: right; }
+.tr-tabla i { font-style: normal; font-size: 10px; color: var(--t3); font-family: var(--sans); }
+.tr-tabla tr.tr-fut td { color: var(--accent); }
+@media (max-width: 760px) { .tr-stats { grid-template-columns: 1fr 1fr; } .ai-f-alq { grid-template-columns: 1fr; } }
+.mes-picker { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,1fr); gap: 8px; }
+@media (max-width: 760px) { .tr-stats > :last-child:nth-child(odd) { grid-column: 1 / -1; } }
+@media (max-width: 760px) { .tool-fields > div:has(> .mes-picker) { grid-column: 1 / -1; } }
+.mes-picker select.form-input { padding-left: 12px; padding-right: 8px; }
+@media (max-width: 760px) {
+  .cz-infl-top { flex-direction: column; gap: 10px; }
+  .cz-infl-right { width: 100%; flex-direction: row; flex-wrap: wrap; align-items: stretch; justify-content: flex-start; text-align: left; gap: 8px; }
+  .cz-infl-right .cz-indec { text-align: left; }
+  .cz-rem { align-items: flex-start; }
+}
 </style>
 </head>
 <body>
@@ -2323,6 +2360,7 @@ body:not(.light-mode) .cz-infl { background: linear-gradient(135deg, #1B1640 0%,
       <div class="pg-sub">Cargá cuánto gastás por rubro y compará tu inflación con la del INDEC</div>
     </div>
     <div class="pg-actions">
+      <button class="pg-btn" onclick="compartirInflacion()" title="Imagen con tu inflación (solo porcentajes, sin montos)">Compartir</button>
       <button class="pg-btn" onclick="showCsvImport()">Importar resumen</button>
       <button class="pg-btn primary" onclick="saveMonthSnapshot().then(()=>renderHistorial())">Guardar mes</button>
     </div>
@@ -3276,6 +3314,111 @@ body:not(.light-mode) .cz-infl { background: linear-gradient(135deg, #1B1640 0%,
       </div>
       <div id="rf-result"><div class="rf-empty"><span class="loading-spinner" style="width:16px;height:16px"></span> Buscando tasas en vivo…</div></div>
     </div>
+  </div>
+
+  <!-- ══ SALARIO REAL: ¿te alcanzó el aumento? ══ -->
+  <div class="tool-card" style="--tool-accent:var(--accent);--tool-accent-bg:var(--accent-bg)">
+    <div class="tool-card-hd">
+      <div class="tool-icon-chip"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="2"/><circle cx="12" cy="12.5" r="2.5"/><path d="M6 10v5M18 10v5"/></svg></div>
+      <div class="tool-card-titles">
+        <div class="tool-card-title">¿Te alcanzó el aumento?</div>
+        <div class="tool-card-tag">Tu sueldo contra la inflación, mes a mes</div>
+      </div>
+      <button class="tool-info-btn" onclick="toggleToolInfo('sr-info')" title="Cómo funciona">ⓘ</button>
+    </div>
+    <div class="tool-info-panel" id="sr-info">
+      Compara tu sueldo de hoy con el que cobrabas antes, ajustado por la inflación oficial de cada mes (INDEC). Si cerraste meses en Mi historial, esos meses usan tu inflación personal. Los meses que el INDEC todavía no publicó se estiman con el REM del BCRA. Usá el sueldo de bolsillo (neto) en los dos campos.
+    </div>
+    <div class="tool-fields">
+      <div>
+        <label class="form-label">Sueldo de antes</label>
+        <div class="fin-input-wrap"><span class="fin-prefix">$</span><input type="text" class="fin-inp" id="sr-antes" inputmode="numeric" oninput="calcSalarioReal()" /></div>
+      </div>
+      <div>
+        <label class="form-label">¿De qué mes?</label>
+        <div class="mes-picker" data-for="sr-mes"></div><input type="hidden" id="sr-mes" oninput="calcSalarioReal()" />
+      </div>
+      <div class="tf-full">
+        <label class="form-label">Sueldo de hoy</label>
+        <div class="fin-input-wrap"><span class="fin-prefix">$</span><input type="text" class="fin-inp" id="sr-hoy" inputmode="numeric" oninput="calcSalarioReal()" /></div>
+      </div>
+    </div>
+    <div id="sr-result"><div class="tr-empty">Completá los tres datos y te decimos si ganaste o perdiste poder de compra, y cuánto pedir para empatar.</div></div>
+  </div>
+
+  <!-- ══ CUOTAS O CONTADO ══ -->
+  <div class="tool-card" style="--tool-accent:var(--purple);--tool-accent-bg:var(--purple-bg)">
+    <div class="tool-card-hd">
+      <div class="tool-icon-chip"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></div>
+      <div class="tool-card-titles">
+        <div class="tool-card-title">¿Cuotas o contado?</div>
+        <div class="tool-card-tag">Con la tasa de un money market y la inflación esperada</div>
+      </div>
+      <button class="tool-info-btn" onclick="toggleToolInfo('cc-info')" title="Cómo funciona">ⓘ</button>
+    </div>
+    <div class="tool-info-panel" id="cc-info">
+      Si pagás en cuotas, la plata del contado puede quedarse rindiendo en un fondo money market (liquidez inmediata) mientras pagás. Traemos cada cuota a valor de hoy con esa tasa: si el total da menos que el precio de contado, convienen las cuotas. Suponemos que la primera cuota se paga en el próximo resumen. No incluye impuestos ni costos de la tarjeta.
+    </div>
+    <div class="tool-fields">
+      <div>
+        <label class="form-label">Precio de contado</label>
+        <div class="fin-input-wrap"><span class="fin-prefix">$</span><input type="text" class="fin-inp" id="cc-contado" inputmode="numeric" oninput="calcCuotas()" /></div>
+      </div>
+      <div>
+        <label class="form-label">Cantidad de cuotas</label>
+        <input type="number" class="form-input" id="cc-n" min="2" max="60" step="1" oninput="calcCuotas()" />
+      </div>
+      <div class="tf-full">
+        <label class="form-label">Valor de cada cuota <span class="tr-hint">(vacío = cuotas sin interés)</span></label>
+        <div class="fin-input-wrap"><span class="fin-prefix">$</span><input type="text" class="fin-inp" id="cc-cuota" inputmode="numeric" oninput="calcCuotas()" /></div>
+      </div>
+    </div>
+    <div id="cc-result"><div class="tr-empty">Poné el precio de contado y la cantidad de cuotas.</div></div>
+  </div>
+
+  <!-- ══ ACTUALIZAR POR INFLACIÓN (montos y alquileres) ══ -->
+  <div class="tool-card tool-card-wide" style="--tool-accent:var(--amber);--tool-accent-bg:var(--amber-bg)">
+    <div class="tool-card-hd">
+      <div class="tool-icon-chip"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg></div>
+      <div class="tool-card-titles">
+        <div class="tool-card-title">Actualizar por inflación</div>
+        <div class="tool-card-tag">Cuánto vale hoy un monto viejo, o cuánto queda tu alquiler ajustado por IPC</div>
+      </div>
+      <button class="tool-info-btn" onclick="toggleToolInfo('ai-info')" title="Cómo funciona">ⓘ</button>
+    </div>
+    <div class="tool-info-panel" id="ai-info">
+      Usa el IPC nacional del INDEC desde 2017. Alquiler: cada ajuste aplica la inflación acumulada de los meses del período anterior (por ejemplo, un ajuste trimestral en abril usa enero, febrero y marzo). Si un mes todavía no se publicó, se estima con el REM del BCRA y queda marcado. Revisá tu contrato: algunos usan "los últimos meses publicados" o el ICL; ahí el número puede cambiar un poco.
+    </div>
+    <div class="seg-pills ai-modo" id="ai-modo">
+      <button data-m="monto" class="on">Un monto</button><button data-m="alquiler">Mi alquiler</button>
+    </div>
+    <div class="tool-fields ai-fields" id="ai-f-monto">
+      <div>
+        <label class="form-label">Monto</label>
+        <div class="fin-input-wrap"><span class="fin-prefix">$</span><input type="text" class="fin-inp" id="ai-monto" inputmode="numeric" oninput="calcActualizar()" /></div>
+      </div>
+      <div>
+        <label class="form-label">¿De qué mes es ese precio?</label>
+        <div class="mes-picker" data-for="ai-mes"></div><input type="hidden" id="ai-mes" oninput="calcActualizar()" />
+      </div>
+    </div>
+    <div class="tool-fields ai-fields ai-f-alq" id="ai-f-alquiler" style="display:none">
+      <div>
+        <label class="form-label">Alquiler inicial</label>
+        <div class="fin-input-wrap"><span class="fin-prefix">$</span><input type="text" class="fin-inp" id="ai-alq" inputmode="numeric" oninput="calcActualizar()" /></div>
+      </div>
+      <div>
+        <label class="form-label">Inicio del contrato</label>
+        <div class="mes-picker" data-for="ai-inicio"></div><input type="hidden" id="ai-inicio" oninput="calcActualizar()" />
+      </div>
+      <div>
+        <label class="form-label">Se ajusta cada</label>
+        <div class="seg-pills" id="ai-cada">
+          <button data-n="3" class="on">3 meses</button><button data-n="4">4</button><button data-n="6">6</button><button data-n="12">12</button>
+        </div>
+      </div>
+    </div>
+    <div id="ai-result"><div class="tr-empty">Completá los datos de arriba.</div></div>
   </div>
 
   <!-- ══ ALERTA IPC ══ -->
@@ -4780,6 +4923,303 @@ function fetchIPC() {
   return true;
 }
 
+// ═══════════════════════════════════════════════
+// HERRAMIENTAS DE INFLACIÓN: salario real · cuotas o contado · actualizar montos/alquiler
+// ═══════════════════════════════════════════════
+const _MES_CORTO = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+const _mk = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+function _mesSuma(k, n) { const [y, m] = k.split('-').map(Number); return _mk(new Date(y, m - 1 + n, 1)); }
+function _mesLbl(k, largo) { const [y, m] = k.split('-').map(Number); return (largo ? _mesesREM()[m - 1] : _MES_CORTO[m - 1]) + ' ' + y; }
+const _f1 = v => (Math.round(v * 10) / 10).toFixed(1).replace('.', ',');
+const _fp = v => '$' + Math.round(v).toLocaleString('es-AR');
+function _mesHoy() { return _mk(new Date()); }
+// IPC oficial por mes {'YYYY-MM': %}
+function _ipcMapa() { const o = {}; (ipcLiveData || []).forEach(d => { o[String(d.fecha).slice(0, 7)] = d.valor; }); return o; }
+function _ultimoIPCk() { const l = ipcLiveData?.[ipcLiveData.length - 1]; return l ? String(l.fecha).slice(0, 7) : null; }
+// Expectativa REM por mes (Top 10 si está, si no la general)
+function _remMapa() {
+  const o = {};
+  (remData?.general || []).forEach(f => { if (f.mediana != null) o[f.mes] = f.mediana; });
+  (remData?.top10 || []).forEach(f => { if (f.mediana != null) o[f.mes] = f.mediana; });
+  return o;
+}
+// Inflación de los meses (desde, hasta] — usa INDEC, si falta usa REM, si falta el último valor conocido.
+// `personal` (opcional) = { 'YYYY-MM': % } con meses cerrados por el usuario, que tienen prioridad.
+function _inflacionEntre(desdeExcl, hastaIncl, personal) {
+  const ipc = _ipcMapa(), rem = _remMapa();
+  let factor = 1, reales = 0, estimados = 0, propios = 0, ultimo = null; const meses = [];
+  for (let k = _mesSuma(desdeExcl, 1); k <= hastaIncl; k = _mesSuma(k, 1)) {
+    let v, tipo;
+    if (personal && personal[k] != null) { v = personal[k]; tipo = 'propio'; propios++; }
+    else if (ipc[k] != null) { v = ipc[k]; tipo = 'indec'; reales++; }
+    else if (rem[k] != null) { v = rem[k]; tipo = 'rem'; estimados++; }
+    else if (ultimo != null) { v = ultimo; tipo = 'rem'; estimados++; }
+    else return null;
+    ultimo = v; factor *= 1 + v / 100; meses.push({ k, v, tipo });
+  }
+  return { factor, pct: (factor - 1) * 100, reales, estimados, propios, meses };
+}
+function _primerMesIPC() { const k = ipcLiveData?.[0]?.fecha; return k ? String(k).slice(0, 7) : '2025-01'; }
+
+// ── 1. ¿Te alcanzó el aumento? ──
+let _srPersonal = null, _srPersonalUid = null;
+async function _cargarInflPersonal() {
+  if (!currentUser) { _srPersonal = null; return; }
+  if (_srPersonalUid === currentUser.id && _srPersonal) return;
+  try {
+    const h = await getHistorial(); const o = {};
+    h.forEach(s => { if (s?.key && typeof s.ipcPersonal === 'number') o[s.key] = s.ipcPersonal; });
+    _srPersonal = o; _srPersonalUid = currentUser.id;
+  } catch (e) {}
+}
+function calcSalarioReal() {
+  const el = document.getElementById('sr-result'); if (!el) return;
+  const antes = getRawValue(document.getElementById('sr-antes'));
+  const hoy = getRawValue(document.getElementById('sr-hoy'));
+  const mes = document.getElementById('sr-mes')?.value;
+  if (!(antes > 0) || !(hoy > 0) || !mes) { el.innerHTML = '<div class="tr-empty">Completá los tres datos y te decimos si ganaste o perdiste poder de compra, y cuánto pedir para empatar.</div>'; return; }
+  const H = _mesHoy();
+  if (mes >= H) { el.innerHTML = '<div class="tr-empty">Elegí un mes anterior al actual.</div>'; return; }
+  if (mes < _primerMesIPC()) { el.innerHTML = '<div class="tr-empty">Tenemos datos de inflación desde ' + _mesLbl(_primerMesIPC(), true) + '.</div>'; return; }
+  if (currentUser && !_srPersonal) _cargarInflPersonal().then(() => { if (_srPersonal && Object.keys(_srPersonal).length) calcSalarioReal(); });
+  const usaPropia = _srPersonal && Object.keys(_srPersonal).some(k => k > mes && k <= H);
+  const inf = _inflacionEntre(mes, H, usaPropia ? _srPersonal : null);
+  if (!inf) { el.innerHTML = '<div class="tr-empty">No hay datos de inflación para ese período.</div>'; return; }
+  const necesario = antes * inf.factor;
+  const real = (hoy / necesario - 1) * 100;
+  const aumento = (hoy / antes - 1) * 100;
+  const falta = necesario - hoy;
+  const proxRem = _remMapa()[_mesSuma(H, 1)];
+  const gano = real >= 0.05, empate = Math.abs(real) < 0.05;
+  const cls = empate ? 'tr-neutral' : gano ? 'tr-good' : 'tr-bad';
+  const titulo = empate ? 'Empataste con la inflación' : gano ? 'Le ganaste a la inflación: tu sueldo compra ' + _f1(real) + '% más' : 'Perdiste poder de compra: tu sueldo compra ' + _f1(-real) + '% menos';
+  let pedir = '';
+  if (!gano && !empate) {
+    pedir = 'Para recuperar lo de ' + _mesLbl(mes) + ' necesitás un aumento de <b>' + _f1((necesario / hoy - 1) * 100) + '%</b> (sueldo de <b>' + _fp(necesario) + '</b>)';
+    if (proxRem != null) pedir += ', o <b>' + _fp(necesario * (1 + proxRem / 100)) + '</b> si lo cobrás el mes que viene (inflación esperada ' + _f1(proxRem) + '%)';
+    pedir += '.';
+  } else if (proxRem != null) {
+    pedir = 'Si no hay aumento, el mes que viene la ventaja baja a ' + _f1(((hoy / (necesario * (1 + proxRem / 100))) - 1) * 100) + '% (inflación esperada ' + _f1(proxRem) + '%).';
+  }
+  const fuente = [inf.propios ? inf.propios + ' con tu inflación personal' : '', inf.reales ? inf.reales + ' con INDEC' : '', inf.estimados ? inf.estimados + ' estimado' + (inf.estimados > 1 ? 's' : '') + ' con REM' : ''].filter(Boolean).join(' · ');
+  el.innerHTML =
+    '<div class="tr-verdict ' + cls + '">' + titulo + '</div>' +
+    '<div class="tr-stats">' +
+      '<div class="tr-stat"><span>Aumento que tuviste</span><b>' + _f1(aumento) + '%</b></div>' +
+      '<div class="tr-stat"><span>Inflación ' + _mesLbl(mes) + ' → ' + _mesLbl(H) + '</span><b>' + _f1(inf.pct) + '%</b></div>' +
+      '<div class="tr-stat"><span>Sueldo para empatar</span><b>' + _fp(necesario) + '</b></div>' +
+    '</div>' +
+    (pedir ? '<div class="tr-note">' + pedir + '</div>' : '') +
+    '<div class="tr-src">' + inf.meses.length + ' meses: ' + fuente + (falta > 0 ? '' : '') + '</div>';
+}
+
+// ── 2. ¿Cuotas o contado? ──
+function calcCuotas() {
+  const el = document.getElementById('cc-result'); if (!el) return;
+  const contado = getRawValue(document.getElementById('cc-contado'));
+  const n = Math.round(+document.getElementById('cc-n')?.value || 0);
+  let cuota = getRawValue(document.getElementById('cc-cuota'));
+  if (!(contado > 0) || !(n >= 2 && n <= 60)) { el.innerHTML = '<div class="tr-empty">Poné el precio de contado y la cantidad de cuotas.</div>'; return; }
+  const sinInteres = !(cuota > 0);
+  if (sinInteres) cuota = contado / n;
+  // Tasa de oportunidad: el money market más grande (liquidez inmediata); si no hay datos, el mejor plazo fijo; si no, 25% TNA
+  const mm = _rf?.mm?.grande || _rf?.mm?.top;
+  const tna = mm?.tna ?? _rf?.pf?.[0]?.tna ?? 25;
+  const tasaNombre = mm ? 'money market ' + mm.fondo.replace(/ - Clase .*$/, '') : (_rf?.pf?.[0] ? 'plazo fijo ' + _rf.pf[0].entidad : 'tasa de referencia');
+  const im = Math.pow(1 + tna / 100 / 365, 30) - 1;   // mensual, capitalizando diario
+  let vp = 0; for (let k = 1; k <= n; k++) vp += cuota / Math.pow(1 + im, k);
+  const total = cuota * n;
+  // Lo mismo en pesos de hoy, con la inflación esperada mes a mes
+  const H = _mesHoy(); const inf = _inflacionEntre(H, _mesSuma(H, n)); let real = null;
+  if (inf) { real = 0; let f = 1; inf.meses.forEach((m, i) => { f *= 1 + m.v / 100; real += cuota / f; }); }
+  const ahorro = contado - vp;
+  const recargo = (total / contado - 1) * 100;
+  const descEquil = (1 - vp / total) * 100; // descuento por contado que deja todo igual
+  const conviene = ahorro > contado * 0.002 ? 'cuotas' : ahorro < -contado * 0.002 ? 'contado' : 'igual';
+  const cls = conviene === 'cuotas' ? 'tr-good' : conviene === 'contado' ? 'tr-bad' : 'tr-neutral';
+  const titulo = conviene === 'cuotas' ? 'Convienen las cuotas: te ahorrás ' + _fp(ahorro) + ' de hoy'
+    : conviene === 'contado' ? 'Conviene pagar de contado: las cuotas te cuestan ' + _fp(-ahorro) + ' más'
+    : 'Da casi lo mismo';
+  el.innerHTML =
+    '<div class="tr-verdict ' + cls + '">' + titulo + '</div>' +
+    '<div class="tr-stats">' +
+      '<div class="tr-stat"><span>Total en cuotas</span><b>' + _fp(total) + '</b><em>' + (sinInteres ? 'sin interés' : (recargo >= 0 ? '+' : '') + _f1(recargo) + '% vs contado') + '</em></div>' +
+      '<div class="tr-stat"><span>Las cuotas valen hoy</span><b>' + _fp(vp) + '</b><em>si invertís la diferencia</em></div>' +
+      '<div class="tr-stat"><span>En pesos de hoy</span><b>' + (real != null ? _fp(real) : '—') + '</b><em>con inflación esperada</em></div>' +
+    '</div>' +
+    '<div class="tr-note">' + (sinInteres
+      ? 'Si te ofrecen <b>más de ' + _f1(descEquil) + '% de descuento</b> por pagar de contado, conviene el contado.'
+      : 'Con cuotas de ' + _fp(cuota) + ', el contado conviene si su precio es menor a <b>' + _fp(vp) + '</b>.') + '</div>' +
+    '<div class="tr-src">Tasa usada: ' + _f1(tna) + '% TNA (' + tasaNombre + '), ' + _f1(im * 100) + '% por mes. Primera cuota en el próximo resumen.</div>';
+}
+
+// ── 3. Actualizar por inflación: monto o alquiler ──
+let _aiModo = 'monto', _aiCada = 3;
+// Selector de mes en español (mes + año), igual en todos los navegadores y celulares.
+// Escribe 'YYYY-MM' en el input oculto y dispara su oninput.
+function initMesPickers() {
+  document.querySelectorAll('.mes-picker').forEach(w => {
+    const hid = document.getElementById(w.dataset.for); if (!hid) return;
+    const min = hid.dataset.min || _primerMesIPC(), max = hid.dataset.max || _mesHoy();
+    const yMin = +min.slice(0, 4), yMax = +max.slice(0, 4);
+    if (w.dataset.rango === min + max) return;
+    w.dataset.rango = min + max;
+    const prev = hid.value;
+    const nombres = _mesesREM().map(n => n[0].toUpperCase() + n.slice(1));
+    let anios = ''; for (let y = yMax; y >= yMin; y--) anios += '<option value="' + y + '">' + y + '</option>';
+    w.innerHTML = '<select class="form-input mp-mes"><option value="">Mes</option>' + nombres.map((n, i) => '<option value="' + String(i + 1).padStart(2, '0') + '">' + n + '</option>').join('') + '</select>' +
+      '<select class="form-input mp-anio"><option value="">Año</option>' + anios + '</select>';
+    const sm = w.querySelector('.mp-mes'), sa = w.querySelector('.mp-anio');
+    if (prev) { sm.value = prev.slice(5, 7); sa.value = prev.slice(0, 4); }
+    const upd = () => {
+      let v = sm.value && sa.value ? sa.value + '-' + sm.value : '';
+      if (v && v < min) { v = min; } if (v && v > max) { v = max; }
+      if (v) { sm.value = v.slice(5, 7); sa.value = v.slice(0, 4); }
+      hid.value = v; hid.dispatchEvent(new Event('input'));
+    };
+    sm.addEventListener('change', upd); sa.addEventListener('change', upd);
+  });
+}
+function initActualizar() {
+  const modo = document.getElementById('ai-modo'), cada = document.getElementById('ai-cada');
+  if (modo && !modo.dataset.ok) {
+    modo.dataset.ok = '1';
+    modo.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+      _aiModo = b.dataset.m; modo.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+      document.getElementById('ai-f-monto').style.display = _aiModo === 'monto' ? '' : 'none';
+      document.getElementById('ai-f-alquiler').style.display = _aiModo === 'alquiler' ? '' : 'none';
+      calcActualizar();
+    }));
+  }
+  if (cada && !cada.dataset.ok) {
+    cada.dataset.ok = '1';
+    cada.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+      _aiCada = +b.dataset.n; cada.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); calcActualizar();
+    }));
+  }
+  const max = _mesSuma(_mesHoy(), -1);
+  ['ai-mes', 'sr-mes'].forEach(id => { const i = document.getElementById(id); if (i) { i.dataset.max = max; i.dataset.min = _primerMesIPC(); } });
+  const ini = document.getElementById('ai-inicio'); if (ini) { ini.dataset.max = _mesHoy(); ini.dataset.min = _primerMesIPC(); }
+  initMesPickers();
+}
+function calcActualizar() {
+  initActualizar();
+  const el = document.getElementById('ai-result'); if (!el) return;
+  const vacio = '<div class="tr-empty">Completá los datos de arriba.</div>';
+  const ult = _ultimoIPCk();
+  if (_aiModo === 'monto') {
+    const monto = getRawValue(document.getElementById('ai-monto'));
+    const mes = document.getElementById('ai-mes')?.value;
+    if (!(monto > 0) || !mes) { el.innerHTML = vacio; return; }
+    if (mes < _primerMesIPC()) { el.innerHTML = '<div class="tr-empty">Tenemos datos desde ' + _mesLbl(_primerMesIPC(), true) + '.</div>'; return; }
+    if (!ult || mes >= ult) { el.innerHTML = '<div class="tr-empty">Elegí un mes anterior a ' + _mesLbl(ult || _mesHoy(), true) + ' (último IPC publicado).</div>'; return; }
+    const inf = _inflacionEntre(mes, ult);
+    const H = _mesHoy(); const infHoy = _inflacionEntre(mes, H);
+    el.innerHTML =
+      '<div class="tr-stats tr-stats-4">' +
+        '<div class="tr-stat"><span>' + _fp(monto) + ' de ' + _mesLbl(mes) + ' equivalen a</span><b class="tr-acc">' + _fp(monto * inf.factor) + '</b><em>a ' + _mesLbl(ult) + ' (último IPC)</em></div>' +
+        '<div class="tr-stat"><span>Inflación acumulada</span><b>' + _f1(inf.pct) + '%</b><em>' + inf.meses.length + ' meses</em></div>' +
+        (infHoy && infHoy.estimados ? '<div class="tr-stat"><span>Estimado a ' + _mesLbl(H) + '</span><b>' + _fp(monto * infHoy.factor) + '</b><em>con REM del BCRA</em></div>' : '') +
+        '<div class="tr-stat"><span>Tu plata perdió</span><b>' + _f1((1 - 1 / inf.factor) * 100) + '%</b><em>de poder de compra</em></div>' +
+      '</div>';
+    return;
+  }
+  // Alquiler
+  const alq = getRawValue(document.getElementById('ai-alq'));
+  const ini = document.getElementById('ai-inicio')?.value;
+  if (!(alq > 0) || !ini) { el.innerHTML = vacio; return; }
+  if (ini < _mesSuma(_primerMesIPC(), 1)) { el.innerHTML = '<div class="tr-empty">Tenemos datos desde ' + _mesLbl(_primerMesIPC(), true) + '.</div>'; return; }
+  const H = _mesHoy(), N = _aiCada;
+  // Ajustes ya ocurridos y el próximo
+  const filas = []; let valor = alq, k = ini, guard = 0;
+  while (guard++ < 200) {
+    const prox = _mesSuma(k, N);
+    const inf = _inflacionEntre(_mesSuma(prox, -N - 1), _mesSuma(prox, -1)); // los N meses anteriores al ajuste
+    if (!inf) break;
+    const nuevo = valor * inf.factor;
+    filas.push({ mes: prox, desde: valor, hasta: nuevo, pct: inf.pct, est: inf.estimados, futuro: prox > H });
+    if (prox > H) break;
+    valor = nuevo; k = prox;
+  }
+  const pasados = filas.filter(f => !f.futuro), prox = filas.find(f => f.futuro);
+  const actual = pasados.length ? pasados[pasados.length - 1].hasta : alq;
+  const rows = filas.slice(-7).map(f => '<tr' + (f.futuro ? ' class="tr-fut"' : '') + '><td>' + _mesLbl(f.mes) + (f.futuro ? ' <i>próximo</i>' : '') + '</td><td>+' + _f1(f.pct) + '%' + (f.est ? ' <i>est.</i>' : '') + '</td><td>' + _fp(f.hasta) + '</td></tr>').join('');
+  el.innerHTML =
+    '<div class="tr-stats tr-stats-4">' +
+      '<div class="tr-stat"><span>Alquiler hoy</span><b class="tr-acc">' + _fp(actual) + '</b><em>' + (pasados.length ? 'desde ' + _mesLbl(pasados[pasados.length - 1].mes) : 'todavía sin ajustes') + '</em></div>' +
+      '<div class="tr-stat"><span>Subió desde el inicio</span><b>' + _f1((actual / alq - 1) * 100) + '%</b><em>' + pasados.length + ' ajuste' + (pasados.length === 1 ? '' : 's') + '</em></div>' +
+      (prox ? '<div class="tr-stat"><span>Próximo ajuste · ' + _mesLbl(prox.mes) + '</span><b>' + _fp(prox.hasta) + '</b><em>+' + _f1(prox.pct) + '%' + (prox.est ? ' · estimado con REM' : '') + '</em></div>' : '') +
+      (prox ? '<div class="tr-stat"><span>Te sube por mes</span><b>' + _fp(prox.hasta - prox.desde) + '</b><em>para presupuestar</em></div>' : '') +
+    '</div>' +
+    (rows ? '<table class="tr-tabla"><thead><tr><th>Ajuste</th><th>IPC del período</th><th>Alquiler</th></tr></thead><tbody>' + rows + '</tbody></table>' : '');
+}
+
+// ═══════════════════════════════════════════════
+// COMPARTIR MI INFLACIÓN — imagen 1080×1350 para historias / WhatsApp.
+// Solo porcentajes: nunca muestra montos ni datos personales.
+// ═══════════════════════════════════════════════
+async function compartirInflacion() {
+  const ipc = computeCurrentIPC();
+  if (ipc == null) { showToast('Cargá tus gastos en Mi canasta para calcular tu inflación', 'error'); return; }
+  try { await document.fonts?.ready; } catch (e) {}
+  const W = 1080, H = 1350, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+  const x = cv.getContext('2d');
+  const LIME = '#C8F135', VIO = '#7C5CFF', AZ = '#4F8BFF', T1 = '#F2F5FF', T3 = '#8A93B5';
+  const g = x.createLinearGradient(0, 0, W, H); g.addColorStop(0, '#1B1640'); g.addColorStop(.6, '#0E1426'); g.addColorStop(1, '#0A0F1E');
+  x.fillStyle = g; x.fillRect(0, 0, W, H);
+  const glow = x.createRadialGradient(W * .85, 140, 0, W * .85, 140, 520); glow.addColorStop(0, 'rgba(124,92,255,.35)'); glow.addColorStop(1, 'rgba(124,92,255,0)');
+  x.fillStyle = glow; x.fillRect(0, 0, W, H);
+  const fmt = v => v.toFixed(1).replace('.', ',');
+  const mesesL = _mesesREM(); const d = new Date(); const mes = mesesL[d.getMonth()];
+  x.textBaseline = 'alphabetic';
+  x.fillStyle = LIME; x.font = '700 40px "Space Grotesk", sans-serif'; x.fillText('MI INFLACIÓN', 80, 120);
+  x.fillStyle = T3; x.font = '500 38px Inter, sans-serif'; x.fillText('Mi inflación de ' + mes + ' ' + d.getFullYear(), 80, 250);
+  x.fillStyle = LIME; x.font = '700 260px "Space Grotesk", sans-serif'; const num = fmt(ipc); x.fillText(num, 72, 500);
+  const nw = x.measureText(num).width; x.font = '700 120px "Space Grotesk", sans-serif'; x.fillText('%', 80 + nw, 420);
+  const of = (typeof ipcLastVal === 'number') ? ipcLastVal : null;
+  if (of != null) {
+    const dif = ipc - of;
+    x.fillStyle = T1; x.font = '500 40px Inter, sans-serif';
+    x.fillText('INDEC (' + (ipcLastMes || '').toLowerCase() + '): ' + fmt(of) + '%', 80, 590);
+    const txt = Math.abs(dif) < .05 ? 'Igual que el INDEC' : (dif > 0 ? '+' : '−') + fmt(Math.abs(dif)) + ' pts ' + (dif > 0 ? 'por encima' : 'por debajo') + ' del INDEC';
+    x.font = '700 38px Inter, sans-serif'; const tw = x.measureText(txt).width;
+    x.fillStyle = dif > .05 ? 'rgba(255,85,85,.16)' : 'rgba(61,220,132,.16)';
+    _rrect(x, 80, 625, tw + 56, 72, 36); x.fill();
+    x.fillStyle = dif > .05 ? '#FF6B6B' : '#3DDC84'; x.fillText(txt, 108, 674);
+  }
+  // Qué rubros empujan: aporte = peso × IPC del rubro
+  const EXCL = ['ahorro', 'inversion', 'banco_deudas'];
+  const totW = CATS.filter(c => !EXCL.includes(c.id)).reduce((a, c) => a + (state[c.id]?.w || 0), 0) || 1;
+  const top = CATS.filter(c => !EXCL.includes(c.id) && (state[c.id]?.w || 0) > 0)
+    .map(c => ({ n: c.name, w: state[c.id].w / totW * 100, ipc: catEffIpc(c), ap: state[c.id].w / totW * catEffIpc(c) }))
+    .sort((a, b) => b.ap - a.ap).slice(0, 3);
+  x.fillStyle = T3; x.font = '600 30px Inter, sans-serif'; x.fillText('LO QUE MÁS EMPUJA MI INFLACIÓN', 80, 800);
+  const maxAp = Math.max(...top.map(t => t.ap), .01);
+  top.forEach((t, i) => {
+    const y = 860 + i * 100;
+    x.fillStyle = T1; x.font = '600 36px Inter, sans-serif'; x.fillText(t.n, 80, y + 30);
+    x.fillStyle = T3; x.font = '500 28px Inter, sans-serif'; x.fillText(Math.round(t.w) + '% del gasto · sube ' + fmt(t.ipc) + '%', 80, y + 70);
+    const bx = 640, bw = 360 * t.ap / maxAp;
+    x.fillStyle = 'rgba(255,255,255,.07)'; _rrect(x, bx, y + 8, 360, 26, 13); x.fill();
+    const bg = x.createLinearGradient(bx, 0, bx + 360, 0); bg.addColorStop(0, VIO); bg.addColorStop(1, AZ);
+    x.fillStyle = bg; _rrect(x, bx, y + 8, Math.max(26, bw), 26, 13); x.fill();
+  });
+  x.fillStyle = 'rgba(255,255,255,.08)'; x.fillRect(80, H - 170, W - 160, 2);
+  x.fillStyle = T1; x.font = '600 36px Inter, sans-serif'; x.fillText('¿Y la tuya? Calculala gratis', 80, H - 100);
+  x.fillStyle = LIME; x.font = '700 34px "Space Grotesk", sans-serif'; x.fillText(location.host || 'miinflacion', 80, H - 52);
+  const blob = await new Promise(r => cv.toBlob(r, 'image/png'));
+  const file = new File([blob], 'mi-inflacion-' + mes + '.png', { type: 'image/png' });
+  const texto = 'Mi inflación de ' + mes + ' fue ' + fmt(ipc) + '%' + (of != null ? ' (INDEC: ' + fmt(of) + '%)' : '') + '. ¿Y la tuya? ' + location.origin + location.pathname;
+  try {
+    if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], text: texto }); return; }
+  } catch (e) { if (e?.name === 'AbortError') return; }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = file.name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  try { await navigator.clipboard?.writeText(texto); showToast('Imagen descargada · el texto quedó copiado para pegar', 'success'); }
+  catch (e) { showToast('Imagen descargada', 'success'); }
+}
+function _rrect(x, a, b, w, h, r) { x.beginPath(); x.moveTo(a + r, b); x.arcTo(a + w, b, a + w, b + h, r); x.arcTo(a + w, b + h, a, b + h, r); x.arcTo(a, b + h, a, b, r); x.arcTo(a, b, a + w, b, r); x.closePath(); }
+
 // ── Inflación esperada: REM del BCRA, analistas "Top 10" ──
 // El BCRA encuesta todos los meses a ~45 consultoras y bancos, y rankea a los 10 que
 // mejor vienen pronosticando. Mostramos su mediana y la mitad central de sus
@@ -5799,7 +6239,7 @@ function switchFinSub(sub) {
 function initFinSub(sub) {
   if (sub === 'diagnostico') { loadFinanzasData(); renderFuentesIngreso(); initFinanzasGate(); }
   if (sub === 'deudas') initDeudas();
-  if (sub === 'herramientas') initHerramientas();
+  if (sub === 'herramientas') { initHerramientas(); try { initActualizar(); calcSalarioReal(); calcCuotas(); calcActualizar(); } catch (e) { console.warn(e); } }
 }
 
 function onPanelActivated(panel) {
